@@ -69,6 +69,7 @@ module.exports = {
 				sm: 'calc(var(--radius) - 4px)',
 			},
 			fontFamily: {
+				heading: ['var(--font-heading)', ...fontFamily.sans],
 				sans: ['var(--font-sans)', ...fontFamily.sans],
 			},
 			keyframes: {

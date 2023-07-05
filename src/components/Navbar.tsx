@@ -16,7 +16,7 @@ const Navbar = async () => {
 				{/* logo */}
 				<Link href='/' className='flex gap-2 items-center'>
 					<Icons.logo className='h-8 w-8 sm:h-6 sm:w-6' />
-					<p className='hidden text-primary text-sm font-medium md:block'>
+					<p className='hidden text-primary text-lg font-medium md:block'>
 						Breadit
 					</p>
 				</Link>
@@ -29,7 +29,7 @@ const Navbar = async () => {
 								key={index}
 								href={item.href}
 								className={
-									'flex items-center text-lg font-medium transition-colors hover:text-foreground/80 md:text-sm text-foreground'
+									'flex items-center text-sm font-medium md:text-base text-white'
 								}
 							>
 								{item.title}
@@ -43,7 +43,7 @@ const Navbar = async () => {
 					<UserAccountNav user={session.user} />
 				) : (
 					<Link href='/sign-in' className={buttonVariants()}>
-						Sign In
+						Login
 					</Link>
 				)}
 
