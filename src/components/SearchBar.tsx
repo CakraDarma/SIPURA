@@ -64,7 +64,7 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
 	return (
 		<Command
 			ref={commandRef}
-			className='relative rounded-lg border max-w-[248px] h-[30px] z-50 overflow-visible'
+			className='relative rounded-lg border max-w-[248px] h-[25px] z-50 overflow-visible'
 		>
 			<CommandInput
 				isLoading={isFetching}
@@ -73,7 +73,7 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
 					debounceRequest();
 				}}
 				value={input}
-				className='outline-none border-none focus:border-none focus:outline-none ring-0 h-[30px]'
+				className='outline-none border-none focus:border-none focus:outline-none ring-0 h-[25px] placeholder:text-xs'
 				placeholder='Cari informasi...'
 			/>
 
