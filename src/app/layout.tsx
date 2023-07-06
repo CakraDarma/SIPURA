@@ -1,10 +1,10 @@
 import Navbar from '@/components/Navbar';
 import { cn } from '@/lib/utils';
 import { Open_Sans } from 'next/font/google';
-import { Inter } from 'next/font/google';
 import localFont from 'next/font/local';
 import Providers from '@/components/Providers';
 import { Toaster } from '@/components/ui/Toaster';
+import { TailwindIndicator } from '@/components/tailwind-indicator';
 
 import '@/styles/globals.css';
 
@@ -45,11 +45,11 @@ export default function RootLayout({
 					<Navbar />
 					{authModal}
 					<div className='container max-w-7xl mx-auto h-full pt-12'>
-						<p className='font-sans'>sdafasd</p>
-						<p className='font-heading text-7xl font-bold'>sdafasd</p>
-						{/* {children} */}
+						<h1>coba</h1>
+						{children}
 					</div>
 				</Providers>
+				<TailwindIndicator />
 				<Toaster />
 			</body>
 		</html>
