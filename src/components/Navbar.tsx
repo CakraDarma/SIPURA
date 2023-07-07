@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils';
 const Navbar = async () => {
 	const session = await getServerSession(authOptions);
 	return (
-		<div className='fixed top-0 inset-x-0 h-fit bg-orange-800 z-[10] py-2 backdrop-filter backdrop-blur-lg bg-opacity-30 border-b border-gray-200'>
+		<div className='fixed top-0 inset-x-0 h-fit bg-black-light z-[10] py-4 backdrop-filter backdrop-blur-lg bg-opacity-30 border-b border-gray-200'>
 			<div className='container max-w-7xl h-full mx-auto flex items-center justify-between gap-2'>
 				{/* logo */}
 				<Link href='/' className='flex gap-2 items-center'>
