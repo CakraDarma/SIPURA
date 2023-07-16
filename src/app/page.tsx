@@ -7,6 +7,7 @@
 // import Footer from '../components/Footer/Footer';
 // import Gallery from '../components/Gallery/Gallery';
 import Hero from '@/components/Hero';
+import About from '@/components/about/About';
 // import Pricing from '../components/Pricing/Pricing';
 // import Testimonials from '../components/Testimonials/Testimonials';
 // import Trainers from '../components/Trainers/Trainers';
@@ -15,17 +16,17 @@ function Home() {
 	return (
 		<>
 			<Hero />
-			{/* <About />
-			<Featured />
-			<ChooseUs />
-			<Trainers />
-			<Testimonials />
-			<Gallery />
-			<BmiCalc />
-			<Pricing />
-			<Blog />
-			<CtaBanner />
-			<Footer /> */}
+			<About />
+			{/* <Featured /> */}
+			{/* <ChooseUs /> */}
+			{/* <Trainers /> */}
+			{/* <Testimonials /> */}
+			{/* <Gallery /> */}
+			{/* <BmiCalc /> */}
+			{/* <Pricing /> */}
+			{/* <Blog /> */}
+			{/* <CtaBanner /> */}
+			{/* <Footer /> */}
 		</>
 	);
 }

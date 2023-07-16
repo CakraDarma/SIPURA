@@ -19,8 +19,8 @@ const fontHeading = localFont({
 });
 
 export const metadata = {
-	title: 'Breadit',
-	description: 'A Reddit clone built with Next.js and TypeScript.',
+	title: 'SIPURA',
+	description: 'Sistem Informasi Pura Beserta Virtual Tour Pura',
 };
 
 export default function RootLayout({

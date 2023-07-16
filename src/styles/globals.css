@@ -104,6 +104,11 @@
 		@apply font-sans font-bold;
 	}
 
+	.page-padding {
+		padding-left: 2.5rem;
+		padding-right: 2.5rem;
+	}
+
 	.hero-section {
 		background-image: url('/hero.png');
 		width: 100%;
