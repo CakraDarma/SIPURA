@@ -104,50 +104,12 @@
 		@apply font-sans font-bold;
 	}
 
-	.page-padding {
-		padding-left: 2.5rem;
-		padding-right: 2.5rem;
-	}
-
 	.hero-section {
 		background-image: url('/hero.png');
-		width: 100%;
-		height: 110vh;
+		height: 80vh;
 		object-fit: cover;
 		background-size: cover;
 		background-position: center center;
-	}
-
-	.hero-text {
-		top: 55%;
-		right: 12px;
-		transform: translate(-50%, -50%);
-	}
-
-	.title-white {
-		filter: brightness(0) invert(1);
-	}
-
-	.hero-cta::after {
-		content: '';
-		width: 20rem;
-		height: 5.5rem;
-		border: 1px solid rgba(255, 255, 255, 0.362);
-		position: absolute;
-		top: -12px;
-		left: 12px;
-		transition: all 0.4s;
-	}
-
-	.hero-cta:hover:after {
-		content: '';
-		width: 20rem;
-		height: 5.5rem;
-		border: 1px solid rgba(255, 255, 255);
-		position: absolute;
-		top: -0px;
-		left: 0px;
-		transition: all 0.4s;
 	}
 
 	.about-section {
@@ -166,5 +128,10 @@
 	.card-item-div:hover {
 		background-image: url('../src/images/who-we-are/info-card-bg.jpg');
 		color: white;
+	}
+
+	.page-padding {
+		padding-left: 2.5rem;
+		padding-right: 2.5rem;
 	}
 }
