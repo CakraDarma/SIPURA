@@ -9,6 +9,8 @@
 import Hero from '@/components/Hero';
 import VideoInformation from '@/components/videoInformation/VideoInformation';
 import About from '@/components/about/About';
+import Announce from '@/components/announce/Announce';
+
 // import Pricing from '../components/Pricing/Pricing';
 // import Testimonials from '../components/Testimonials/Testimonials';
 // import Trainers from '../components/Trainers/Trainers';
@@ -20,6 +22,7 @@ function Home() {
 			{/* <About /> */}
 
 			<VideoInformation />
+			<Announce />
 			{/* <ChooseUs /> */}
 			{/* <Trainers /> */}
 			{/* <Testimonials /> */}

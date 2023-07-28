@@ -40,7 +40,7 @@ export default function RootLayout({
 				fontHeading.variable
 			)}
 		>
-			<body className='min-h-screen bg-slate-50 antialiased'>
+			<body className='min-h-screen bg-white antialiased'>
 				<Providers>
 					{/* @ts-expect-error Server Component */}
 					<Navbar />
