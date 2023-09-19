@@ -41,6 +41,14 @@ const announce = () => {
 						</nav>
 					) : null}
 				</div>
+				<Link
+					className='w-64 px-12 py-4 bg-red-500 flex-col justify-center items-center inline-flex my-20'
+					href={'/'}
+				>
+					<div className='text-white text-sm font-bold leading-normal'>
+						Berita Lebih Banyak
+					</div>
+				</Link>
 			</div>
 		</div>
 	);
