@@ -1,0 +1,292 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+enum VoteType {
+  UP
+  DOWN
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id                String               @id @default(cuid())
+  name              String?
+  email             String?              @unique
+  emailVerified     DateTime?
+  createdSubreddits Subreddit[]          @relation("CreatedBy")
+  subscriptions     Subscription[]
+  votes             Vote[]
+  // d
+  roleId            Int?
+  role              Role?                @relation("RoleUser", fields: [roleId], references: [id])
+  password          String?
+  telepon           String?
+  otp               Int?
+  status            String?              @default("tidak aktif")
+  createdAt         DateTime?            @default(now())
+  updateAt          DateTime?            @default(now())
+  pura              Pura[]               @relation("UserPura")
+  upacara           Upacara[]            @relation("UserUpacara")
+  kegiatan          Kegiatan[]           @relation("UserKegiatan")
+  peninggalan       Peninggalan[]        @relation("UserPeninggalan")
+  pelinggih         Pelinggih[]          @relation("UserPelinggih")
+  userToken         User_refresh_token[] @relation("UserToken")
+  // d
+
+  username String? @unique
+
+  image       String?
+  accounts    Account[]
+  sessions    Session[]
+  Post        Post[]
+  Comment     Comment[]
+  CommentVote CommentVote[]
+}
+
+model Subreddit {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  posts     Post[]
+
+  creatorId   String?
+  Creator     User?          @relation("CreatedBy", fields: [creatorId], references: [id])
+  subscribers Subscription[]
+
+  @@index([name])
+}
+
+model Subscription {
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String
+  subreddit   Subreddit @relation(fields: [subredditId], references: [id])
+  subredditId String
+
+  @@id([userId, subredditId])
+}
+
+model Post {
+  id          String    @id @default(cuid())
+  title       String
+  content     Json?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  author      User      @relation(fields: [authorId], references: [id])
+  authorId    String
+  subreddit   Subreddit @relation(fields: [subredditId], references: [id])
+  subredditId String
+  comments    Comment[]
+  votes       Vote[]
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  text      String
+  createdAt DateTime @default(now())
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String
+
+  replyToId String?
+  replyTo   Comment?  @relation("ReplyTo", fields: [replyToId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  replies   Comment[] @relation("ReplyTo")
+
+  votes     CommentVote[]
+  commentId String?
+}
+
+model Vote {
+  user   User     @relation(fields: [userId], references: [id])
+  userId String
+  post   Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String
+  type   VoteType
+
+  @@id([userId, postId])
+}
+
+model CommentVote {
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  comment   Comment  @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  commentId String
+  type      VoteType
+
+  @@id([userId, commentId])
+}
+
+// cek
+
+model Banten {
+  id     Int     @id @default(autoincrement())
+  nama   String?
+  jumlah Int?
+}
+
+model Desa {
+  id          Int       @id @default(autoincrement())
+  nama        String?
+  kecamatanId Int
+  kecamatan   Kecamatan @relation("KecamatanDesa", fields: [kecamatanId], references: [id])
+  pura        Pura[]    @relation("DesaPura")
+}
+
+model Kecamatan {
+  id          Int       @id @default(autoincrement())
+  kabupatenId Int
+  nama        String
+  desa        Desa[]    @relation("KecamatanDesa")
+  kabupaten   Kabupaten @relation("KabupatenKecamatan", fields: [kabupatenId], references: [id])
+}
+
+model Kabupaten {
+  id         Int         @id @default(autoincrement())
+  provinsiId Int
+  nama       String
+  kecamatan  Kecamatan[] @relation("KabupatenKecamatan")
+  provinsi   Provinsi    @relation("ProvinsiKabupaten", fields: [provinsiId], references: [id])
+}
+
+model Provinsi {
+  id        Int         @id @default(autoincrement())
+  nama      String
+  kabupaten Kabupaten[] @relation("ProvinsiKabupaten")
+}
+
+model Role {
+  id   Int    @id @default(autoincrement())
+  nama String
+  user User[] @relation("RoleUser")
+}
+
+model Pura {
+  id            Int           @id @default(autoincrement())
+  desaId        Int
+  desa          Desa          @relation("DesaPura", fields: [desaId], references: [id])
+  userId        String
+  user          User          @relation("UserPura", fields: [userId], references: [id])
+  nama          String
+  kategori      String
+  sejarah       String
+  tahun_berdiri DateTime
+  tanggal_input DateTime
+  fungsi        String
+  alamat        String
+  piodalan      String
+  pengusung     String
+  palebahan     String
+  sesuhunan     String
+  kode_foto     String
+  upacara       Upacara[]     @relation("PuraUpacara")
+  kegiatan      Kegiatan[]    @relation("PuraKegiatan")
+  peninggalan   Peninggalan[] @relation("PuraPeninggalan")
+  pelinggih     Pelinggih[]   @relation("PuraPelinggih")
+  pengurus      Pengurus[]    @relation("PuraPengurus")
+}
+
+model Upacara {
+  id               Int      @id @default(autoincrement())
+  puraId           Int
+  pura             Pura     @relation("PuraUpacara", fields: [puraId], references: [id])
+  userId           String
+  user             User     @relation("UserUpacara", fields: [userId], references: [id])
+  nama             String
+  tanggal_mulai    DateTime
+  tanggal_berakhir DateTime
+  pamuput          String
+  biaya            Int
+  tanggal_input    DateTime
+}
+
+model Kegiatan {
+  id               Int      @id @default(autoincrement())
+  userId           String
+  user             User     @relation("UserKegiatan", fields: [userId], references: [id])
+  puraId           Int
+  pura             Pura     @relation("PuraKegiatan", fields: [puraId], references: [id])
+  nama             String
+  keterangan       String
+  tanggal_kegiatan DateTime
+  tanggal_input    DateTime
+}
+
+model Peninggalan {
+  id     Int    @id @default(autoincrement())
+  puraId Int
+  pura   Pura   @relation("PuraPeninggalan", fields: [puraId], references: [id])
+  userId String
+  user   User   @relation("UserPeninggalan", fields: [userId], references: [id])
+}
+
+model Pelinggih {
+  id            Int      @id @default(autoincrement())
+  puraId        Int
+  pura          Pura     @relation("PuraPelinggih", fields: [puraId], references: [id])
+  userId        String
+  user          User     @relation("UserPelinggih", fields: [userId], references: [id])
+  nama          String
+  fungsi        String
+  sejarah       String
+  tahun         DateTime
+  kode_foto     String
+  tanggal_input DateTime
+}
+
+model Pengurus {
+  id          Int      @id @default(autoincrement())
+  puraId      Int
+  pura        Pura     @relation("PuraPengurus", fields: [puraId], references: [id])
+  nama        String
+  jabatan     String
+  tahun_awal  DateTime
+  tahun_akhir DateTime
+  status      String
+  telepon     String?
+  kode_foto   String
+}
+
+model User_refresh_token {
+  id           Int      @id @default(autoincrement())
+  refreshToken String   @db.VarChar(255)
+  userId       String
+  user         User     @relation("UserToken", fields: [userId], references: [id])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now())
+}

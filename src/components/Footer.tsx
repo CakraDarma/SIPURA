@@ -4,7 +4,7 @@ import Link from 'next/link';
 const Footer = () => {
 	return (
 		<div className=' bg-neutral-600'>
-			<div className='max-w-7xl container mx-auto h-full pt-12'>
+			<div className='max-w-7xl container h-full py-12'>
 				<div className='flex-col justify-start items-center gap-[120px] flex'>
 					<div className='flex-col justify-start items-center gap-6 flex'>
 						<h3 className='text-white text-[32px] font-medium leading-[38.40px]'>
@@ -14,8 +14,13 @@ const Footer = () => {
 							Pesan Anda akan dikirimkan kepada kami untuk pengembangan website
 							ini. Yuk jangan ragu untuk memberikan pesan dengan kami!
 						</p>
+						<button className='px-3 py-4 border border-white justify-center items-center gap-2.5 inline-flex'>
+							<div className='text-white text-xs font-normal leading-normal'>
+								Contact Us
+							</div>
+						</button>
 					</div>
-					<div className='pb-20 border-b border-white justify-between items-start gap-[212px] inline-flex'>
+					<div className='pb-20 border-b border-white justify-between items-start gap-10 md:gap-[212px] flex md:flex-row flex-col'>
 						<div className='flex-col justify-start items-start gap-6 inline-flex'>
 							<h2 className='text-white text-[32px] font-medium leading-[38.40px]'>
 								LOGO
@@ -46,16 +51,6 @@ const Footer = () => {
 									))}
 								</div>
 							) : null}
-						</div>
-						<div className='flex-col justify-start items-start gap-6 inline-flex'>
-							<h2 className='text-white text-2xl font-medium leading-[28.80px]'>
-								Any question?
-							</h2>
-							<button className='px-3 py-4 border border-white justify-center items-center gap-2.5 inline-flex'>
-								<div className='text-white text-xs font-normal leading-normal'>
-									Contact Us
-								</div>
-							</button>
 						</div>
 					</div>
 				</div>
