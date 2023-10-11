@@ -40,12 +40,14 @@ export default function RootLayout({
 				fontHeading.variable
 			)}
 		>
-			<body className='min-h-screen bg-white antialiased'>
+			<body className='min-h-screen pt-12 bg-white antialiased'>
 				<Providers>
 					{/* @ts-expect-error Server Component */}
 					<Navbar />
 					{authModal}
-					{children}
+					<div className='container max-w-7xl mx-auto h-full pt-12'>
+						{children}
+					</div>
 					<Footer />
 				</Providers>
 				<TailwindIndicator />

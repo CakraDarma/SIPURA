@@ -2,7 +2,7 @@ import Hero from '@/components/Hero';
 import VideoInformation from '@/components/homepage/VideoInformation';
 import Announce from '@/components/homepage/Announce';
 
-function Home() {
+const Home = () => {
 	return (
 		<>
 			<Hero imageUrl='/hero.png' />
@@ -20,6 +20,6 @@ function Home() {
 			{/* <Footer /> */}
 		</>
 	);
-}
+};
 
 export default Home;
