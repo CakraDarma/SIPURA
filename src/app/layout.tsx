@@ -45,9 +45,9 @@ export default function RootLayout({
 					{/* @ts-expect-error Server Component */}
 					<Navbar />
 					{authModal}
-					<div className='container max-w-7xl mx-auto h-full pt-12'>
-						{children}
-					</div>
+					{/* <div className='container max-w-7xl mx-auto h-full pt-12'> */}
+					{children}
+					{/* </div> */}
 					<Footer />
 				</Providers>
 				<TailwindIndicator />

@@ -62,7 +62,7 @@ const SearchBar = () => {
 	return (
 		<Command
 			ref={commandRef}
-			className='relative rounded-lg border max-w-[248px] h-[25px] z-50 overflow-visible'
+			className='relative border max-w-sm z-50 overflow-visible'
 		>
 			<CommandInput
 				isLoading={isFetching}
@@ -72,7 +72,7 @@ const SearchBar = () => {
 				}}
 				value={input}
 				className='outline-none border-none focus:border-none focus:outline-none ring-0 h-[25px] placeholder:text-xs'
-				placeholder='Cari informasi...'
+				placeholder='Cari Pura...'
 			/>
 
 			{input.length > 0 && (

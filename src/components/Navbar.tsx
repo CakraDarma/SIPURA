@@ -1,5 +1,4 @@
-import { authOptions } from '@/lib/auth';
-import { getServerSession } from 'next-auth';
+import { getAuthSession } from '@/lib/auth';
 import Link from 'next/link';
 import { Icons } from './Icons';
 import { UserAccountNav } from './UserAccountNav';
@@ -9,10 +8,10 @@ import { navConfig } from '@/config/nav';
 import { cn } from '@/lib/utils';
 
 const Navbar = async () => {
-	const session = await getServerSession(authOptions);
+	const session = await getAuthSession();
 	return (
-		<div className='fixed top-0 inset-x-0 h-fit bg-black-light z-[10] py-4 backdrop-filter backdrop-blur-lg bg-opacity-30 border-b border-gray-200'>
-			<div className='container max-w-7xl h-full mx-auto flex items-center justify-between gap-2'>
+		<div className='fixed top-0 inset-x-0 h-fit bg-black-light z-[10] py-4 backdrop-filter backdrop-blur-lg bg-opacity-30'>
+			<div className='container max-w-7xl h-full flex items-center justify-between gap-2'>
 				{/* logo */}
 				<Link href='/' className='flex gap-2 items-center'>
 					<Icons.logo className='h-8 w-8 sm:h-6 sm:w-6' />
