@@ -10,7 +10,6 @@ export const metadata = {
 
 export default async function SettingsPage() {
 	const session = await getAuthSession();
-
 	if (!session?.user) {
 		redirect(authOptions?.pages?.signIn || '/login');
 	}

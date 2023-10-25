@@ -4,23 +4,23 @@ import Link from 'next/link';
 
 const announce = () => {
 	return (
-		<div className='max-w-7xl container py-12'>
+		<div className='max-w-7xl container py-20'>
 			<div className='flex-col justify-start flex my-6'>
-				<h1 className='w-96 text-zinc-800 self-stretch'>
+				<h1 className='w-96 text-zinc-800 self-stretch '>
 					Informasi, Pengumuman, Acara Terbaru
 				</h1>
 			</div>
 			{/* box */}
 			{blogConfig?.length ? (
-				<div className='flex-col items-center justify-center gap-6 flex md:flex-row'>
+				<div className='flex-col items-center justify-center gap-12 flex md:flex-row mt-6'>
 					{blogConfig?.map((item, index) => (
 						<Link
-							className='flex-col justify-start items-start inline-flex w-96 gap-4'
+							className='flex-col justify-start items-start inline-flex gap-4 w-[405px]'
 							key={index}
 							href={item.href}
 						>
 							<Image
-								src='/pura.png'
+								src='/images/announce.png'
 								alt='Announce'
 								width={1000}
 								height={1000}

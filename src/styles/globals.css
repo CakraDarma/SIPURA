@@ -79,22 +79,22 @@
 		font-feature-settings: 'rlig' 1, 'calt' 1;
 	}
 	h1 {
-		@apply text-5xl font-medium md:text-6xl font-heading leading-[76.80px];
+		@apply text-5xl font-medium md:text-6xl font-heading md:leading-[76.80px];
 	}
 	h2 {
-		@apply text-4xl font-medium md:text-5xl font-heading leading-[57.60px];
+		@apply text-4xl font-medium md:text-5xl font-heading md:leading-[57.60px];
 	}
 	h3 {
-		@apply text-2xl font-medium md:text-3xl font-heading leading-[38.40px];
+		@apply text-2xl font-medium md:text-3xl font-heading md:leading-[38.40px];
 	}
 	h4 {
-		@apply text-xl font-medium md:text-2xl font-heading leading-[28.80px];
+		@apply text-xl font-medium md:text-2xl font-heading md:leading-[28.80px];
 	}
 	h5 {
-		@apply text-lg font-medium md:text-xl font-heading leading-[24px];
+		@apply text-lg font-medium md:text-xl font-heading md:leading-[24px];
 	}
 	h6 {
-		@apply text-sm font-medium md:text-base font-heading leading-[19.20px];
+		@apply text-sm font-medium md:text-base font-heading md:leading-[19.20px];
 	}
 	p {
 		@apply font-sans font-medium;

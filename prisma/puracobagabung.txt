@@ -16,12 +16,6 @@ enum VoteType {
   DOWN
 }
 
-enum UserRole {
-  ADMIN
-  PENGEMPON
-  PRAJURU
-}
-
 model Subreddit {
   id        String   @id @default(cuid())
   name      String   @unique
@@ -103,7 +97,6 @@ model User {
   emailVerified     DateTime?
   username          String?              @unique
   image             String?
-  role              UserRole             @default(PENGEMPON)
   // breddit
   createdSubreddits Subreddit[]          @relation("CreatedBy")
   subscriptions     Subscription[]

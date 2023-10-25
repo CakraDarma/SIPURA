@@ -1,24 +1,16 @@
 import Hero from '@/components/Hero';
 import VideoInformation from '@/components/homepage/VideoInformation';
 import Announce from '@/components/homepage/Announce';
+import About from '@/components/homepage/About';
 
 const Home = () => {
 	return (
-		<>
-			<Hero imageUrl='/hero.png' />
-			{/* <About /> */}
+		<div className='flex flex-col gap-4'>
+			<Hero imageUrl='/images/hero.png' />
+			<About />
 			<VideoInformation />
 			<Announce />
-			{/* <ChooseUs /> */}
-			{/* <Trainers /> */}
-			{/* <Testimonials /> */}
-			{/* <Gallery /> */}
-			{/* <BmiCalc /> */}
-			{/* <Pricing /> */}
-			{/* <Blog /> */}
-			{/* <CtaBanner /> */}
-			{/* <Footer /> */}
-		</>
+		</div>
 	);
 };
 

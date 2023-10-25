@@ -40,15 +40,19 @@ export const UserAccountNav = ({ user }: UserAccountNavProps) => {
 				</div>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem asChild>
-					<Link href='/'>Feed</Link>
+					<Link href='/'>Beranda</Link>
 				</DropdownMenuItem>
 
 				<DropdownMenuItem asChild>
-					<Link href='/r/create'>Create Community</Link>
+					<Link href='/r/dashboard'>Dashboard</Link>
 				</DropdownMenuItem>
 
 				<DropdownMenuItem asChild>
-					<Link href='/settings'>Settings</Link>
+					<Link href='/r/create'>Tambah Kegiatan</Link>
+				</DropdownMenuItem>
+
+				<DropdownMenuItem asChild>
+					<Link href='/settings'>Profile</Link>
 				</DropdownMenuItem>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem
