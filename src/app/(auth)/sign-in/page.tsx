@@ -1,11 +1,7 @@
 import { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 
-import { cn } from '@/lib/utils';
-import { buttonVariants } from '@/components/ui/Button';
-import { UserAuthForm } from '@/components/UserAuthForm';
-import { Icons } from '@/components/Icons';
+import SignIn from '@/components/SignIn';
 
 export const metadata: Metadata = {
 	title: 'Autentikasi',
@@ -24,12 +20,12 @@ export default function AuthenticationPage() {
 						className='absolute inset-0  object-cover bg-center bg-cover'
 						style={divStyle}
 					/>
-					<div className='relative z-20 flex items-center text-lg font-medium'>
+					{/* <div className='relative z-20 flex items-center text-lg font-medium'>
 						<Link href='/' className='flex gap-2 items-center'>
 							<Icons.logo className='h-8 w-8 sm:h-6 sm:w-6' />
 							<h4>Si Pura</h4>
 						</Link>
-					</div>
+					</div> */}
 					<div className='relative z-20 mt-auto'>
 						<blockquote className='space-y-2'>
 							<p className='text-lg'>
@@ -50,7 +46,7 @@ export default function AuthenticationPage() {
 								Masukan email dan password untuk login ke akun Anda
 							</p>
 						</div>
-						<UserAuthForm />
+						<SignIn />
 						<p className='px-8 text-center text-sm text-muted-foreground'>
 							Belum memiliki akun?{' '}
 							<Link
