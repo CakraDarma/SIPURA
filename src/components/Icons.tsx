@@ -1,8 +1,59 @@
-import { LucideProps, MessageSquare, User } from 'lucide-react';
+import {
+	LucideProps,
+	MessageSquare,
+	User,
+	AlertTriangle,
+	ArrowRight,
+	Check,
+	ChevronLeft,
+	ChevronRight,
+	CreditCard,
+	File,
+	FileText,
+	HelpCircle,
+	Image,
+	Laptop,
+	Loader2,
+	Moon,
+	MoreVertical,
+	Pizza,
+	Plus,
+	Settings,
+	SunMedium,
+	Trash,
+	Twitter,
+	X,
+	type Icon as LucideIcon,
+} from 'lucide-react';
+
 import { FaRegUserCircle } from 'react-icons/fa';
+
+export type Icon = LucideIcon;
+
 export const Icons = {
-	user2: FaRegUserCircle,
+	twitter: Twitter,
+	check: Check,
+	spinner: Loader2,
+	chevronLeft: ChevronLeft,
+	chevronRight: ChevronRight,
+	trash: Trash,
+	post: FileText,
+	page: File,
+	media: Image,
+	settings: Settings,
+	billing: CreditCard,
+	ellipsis: MoreVertical,
+	add: Plus,
+	warning: AlertTriangle,
 	user: User,
+	arrowRight: ArrowRight,
+	help: HelpCircle,
+	pizza: Pizza,
+	sun: SunMedium,
+	moon: Moon,
+	laptop: Laptop,
+	close: X,
+	user2: FaRegUserCircle,
 	logo: (props: LucideProps) => (
 		<svg {...props} viewBox='0 0 497 497'>
 			<g>
