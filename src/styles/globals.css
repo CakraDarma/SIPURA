@@ -79,7 +79,7 @@
 		font-feature-settings: 'rlig' 1, 'calt' 1;
 	}
 	h1 {
-		@apply text-5xl font-medium md:text-6xl font-heading md:leading-[76.80px];
+		@apply text-5xl md:text-6xl font-heading md:leading-[76.80px];
 	}
 	h2 {
 		@apply text-4xl font-medium md:text-5xl font-heading md:leading-[57.60px];
