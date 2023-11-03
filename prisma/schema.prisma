@@ -75,6 +75,13 @@ model User {
   kegiatan      Kegiatan[]
   Comment       Comment[]
   CommentVote   CommentVote[]
+
+  // pura
+  upacara     Upacara[]
+  pratima     Pratima[]
+  pelinggih   Pelinggih[]
+  userToken   User_refresh_token[]
+  virtualTour VirtualTour[]
 }
 
 model Pura {
@@ -93,11 +100,10 @@ model Pura {
   kegiatans   Kegiatan[]
   subscribers Subscription[]
 
-  // upacara      Upacara[]
-  // kegiatan     Kegiatan[]
-  // pratima      Pratima[]
-  // pelinggih    Pelinggih[]
-  // virtualTour  VirtualTour[]
+  upacara     Upacara[]
+  pratima     Pratima[]
+  pelinggih   Pelinggih[]
+  virtualTour VirtualTour[]
 
   @@index([name])
 }
@@ -162,4 +168,81 @@ model CommentVote {
   type      VoteType
 
   @@id([userId, commentId])
+}
+
+model Pratima {
+  id               String   @id @default(cuid())
+  nama             String
+  konten           Json?
+  puraId           String
+  bahan            String
+  jenis            String
+  pura             Pura     @relation(fields: [puraId], references: [id])
+  userId           String
+  user             User     @relation(fields: [userId], references: [id])
+  tahunPeninggalan Int
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Pelinggih {
+  id               String   @id @default(cuid())
+  puraId           String
+  pura             Pura     @relation(fields: [puraId], references: [id])
+  userId           String
+  user             User     @relation(fields: [userId], references: [id])
+  nama             String
+  konten           Json
+  tahunPeninggalan Int
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  banten Banten[]
+}
+
+model User_refresh_token {
+  id           String   @id @default(cuid())
+  refreshToken String   @db.VarChar(255)
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now())
+}
+
+model VirtualTour {
+  id          String   @id @default(cuid())
+  puraId      String
+  pura        Pura     @relation(fields: [puraId], references: [id])
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  virtualTour String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Banten {
+  id          String    @id @default(cuid())
+  pelinggihId String
+  pelinggih   Pelinggih @relation(fields: [pelinggihId], references: [id])
+  upacaraId   String
+  upacara     Upacara   @relation(fields: [upacaraId], references: [id])
+  nama        String
+  konten      Json?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Upacara {
+  id        String   @id @default(cuid())
+  puraId    String
+  pura      Pura     @relation(fields: [puraId], references: [id])
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  nama      String
+  biaya     String
+  konten    Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  banten Banten[]
 }
