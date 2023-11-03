@@ -7,7 +7,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Loader2 } from 'lucide-react';
 import { useEffect, useRef } from 'react';
-import Post from './Post';
+import Kegiatan from './Post';
 import { useSession } from 'next-auth/react';
 
 interface PostFeedProps {
@@ -27,7 +27,7 @@ const PostFeed = ({ initialPosts, subredditName }: PostFeedProps) => {
 		['infinite-query'],
 		async ({ pageParam = 1 }) => {
 			const query =
-				`/api/posts?limit=${INFINITE_SCROLL_PAGINATION_RESULTS}&page=${pageParam}` +
+				`/api/kegiatans?limit=${INFINITE_SCROLL_PAGINATION_RESULTS}&page=${pageParam}` +
 				(!!subredditName ? `&subredditName=${subredditName}` : '');
 
 			const { data } = await axios.get(query);
@@ -44,33 +44,33 @@ const PostFeed = ({ initialPosts, subredditName }: PostFeedProps) => {
 
 	useEffect(() => {
 		if (entry?.isIntersecting) {
-			fetchNextPage(); // Load more posts when the last post comes into view
+			fetchNextPage(); // Load more kegiatans when the last kegiatan comes into view
 		}
 	}, [entry, fetchNextPage]);
 
-	const posts = data?.pages.flatMap((page) => page) ?? initialPosts;
+	const kegiatans = data?.pages.flatMap((page) => page) ?? initialPosts;
 
 	return (
 		<ul className='flex flex-col col-span-2 space-y-6'>
-			{posts.map((post, index) => {
-				const votesAmt = post.votes.reduce((acc, vote) => {
+			{kegiatans.map((kegiatan, index) => {
+				const votesAmt = kegiatan.votes.reduce((acc, vote) => {
 					if (vote.type === 'UP') return acc + 1;
 					if (vote.type === 'DOWN') return acc - 1;
 					return acc;
 				}, 0);
 
-				const currentVote = post.votes.find(
+				const currentVote = kegiatan.votes.find(
 					(vote) => vote.userId === session?.user.id
 				);
 
-				if (index === posts.length - 1) {
-					// Add a ref to the last post in the list
+				if (index === kegiatans.length - 1) {
+					// Add a ref to the last kegiatan in the list
 					return (
-						<li key={post.id} ref={ref}>
-							<Post
-								post={post}
-								commentAmt={post.comments.length}
-								subredditName={post.subreddit.name}
+						<li key={kegiatan.id} ref={ref}>
+							<Kegiatan
+								kegiatan={kegiatan}
+								commentAmt={kegiatan.comments.length}
+								subredditName={kegiatan.pura.name}
 								votesAmt={votesAmt}
 								currentVote={currentVote}
 							/>
@@ -78,11 +78,11 @@ const PostFeed = ({ initialPosts, subredditName }: PostFeedProps) => {
 					);
 				} else {
 					return (
-						<Post
-							key={post.id}
-							post={post}
-							commentAmt={post.comments.length}
-							subredditName={post.subreddit.name}
+						<Kegiatan
+							key={kegiatan.id}
+							kegiatan={kegiatan}
+							commentAmt={kegiatan.comments.length}
+							subredditName={kegiatan.pura.name}
 							votesAmt={votesAmt}
 							currentVote={currentVote}
 						/>

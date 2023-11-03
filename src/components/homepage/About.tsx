@@ -7,7 +7,12 @@ const About = () => {
 			<div className='w-full flex flex-row justify-center items-center relative z-10'>
 				<div>
 					<div className='w-[515px] h-[719px] absolute top-[-65px] left-0 z-10'>
-						<Image src='/pura.png' alt='About' fill className='object-cover' />
+						<Image
+							src='/images/about.png'
+							alt='About'
+							fill
+							className='object-cover'
+						/>
 					</div>
 					<div className='bg-orange-light w-[801px] h-[725px] items-end flex flex-col box-border pr-16 pt-[140px] pb-[80px]'>
 						<div className='flex flex-col'>

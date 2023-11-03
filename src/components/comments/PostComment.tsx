@@ -26,14 +26,14 @@ interface PostCommentProps {
 	comment: ExtendedComment;
 	votesAmt: number;
 	currentVote: CommentVote | undefined;
-	postId: string;
+	kegiatanId: string;
 }
 
 const PostComment = ({
 	comment,
 	votesAmt,
 	currentVote,
-	postId,
+	kegiatanId,
 }: PostCommentProps) => {
 	const { data: session } = useSession();
 	const [isReplying, setIsReplying] = useState<boolean>(false);
@@ -45,11 +45,11 @@ const PostComment = ({
 	});
 
 	const { mutate: postComment, isLoading } = useMutation({
-		mutationFn: async ({ postId, text, replyToId }: CommentRequest) => {
-			const payload: CommentRequest = { postId, text, replyToId };
+		mutationFn: async ({ kegiatanId, text, replyToId }: CommentRequest) => {
+			const payload: CommentRequest = { kegiatanId, text, replyToId };
 
 			const { data } = await axios.patch(
-				`/api/subreddit/post/comment/`,
+				`/api/pura/kegiatan/comment/`,
 				payload
 			);
 			return data;
@@ -143,13 +143,13 @@ const PostComment = ({
 								onClick={() => {
 									if (!input) return;
 									postComment({
-										postId,
+										kegiatanId,
 										text: input,
 										replyToId: comment.replyToId ?? comment.id, // default to top-level comment
 									});
 								}}
 							>
-								Post
+								Kegiatan
 							</Button>
 						</div>
 					</div>

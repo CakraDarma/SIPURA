@@ -1,6 +1,6 @@
 import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
-import { SubredditValidator } from '@/lib/validators/subreddit';
+import { SubredditValidator } from '@/lib/validators/pura';
 import { z } from 'zod';
 
 export async function POST(req: Request) {
@@ -16,7 +16,7 @@ export async function POST(req: Request) {
 		const { name } = SubredditValidator.parse(body);
 
 		// check if subreddit already exists
-		const subredditExists = await db.subreddit.findFirst({
+		const subredditExists = await db.pura.findFirst({
 			where: {
 				name,
 			},
@@ -27,7 +27,7 @@ export async function POST(req: Request) {
 		}
 
 		// create subreddit and associate it with the user
-		const subreddit = await db.subreddit.create({
+		const subreddit = await db.pura.create({
 			data: {
 				name,
 				creatorId: session.user.id,
@@ -38,7 +38,7 @@ export async function POST(req: Request) {
 		await db.subscription.create({
 			data: {
 				userId: session.user.id,
-				subredditId: subreddit.id,
+				puraId: subreddit.id,
 			},
 		});
 

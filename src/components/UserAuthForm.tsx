@@ -4,7 +4,7 @@ import { signIn } from 'next-auth/react';
 import * as React from 'react';
 import { Button } from '@/components/ui/Button';
 import { useToast } from '@/hooks/use-toast';
-import { Icons } from './Icons';
+import { Icons } from '@/components/icons';
 
 const UserAuthForm = () => {
 	const { toast } = useToast();

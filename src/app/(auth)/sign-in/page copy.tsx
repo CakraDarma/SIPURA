@@ -1,11 +1,15 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
+
+import SignIn from '@/components/SignIn';
 import { Icons } from '@/components/icons';
 
-interface AuthLayoutProps {
-	children: React.ReactNode;
-}
+export const metadata: Metadata = {
+	title: 'Autentikasi',
+	description: 'Autentikasi User',
+};
 
-export default function AuthLayout({ children }: AuthLayoutProps) {
+export default function AuthenticationPage() {
 	const divStyle = {
 		backgroundImage: `url(/images/hero.png)`,
 	};
@@ -32,7 +36,19 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
 					</blockquote>
 				</div>
 			</div>
-			{children}
+			<div className='lg:p-8'>
+				<div className='mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]'>
+					<div className='flex flex-col space-y-2 text-center'>
+						<h1 className='text-2xl font-semibold tracking-tight'>
+							Login Akun
+						</h1>
+						<p className='text-sm text-muted-foreground'>
+							Masukan email dan password untuk login ke akun Anda
+						</p>
+					</div>
+					<SignIn />
+				</div>
+			</div>
 		</div>
 	);
 }

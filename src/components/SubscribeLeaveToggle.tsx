@@ -1,6 +1,6 @@
 'use client';
 import { Button } from '@/components/ui/Button';
-import { SubscribeToSubredditPayload } from '@/lib/validators/subreddit';
+import { SubscribeToSubredditPayload } from '@/lib/validators/pura';
 import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
@@ -10,13 +10,13 @@ import { useCustomToasts } from '@/hooks/use-custom-toasts';
 
 interface SubscribeLeaveToggleProps {
 	isSubscribed: boolean;
-	subredditId: string;
+	puraId: string;
 	subredditName: string;
 }
 
 const SubscribeLeaveToggle = ({
 	isSubscribed,
-	subredditId,
+	puraId,
 	subredditName,
 }: SubscribeLeaveToggleProps) => {
 	const { toast } = useToast();
@@ -26,10 +26,10 @@ const SubscribeLeaveToggle = ({
 	const { mutate: subscribe, isLoading: isSubLoading } = useMutation({
 		mutationFn: async () => {
 			const payload: SubscribeToSubredditPayload = {
-				subredditId,
+				puraId,
 			};
 
-			const { data } = await axios.post('/api/subreddit/subscribe', payload);
+			const { data } = await axios.post('/api/pura/subscribe', payload);
 			return data as string;
 		},
 		onError: (err) => {
@@ -61,10 +61,10 @@ const SubscribeLeaveToggle = ({
 	const { mutate: unsubscribe, isLoading: isUnsubLoading } = useMutation({
 		mutationFn: async () => {
 			const payload: SubscribeToSubredditPayload = {
-				subredditId,
+				puraId,
 			};
 
-			const { data } = await axios.post('/api/subreddit/unsubscribe', payload);
+			const { data } = await axios.post('/api/pura/unsubscribe', payload);
 			return data as string;
 		},
 		onError: (err: AxiosError) => {
@@ -101,7 +101,7 @@ const SubscribeLeaveToggle = ({
 			isLoading={isSubLoading}
 			onClick={() => subscribe()}
 		>
-			Join to post
+			Join to kegiatan
 		</Button>
 	);
 };

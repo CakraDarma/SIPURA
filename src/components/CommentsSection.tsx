@@ -16,16 +16,16 @@ type ReplyComment = Comment & {
 };
 
 interface CommentsSectionProps {
-	postId: string;
+	kegiatanId: string;
 	comments: ExtendedComment[];
 }
 
-const CommentsSection = async ({ postId }: CommentsSectionProps) => {
+const CommentsSection = async ({ kegiatanId }: CommentsSectionProps) => {
 	const session = await getAuthSession();
 
 	const comments = await db.comment.findMany({
 		where: {
-			postId: postId,
+			kegiatanId: kegiatanId,
 			replyToId: null, // only fetch top-level comments
 		},
 		include: {
@@ -45,7 +45,7 @@ const CommentsSection = async ({ postId }: CommentsSectionProps) => {
 		<div className='flex flex-col gap-y-4 mt-4'>
 			<hr className='w-full h-px my-6' />
 
-			<CreateComment postId={postId} />
+			<CreateComment kegiatanId={kegiatanId} />
 
 			<div className='flex flex-col gap-y-6 mt-4'>
 				{comments
@@ -73,7 +73,7 @@ const CommentsSection = async ({ postId }: CommentsSectionProps) => {
 										comment={topLevelComment}
 										currentVote={topLevelCommentVote}
 										votesAmt={topLevelCommentVotesAmt}
-										postId={postId}
+										kegiatanId={kegiatanId}
 									/>
 								</div>
 
@@ -100,7 +100,7 @@ const CommentsSection = async ({ postId }: CommentsSectionProps) => {
 													comment={reply}
 													currentVote={replyVote}
 													votesAmt={replyVotesAmt}
-													postId={postId}
+													kegiatanId={kegiatanId}
 												/>
 											</div>
 										);

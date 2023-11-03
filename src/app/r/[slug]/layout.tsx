@@ -23,10 +23,10 @@ const Layout = async ({
 }) => {
 	const session = await getAuthSession();
 
-	const subreddit = await db.subreddit.findFirst({
+	const pura = await db.pura.findFirst({
 		where: { name: slug },
 		include: {
-			posts: {
+			kegiatans: {
 				include: {
 					author: true,
 					votes: true,
@@ -39,7 +39,7 @@ const Layout = async ({
 		? undefined
 		: await db.subscription.findFirst({
 				where: {
-					subreddit: {
+					pura: {
 						name: slug,
 					},
 					user: {
@@ -50,11 +50,11 @@ const Layout = async ({
 
 	const isSubscribed = !!subscription;
 
-	if (!subreddit) return notFound();
+	if (!pura) return notFound();
 
 	const memberCount = await db.subscription.count({
 		where: {
-			subreddit: {
+			pura: {
 				name: slug,
 			},
 		},
@@ -71,14 +71,14 @@ const Layout = async ({
 					{/* info sidebar */}
 					<div className='overflow-hidden h-fit rounded-lg border border-gray-200 order-first md:order-last'>
 						<div className='px-6 py-4'>
-							<p className='font-semibold py-3'>About r/{subreddit.name}</p>
+							<p className='font-semibold py-3'>About r/{pura.name}</p>
 						</div>
 						<dl className='divide-y divide-gray-100 px-6 py-4 text-sm leading-6 bg-white'>
 							<div className='flex justify-between gap-x-4 py-3'>
 								<dt className='text-gray-500'>Created</dt>
 								<dd className='text-gray-700'>
-									<time dateTime={subreddit.createdAt.toDateString()}>
-										{format(subreddit.createdAt, 'MMMM d, yyyy')}
+									<time dateTime={pura.createdAt.toDateString()}>
+										{format(pura.createdAt, 'MMMM d, yyyy')}
 									</time>
 								</dd>
 							</div>
@@ -88,17 +88,17 @@ const Layout = async ({
 									<div className='text-gray-900'>{memberCount}</div>
 								</dd>
 							</div>
-							{subreddit.creatorId === session?.user?.id ? (
+							{pura.creatorId === session?.user?.id ? (
 								<div className='flex justify-between gap-x-4 py-3'>
 									<dt className='text-gray-500'>You created this community</dt>
 								</div>
 							) : null}
 
-							{subreddit.creatorId !== session?.user?.id ? (
+							{pura.creatorId !== session?.user?.id ? (
 								<SubscribeLeaveToggle
 									isSubscribed={isSubscribed}
-									subredditId={subreddit.id}
-									subredditName={subreddit.name}
+									puraId={pura.id}
+									subredditName={pura.name}
 								/>
 							) : null}
 							<Link
@@ -108,7 +108,7 @@ const Layout = async ({
 								})}
 								href={`r/${slug}/submit`}
 							>
-								Create Post
+								Create Kegiatan
 							</Link>
 						</dl>
 					</div>

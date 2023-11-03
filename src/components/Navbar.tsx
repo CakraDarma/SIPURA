@@ -1,6 +1,6 @@
 import { getAuthSession } from '@/lib/auth';
 import Link from 'next/link';
-import { Icons } from './Icons';
+import { Icons } from '@/components/icons';
 import { UserAccountNav } from './UserAccountNav';
 import SearchBar from './SearchBar';
 

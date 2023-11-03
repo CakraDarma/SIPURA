@@ -31,7 +31,7 @@ const MiniCreatePost = ({ session }: MiniCreatePostProps) => {
 				<Input
 					onClick={() => router.push(pathname + '/submit')}
 					readOnly
-					placeholder='Create post'
+					placeholder='Create kegiatan'
 				/>
 				<Button
 					onClick={() => router.push(pathname + '/submit')}

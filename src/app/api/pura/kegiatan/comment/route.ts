@@ -7,7 +7,7 @@ export async function PATCH(req: Request) {
 	try {
 		const body = await req.json();
 
-		const { postId, text, replyToId } = CommentValidator.parse(body);
+		const { kegiatanId, text, replyToId } = CommentValidator.parse(body);
 
 		const session = await getAuthSession();
 
@@ -19,7 +19,7 @@ export async function PATCH(req: Request) {
 		await db.comment.create({
 			data: {
 				text,
-				postId,
+				kegiatanId,
 				authorId: session.user.id,
 				replyToId,
 			},
@@ -32,7 +32,7 @@ export async function PATCH(req: Request) {
 		}
 
 		return new Response(
-			'Could not post to subreddit at this time. Please try later',
+			'Could not kegiatan to pura at this time. Please try later',
 			{ status: 500 }
 		);
 	}

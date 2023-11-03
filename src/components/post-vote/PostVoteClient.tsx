@@ -13,13 +13,13 @@ import { ArrowBigDown, ArrowBigUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface PostVoteClientProps {
-	postId: string;
+	kegiatanId: string;
 	initialVotesAmt: number;
 	initialVote?: VoteType | null;
 }
 
 const PostVoteClient = ({
-	postId,
+	kegiatanId,
 	initialVotesAmt,
 	initialVote,
 }: PostVoteClientProps) => {
@@ -37,10 +37,10 @@ const PostVoteClient = ({
 		mutationFn: async (type: VoteType) => {
 			const payload: PostVoteRequest = {
 				voteType: type,
-				postId: postId,
+				kegiatanId: kegiatanId,
 			};
 
-			await axios.patch('/api/subreddit/post/vote', payload);
+			await axios.patch('/api/pura/kegiatan/vote', payload);
 		},
 		onError: (err, voteType) => {
 			if (voteType === 'UP') setVotesAmt((prev) => prev - 1);

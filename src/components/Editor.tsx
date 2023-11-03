@@ -10,7 +10,7 @@ import { z } from 'zod';
 
 import { toast } from '@/hooks/use-toast';
 import { uploadFiles } from '@/lib/uploadthing';
-import { PostCreationRequest, PostValidator } from '@/lib/validators/post';
+import { PostCreationRequest, PostValidator } from '@/lib/validators/kegiatan';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 
@@ -19,10 +19,10 @@ import '@/styles/editor.css';
 type FormData = z.infer<typeof PostValidator>;
 
 interface EditorProps {
-	subredditId: string;
+	puraId: string;
 }
 
-export const Editor = ({ subredditId }: EditorProps) => {
+export const Editor = ({ puraId }: EditorProps) => {
 	const {
 		register,
 		handleSubmit,
@@ -30,7 +30,7 @@ export const Editor = ({ subredditId }: EditorProps) => {
 	} = useForm<FormData>({
 		resolver: zodResolver(PostValidator),
 		defaultValues: {
-			subredditId,
+			puraId,
 			title: '',
 			content: null,
 		},
@@ -43,19 +43,15 @@ export const Editor = ({ subredditId }: EditorProps) => {
 	const pathname = usePathname();
 
 	const { mutate: createPost } = useMutation({
-		mutationFn: async ({
-			title,
-			content,
-			subredditId,
-		}: PostCreationRequest) => {
-			const payload: PostCreationRequest = { title, content, subredditId };
-			const { data } = await axios.post('/api/subreddit/post/create', payload);
+		mutationFn: async ({ title, content, puraId }: PostCreationRequest) => {
+			const payload: PostCreationRequest = { title, content, puraId };
+			const { data } = await axios.post('/api/pura/kegiatan/create', payload);
 			return data;
 		},
 		onError: () => {
 			return toast({
 				title: 'Something went wrong.',
-				description: 'Your post was not published. Please try again.',
+				description: 'Your kegiatan was not published. Please try again.',
 				variant: 'destructive',
 			});
 		},
@@ -67,7 +63,7 @@ export const Editor = ({ subredditId }: EditorProps) => {
 			router.refresh();
 
 			return toast({
-				description: 'Your post has been published.',
+				description: 'Your kegiatan has been published.',
 			});
 		},
 	});
@@ -172,7 +168,7 @@ export const Editor = ({ subredditId }: EditorProps) => {
 		const payload: PostCreationRequest = {
 			title: data.title,
 			content: blocks,
-			subredditId,
+			puraId,
 		};
 
 		createPost(payload);
@@ -187,7 +183,7 @@ export const Editor = ({ subredditId }: EditorProps) => {
 	return (
 		<div className='w-full p-4 bg-zinc-50 rounded-lg border border-zinc-200'>
 			<form
-				id='subreddit-post-form'
+				id='pura-kegiatan-form'
 				className='w-fit'
 				onSubmit={handleSubmit(onSubmit)}
 			>

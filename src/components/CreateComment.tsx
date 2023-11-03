@@ -13,21 +13,21 @@ import { Label } from '@/components/ui/Label';
 import { Textarea } from '@/components/ui/Textarea';
 
 interface CreateCommentProps {
-	postId: string;
+	kegiatanId: string;
 	replyToId?: string;
 }
 
-const CreateComment = ({ postId, replyToId }: CreateCommentProps) => {
+const CreateComment = ({ kegiatanId, replyToId }: CreateCommentProps) => {
 	const [input, setInput] = useState<string>('');
 	const router = useRouter();
 	const { loginToast } = useCustomToasts();
 
 	const { mutate: comment, isLoading } = useMutation({
-		mutationFn: async ({ postId, text, replyToId }: CommentRequest) => {
-			const payload: CommentRequest = { postId, text, replyToId };
+		mutationFn: async ({ kegiatanId, text, replyToId }: CommentRequest) => {
+			const payload: CommentRequest = { kegiatanId, text, replyToId };
 
 			const { data } = await axios.patch(
-				`/api/subreddit/post/comment/`,
+				`/api/pura/kegiatan/comment/`,
 				payload
 			);
 			return data;
@@ -68,9 +68,9 @@ const CreateComment = ({ postId, replyToId }: CreateCommentProps) => {
 					<Button
 						isLoading={isLoading}
 						disabled={input.length === 0}
-						onClick={() => comment({ postId, text: input, replyToId })}
+						onClick={() => comment({ kegiatanId, text: input, replyToId })}
 					>
-						Post
+						Kegiatan
 					</Button>
 				</div>
 			</div>

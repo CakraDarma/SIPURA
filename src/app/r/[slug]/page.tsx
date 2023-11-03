@@ -16,15 +16,15 @@ const page = async ({ params }: PageProps) => {
 
 	const session = await getAuthSession();
 
-	const subreddit = await db.subreddit.findFirst({
+	const pura = await db.pura.findFirst({
 		where: { name: slug },
 		include: {
-			posts: {
+			kegiatans: {
 				include: {
 					author: true,
 					votes: true,
 					comments: true,
-					subreddit: true,
+					pura: true,
 				},
 				orderBy: {
 					createdAt: 'desc',
@@ -34,15 +34,13 @@ const page = async ({ params }: PageProps) => {
 		},
 	});
 
-	if (!subreddit) return notFound();
+	if (!pura) return notFound();
 
 	return (
 		<>
-			<h1 className='font-bold text-3xl md:text-4xl h-14'>
-				r/{subreddit.name}
-			</h1>
+			<h1 className='font-bold text-3xl md:text-4xl h-14'>r/{pura.name}</h1>
 			<MiniCreatePost session={session} />
-			<PostFeed initialPosts={subreddit.posts} subredditName={subreddit.name} />
+			<PostFeed initialPosts={pura.kegiatans} subredditName={pura.name} />
 		</>
 	);
 };

@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { toast } from '@/hooks/use-toast';
 import { useCustomToasts } from '@/hooks/use-custom-toasts';
-import { CreateSubredditPayload } from '@/lib/validators/subreddit';
+import { CreateSubredditPayload } from '@/lib/validators/pura';
 import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
@@ -21,14 +21,14 @@ const Page = () => {
 				name: input,
 			};
 
-			const { data } = await axios.post('/api/subreddit', payload);
+			const { data } = await axios.post('/api/pura', payload);
 			return data as string;
 		},
 		onError: (err) => {
 			if (err instanceof AxiosError) {
 				if (err.response?.status === 409) {
 					return toast({
-						title: 'Subreddit already exists.',
+						title: 'Pura already exists.',
 						description: 'Please choose a different name.',
 						variant: 'destructive',
 					});
@@ -36,7 +36,7 @@ const Page = () => {
 
 				if (err.response?.status === 422) {
 					return toast({
-						title: 'Invalid subreddit name.',
+						title: 'Invalid pura name.',
 						description: 'Please choose a name between 3 and 21 letters.',
 						variant: 'destructive',
 					});
@@ -49,7 +49,7 @@ const Page = () => {
 
 			toast({
 				title: 'There was an error.',
-				description: 'Could not create subreddit.',
+				description: 'Could not create pura.',
 				variant: 'destructive',
 			});
 		},

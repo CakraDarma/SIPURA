@@ -15,15 +15,15 @@ const CustomFeed = async () => {
 			userId: session.user.id,
 		},
 		include: {
-			subreddit: true,
+			pura: true,
 		},
 	});
 
-	const posts = await db.post.findMany({
+	const kegiatans = await db.kegiatan.findMany({
 		where: {
-			subreddit: {
+			pura: {
 				name: {
-					in: followedCommunities.map((sub) => sub.subreddit.name),
+					in: followedCommunities.map((sub) => sub.pura.name),
 				},
 			},
 		},
@@ -34,12 +34,12 @@ const CustomFeed = async () => {
 			votes: true,
 			author: true,
 			comments: true,
-			subreddit: true,
+			pura: true,
 		},
 		take: INFINITE_SCROLL_PAGINATION_RESULTS,
 	});
 
-	return <PostFeed initialPosts={posts} />;
+	return <PostFeed initialPosts={kegiatans} />;
 };
 
 export default CustomFeed;

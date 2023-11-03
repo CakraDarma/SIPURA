@@ -3,8 +3,8 @@ import { redirect } from 'next/navigation';
 import { authOptions, getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
 // import { EmptyPlaceholder } from '@/components/empty-placeholder';
-// import { PostItem } from '@/components/post-item';
-// import { PostCreateButton } from '@/components/post-create-button';
+// import { PostItem } from '@/components/kegiatan-item';
+// import { PostCreateButton } from '@/components/kegiatan-create-button';
 import { DashboardHeader } from '@/components/header';
 import { DashboardShell } from '@/components/shell';
 
@@ -19,7 +19,7 @@ export default async function DashboardPage() {
 		redirect(authOptions?.pages?.signIn || '/login');
 	}
 
-	// const posts = await db.post.findMany({
+	// const kegiatans = await db.kegiatan.findMany({
 	// 	where: {
 	// 		authorId: session.id,
 	// 	},
@@ -36,22 +36,22 @@ export default async function DashboardPage() {
 
 	return (
 		<DashboardShell>
-			<DashboardHeader heading='Posts' text='Create and manage posts.'>
+			<DashboardHeader heading='Posts' text='Create and manage kegiatans.'>
 				{/* <PostCreateButton /> */}
 			</DashboardHeader>
 			<div>
-				{/* {posts?.length ? (
+				{/* {kegiatans?.length ? (
 					<div className='divide-y divide-border rounded-md border'>
-						{posts.map((post) => (
-							<PostItem key={post.id} post={post} />
+						{kegiatans.map((kegiatan) => (
+							<PostItem key={kegiatan.id} kegiatan={kegiatan} />
 						))}
 					</div>
 				) : (
 					<EmptyPlaceholder>
-						<EmptyPlaceholder.Icon name='post' />
-						<EmptyPlaceholder.Title>No posts created</EmptyPlaceholder.Title>
+						<EmptyPlaceholder.Icon name='kegiatan' />
+						<EmptyPlaceholder.Title>No kegiatans created</EmptyPlaceholder.Title>
 						<EmptyPlaceholder.Description>
-							You don&apos;t have any posts yet. Start creating content.
+							You don&apos;t have any kegiatans yet. Start creating content.
 						</EmptyPlaceholder.Description>
 						<PostCreateButton variant='outline' />
 					</EmptyPlaceholder>

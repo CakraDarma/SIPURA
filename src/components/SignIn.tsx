@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Label } from '@/components/ui/Label';
 import UserAuthForm from '@/components/UserAuthForm';
+import Link from 'next/link';
 
 interface SignInProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -31,7 +32,7 @@ function SignIn({ className, ...props }: SignInProps) {
 						</Label>
 						<Input
 							id='email'
-							placeholder='name@example.com'
+							placeholder='Email'
 							type='email'
 							autoCapitalize='none'
 							autoComplete='email'
@@ -43,7 +44,7 @@ function SignIn({ className, ...props }: SignInProps) {
 						</Label>
 						<Input
 							id='password'
-							placeholder='password'
+							placeholder='Password'
 							type='password'
 							autoCapitalize='none'
 							autoCorrect='off'
@@ -64,6 +65,23 @@ function SignIn({ className, ...props }: SignInProps) {
 				</div>
 			</div>
 			<UserAuthForm />
+			<p className='px-8 text-center text-sm text-muted-foreground leading-6'>
+				Belum memiliki akun?{' '}
+				<Link
+					href='/sign-up'
+					className='underline underline-offset-4 hover:text-primary'
+				>
+					Daftar
+				</Link>{' '}
+				atau{' '}
+				<Link
+					href='/forgot-password'
+					className='underline underline-offset-4 hover:text-primary'
+				>
+					Lupa password
+				</Link>
+				.
+			</p>
 		</div>
 	);
 }

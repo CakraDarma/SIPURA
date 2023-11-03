@@ -1,13 +1,13 @@
 import { getAuthSession } from '@/lib/auth';
-import type { Post, Vote } from '@prisma/client';
+import type { Kegiatan, Vote } from '@prisma/client';
 import { notFound } from 'next/navigation';
 import PostVoteClient from './PostVoteClient';
 
 interface PostVoteServerProps {
-	postId: string;
+	kegiatanId: string;
 	initialVotesAmt?: number;
 	initialVote?: Vote['type'] | null;
-	getData?: () => Promise<(Post & { votes: Vote[] }) | null>;
+	getData?: () => Promise<(Kegiatan & { votes: Vote[] }) | null>;
 }
 
 /**
@@ -18,7 +18,7 @@ interface PostVoteServerProps {
  */
 
 const PostVoteServer = async ({
-	postId,
+	kegiatanId,
 	initialVotesAmt,
 	initialVote,
 	getData,
@@ -30,16 +30,16 @@ const PostVoteServer = async ({
 
 	if (getData) {
 		// fetch data in component
-		const post = await getData();
-		if (!post) return notFound();
+		const kegiatan = await getData();
+		if (!kegiatan) return notFound();
 
-		_votesAmt = post.votes.reduce((acc, vote) => {
+		_votesAmt = kegiatan.votes.reduce((acc, vote) => {
 			if (vote.type === 'UP') return acc + 1;
 			if (vote.type === 'DOWN') return acc - 1;
 			return acc;
 		}, 0);
 
-		_currentVote = post.votes.find(
+		_currentVote = kegiatan.votes.find(
 			(vote) => vote.userId === session?.user?.id
 		)?.type;
 	} else {
@@ -50,7 +50,7 @@ const PostVoteServer = async ({
 
 	return (
 		<PostVoteClient
-			postId={postId}
+			kegiatanId={kegiatanId}
 			initialVotesAmt={_votesAmt}
 			initialVote={_currentVote}
 		/>
