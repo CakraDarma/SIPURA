@@ -62,24 +62,22 @@ const Page = () => {
 		<div className='container flex items-center h-full max-w-3xl mx-auto'>
 			<div className='relative bg-white w-full h-fit p-4 rounded-lg space-y-6'>
 				<div className='flex justify-between items-center'>
-					<h1 className='text-xl font-semibold'>Create a Community</h1>
+					<h1 className='text-xl font-semibold'>Buat Pura</h1>
 				</div>
 
 				<hr className='bg-red-500 h-px' />
 
 				<div>
-					<p className='text-lg font-medium'>Name</p>
-					<p className='text-xs pb-2'>
-						Community names including capitalization cannot be changed.
-					</p>
+					<p className='text-lg font-medium'>Nama</p>
+					<p className='text-xs pb-2'>Nama Pura diawali dengan huruf kapital</p>
 					<div className='relative'>
-						<p className='absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-400'>
-							r/
+						<p className='absolute text-sm left-0 w-20 inset-y-0 grid place-items-center text-zinc-400'>
+							Pura/
 						</p>
 						<Input
 							value={input}
 							onChange={(e) => setInput(e.target.value)}
-							className='pl-6'
+							className='pl-16'
 						/>
 					</div>
 				</div>
@@ -90,14 +88,14 @@ const Page = () => {
 						variant='subtle'
 						onClick={() => router.back()}
 					>
-						Cancel
+						Batalkan
 					</Button>
 					<Button
 						isLoading={isLoading}
 						disabled={input.length === 0}
 						onClick={() => createCommunity()}
 					>
-						Create Community
+						Buat Pura
 					</Button>
 				</div>
 			</div>

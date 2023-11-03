@@ -79,7 +79,7 @@ const SearchBar = () => {
 				<CommandList className='absolute bg-white top-full inset-x-0 shadow rounded-b-md'>
 					{isFetched && <CommandEmpty>Pencarian tidak ditemukan.</CommandEmpty>}
 					{(queryResults?.length ?? 0) > 0 ? (
-						<CommandGroup heading='Communities'>
+						<CommandGroup heading='Pura'>
 							{queryResults?.map((pura) => (
 								<CommandItem
 									onSelect={(e) => {

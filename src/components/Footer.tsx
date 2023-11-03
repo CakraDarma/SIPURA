@@ -34,7 +34,7 @@ const Footer = () => {
 						</div>
 						<div className='flex-col justify-start items-start gap-6 inline-flex'>
 							<h3 className='text-white text-2xl font-medium leading-[28.80px]'>
-								Information
+								Informasi
 							</h3>
 							{footConfig?.length ? (
 								<div className='flex-col justify-center items-start gap-6 flex'>
