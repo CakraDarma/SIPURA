@@ -1,4 +1,4 @@
-import Footer from '@/components/Footer';
+// import Footer from '@/components/Footer';
 import { cn } from '@/lib/utils';
 import { Open_Sans } from 'next/font/google';
 import localFont from 'next/font/local';
@@ -45,7 +45,6 @@ export default function RootLayout({
 					{/* <div className='container max-w-7xl mx-auto h-full pt-12'> */}
 					{children}
 					{/* </div> */}
-					<Footer />
 				</Providers>
 				<TailwindIndicator />
 				<Toaster />

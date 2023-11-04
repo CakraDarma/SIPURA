@@ -1,7 +1,7 @@
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 
 import { dashboardConfig } from '@/config/dashboard';
-import { getAuthSession } from '@/lib/auth';
+import { authOptions, getAuthSession } from '@/lib/auth';
 import { MainNav } from '@/components/main-nav';
 import { UserAccountNav } from '@/components/UserAccountNav';
 import { Link } from 'lucide-react';
@@ -19,7 +19,7 @@ export default async function DashboardLayout({
 	const session = await getAuthSession();
 
 	if (!session) {
-		return notFound();
+		redirect(authOptions?.pages?.signIn || '/login');
 	}
 
 	return (

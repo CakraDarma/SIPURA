@@ -33,11 +33,11 @@ const Kegiatan = ({
 	return (
 		<div className='rounded-md bg-white shadow'>
 			<div className='px-6 py-4 flex justify-between'>
-				<PostVoteClient
+				{/* <PostVoteClient
 					kegiatanId={kegiatan.id}
 					initialVotesAmt={_votesAmt}
 					initialVote={_currentVote?.type}
-				/>
+				/> */}
 
 				<div className='w-0 flex-1'>
 					<div className='max-h-40 mt-1 text-xs text-gray-500'>
@@ -47,12 +47,12 @@ const Kegiatan = ({
 									className='underline text-zinc-900 text-sm underline-offset-2'
 									href={`/r/${subredditName}`}
 								>
-									r/{subredditName}
+									Pura {subredditName}
 								</a>
 								<span className='px-1'>•</span>
 							</>
 						) : null}
-						<span>Posted by u/{kegiatan.author.username}</span>{' '}
+						<span>Di kirim oleh {kegiatan.author.username}</span>{' '}
 						{formatTimeToNow(new Date(kegiatan.createdAt))}
 					</div>
 					<a href={`/r/${subredditName}/kegiatan/${kegiatan.id}`}>
@@ -79,7 +79,7 @@ const Kegiatan = ({
 					href={`/r/${subredditName}/kegiatan/${kegiatan.id}`}
 					className='w-fit flex items-center gap-2'
 				>
-					<MessageSquare className='h-4 w-4' /> {commentAmt} comments
+					<MessageSquare className='h-4 w-4' /> {commentAmt} Komentar
 				</Link>
 			</div>
 		</div>

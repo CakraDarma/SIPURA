@@ -36,9 +36,11 @@ export default async function DashboardPage() {
 
 	return (
 		<DashboardShell>
-			<DashboardHeader heading='Posts' text='Create and manage kegiatans.'>
-				{/* <PostCreateButton /> */}
-			</DashboardHeader>
+			<DashboardHeader
+				heading='Dashboard'
+				text='Kelola semua aspek terkait dengan Pura dalam satu lokasi yang
+						nyaman.'
+			/>
 			<div>
 				{/* {kegiatans?.length ? (
 					<div className='divide-y divide-border rounded-md border'>

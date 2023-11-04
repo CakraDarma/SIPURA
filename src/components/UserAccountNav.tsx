@@ -48,7 +48,7 @@ export const UserAccountNav = ({ user }: UserAccountNavProps) => {
 				</DropdownMenuItem>
 
 				<DropdownMenuItem asChild>
-					<Link href='/r/create'>Tambah Kegiatan</Link>
+					<Link href='/dashboard/kegiatan/create'>Tambah Kegiatan</Link>
 				</DropdownMenuItem>
 
 				<DropdownMenuItem asChild>

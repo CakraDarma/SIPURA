@@ -23,37 +23,33 @@ import {
 	Trash,
 	Twitter,
 	X,
+	Building,
+	FileDiff,
+	Columns,
+	Combine,
 	type Icon as LucideIcon,
 } from 'lucide-react';
 
-import { FaRegUserCircle } from 'react-icons/fa';
+// import { FaRegUserCircle } from 'react-icons/fa';
 
 export type Icon = LucideIcon;
 
 export const Icons = {
-	twitter: Twitter,
+	pura: Building,
+	upacara: FileDiff,
+	inventory: Columns,
+	virtualTour: Combine,
 	check: Check,
 	spinner: Loader2,
 	chevronLeft: ChevronLeft,
 	chevronRight: ChevronRight,
 	trash: Trash,
 	kegiatan: FileText,
-	page: File,
-	media: Image,
 	settings: Settings,
-	billing: CreditCard,
-	ellipsis: MoreVertical,
-	add: Plus,
-	warning: AlertTriangle,
 	user: User,
 	arrowRight: ArrowRight,
-	help: HelpCircle,
-	pizza: Pizza,
-	sun: SunMedium,
-	moon: Moon,
 	laptop: Laptop,
 	close: X,
-	user2: FaRegUserCircle,
 	logo: (props: LucideProps) => (
 		<svg {...props} viewBox='0 0 497 497'>
 			<g>

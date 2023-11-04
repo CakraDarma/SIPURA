@@ -9,6 +9,8 @@ import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { DashboardHeader } from '@/components/header';
+import { DashboardShell } from '@/components/shell';
 
 const Page = () => {
 	const router = useRouter();
@@ -54,15 +56,41 @@ const Page = () => {
 			});
 		},
 		onSuccess: (data) => {
-			router.push(`/r/${data}`);
+			router.push(`/dashboard/kegiatan/${data}`);
 		},
 	});
 
 	return (
+		// <DashboardShell>
+		// 	<DashboardHeader
+		// 		heading='Dashboard'
+		// 		text='Kelola semua aspek terkait dengan Pura dalam satu lokasi yang
+		// 				nyaman.'
+		// 	/>
+		// 	<div>
+		// 		{/* {kegiatans?.length ? (
+		// 			<div className='divide-y divide-border rounded-md border'>
+		// 				{kegiatans.map((kegiatan) => (
+		// 					<PostItem key={kegiatan.id} kegiatan={kegiatan} />
+		// 				))}
+		// 			</div>
+		// 		) : (
+		// 			<EmptyPlaceholder>
+		// 				<EmptyPlaceholder.Icon name='kegiatan' />
+		// 				<EmptyPlaceholder.Title>No kegiatans created</EmptyPlaceholder.Title>
+		// 				<EmptyPlaceholder.Description>
+		// 					You don&apos;t have any kegiatans yet. Start creating content.
+		// 				</EmptyPlaceholder.Description>
+		// 				<PostCreateButton variant='outline' />
+		// 			</EmptyPlaceholder>
+		// 		)} */}
+		// 	</div>
+		// </DashboardShell>
+
 		<div className='container flex items-center h-full max-w-3xl mx-auto'>
 			<div className='relative bg-white w-full h-fit p-4 rounded-lg space-y-6'>
 				<div className='flex justify-between items-center'>
-					<h1 className='text-xl font-semibold'>Buat Pura</h1>
+					<h1 className='text-xl font-semibold'>Buat Kegiatan Pura</h1>
 				</div>
 
 				<hr className='bg-red-500 h-px' />
