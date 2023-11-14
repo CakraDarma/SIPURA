@@ -47,7 +47,7 @@ const Layout = async ({
 	return (
 		<div className='sm:container max-w-7xl mx-auto h-full'>
 			<div>
-				<div className='grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 py-6'>
+				<div className='grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4'>
 					<div className='flex flex-col col-span-2 space-y-6'>{children}</div>
 
 					{/* info sidebar */}
@@ -72,7 +72,9 @@ const Layout = async ({
 							</div>
 							{pura.creatorId === session?.user?.id ? (
 								<div className='flex justify-between gap-x-4 py-3'>
-									<dt className='text-gray-500'>Anda membuat Pura ini</dt>
+									<dt className='text-gray-500'>
+										Anda yang membuat objek Pura ini
+									</dt>
 								</div>
 							) : null}
 
@@ -81,7 +83,7 @@ const Layout = async ({
 									variant: 'outline',
 									className: 'w-full mb-6',
 								})}
-								href={`${slug}/submit`}
+								href={`/dashboard/${slug}/kegiatan/submit`}
 							>
 								Tambahkan Kegiatan
 							</Link>

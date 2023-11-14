@@ -3,13 +3,30 @@ import { DashboardConfig } from '@/types';
 export const dashboardConfig: DashboardConfig = {
 	mainNav: [
 		{
-			title: 'nav 1',
-			href: '/docs',
+			title: 'Kabupaten',
+			href: '/kabupaten',
 		},
 		{
-			title: 'nav 2',
-			href: '/support',
-			disabled: true,
+			title: 'Kecamatan',
+			href: '/kecamatan',
+		},
+		{
+			title: 'Desa',
+			href: '/desa',
+		},
+		{
+			title: 'Pura',
+			href: '/pura',
+		},
+	],
+	dashboardNav: [
+		{
+			title: 'User',
+			href: '#',
+		},
+		{
+			title: 'Project',
+			href: '#',
 		},
 	],
 	sidebarNav: [

@@ -7,7 +7,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Loader2 } from 'lucide-react';
 import { useEffect, useRef } from 'react';
-import Kegiatan from './Post';
+import Kegiatan from './Kegiatan';
 import { useSession } from 'next-auth/react';
 
 interface PostFeedProps {
@@ -69,7 +69,6 @@ const PostFeed = ({ initialPosts, subredditName }: PostFeedProps) => {
 						<li key={kegiatan.id} ref={ref}>
 							<Kegiatan
 								kegiatan={kegiatan}
-								commentAmt={kegiatan.comments.length}
 								subredditName={kegiatan.pura.name}
 								votesAmt={votesAmt}
 								currentVote={currentVote}
@@ -81,7 +80,6 @@ const PostFeed = ({ initialPosts, subredditName }: PostFeedProps) => {
 						<Kegiatan
 							key={kegiatan.id}
 							kegiatan={kegiatan}
-							commentAmt={kegiatan.comments.length}
 							subredditName={kegiatan.pura.name}
 							votesAmt={votesAmt}
 							currentVote={currentVote}

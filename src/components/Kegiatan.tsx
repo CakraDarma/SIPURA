@@ -2,11 +2,9 @@
 
 import { formatTimeToNow } from '@/lib/utils';
 import { Kegiatan, User, Vote } from '@prisma/client';
-import { MessageSquare } from 'lucide-react';
-import Link from 'next/link';
 import { useRef } from 'react';
 import EditorOutput from './EditorOutput';
-import PostVoteClient from './post-vote/PostVoteClient';
+import Link from 'next/link';
 
 type PartialVote = Pick<Vote, 'type'>;
 
@@ -18,27 +16,14 @@ interface PostProps {
 	votesAmt: number;
 	subredditName: string;
 	currentVote?: PartialVote;
-	commentAmt: number;
 }
 
-const Kegiatan = ({
-	kegiatan,
-	votesAmt: _votesAmt,
-	currentVote: _currentVote,
-	subredditName,
-	commentAmt,
-}: PostProps) => {
+const Kegiatan = ({ kegiatan, subredditName }: PostProps) => {
 	const pRef = useRef<HTMLParagraphElement>(null);
 
 	return (
 		<div className='rounded-md bg-white shadow'>
 			<div className='px-6 py-4 flex justify-between'>
-				{/* <PostVoteClient
-					kegiatanId={kegiatan.id}
-					initialVotesAmt={_votesAmt}
-					initialVote={_currentVote?.type}
-				/> */}
-
 				<div className='w-0 flex-1'>
 					<div className='max-h-40 mt-1 text-xs text-gray-500'>
 						{subredditName ? (
@@ -52,10 +37,10 @@ const Kegiatan = ({
 								<span className='px-1'>•</span>
 							</>
 						) : null}
-						<span>Di kirim oleh {kegiatan.author.username}</span>{' '}
+						<span>Dikirim oleh {kegiatan.author.username}</span>{' '}
 						{formatTimeToNow(new Date(kegiatan.createdAt))}
 					</div>
-					<a href={`/r/${subredditName}/kegiatan/${kegiatan.id}`}>
+					<a href={`/dashboard/${subredditName}/kegiatan/${kegiatan.id}`}>
 						<h1 className='text-lg font-semibold py-2 leading-6 text-gray-900'>
 							{kegiatan.title}
 						</h1>
@@ -73,13 +58,12 @@ const Kegiatan = ({
 					</div>
 				</div>
 			</div>
-
 			<div className='bg-gray-50 z-20 text-sm px-4 py-4 sm:px-6'>
 				<Link
-					href={`/r/${subredditName}/kegiatan/${kegiatan.id}`}
+					href={`/dashboard/${subredditName}/kegiatan/${kegiatan.id}`}
 					className='w-fit flex items-center gap-2'
 				>
-					<MessageSquare className='h-4 w-4' /> {commentAmt} Komentar
+					Baca Selengkapnya
 				</Link>
 			</div>
 		</div>

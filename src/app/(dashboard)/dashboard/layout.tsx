@@ -1,4 +1,4 @@
-import { notFound, redirect } from 'next/navigation';
+import { redirect } from 'next/navigation';
 
 import { dashboardConfig } from '@/config/dashboard';
 import { authOptions, getAuthSession } from '@/lib/auth';
@@ -24,9 +24,9 @@ export default async function DashboardLayout({
 
 	return (
 		<div className='flex min-h-screen flex-col space-y-6'>
-			<header className='sticky top-0 z-40 border-b bg-background'>
+			<header className='sticky top-0 z-40 border-b bg-black-dark'>
 				<div className='container flex h-16 items-center justify-between py-4'>
-					<MainNav items={dashboardConfig.mainNav} />
+					<MainNav items={dashboardConfig.dashboardNav} />
 					{session?.user ? (
 						<UserAccountNav user={session.user} />
 					) : (
