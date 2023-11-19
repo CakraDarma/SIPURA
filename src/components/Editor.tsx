@@ -31,7 +31,7 @@ export const Editor = ({ puraId }: EditorProps) => {
 		resolver: zodResolver(PostValidator),
 		defaultValues: {
 			puraId,
-			title: '',
+			title: 'dsd',
 			content: null,
 		},
 	});
@@ -74,9 +74,7 @@ export const Editor = ({ puraId }: EditorProps) => {
 		const Embed = (await import('@editorjs/embed')).default;
 		const Table = (await import('@editorjs/table')).default;
 		const List = (await import('@editorjs/list')).default;
-		const Code = (await import('@editorjs/code')).default;
 		const LinkTool = (await import('@editorjs/link')).default;
-		const InlineCode = (await import('@editorjs/inline-code')).default;
 		const ImageTool = (await import('@editorjs/image')).default;
 
 		if (!ref.current) {
@@ -115,8 +113,6 @@ export const Editor = ({ puraId }: EditorProps) => {
 						},
 					},
 					list: List,
-					code: Code,
-					inlineCode: InlineCode,
 					table: Table,
 					embed: Embed,
 				},
@@ -204,7 +200,7 @@ export const Editor = ({ puraId }: EditorProps) => {
 						<kbd className='rounded-md border bg-muted px-1 text-xs uppercase'>
 							Tab
 						</kbd>{' '}
-						untuk membuka menu perintah.
+						untuk membuka menu perintah
 					</p>
 				</div>
 			</form>

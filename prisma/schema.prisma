@@ -119,14 +119,13 @@ model Subscription {
 }
 
 model Kegiatan {
-  id              String    @id @default(cuid())
-  title           String
-  content         Json?
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-  authorId        String
-  puraId          String
-  tanggalKegiatan DateTime?
+  id        String   @id @default(cuid())
+  title     String
+  content   Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  authorId  String
+  puraId    String
 
   pura     Pura      @relation(fields: [puraId], references: [id])
   author   User      @relation(fields: [authorId], references: [id])
