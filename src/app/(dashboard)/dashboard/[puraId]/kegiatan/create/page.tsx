@@ -1,18 +1,18 @@
-import { Editor } from '@/components/editor';
+import { Editor2 } from '@/components/Editor2';
 import { Button } from '@/components/ui/Button';
 import { db } from '@/lib/db';
 import { notFound } from 'next/navigation';
 
 interface pageProps {
 	params: {
-		slug: string;
+		puraId: string;
 	};
 }
 
 const page = async ({ params }: pageProps) => {
 	const pura = await db.pura.findFirst({
 		where: {
-			name: params.slug,
+			name: params.puraId,
 		},
 	});
 
@@ -27,13 +27,13 @@ const page = async ({ params }: pageProps) => {
 						Buat postingan
 					</h3>
 					<p className='ml-2 mt-1 truncate text-sm text-gray-500'>
-						di {params.slug}
+						di {params.puraId}
 					</p>
 				</div>
 			</div>
 
 			{/* form */}
-			<Editor puraId={pura.id} />
+			<Editor2 puraId={pura.id} />
 
 			<div className='w-full flex justify-end'>
 				<Button type='submit' className='w-full' form='pura-kegiatan-form'>

@@ -12,7 +12,6 @@ import { toast } from '@/hooks/use-toast';
 import { uploadFiles } from '@/lib/uploadthing';
 import { PostCreationRequest, PostValidator } from '@/lib/validators/kegiatan';
 import { useMutation } from '@tanstack/react-query';
-import { Kegiatan } from '@prisma/client';
 import axios from 'axios';
 
 import '@/styles/editor.css';
@@ -20,10 +19,10 @@ import '@/styles/editor.css';
 type FormData = z.infer<typeof PostValidator>;
 
 interface EditorProps {
-	kegiatan: Pick<Kegiatan, 'id' | 'title' | 'content' | 'puraId'>;
+	puraId: string;
 }
 
-export const Editor = ({ kegiatan }: EditorProps) => {
+export const Editor2 = ({ puraId }: EditorProps) => {
 	const {
 		register,
 		handleSubmit,
@@ -31,8 +30,9 @@ export const Editor = ({ kegiatan }: EditorProps) => {
 	} = useForm<FormData>({
 		resolver: zodResolver(PostValidator),
 		defaultValues: {
-			title: kegiatan.title,
-			content: kegiatan.content,
+			puraId,
+			title: '',
+			content: null,
 		},
 	});
 
@@ -77,8 +77,6 @@ export const Editor = ({ kegiatan }: EditorProps) => {
 		const LinkTool = (await import('@editorjs/link')).default;
 		const ImageTool = (await import('@editorjs/image')).default;
 
-		const body = PostValidator.parse(kegiatan);
-
 		if (!ref.current) {
 			const editor = new EditorJS({
 				holder: 'editor',
@@ -87,8 +85,7 @@ export const Editor = ({ kegiatan }: EditorProps) => {
 				},
 				placeholder: 'Ketik di sini untuk menulis postingan Anda...',
 				inlineToolbar: true,
-				data: body.content,
-				// data: { blocks: [] },
+				data: { blocks: [] },
 				tools: {
 					header: Header,
 					linkTool: {
@@ -126,7 +123,6 @@ export const Editor = ({ kegiatan }: EditorProps) => {
 	useEffect(() => {
 		if (Object.keys(errors).length) {
 			for (const [_key, value] of Object.entries(errors)) {
-				console.log(value);
 				value;
 				toast({
 					title: 'Something went wrong.',
@@ -163,13 +159,12 @@ export const Editor = ({ kegiatan }: EditorProps) => {
 	}, [isMounted, initializeEditor]);
 
 	async function onSubmit(data: FormData) {
-		console.log('bai');
 		const blocks = await ref.current?.save();
 
 		const payload: PostCreationRequest = {
 			title: data.title,
 			content: blocks,
-			puraId: kegiatan.puraId,
+			puraId,
 		};
 
 		createPost(payload);

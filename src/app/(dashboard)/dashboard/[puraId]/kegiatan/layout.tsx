@@ -15,15 +15,15 @@ export const metadata: Metadata = {
 
 const Layout = async ({
 	children,
-	params: { slug },
+	params: { puraId },
 }: {
 	children: ReactNode;
-	params: { slug: string };
+	params: { puraId: string };
 }) => {
 	const session = await getAuthSession();
 
 	const pura = await db.pura.findFirst({
-		where: { name: slug },
+		where: { name: puraId },
 		include: {
 			kegiatans: {
 				include: {
@@ -39,7 +39,7 @@ const Layout = async ({
 	const memberCount = await db.subscription.count({
 		where: {
 			pura: {
-				name: slug,
+				name: puraId,
 			},
 		},
 	});
@@ -83,7 +83,7 @@ const Layout = async ({
 									variant: 'outline',
 									className: 'w-full mb-6',
 								})}
-								href={`/dashboard/${slug}/kegiatan/submit`}
+								href={`/dashboard/${puraId}/kegiatan/create`}
 							>
 								Tambahkan Kegiatan
 							</Link>

@@ -90,7 +90,7 @@ const SearchBar = () => {
 									value={pura.name}
 								>
 									<Users className='mr-2 h-4 w-4' />
-									<a href={`/r/${pura.name}`}>r/{pura.name}</a>
+									<a href={`/r/${pura.name}`}>{pura.name}</a>
 								</CommandItem>
 							))}
 						</CommandGroup>

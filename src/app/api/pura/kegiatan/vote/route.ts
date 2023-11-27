@@ -1,8 +1,6 @@
 import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
-import { redis } from '@/lib/redis';
 import { PostVoteValidator } from '@/lib/validators/vote';
-import { CachedPost } from '@/types/redis';
 import { z } from 'zod';
 
 const CACHE_AFTER_UPVOTES = 1;
@@ -60,19 +58,6 @@ export async function PATCH(req: Request) {
 					return acc;
 				}, 0);
 
-				if (votesAmt >= CACHE_AFTER_UPVOTES) {
-					const cachePayload: CachedPost = {
-						authorUsername: kegiatan.author.username ?? '',
-						content: JSON.stringify(kegiatan.content),
-						id: kegiatan.id,
-						title: kegiatan.title,
-						currentVote: null,
-						createdAt: kegiatan.createdAt,
-					};
-
-					await redis.hset(`kegiatan:${kegiatanId}`, cachePayload); // Store the kegiatan data as a hash
-				}
-
 				return new Response('OK');
 			}
 
@@ -96,19 +81,6 @@ export async function PATCH(req: Request) {
 				return acc;
 			}, 0);
 
-			if (votesAmt >= CACHE_AFTER_UPVOTES) {
-				const cachePayload: CachedPost = {
-					authorUsername: kegiatan.author.username ?? '',
-					content: JSON.stringify(kegiatan.content),
-					id: kegiatan.id,
-					title: kegiatan.title,
-					currentVote: voteType,
-					createdAt: kegiatan.createdAt,
-				};
-
-				await redis.hset(`kegiatan:${kegiatanId}`, cachePayload); // Store the kegiatan data as a hash
-			}
-
 			return new Response('OK');
 		}
 
@@ -127,19 +99,6 @@ export async function PATCH(req: Request) {
 			if (vote.type === 'DOWN') return acc - 1;
 			return acc;
 		}, 0);
-
-		if (votesAmt >= CACHE_AFTER_UPVOTES) {
-			const cachePayload: CachedPost = {
-				authorUsername: kegiatan.author.username ?? '',
-				content: JSON.stringify(kegiatan.content),
-				id: kegiatan.id,
-				title: kegiatan.title,
-				currentVote: voteType,
-				createdAt: kegiatan.createdAt,
-			};
-
-			await redis.hset(`kegiatan:${kegiatanId}`, cachePayload); // Store the kegiatan data as a hash
-		}
 
 		return new Response('OK');
 	} catch (error) {

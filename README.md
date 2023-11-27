@@ -34,8 +34,6 @@ GOOGLE_CLIENT_SECRET=
 UPLOADTHING_SECRET=
 UPLOADTHING_APP_ID=
 
-REDIS_URL=
-REDIS_SECRET=
 ```
 
 if you'd like, you can paste this snippet for quick component creation (optional):

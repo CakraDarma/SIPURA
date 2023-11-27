@@ -9,17 +9,17 @@ import { notFound } from 'next/navigation';
 
 interface PageProps {
 	params: {
-		slug: string;
+		puraId: string;
 	};
 }
 
 const page = async ({ params }: PageProps) => {
-	const { slug } = params;
+	const { puraId } = params;
 
 	// const session = await getAuthSession();
 
 	const pura = await db.pura.findFirst({
-		where: { name: slug },
+		where: { name: puraId },
 		include: {
 			kegiatans: {
 				include: {

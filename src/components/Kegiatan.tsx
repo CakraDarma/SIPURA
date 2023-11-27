@@ -60,7 +60,7 @@ const Kegiatan = ({ kegiatan, subredditName }: PostProps) => {
 			</div>
 			<div className='bg-gray-50 z-20 text-sm px-4 py-4 sm:px-6'>
 				<Link
-					href={`/dashboard/${subredditName}/kegiatan/${kegiatan.id}`}
+					href={`/dashboard/${subredditName}/kegiatan/${kegiatan.id}/edit`}
 					className='w-fit flex items-center gap-2'
 				>
 					Baca Selengkapnya

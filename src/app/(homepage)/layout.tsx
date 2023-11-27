@@ -1,13 +1,10 @@
-import { redirect } from 'next/navigation';
-
 import { dashboardConfig } from '@/config/dashboard';
-import { authOptions, getAuthSession } from '@/lib/auth';
+import { getAuthSession } from '@/lib/auth';
 import { MainNav } from '@/components/main-nav';
 import { UserAccountNav } from '@/components/UserAccountNav';
-import { Link } from 'lucide-react';
+import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
-import { DashboardNav } from '@/components/nav';
 import SearchBar from '@/components/SearchBar';
 
 interface DashboardLayoutProps {
@@ -18,10 +15,6 @@ export default async function DashboardLayout({
 	children,
 }: DashboardLayoutProps) {
 	const session = await getAuthSession();
-
-	if (!session) {
-		redirect(authOptions?.pages?.signIn || '/login');
-	}
 
 	return (
 		<div className='flex min-h-screen flex-col'>
