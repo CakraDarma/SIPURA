@@ -14,7 +14,7 @@ export const dynamic = 'force-dynamic';
 export const fetchCache = 'force-no-store';
 
 const SubRedditPostPage = async ({ params }: SubRedditPostPageProps) => {
-	let post: (Kegiatan & { votes: Vote[]; author: User }) | null = null;
+	let post: (Kegiatan & { votes: Vote[]; user: User }) | null = null;
 
 	post = await db.kegiatan.findFirst({
 		where: {
@@ -22,7 +22,7 @@ const SubRedditPostPage = async ({ params }: SubRedditPostPageProps) => {
 		},
 		include: {
 			votes: true,
-			author: true,
+			user: true,
 		},
 	});
 
@@ -33,7 +33,7 @@ const SubRedditPostPage = async ({ params }: SubRedditPostPageProps) => {
 			<div className='h-full flex flex-col sm:flex-row items-center sm:items-start justify-between'>
 				<div className='sm:w-0 w-full flex-1 bg-white p-4 rounded-sm'>
 					<p className='max-h-40 mt-1 truncate text-xs text-gray-500'>
-						Dikirim oleh {post?.author.username}{' '}
+						Dikirim oleh {post?.user.username}{' '}
 						{formatTimeToNow(new Date(post?.createdAt))}
 					</p>
 					<h1 className='text-xl font-semibold py-2 leading-6 text-gray-900'>

@@ -27,7 +27,7 @@ const Layout = async ({
 		include: {
 			kegiatans: {
 				include: {
-					author: true,
+					user: true,
 					votes: true,
 				},
 			},
@@ -70,7 +70,7 @@ const Layout = async ({
 									<div className='text-gray-900'>{memberCount}</div>
 								</dd>
 							</div>
-							{pura.creatorId === session?.user?.id ? (
+							{pura.userId === session?.user?.id ? (
 								<div className='flex justify-between gap-x-4 py-3'>
 									<dt className='text-gray-500'>
 										Anda yang membuat objek Pura ini

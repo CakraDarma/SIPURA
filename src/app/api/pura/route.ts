@@ -30,7 +30,7 @@ export async function POST(req: Request) {
 		const subreddit = await db.pura.create({
 			data: {
 				name,
-				creatorId: session.user.id,
+				userId: session.user.id,
 			},
 		});
 

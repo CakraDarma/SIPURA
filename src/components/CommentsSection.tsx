@@ -6,13 +6,13 @@ import PostComment from './comments/PostComment';
 
 type ExtendedComment = Comment & {
 	votes: CommentVote[];
-	author: User;
+	user: User;
 	replies: ReplyComment[];
 };
 
 type ReplyComment = Comment & {
 	votes: CommentVote[];
-	author: User;
+	user: User;
 };
 
 interface CommentsSectionProps {
@@ -29,12 +29,12 @@ const CommentsSection = async ({ kegiatanId }: CommentsSectionProps) => {
 			replyToId: null, // only fetch top-level comments
 		},
 		include: {
-			author: true,
+			user: true,
 			votes: true,
 			replies: {
 				// first level replies
 				include: {
-					author: true,
+					user: true,
 					votes: true,
 				},
 			},

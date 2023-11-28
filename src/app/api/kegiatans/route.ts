@@ -62,7 +62,7 @@ export async function GET(req: Request) {
 			include: {
 				pura: true,
 				votes: true,
-				author: true,
+				user: true,
 				comments: true,
 			},
 			where: whereClause,

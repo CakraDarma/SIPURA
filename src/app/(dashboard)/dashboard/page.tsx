@@ -21,7 +21,7 @@ export default async function DashboardPage() {
 
 	// const kegiatans = await db.kegiatan.findMany({
 	// 	where: {
-	// 		authorId: session.id,
+	// 		userId: session.id,
 	// 	},
 	// 	select: {
 	// 		id: true,

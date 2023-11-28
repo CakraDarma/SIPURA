@@ -31,7 +31,7 @@ export async function POST(req: Request) {
 			data: {
 				title,
 				content,
-				authorId: session.user.id,
+				userId: session.user.id,
 				puraId,
 			},
 		});

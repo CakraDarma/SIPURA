@@ -45,7 +45,7 @@ export async function PATCH(
 			data: {
 				title,
 				content,
-				authorId: session.user.id,
+				userId: session.user.id,
 				puraId,
 			},
 		});

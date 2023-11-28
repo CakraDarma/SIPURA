@@ -9,7 +9,7 @@ const GeneralFeed = async () => {
 		},
 		include: {
 			votes: true,
-			author: true,
+			user: true,
 			comments: true,
 			pura: true,
 		},

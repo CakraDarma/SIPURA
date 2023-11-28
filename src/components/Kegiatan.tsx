@@ -10,7 +10,7 @@ type PartialVote = Pick<Vote, 'type'>;
 
 interface PostProps {
 	kegiatan: Kegiatan & {
-		author: User;
+		user: User;
 		votes: Vote[];
 	};
 	votesAmt: number;
@@ -37,7 +37,7 @@ const Kegiatan = ({ kegiatan, subredditName }: PostProps) => {
 								<span className='px-1'>•</span>
 							</>
 						) : null}
-						<span>Dikirim oleh {kegiatan.author.username}</span>{' '}
+						<span>Dikirim oleh {kegiatan.user.username}</span>{' '}
 						{formatTimeToNow(new Date(kegiatan.createdAt))}
 					</div>
 					<a href={`/dashboard/${subredditName}/kegiatan/${kegiatan.id}`}>

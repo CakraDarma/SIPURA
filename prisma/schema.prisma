@@ -18,7 +18,6 @@ enum VoteType {
 
 enum UserRole {
   ADMIN
-  // PENGEMPON
   PRAJURU
 }
 
@@ -53,7 +52,8 @@ model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
@@ -68,21 +68,21 @@ model User {
   telepon       String?
   role          UserRole  @default(PRAJURU)
 
-  createdpuras  Pura[]         @relation("CreatedBy")
+  puras         Pura[]
   subscriptions Subscription[]
   votes         Vote[]
   accounts      Account[]
   sessions      Session[]
-  kegiatan      Kegiatan[]
-  Comment       Comment[]
-  CommentVote   CommentVote[]
+  kegiatans     Kegiatan[]
+  Comments      Comment[]
+  CommentVotes  CommentVote[]
 
   // pura
-  upacara     Upacara[]
-  pratima     Pratima[]
-  pelinggih   Pelinggih[]
-  userToken   User_refresh_token[]
-  virtualTour VirtualTour[]
+  upacaras     Upacara[]
+  pratimas     Pratima[]
+  pelinggihs   Pelinggih[]
+  userTokens   User_refresh_token[]
+  virtualTours VirtualTour[]
 }
 
 model Pura {
@@ -90,30 +90,30 @@ model Pura {
   name         String        @unique
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
-  creatorId    String?
+  userId       String?
   konten       Json?
   tahunBerdiri Int?
   alamat       String?
   piodalan     String?
   kategori     CategoryPura?
 
-  Creator     User?          @relation("CreatedBy", fields: [creatorId], references: [id])
-  kegiatans   Kegiatan[]
-  subscribers Subscription[]
-
-  upacara     Upacara[]
-  pratima     Pratima[]
-  pelinggih   Pelinggih[]
-  virtualTour VirtualTour[]
+  user         User?          @relation(fields: [userId], references: [id])
+  kegiatans    Kegiatan[]
+  subscribers  Subscription[]
+  upacaras     Upacara[]
+  pratimas     Pratima[]
+  pelinggihs   Pelinggih[]
+  virtualTours VirtualTour[]
 
   @@index([name])
 }
 
 model Subscription {
-  user   User   @relation(fields: [userId], references: [id])
   userId String
-  pura   Pura   @relation(fields: [puraId], references: [id])
   puraId String
+
+  user User @relation(fields: [userId], references: [id])
+  pura Pura @relation(fields: [puraId], references: [id])
 
   @@id([userId, puraId])
 }
@@ -124,11 +124,11 @@ model Kegiatan {
   content   Json?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  authorId  String
+  userId    String
   puraId    String
 
   pura     Pura      @relation(fields: [puraId], references: [id])
-  author   User      @relation(fields: [authorId], references: [id])
+  user     User      @relation(fields: [userId], references: [id])
   comments Comment[]
   votes    Vote[]
 }
@@ -137,35 +137,36 @@ model Comment {
   id         String   @id @default(cuid())
   text       String
   createdAt  DateTime @default(now())
-  author     User     @relation(fields: [authorId], references: [id])
-  authorId   String
-  kegiatan   Kegiatan @relation(fields: [kegiatanId], references: [id], onDelete: Cascade)
+  userId     String
   kegiatanId String
+  replyToId  String?
+  commentId  String?
 
-  replyToId String?
-  replyTo   Comment?  @relation("ReplyTo", fields: [replyToId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  replies   Comment[] @relation("ReplyTo")
-
-  votes     CommentVote[]
-  commentId String?
+  user     User          @relation(fields: [userId], references: [id])
+  kegiatan Kegiatan      @relation(fields: [kegiatanId], references: [id], onDelete: Cascade)
+  replyTo  Comment?      @relation("ReplyTo", fields: [replyToId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  replies  Comment[]     @relation("ReplyTo")
+  votes    CommentVote[]
 }
 
 model Vote {
-  user       User     @relation(fields: [userId], references: [id])
   userId     String
-  kegiatan   Kegiatan @relation(fields: [kegiatanId], references: [id], onDelete: Cascade)
   kegiatanId String
   type       VoteType
+
+  user     User     @relation(fields: [userId], references: [id])
+  kegiatan Kegiatan @relation(fields: [kegiatanId], references: [id], onDelete: Cascade)
 
   @@id([userId, kegiatanId])
 }
 
 model CommentVote {
-  user      User     @relation(fields: [userId], references: [id])
   userId    String
-  comment   Comment  @relation(fields: [commentId], references: [id], onDelete: Cascade)
   commentId String
   type      VoteType
+
+  user    User    @relation(fields: [userId], references: [id])
+  comment Comment @relation(fields: [commentId], references: [id], onDelete: Cascade)
 
   @@id([userId, commentId])
 }
@@ -177,72 +178,76 @@ model Pratima {
   puraId           String
   bahan            String
   jenis            String
-  pura             Pura     @relation(fields: [puraId], references: [id])
   userId           String
-  user             User     @relation(fields: [userId], references: [id])
   tahunPeninggalan Int
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+
+  pura Pura @relation(fields: [puraId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 }
 
 model Pelinggih {
   id               String   @id @default(cuid())
   puraId           String
-  pura             Pura     @relation(fields: [puraId], references: [id])
   userId           String
-  user             User     @relation(fields: [userId], references: [id])
   nama             String
   konten           Json
   tahunPeninggalan Int
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 
-  banten Banten[]
+  pura    Pura     @relation(fields: [puraId], references: [id])
+  user    User     @relation(fields: [userId], references: [id])
+  bantens Banten[]
 }
 
 model User_refresh_token {
   id           String   @id @default(cuid())
   refreshToken String   @db.VarChar(255)
   userId       String
-  user         User     @relation(fields: [userId], references: [id])
   createdAt    DateTime @default(now())
   updatedAt    DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
 }
 
 model VirtualTour {
   id          String   @id @default(cuid())
   puraId      String
-  pura        Pura     @relation(fields: [puraId], references: [id])
   userId      String
-  user        User     @relation(fields: [userId], references: [id])
   virtualTour String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  pura Pura @relation(fields: [puraId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 }
 
 model Banten {
-  id          String    @id @default(cuid())
+  id          String   @id @default(cuid())
   pelinggihId String
-  pelinggih   Pelinggih @relation(fields: [pelinggihId], references: [id])
   upacaraId   String
-  upacara     Upacara   @relation(fields: [upacaraId], references: [id])
   nama        String
   konten      Json?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  pelinggih Pelinggih @relation(fields: [pelinggihId], references: [id])
+  upacara   Upacara   @relation(fields: [upacaraId], references: [id])
 }
 
 model Upacara {
   id        String   @id @default(cuid())
   puraId    String
-  pura      Pura     @relation(fields: [puraId], references: [id])
   userId    String
-  user      User     @relation(fields: [userId], references: [id])
   nama      String
   biaya     String
   konten    Json?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  banten Banten[]
+  pura    Pura     @relation(fields: [puraId], references: [id])
+  user    User     @relation(fields: [userId], references: [id])
+  bantens Banten[]
 }
