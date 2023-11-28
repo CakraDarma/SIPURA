@@ -60,15 +60,5 @@ export const dashboardConfig: DashboardConfig = {
 			href: '/dashboard/settings',
 			icon: 'settings',
 		},
-		{
-			title: 'Pura',
-			href: '/dashboard/settings',
-			icon: 'settings',
-		},
-		{
-			title: 'Verifikasi Pura Baru',
-			href: '/dashboard/pura/verification',
-			icon: 'settings',
-		},
 	],
 };

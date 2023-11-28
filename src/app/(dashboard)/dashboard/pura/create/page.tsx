@@ -9,8 +9,8 @@ import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { DashboardHeader } from '@/components/header';
-import { DashboardShell } from '@/components/shell';
+import DashboardHeader from '@/components/header';
+import DashboardShell from '@/components/shell';
 
 const Page = () => {
 	const router = useRouter();

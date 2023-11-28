@@ -49,6 +49,7 @@ export const Icons = {
 	user: User,
 	arrowRight: ArrowRight,
 	laptop: Laptop,
+	ellipsis: MoreVertical,
 	close: X,
 	logo: (props: LucideProps) => (
 		<svg {...props} viewBox='0 0 497 497'>

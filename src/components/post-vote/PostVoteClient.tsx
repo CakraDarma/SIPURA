@@ -56,7 +56,7 @@ const PostVoteClient = ({
 			}
 
 			return toast({
-				title: 'Something went wrong.',
+				title: 'Terjadi kesalahan.',
 				description: 'Your vote was not registered. Please try again.',
 				variant: 'destructive',
 			});

@@ -6,7 +6,6 @@ import { db } from '@/lib/db';
 import { getAuthSession } from '@/lib/auth';
 import { Editor } from '@/components/Editor';
 import { Button } from '@/components/ui/Button';
-// import { Editor } from '@/components/editor';
 
 async function getKegiatanForUser(
 	kegiatanId: Kegiatan['id'],

@@ -1,13 +1,13 @@
 import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
-import { CommentValidator } from '@/lib/validators/comment';
+import { kegiatanValidator } from '@/lib/validators/kegiatan';
 import { z } from 'zod';
 
-export async function PATCH(req: Request) {
+export async function POST(req: Request) {
 	try {
 		const body = await req.json();
 
-		const { kegiatanId, text, replyToId } = CommentValidator.parse(body);
+		const { title, content, puraId } = kegiatanValidator.parse(body);
 
 		const session = await getAuthSession();
 
@@ -15,13 +15,24 @@ export async function PATCH(req: Request) {
 			return new Response('Unauthorized', { status: 401 });
 		}
 
-		// if no existing vote, create a new vote
-		await db.comment.create({
+		// verify user is subscribed to passed pura id
+		const subscription = await db.subscription.findFirst({
+			where: {
+				puraId,
+				userId: session.user.id,
+			},
+		});
+
+		if (!subscription) {
+			return new Response('Subscribe to kegiatan', { status: 403 });
+		}
+
+		await db.kegiatan.create({
 			data: {
-				text,
-				kegiatanId,
+				title,
+				content,
 				authorId: session.user.id,
-				replyToId,
+				puraId,
 			},
 		});
 

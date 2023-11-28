@@ -11,7 +11,7 @@ const Error = ({ error, reset }: { error: Error; reset: () => void }) => {
 					Terjadi Kesalahan
 				</p>
 				<h1 className='mt-4 text-3xl font-bold tracking-tight text-white'>
-					{error.message || 'Something went wrong'}
+					{error.message || 'Terjadi kesalahan'}
 				</h1>
 				<p className='mt-6 text-base leading-7 text-zinc-600'>
 					Please try again later or contact support if the problem persistant

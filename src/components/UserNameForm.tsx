@@ -62,7 +62,7 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
 			}
 
 			return toast({
-				title: 'Something went wrong.',
+				title: 'Terjadi kesalahan.',
 				description: 'Your username was not updated. Please try again.',
 				variant: 'destructive',
 			});

@@ -41,7 +41,7 @@ const SubscribeLeaveToggle = ({
 
 			return toast({
 				title: 'There was a problem.',
-				description: 'Something went wrong. Please try again.',
+				description: 'Terjadi kesalahan. Please try again.',
 				variant: 'destructive',
 			});
 		},

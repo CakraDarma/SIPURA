@@ -10,14 +10,17 @@ import { z } from 'zod';
 
 import { toast } from '@/hooks/use-toast';
 import { uploadFiles } from '@/lib/uploadthing';
-import { PostCreationRequest, PostValidator } from '@/lib/validators/kegiatan';
+import {
+	KegiatanCreationRequest,
+	kegiatanValidator,
+} from '@/lib/validators/kegiatan';
 import { useMutation } from '@tanstack/react-query';
 import { Kegiatan } from '@prisma/client';
 import axios from 'axios';
 
 import '@/styles/editor.css';
 
-type FormData = z.infer<typeof PostValidator>;
+type FormData = z.infer<typeof kegiatanValidator>;
 
 interface EditorProps {
 	kegiatan: Pick<Kegiatan, 'id' | 'title' | 'content' | 'puraId'>;
@@ -29,8 +32,9 @@ export const Editor = ({ kegiatan }: EditorProps) => {
 		handleSubmit,
 		formState: { errors },
 	} = useForm<FormData>({
-		resolver: zodResolver(PostValidator),
+		resolver: zodResolver(kegiatanValidator),
 		defaultValues: {
+			puraId: kegiatan.puraId,
 			title: kegiatan.title,
 			content: kegiatan.content,
 		},
@@ -42,16 +46,20 @@ export const Editor = ({ kegiatan }: EditorProps) => {
 	const [isMounted, setIsMounted] = useState<boolean>(false);
 	const pathname = usePathname();
 
-	const { mutate: createPost } = useMutation({
-		mutationFn: async ({ title, content, puraId }: PostCreationRequest) => {
-			const payload: PostCreationRequest = { title, content, puraId };
-			const { data } = await axios.post('/api/pura/kegiatan/create', payload);
+	const { mutate: editKegiatan } = useMutation({
+		mutationFn: async ({ title, content, puraId }: KegiatanCreationRequest) => {
+			const payload: KegiatanCreationRequest = { title, content, puraId };
+			const { data } = await axios.patch(
+				`/api/pura/kegiatan/${kegiatan.id}`,
+				payload
+			);
 			return data;
 		},
 		onError: () => {
 			return toast({
-				title: 'Something went wrong.',
-				description: 'Your kegiatan was not published. Please try again.',
+				title: 'Terjadi kesalahan.',
+				description:
+					'Kegiatan Anda tidak berhasil dipublikasikan. Silakan coba lagi.',
 				variant: 'destructive',
 			});
 		},
@@ -63,7 +71,7 @@ export const Editor = ({ kegiatan }: EditorProps) => {
 			router.refresh();
 
 			return toast({
-				description: 'Your kegiatan has been published.',
+				description: 'Kegiatan Anda berhasil dipublikasikan.',
 			});
 		},
 	});
@@ -77,7 +85,7 @@ export const Editor = ({ kegiatan }: EditorProps) => {
 		const LinkTool = (await import('@editorjs/link')).default;
 		const ImageTool = (await import('@editorjs/image')).default;
 
-		const body = PostValidator.parse(kegiatan);
+		const body = kegiatanValidator.parse(kegiatan);
 
 		if (!ref.current) {
 			const editor = new EditorJS({
@@ -126,10 +134,9 @@ export const Editor = ({ kegiatan }: EditorProps) => {
 	useEffect(() => {
 		if (Object.keys(errors).length) {
 			for (const [_key, value] of Object.entries(errors)) {
-				console.log(value);
 				value;
 				toast({
-					title: 'Something went wrong.',
+					title: 'Terjadi kesalahan.',
 					description: (value as { message: string }).message,
 					variant: 'destructive',
 				});
@@ -163,16 +170,15 @@ export const Editor = ({ kegiatan }: EditorProps) => {
 	}, [isMounted, initializeEditor]);
 
 	async function onSubmit(data: FormData) {
-		console.log('bai');
 		const blocks = await ref.current?.save();
 
-		const payload: PostCreationRequest = {
+		const payload: KegiatanCreationRequest = {
 			title: data.title,
 			content: blocks,
 			puraId: kegiatan.puraId,
 		};
 
-		createPost(payload);
+		editKegiatan(payload);
 	}
 
 	if (!isMounted) {

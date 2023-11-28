@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const PostValidator = z.object({
+export const kegiatanValidator = z.object({
 	title: z
 		.string()
 		.min(3, {
@@ -13,4 +13,4 @@ export const PostValidator = z.object({
 	puraId: z.string(),
 });
 
-export type PostCreationRequest = z.infer<typeof PostValidator>;
+export type KegiatanCreationRequest = z.infer<typeof kegiatanValidator>;
