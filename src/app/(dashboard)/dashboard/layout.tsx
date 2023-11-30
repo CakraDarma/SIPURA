@@ -18,6 +18,7 @@ export default async function DashboardLayout({
 		redirect(authOptions?.pages?.signIn || '/login');
 	}
 
+	console.log(session.user);
 	return (
 		<div className='flex min-h-screen flex-col space-y-6'>
 			<header className='sticky top-0 z-40 border-b bg-black-dark'>

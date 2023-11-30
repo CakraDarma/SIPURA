@@ -54,8 +54,8 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
 			if (err instanceof AxiosError) {
 				if (err.response?.status === 409) {
 					return toast({
-						title: 'Username already taken.',
-						description: 'Please choose another username.',
+						title: 'Username sudah digunakan.',
+						description: 'Silakan pilih username lain.',
 						variant: 'destructive',
 					});
 				}
@@ -63,13 +63,13 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
 
 			return toast({
 				title: 'Terjadi kesalahan.',
-				description: 'Your username was not updated. Please try again.',
+				description: 'Username Anda tidak dapat dirubah. Silakan coba lagi.',
 				variant: 'destructive',
 			});
 		},
 		onSuccess: () => {
 			toast({
-				description: 'Your username has been updated.',
+				description: 'Username Anda berhasil dirubah.',
 			});
 			router.refresh();
 		},
@@ -85,7 +85,7 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
 				<CardHeader>
 					<CardTitle>Your username</CardTitle>
 					<CardDescription>
-						Please enter a display name you are comfortable with.
+						Masukkan nama tampilan yang Anda ingin gunakan
 					</CardDescription>
 				</CardHeader>
 				<CardContent>
@@ -94,7 +94,7 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
 							<span className='text-sm text-zinc-400'>u/</span>
 						</div>
 						<Label className='sr-only' htmlFor='name'>
-							Name
+							Nama
 						</Label>
 						<Input
 							id='name'
@@ -108,7 +108,7 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
 					</div>
 				</CardContent>
 				<CardFooter>
-					<Button isLoading={isLoading}>Change name</Button>
+					<Button isLoading={isLoading}>Simpan</Button>
 				</CardFooter>
 			</Card>
 		</form>
