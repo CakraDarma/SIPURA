@@ -32,27 +32,27 @@ export const dashboardConfig: DashboardConfig = {
 	sidebarNav: [
 		{
 			title: 'Profil',
-			href: '/dashboard/profil',
+			href: '/profil',
 			icon: 'pura',
 		},
 		{
 			title: 'Upacara',
-			href: '/dashboard/upacara',
+			href: '/upacara',
 			icon: 'upacara',
 		},
 		{
 			title: 'Kegiatan',
-			href: '/dashboard/test/kegiatan',
+			href: '/kegiatan',
 			icon: 'kegiatan',
 		},
 		{
 			title: 'Inventaris',
-			href: '/dashboard/inventaris',
+			href: '/inventaris',
 			icon: 'inventory',
 		},
 		{
 			title: 'Virtual Tour',
-			href: '/dashboard/virtual-tour',
+			href: '/virtual-tour',
 			icon: 'virtualTour',
 		},
 		{

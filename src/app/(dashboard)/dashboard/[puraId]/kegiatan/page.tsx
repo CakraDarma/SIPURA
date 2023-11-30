@@ -46,7 +46,7 @@ const page = async ({ params }: PageProps) => {
 						<EmptyPlaceholder.Icon name='kegiatan' />
 						<EmptyPlaceholder.Title>Belum ada postingan</EmptyPlaceholder.Title>
 						<EmptyPlaceholder.Description>
-							Kamu belum memiliki postingan. Mulai membuat konten sekarang.
+							Anda belum memiliki postingan. Mulai membuat konten sekarang.
 						</EmptyPlaceholder.Description>
 						<Link
 							className={buttonVariants({})}

@@ -38,7 +38,7 @@ const PostComment = ({
 	const { data: session } = useSession();
 	const [isReplying, setIsReplying] = useState<boolean>(false);
 	const commentRef = useRef<HTMLDivElement>(null);
-	const [input, setInput] = useState<string>(`@${comment.user.username} `);
+	const [input, setInput] = useState<string>(`@${comment.user.name} `);
 	const router = useRouter();
 	useOnClickOutside(commentRef, () => {
 		setIsReplying(false);
@@ -80,7 +80,7 @@ const PostComment = ({
 				/>
 				<div className='ml-2 flex items-center gap-x-2'>
 					<p className='text-sm font-medium text-gray-900'>
-						u/{comment.user.username}
+						u/{comment.user.name}
 					</p>
 
 					<p className='max-h-40 truncate text-xs text-zinc-500'>

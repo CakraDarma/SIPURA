@@ -37,7 +37,7 @@ const Kegiatan = ({ kegiatan, subredditName }: PostProps) => {
 								<span className='px-1'>•</span>
 							</>
 						) : null}
-						<span>Dikirim oleh {kegiatan.user.username}</span>{' '}
+						<span>Dikirim oleh {kegiatan.user.name}</span>{' '}
 						{formatTimeToNow(new Date(kegiatan.createdAt))}
 					</div>
 					<a href={`/dashboard/${subredditName}/kegiatan/${kegiatan.id}`}>

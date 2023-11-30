@@ -7,6 +7,8 @@ import { db } from '@/lib/db';
 // import { PostCreateButton } from '@/components/kegiatan-create-button';
 import DashboardHeader from '@/components/header';
 import DashboardShell from '@/components/shell';
+import EmptyPlaceholder from '@/components/EmptyPlaceholder';
+import CardPura from '@/components/CardPura';
 
 export const metadata = {
 	title: 'Dashboard',
@@ -19,45 +21,42 @@ export default async function DashboardPage() {
 		redirect(authOptions?.pages?.signIn || '/login');
 	}
 
-	// const kegiatans = await db.kegiatan.findMany({
-	// 	where: {
-	// 		userId: session.id,
-	// 	},
-	// 	select: {
-	// 		id: true,
-	// 		title: true,
-	// 		published: true,
-	// 		createdAt: true,
-	// 	},
-	// 	orderBy: {
-	// 		updatedAt: 'desc',
-	// 	},
-	// });
+	const pura = await db.pura.findMany({
+		where: {
+			userId: session.user.id,
+		},
+		orderBy: {
+			name: 'asc',
+		},
+	});
 
 	return (
 		<DashboardShell>
-			<DashboardHeader
-				heading='Dashboard'
-				text='Kelola semua aspek terkait dengan Pura dalam satu lokasi yang
+			<div className='ml-6'>
+				<DashboardHeader
+					heading='Dashboard'
+					text='Kelola semua aspek terkait dengan Pura dalam satu lokasi yang
 						nyaman.'
-			/>
+				/>
+			</div>
 			<div>
-				{/* {kegiatans?.length ? (
-					<div className='divide-y divide-border rounded-md border'>
-						{kegiatans.map((kegiatan) => (
-							<PostItem key={kegiatan.id} kegiatan={kegiatan} />
+				{pura?.length ? (
+					<div className='flex-col items-center justify-center flex md:flex-row gap-6'>
+						{pura.map((pura, index) => (
+							<CardPura key={index} pura={pura} />
 						))}
 					</div>
 				) : (
 					<EmptyPlaceholder>
 						<EmptyPlaceholder.Icon name='kegiatan' />
-						<EmptyPlaceholder.Title>No kegiatans created</EmptyPlaceholder.Title>
+						<EmptyPlaceholder.Title>Tidak ada Pura</EmptyPlaceholder.Title>
 						<EmptyPlaceholder.Description>
-							You don&apos;t have any kegiatans yet. Start creating content.
+							Anda belum memiliki Pura yang tersedia. Silahkan tambahkan Pura
+							terlebih dahulu
 						</EmptyPlaceholder.Description>
-						<PostCreateButton variant='outline' />
+						{/* <PostCreateButton variant='outline' /> */}
 					</EmptyPlaceholder>
-				)} */}
+				)}
 			</div>
 		</DashboardShell>
 	);

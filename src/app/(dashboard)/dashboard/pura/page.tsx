@@ -10,14 +10,13 @@ import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import DashboardHeader from '@/components/header';
-import DashboardShell from '@/components/shell';
 
 const Page = () => {
 	const router = useRouter();
 	const [input, setInput] = useState<string>('');
 	const { loginToast } = useCustomToasts();
 
-	const { mutate: createCommunity, isLoading } = useMutation({
+	const { mutate: createPura, isLoading } = useMutation({
 		mutationFn: async () => {
 			const payload: CreateSubredditPayload = {
 				name: input,
@@ -30,16 +29,16 @@ const Page = () => {
 			if (err instanceof AxiosError) {
 				if (err.response?.status === 409) {
 					return toast({
-						title: 'Pura already exists.',
-						description: 'Please choose a different name.',
+						title: 'Pura sudah ada.',
+						description: 'Silakan pilih nama yang berbeda',
 						variant: 'destructive',
 					});
 				}
 
 				if (err.response?.status === 422) {
 					return toast({
-						title: 'Invalid pura name.',
-						description: 'Please choose a name between 3 and 21 letters.',
+						title: 'Nama pura tidak valid.',
+						description: 'Silakan pilih nama antara 3 dan 21 huruf.',
 						variant: 'destructive',
 					});
 				}
@@ -50,8 +49,8 @@ const Page = () => {
 			}
 
 			toast({
-				title: 'There was an error.',
-				description: 'Could not create pura.',
+				title: 'Terjadi kesalahan.',
+				description: 'Tidak dapat membuat pura.',
 				variant: 'destructive',
 			});
 		},
@@ -61,40 +60,13 @@ const Page = () => {
 	});
 
 	return (
-		// <DashboardShell>
-		// 	<DashboardHeader
-		// 		heading='Dashboard'
-		// 		text='Kelola semua aspek terkait dengan Pura dalam satu lokasi yang
-		// 				nyaman.'
-		// 	/>
-		// 	<div>
-		// 		{/* {kegiatans?.length ? (
-		// 			<div className='divide-y divide-border rounded-md border'>
-		// 				{kegiatans.map((kegiatan) => (
-		// 					<PostItem key={kegiatan.id} kegiatan={kegiatan} />
-		// 				))}
-		// 			</div>
-		// 		) : (
-		// 			<EmptyPlaceholder>
-		// 				<EmptyPlaceholder.Icon name='kegiatan' />
-		// 				<EmptyPlaceholder.Title>No kegiatans created</EmptyPlaceholder.Title>
-		// 				<EmptyPlaceholder.Description>
-		// 					You don&apos;t have any kegiatans yet. Start creating content.
-		// 				</EmptyPlaceholder.Description>
-		// 				<PostCreateButton variant='outline' />
-		// 			</EmptyPlaceholder>
-		// 		)} */}
-		// 	</div>
-		// </DashboardShell>
-
 		<div className='container flex items-center h-full max-w-3xl mx-auto'>
 			<div className='relative bg-white w-full h-fit p-4 rounded-lg space-y-6'>
-				<div className='flex justify-between items-center'>
-					<h1 className='text-xl font-semibold'>Buat Kegiatan Pura</h1>
-				</div>
-
+				<DashboardHeader
+					heading='Dashboard'
+					text='Kelola semua aspek terkait dengan Pura dalam satu lokasi yang nyaman.'
+				/>
 				<hr className='bg-red-500 h-px' />
-
 				<div>
 					<p className='text-lg font-medium'>Nama</p>
 					<p className='text-xs pb-2'>Nama Pura diawali dengan huruf kapital</p>
@@ -121,7 +93,7 @@ const Page = () => {
 					<Button
 						isLoading={isLoading}
 						disabled={input.length === 0}
-						onClick={() => createCommunity()}
+						onClick={() => createPura()}
 					>
 						Buat Pura
 					</Button>
