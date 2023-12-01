@@ -10,15 +10,15 @@ import { useEffect, useRef } from 'react';
 import Kegiatan from './Kegiatan';
 import { useSession } from 'next-auth/react';
 
-interface PostFeedProps {
-	initialPosts: ExtendedPost[];
-	subredditName?: string;
+interface KegiatanFeedProps {
+	initialKegiatans: ExtendedPost[];
+	puraName?: string;
 }
 
-const PostFeed = ({ initialPosts, subredditName }: PostFeedProps) => {
-	const lastPostRef = useRef<HTMLElement>(null);
+const KegiatanFeed = ({ initialKegiatans, puraName }: KegiatanFeedProps) => {
+	const lastKegiatanRef = useRef<HTMLElement>(null);
 	const { ref, entry } = useIntersection({
-		root: lastPostRef.current,
+		root: lastKegiatanRef.current,
 		threshold: 1,
 	});
 	const { data: session } = useSession();
@@ -28,7 +28,7 @@ const PostFeed = ({ initialPosts, subredditName }: PostFeedProps) => {
 		async ({ pageParam = 1 }) => {
 			const query =
 				`/api/kegiatans?limit=${INFINITE_SCROLL_PAGINATION_RESULTS}&page=${pageParam}` +
-				(!!subredditName ? `&subredditName=${subredditName}` : '');
+				(!!puraName ? `&puraName=${puraName}` : '');
 
 			const { data } = await axios.get(query);
 			return data as ExtendedPost[];
@@ -38,7 +38,7 @@ const PostFeed = ({ initialPosts, subredditName }: PostFeedProps) => {
 			getNextPageParam: (_, pages) => {
 				return pages.length + 1;
 			},
-			initialData: { pages: [initialPosts], pageParams: [1] },
+			initialData: { pages: [initialKegiatans], pageParams: [1] },
 		}
 	);
 
@@ -48,7 +48,7 @@ const PostFeed = ({ initialPosts, subredditName }: PostFeedProps) => {
 		}
 	}, [entry, fetchNextPage]);
 
-	const kegiatans = data?.pages.flatMap((page) => page) ?? initialPosts;
+	const kegiatans = data?.pages.flatMap((page) => page) ?? initialKegiatans;
 
 	return (
 		<ul className='flex flex-col col-span-2 space-y-6'>
@@ -69,7 +69,7 @@ const PostFeed = ({ initialPosts, subredditName }: PostFeedProps) => {
 						<li key={kegiatan.id} ref={ref}>
 							<Kegiatan
 								kegiatan={kegiatan}
-								subredditName={kegiatan.pura.name}
+								puraName={kegiatan.pura.name}
 								votesAmt={votesAmt}
 								currentVote={currentVote}
 							/>
@@ -80,7 +80,7 @@ const PostFeed = ({ initialPosts, subredditName }: PostFeedProps) => {
 						<Kegiatan
 							key={kegiatan.id}
 							kegiatan={kegiatan}
-							subredditName={kegiatan.pura.name}
+							puraName={kegiatan.pura.name}
 							votesAmt={votesAmt}
 							currentVote={currentVote}
 						/>
@@ -97,4 +97,4 @@ const PostFeed = ({ initialPosts, subredditName }: PostFeedProps) => {
 	);
 };
 
-export default PostFeed;
+export default KegiatanFeed;

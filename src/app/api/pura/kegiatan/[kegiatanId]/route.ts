@@ -27,14 +27,14 @@ export async function PATCH(
 		}
 
 		// verify user is subscribed to passed pura id
-		const subscription = await db.subscription.findFirst({
+		const userRole = await db.userRole.findFirst({
 			where: {
 				puraId,
 				userId: session.user.id,
 			},
 		});
 
-		if (!subscription) {
+		if (!userRole) {
 			return new Response('Subscribe to kegiatan', { status: 403 });
 		}
 

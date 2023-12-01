@@ -6,7 +6,7 @@ import {
 } from '@/components/ui/Card';
 import { Skeleton } from '@/components/ui/skeleton';
 
-export function CardSkeleton() {
+export default function CardSkeleton() {
 	return (
 		<Card>
 			<CardHeader className='gap-2'>

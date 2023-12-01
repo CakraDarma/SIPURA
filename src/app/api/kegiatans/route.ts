@@ -10,7 +10,7 @@ export async function GET(req: Request) {
 	let followedCommunitiesIds: string[] = [];
 
 	if (session) {
-		const followedCommunities = await db.subscription.findMany({
+		const followedCommunities = await db.userRole.findMany({
 			where: {
 				userId: session.user.id,
 			},

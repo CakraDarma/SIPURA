@@ -14,12 +14,12 @@ const Error = ({ error, reset }: { error: Error; reset: () => void }) => {
 					{error.message || 'Terjadi kesalahan'}
 				</h1>
 				<p className='mt-6 text-base leading-7 text-zinc-600'>
-					Please try again later or contact support if the problem persistant
+					Silakan coba lagi nanti atau hubungi Admin jika masalah berlanjut.
 				</p>
 				<div className='mt-10 flex items-center justify-center gap-x-6'>
-					<Button onClick={reset}>Try again</Button>
+					<Button onClick={reset}>Coba lagi</Button>
 					<Link href='/' className={buttonVariants({ variant: 'outline' })}>
-						Go back home
+						Kembali ke halaman utama
 					</Link>
 				</div>
 			</div>

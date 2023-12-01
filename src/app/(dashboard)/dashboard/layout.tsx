@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 
 import { dashboardConfig } from '@/config/dashboard';
 import { authOptions, getAuthSession } from '@/lib/auth';
-import { MainNav } from '@/components/main-nav';
+import { MainNav } from '@/components/MainNav';
 import { UserAccountNav } from '@/components/UserAccountNav';
 
 interface DashboardLayoutProps {

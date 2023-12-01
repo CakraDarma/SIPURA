@@ -1,6 +1,6 @@
 import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
-import { SubredditSubscriptionValidator } from '@/lib/validators/pura';
+import { SubredditUserRoleValidator } from '@/lib/validators/pura';
 import { z } from 'zod';
 
 export async function POST(req: Request) {
@@ -12,24 +12,24 @@ export async function POST(req: Request) {
 		}
 
 		const body = await req.json();
-		const { puraId } = SubredditSubscriptionValidator.parse(body);
+		const { puraId } = SubredditUserRoleValidator.parse(body);
 
 		// check if user has already subscribed to pura
-		const subscriptionExists = await db.subscription.findFirst({
+		const userRoleExists = await db.userRole.findFirst({
 			where: {
 				puraId,
 				userId: session.user.id,
 			},
 		});
 
-		if (subscriptionExists) {
+		if (userRoleExists) {
 			return new Response("You've already subscribed to this pura", {
 				status: 400,
 			});
 		}
 
 		// create pura and associate it with the user
-		await db.subscription.create({
+		await db.userRole.create({
 			data: {
 				puraId,
 				userId: session.user.id,

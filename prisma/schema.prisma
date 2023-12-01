@@ -16,7 +16,7 @@ enum VoteType {
   DOWN
 }
 
-enum UserRole {
+enum Role {
   ADMIN
   PRAJURU
 }
@@ -65,16 +65,16 @@ model User {
   image         String?
   alamat        String?
   telepon       String?
-  role          UserRole  @default(PRAJURU)
+  role          Role      @default(PRAJURU)
 
-  puras         Pura[]
-  subscriptions Subscription[]
-  votes         Vote[]
-  accounts      Account[]
-  sessions      Session[]
-  kegiatans     Kegiatan[]
-  Comments      Comment[]
-  CommentVotes  CommentVote[]
+  puras        Pura[]
+  userRoles    UserRole[]
+  votes        Vote[]
+  accounts     Account[]
+  sessions     Session[]
+  kegiatans    Kegiatan[]
+  Comments     Comment[]
+  CommentVotes CommentVote[]
 
   // pura
   upacaras     Upacara[]
@@ -96,9 +96,9 @@ model Pura {
   piodalan     String?
   kategori     CategoryPura?
 
-  user         User?          @relation(fields: [userId], references: [id])
+  user         User?         @relation(fields: [userId], references: [id])
   kegiatans    Kegiatan[]
-  subscribers  Subscription[]
+  subscribers  UserRole[]
   upacaras     Upacara[]
   pratimas     Pratima[]
   pelinggihs   Pelinggih[]
@@ -107,7 +107,7 @@ model Pura {
   @@index([name])
 }
 
-model Subscription {
+model UserRole {
   userId String
   puraId String
 

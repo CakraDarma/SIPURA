@@ -36,7 +36,7 @@ const Layout = async ({
 
 	if (!pura) return notFound();
 
-	const memberCount = await db.subscription.count({
+	const memberCount = await db.userRole.count({
 		where: {
 			pura: {
 				name: puraId,

@@ -5,8 +5,8 @@ import { db } from '@/lib/db';
 // import { EmptyPlaceholder } from '@/components/empty-placeholder';
 // import { PostItem } from '@/components/kegiatan-item';
 // import { PostCreateButton } from '@/components/kegiatan-create-button';
-import DashboardHeader from '@/components/header';
-import DashboardShell from '@/components/shell';
+import DashboardHeader from '@/components/DashboardHeader';
+import DashboardShell from '@/components/DashboardShell';
 import EmptyPlaceholder from '@/components/EmptyPlaceholder';
 import CardPura from '@/components/CardPura';
 

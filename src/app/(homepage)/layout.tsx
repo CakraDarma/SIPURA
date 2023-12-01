@@ -1,6 +1,6 @@
 import { dashboardConfig } from '@/config/dashboard';
 import { getAuthSession } from '@/lib/auth';
-import { MainNav } from '@/components/main-nav';
+import { MainNav } from '@/components/MainNav';
 import { UserAccountNav } from '@/components/UserAccountNav';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';

@@ -1,5 +1,5 @@
 import { db } from '@/lib/db';
-import PostFeed from '../PostFeed';
+import KegiatanFeed from '../KegiatanFeed';
 import { INFINITE_SCROLL_PAGINATION_RESULTS } from '@/config';
 
 const GeneralFeed = async () => {
@@ -16,7 +16,7 @@ const GeneralFeed = async () => {
 		take: INFINITE_SCROLL_PAGINATION_RESULTS, // 4 to demonstrate infinite scroll, should be higher in production
 	});
 
-	return <PostFeed initialPosts={kegiatans} />;
+	return <KegiatanFeed initialPosts={kegiatans} />;
 };
 
 export default GeneralFeed;

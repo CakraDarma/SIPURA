@@ -4,7 +4,7 @@ import { Open_Sans } from 'next/font/google';
 import localFont from 'next/font/local';
 import Providers from '@/components/Providers';
 import { Toaster } from '@/components/ui/Toaster';
-import { TailwindIndicator } from '@/components/tailwind-indicator';
+import { TailwindIndicator } from '@/components/TailwindIndicator';
 
 import '@/styles/globals.css';
 

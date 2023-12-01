@@ -2,8 +2,8 @@ import { redirect } from 'next/navigation';
 
 import { authOptions, getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
-import DashboardHeader from '@/components/header';
-import DashboardShell from '@/components/shell';
+import DashboardHeader from '@/components/DashboardHeader';
+import DashboardShell from '@/components/DashboardShell';
 
 export const metadata = {
 	title: 'Dashboard',

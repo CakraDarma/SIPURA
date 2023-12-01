@@ -1,10 +1,10 @@
 export const siteConfig = {
 	name: 'SIPura',
 	description:
-		'An open source application built using the new router, server components and everything new in Next.js 13.',
+		'Sistem informasi dan virtual tour Pura: melestarikan Pura secara digital disertai pengalaman interaktif..',
 	url: 'https://tx.shadcn.com',
 	ogImage: 'https://tx.shadcn.com/og.jpg',
 	links: {
-		github: 'https://github.com/shadcn/taxonomy',
+		github: 'https://github.com/CakraDarma/SIPURA',
 	},
 };

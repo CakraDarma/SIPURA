@@ -35,7 +35,7 @@ export async function POST(req: Request) {
 		});
 
 		// creator also has to be subscribed
-		await db.subscription.create({
+		await db.userRole.create({
 			data: {
 				userId: session.user.id,
 				puraId: subreddit.id,

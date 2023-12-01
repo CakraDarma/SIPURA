@@ -8,17 +8,17 @@ import Link from 'next/link';
 
 type PartialVote = Pick<Vote, 'type'>;
 
-interface PostProps {
+interface KegiatanProps {
 	kegiatan: Kegiatan & {
 		user: User;
 		votes: Vote[];
 	};
 	votesAmt: number;
-	subredditName: string;
+	puraName: string;
 	currentVote?: PartialVote;
 }
 
-const Kegiatan = ({ kegiatan, subredditName }: PostProps) => {
+const Kegiatan = ({ kegiatan, puraName }: KegiatanProps) => {
 	const pRef = useRef<HTMLParagraphElement>(null);
 
 	return (
@@ -26,13 +26,13 @@ const Kegiatan = ({ kegiatan, subredditName }: PostProps) => {
 			<div className='px-6 py-4 flex justify-between'>
 				<div className='w-0 flex-1'>
 					<div className='max-h-40 mt-1 text-xs text-gray-500'>
-						{subredditName ? (
+						{puraName ? (
 							<>
 								<a
 									className='underline text-zinc-900 text-sm underline-offset-2'
-									href={`/r/${subredditName}`}
+									href={`/r/${puraName}`}
 								>
-									Pura {subredditName}
+									Pura {puraName}
 								</a>
 								<span className='px-1'>•</span>
 							</>
@@ -40,7 +40,7 @@ const Kegiatan = ({ kegiatan, subredditName }: PostProps) => {
 						<span>Dikirim oleh {kegiatan.user.name}</span>{' '}
 						{formatTimeToNow(new Date(kegiatan.createdAt))}
 					</div>
-					<a href={`/dashboard/${subredditName}/kegiatan/${kegiatan.id}`}>
+					<a href={`/dashboard/${puraName}/kegiatan/${kegiatan.id}`}>
 						<h1 className='text-lg font-semibold py-2 leading-6 text-gray-900'>
 							{kegiatan.title}
 						</h1>
@@ -60,7 +60,7 @@ const Kegiatan = ({ kegiatan, subredditName }: PostProps) => {
 			</div>
 			<div className='bg-gray-50 z-20 text-sm px-4 py-4 sm:px-6'>
 				<Link
-					href={`/dashboard/${subredditName}/kegiatan/${kegiatan.id}/edit`}
+					href={`/dashboard/${puraName}/kegiatan/${kegiatan.id}/edit`}
 					className='w-fit flex items-center gap-2'
 				>
 					Baca Selengkapnya

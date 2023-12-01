@@ -1,8 +1,8 @@
 import { redirect } from 'next/navigation';
 
 import { authOptions, getAuthSession } from '@/lib/auth';
-import DashboardHeader from '@/components/header';
-import DashboardShell from '@/components/shell';
+import DashboardHeader from '@/components/DashboardHeader';
+import DashboardShell from '@/components/DashboardShell';
 import { UserNameForm } from '@/components/UserNameForm';
 
 export const metadata = {
@@ -16,6 +16,7 @@ export default async function SettingsPage() {
 	if (!session) {
 		redirect(authOptions?.pages?.signIn || '/login');
 	}
+	await new Promise((resolve) => setTimeout(resolve, 7000));
 
 	return (
 		<div className='max-w-4xl mx-auto py-12'>

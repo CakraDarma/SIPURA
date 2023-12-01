@@ -9,7 +9,7 @@ import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import DashboardHeader from '@/components/header';
+import DashboardHeader from '@/components/DashboardHeader';
 
 const Page = () => {
 	const router = useRouter();
@@ -55,7 +55,7 @@ const Page = () => {
 			});
 		},
 		onSuccess: (data) => {
-			router.push(`/dashboard/kegiatan/${data}`);
+			router.push(`/dashboard/${data}`);
 		},
 	});
 

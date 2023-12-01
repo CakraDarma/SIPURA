@@ -1,7 +1,7 @@
 import KegiatanItem from '@/components/KegiatanItem';
 import EmptyPlaceholder from '@/components/EmptyPlaceholder';
-import DashboardHeader from '@/components/header';
-import DashboardShell from '@/components/shell';
+import DashboardHeader from '@/components/DashboardHeader';
+import DashboardShell from '@/components/DashboardShell';
 import { db } from '@/lib/db';
 import { notFound } from 'next/navigation';
 import { Pura, Kegiatan } from '@prisma/client';
