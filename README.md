@@ -1,5 +1,7 @@
 # SIPURA - Sistem Informasi Pura dan Virtual Tour Pura
 
+![alt](/public/og.jpg)
+
 Built with the Next.js App Router, TypeScript, MYSql & Tailwind
 
 ## Features
@@ -34,10 +36,4 @@ GOOGLE_CLIENT_SECRET=
 UPLOADTHING_SECRET=
 UPLOADTHING_APP_ID=
 
-```
-
-if you'd like, you can paste this snippet for quick component creation (optional):
-
-```typescript
-// vscode settings -> user snippets -> typescriptreact.json
 ```
