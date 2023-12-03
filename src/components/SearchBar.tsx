@@ -62,7 +62,7 @@ const SearchBar = () => {
 	return (
 		<Command
 			ref={commandRef}
-			className='relative border max-w-sm z-50 overflow-visible'
+			className='relative z-50 max-w-sm overflow-visible border'
 		>
 			<CommandInput
 				isLoading={isFetching}
@@ -76,21 +76,21 @@ const SearchBar = () => {
 			/>
 
 			{input.length > 0 && (
-				<CommandList className='absolute bg-white top-full inset-x-0 shadow rounded-b-md'>
+				<CommandList className='absolute inset-x-0 bg-white shadow top-full rounded-b-md'>
 					{isFetched && <CommandEmpty>Pencarian tidak ditemukan.</CommandEmpty>}
 					{(queryResults?.length ?? 0) > 0 ? (
 						<CommandGroup heading='Pura'>
 							{queryResults?.map((pura) => (
 								<CommandItem
 									onSelect={(e) => {
-										router.push(`/r/${e}`);
+										router.push(`/${e}`);
 										router.refresh();
 									}}
 									key={pura.id}
 									value={pura.name}
 								>
-									<Users className='mr-2 h-4 w-4' />
-									<a href={`/r/${pura.name}`}>{pura.name}</a>
+									<Users className='w-4 h-4 mr-2' />
+									<a href={`/${pura.name}`}>{pura.name}</a>
 								</CommandItem>
 							))}
 						</CommandGroup>

@@ -23,7 +23,9 @@ export default async function DashboardLayout({
 	const accessPage = await db.userRole.findFirst({
 		where: {
 			userId: session.user.id,
-			puraId: params.puraId,
+			pura: {
+				name: params.puraId,
+			},
 		},
 	});
 

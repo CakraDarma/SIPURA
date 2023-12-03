@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { User } from 'next-auth';
 import { signOut } from 'next-auth/react';
+import { userNavConfig } from '@/config/userNav';
 
 import {
 	DropdownMenu,
@@ -39,21 +40,13 @@ export const UserAccountNav = ({ user }: UserAccountNavProps) => {
 					</div>
 				</div>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem asChild>
-					<Link href='/'>Beranda</Link>
-				</DropdownMenuItem>
 
-				<DropdownMenuItem asChild>
-					<Link href='/dashboard'>Dashboard</Link>
-				</DropdownMenuItem>
+				{userNavConfig?.map((item, index) => (
+					<DropdownMenuItem asChild key={index}>
+						<Link href={item.href}>{item.title}</Link>
+					</DropdownMenuItem>
+				))}
 
-				<DropdownMenuItem asChild>
-					<Link href='/dashboard/kegiatan/create'>Tambah Kegiatan</Link>
-				</DropdownMenuItem>
-
-				<DropdownMenuItem asChild>
-					<Link href='/settings'>Profile</Link>
-				</DropdownMenuItem>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem
 					className='cursor-pointer'

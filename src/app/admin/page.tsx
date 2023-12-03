@@ -1,5 +1,6 @@
 import { getAuthSession } from '@/lib/auth';
 import React from 'react';
+import { Role } from '@prisma/client';
 
 const Admin = async () => {
 	const session = await getAuthSession();
