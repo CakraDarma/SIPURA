@@ -1,35 +1,30 @@
 'use client';
 
 import { formatTimeToNow } from '@/lib/utils';
-import { Kegiatan, User, Vote } from '@prisma/client';
+import { Kegiatan, User } from '@prisma/client';
 import { useRef } from 'react';
 import EditorOutput from './EditorOutput';
 import Link from 'next/link';
 
-type PartialVote = Pick<Vote, 'type'>;
-
 interface KegiatanProps {
 	kegiatan: Kegiatan & {
 		user: User;
-		votes: Vote[];
 	};
-	votesAmt: number;
 	puraName: string;
-	currentVote?: PartialVote;
 }
 
 const Kegiatan = ({ kegiatan, puraName }: KegiatanProps) => {
 	const pRef = useRef<HTMLParagraphElement>(null);
 
 	return (
-		<div className='rounded-md bg-white shadow'>
-			<div className='px-6 py-4 flex justify-between'>
-				<div className='w-0 flex-1'>
-					<div className='max-h-40 mt-1 text-xs text-gray-500'>
+		<div className='bg-white rounded-md shadow'>
+			<div className='flex justify-between px-6 py-4'>
+				<div className='flex-1 w-0'>
+					<div className='mt-1 text-xs text-gray-500 max-h-40'>
 						{puraName ? (
 							<>
 								<a
-									className='underline text-zinc-900 text-sm underline-offset-2'
+									className='text-sm underline text-zinc-900 underline-offset-2'
 									href={`/r/${puraName}`}
 								>
 									Pura {puraName}
@@ -41,27 +36,27 @@ const Kegiatan = ({ kegiatan, puraName }: KegiatanProps) => {
 						{formatTimeToNow(new Date(kegiatan.createdAt))}
 					</div>
 					<a href={`/dashboard/${puraName}/kegiatan/${kegiatan.id}`}>
-						<h1 className='text-lg font-semibold py-2 leading-6 text-gray-900'>
+						<h1 className='py-2 text-lg font-semibold leading-6 text-gray-900'>
 							{kegiatan.title}
 						</h1>
 					</a>
 
 					<div
-						className='relative text-sm max-h-40 w-full overflow-clip'
+						className='relative w-full text-sm max-h-40 overflow-clip'
 						ref={pRef}
 					>
 						<EditorOutput content={kegiatan.content} />
 						{pRef.current?.clientHeight === 160 ? (
 							// blur bottom if content is too long
-							<div className='absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-white to-transparent'></div>
+							<div className='absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white to-transparent'></div>
 						) : null}
 					</div>
 				</div>
 			</div>
-			<div className='bg-gray-50 z-20 text-sm px-4 py-4 sm:px-6'>
+			<div className='z-20 px-4 py-4 text-sm bg-gray-50 sm:px-6'>
 				<Link
 					href={`/dashboard/${puraName}/kegiatan/${kegiatan.id}/edit`}
-					className='w-fit flex items-center gap-2'
+					className='flex items-center gap-2 w-fit'
 				>
 					Baca Selengkapnya
 				</Link>

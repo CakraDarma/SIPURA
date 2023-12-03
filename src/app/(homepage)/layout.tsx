@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
 import SearchBar from '@/components/SearchBar';
+import Footer from '@/components/Footer';
 
 interface DashboardLayoutProps {
 	children?: React.ReactNode;
@@ -17,9 +18,9 @@ export default async function DashboardLayout({
 	const session = await getAuthSession();
 
 	return (
-		<div className='flex min-h-screen flex-col'>
+		<div className='flex flex-col min-h-screen'>
 			<header className='fixed inset-x-0 top-0 z-40 border-b bg-black-light backdrop-filter backdrop-blur-lg bg-opacity-30'>
-				<div className='container flex h-16 items-center justify-between py-4'>
+				<div className='container flex items-center justify-between h-16 py-4'>
 					<MainNav items={dashboardConfig.mainNav} />
 
 					{/* search bar */}
@@ -42,9 +43,10 @@ export default async function DashboardLayout({
 					)}
 				</div>
 			</header>
-			<main className='flex w-full flex-1 flex-col overflow-hidden'>
+			<main className='flex flex-col flex-1 w-full overflow-hidden'>
 				{children}
 			</main>
+			<Footer />
 		</div>
 	);
 }

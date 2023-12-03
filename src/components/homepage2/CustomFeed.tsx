@@ -31,9 +31,7 @@ const CustomFeed = async () => {
 			createdAt: 'desc',
 		},
 		include: {
-			votes: true,
 			user: true,
-			comments: true,
 			pura: true,
 		},
 		take: INFINITE_SCROLL_PAGINATION_RESULTS,

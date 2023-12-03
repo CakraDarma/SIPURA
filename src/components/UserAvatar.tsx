@@ -13,7 +13,7 @@ export const UserAvatar = ({ user, ...props }: UserAvatarProps) => {
 	return (
 		<Avatar {...props}>
 			{user.image ? (
-				<div className='relative aspect-square h-full w-full'>
+				<div className='relative w-full h-full aspect-square'>
 					<Image
 						fill
 						src={user.image}
@@ -24,7 +24,7 @@ export const UserAvatar = ({ user, ...props }: UserAvatarProps) => {
 			) : (
 				<AvatarFallback>
 					<span className='sr-only'>{user?.name}</span>
-					<Icons.user className='h-4 w-4' />
+					<Icons.user className='w-4 h-4' />
 				</AvatarFallback>
 			)}
 		</Avatar>

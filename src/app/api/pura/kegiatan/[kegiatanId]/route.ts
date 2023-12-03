@@ -26,7 +26,7 @@ export async function PATCH(
 			return new Response('Unauthorized', { status: 401 });
 		}
 
-		// verify user is subscribed to passed pura id
+		// verify user is prajuru to passed pura id
 		const userRole = await db.userRole.findFirst({
 			where: {
 				puraId,
@@ -35,7 +35,7 @@ export async function PATCH(
 		});
 
 		if (!userRole) {
-			return new Response('Subscribe to kegiatan', { status: 403 });
+			return new Response('Access Denied', { status: 403 });
 		}
 
 		await db.kegiatan.update({
@@ -57,7 +57,7 @@ export async function PATCH(
 		}
 
 		return new Response(
-			'Could not kegiatan to pura at this time. Please try later',
+			'Could not change Kegiatan to the Pura at this time. Please try again later.',
 			{ status: 500 }
 		);
 	}
@@ -76,7 +76,30 @@ export async function DELETE(
 			return new Response('Unauthorized', { status: 401 });
 		}
 
-		console.log(params);
+		const pura = await db.kegiatan.findFirst({
+			where: {
+				id: params.kegiatanId,
+			},
+			select: {
+				puraId: true,
+			},
+		});
+
+		if (!pura) {
+			return new Response('Pura not found', { status: 401 });
+		}
+
+		// verify user is prajuru to passed pura id
+		const userRole = await db.userRole.findFirst({
+			where: {
+				puraId: pura.puraId,
+				userId: session.user.id,
+			},
+		});
+
+		if (!userRole) {
+			return new Response('Access Denied', { status: 403 });
+		}
 
 		await db.kegiatan.delete({
 			where: {
@@ -91,7 +114,7 @@ export async function DELETE(
 		}
 
 		return new Response(
-			'Could not kegiatan to pura at this time. Please try later',
+			'Could not delete Kegiatan to the Pura at this time. Please try again later.',
 			{ status: 500 }
 		);
 	}

@@ -17,6 +17,7 @@ import {
 	FileDiff,
 	Columns,
 	Combine,
+	Command,
 	type Icon as LucideIcon,
 } from 'lucide-react';
 
@@ -41,6 +42,7 @@ export const Icons = {
 	laptop: Laptop,
 	ellipsis: MoreVertical,
 	close: X,
+	logo2: Command,
 	logo: (props: LucideProps) => (
 		<svg {...props} viewBox='0 0 497 497'>
 			<g>

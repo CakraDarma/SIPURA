@@ -11,13 +11,13 @@ import { useCustomToasts } from '@/hooks/use-custom-toasts';
 interface SubscribeLeaveToggleProps {
 	isSubscribed: boolean;
 	puraId: string;
-	subredditName: string;
+	puraName: string;
 }
 
 const SubscribeLeaveToggle = ({
 	isSubscribed,
 	puraId,
-	subredditName,
+	puraName,
 }: SubscribeLeaveToggleProps) => {
 	const { toast } = useToast();
 	const { loginToast } = useCustomToasts();
@@ -53,7 +53,7 @@ const SubscribeLeaveToggle = ({
 			});
 			toast({
 				title: 'Subscribed!',
-				description: `You are now subscribed to r/${subredditName}`,
+				description: `You are now subscribed to r/${puraName}`,
 			});
 		},
 	});
@@ -82,7 +82,7 @@ const SubscribeLeaveToggle = ({
 			});
 			toast({
 				title: 'Unsubscribed!',
-				description: `You are now unsubscribed from/${subredditName}`,
+				description: `You are now unsubscribed from/${puraName}`,
 			});
 		},
 	});

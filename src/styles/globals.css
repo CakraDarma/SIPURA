@@ -102,27 +102,4 @@
 	b {
 		@apply font-sans font-bold;
 	}
-
-	.about-section {
-		background-image: url('../src/images/who-we-are/background.jpg');
-		object-fit: cover;
-		background-size: cover;
-		background-position: center center;
-		width: 100%;
-		height: 100%;
-	}
-
-	.card-item-div {
-		transition: all 0.2s;
-	}
-
-	.card-item-div:hover {
-		background-image: url('../src/images/who-we-are/info-card-bg.jpg');
-		color: white;
-	}
-
-	.page-padding {
-		padding-left: 2.5rem;
-		padding-right: 2.5rem;
-	}
 }

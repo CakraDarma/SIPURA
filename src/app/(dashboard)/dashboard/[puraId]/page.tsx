@@ -1,7 +1,6 @@
 import { redirect } from 'next/navigation';
 
 import { authOptions, getAuthSession } from '@/lib/auth';
-import { db } from '@/lib/db';
 import DashboardHeader from '@/components/DashboardHeader';
 import DashboardShell from '@/components/DashboardShell';
 
@@ -9,7 +8,13 @@ export const metadata = {
 	title: 'Dashboard',
 };
 
-export default async function DashboardPage() {
+interface DashboardPageProps {
+	params: {
+		puraId: string;
+	};
+}
+
+export default async function DashboardPage({ params }: DashboardPageProps) {
 	const session = await getAuthSession();
 
 	if (!session) {

@@ -53,26 +53,11 @@ const KegiatanFeed = ({ initialKegiatans, puraName }: KegiatanFeedProps) => {
 	return (
 		<ul className='flex flex-col col-span-2 space-y-6'>
 			{kegiatans.map((kegiatan, index) => {
-				const votesAmt = kegiatan.votes.reduce((acc, vote) => {
-					if (vote.type === 'UP') return acc + 1;
-					if (vote.type === 'DOWN') return acc - 1;
-					return acc;
-				}, 0);
-
-				const currentVote = kegiatan.votes.find(
-					(vote) => vote.userId === session?.user.id
-				);
-
 				if (index === kegiatans.length - 1) {
 					// Add a ref to the last kegiatan in the list
 					return (
 						<li key={kegiatan.id} ref={ref}>
-							<Kegiatan
-								kegiatan={kegiatan}
-								puraName={kegiatan.pura.name}
-								votesAmt={votesAmt}
-								currentVote={currentVote}
-							/>
+							<Kegiatan kegiatan={kegiatan} puraName={kegiatan.pura.name} />
 						</li>
 					);
 				} else {
@@ -81,8 +66,6 @@ const KegiatanFeed = ({ initialKegiatans, puraName }: KegiatanFeedProps) => {
 							key={kegiatan.id}
 							kegiatan={kegiatan}
 							puraName={kegiatan.pura.name}
-							votesAmt={votesAmt}
-							currentVote={currentVote}
 						/>
 					);
 				}

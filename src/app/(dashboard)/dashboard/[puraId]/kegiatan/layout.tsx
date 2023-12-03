@@ -1,4 +1,3 @@
-import SubscribeLeaveToggle from '@/components/SubscribeLeaveToggle';
 import ToFeedButton from '@/components/ToFeedButton';
 import { buttonVariants } from '@/components/ui/Button';
 import { getAuthSession } from '@/lib/auth';
@@ -28,7 +27,6 @@ const Layout = async ({
 			kegiatans: {
 				include: {
 					user: true,
-					votes: true,
 				},
 			},
 		},

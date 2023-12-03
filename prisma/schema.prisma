@@ -11,11 +11,6 @@ datasource db {
   relationMode = "prisma"
 }
 
-enum VoteType {
-  UP
-  DOWN
-}
-
 enum Role {
   ADMIN
   PRAJURU
@@ -67,14 +62,11 @@ model User {
   telepon       String?
   role          Role      @default(PRAJURU)
 
-  puras        Pura[]
-  userRoles    UserRole[]
-  votes        Vote[]
-  accounts     Account[]
-  sessions     Session[]
-  kegiatans    Kegiatan[]
-  Comments     Comment[]
-  CommentVotes CommentVote[]
+  puras     Pura[]
+  userRoles UserRole[]
+  accounts  Account[]
+  sessions  Session[]
+  kegiatans Kegiatan[]
 
   // pura
   upacaras     Upacara[]
@@ -126,48 +118,8 @@ model Kegiatan {
   userId    String
   puraId    String
 
-  pura     Pura      @relation(fields: [puraId], references: [id])
-  user     User      @relation(fields: [userId], references: [id])
-  comments Comment[]
-  votes    Vote[]
-}
-
-model Comment {
-  id         String   @id @default(cuid())
-  text       String
-  createdAt  DateTime @default(now())
-  userId     String
-  kegiatanId String
-  replyToId  String?
-  commentId  String?
-
-  user     User          @relation(fields: [userId], references: [id])
-  kegiatan Kegiatan      @relation(fields: [kegiatanId], references: [id], onDelete: Cascade)
-  replyTo  Comment?      @relation("ReplyTo", fields: [replyToId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  replies  Comment[]     @relation("ReplyTo")
-  votes    CommentVote[]
-}
-
-model Vote {
-  userId     String
-  kegiatanId String
-  type       VoteType
-
-  user     User     @relation(fields: [userId], references: [id])
-  kegiatan Kegiatan @relation(fields: [kegiatanId], references: [id], onDelete: Cascade)
-
-  @@id([userId, kegiatanId])
-}
-
-model CommentVote {
-  userId    String
-  commentId String
-  type      VoteType
-
-  user    User    @relation(fields: [userId], references: [id])
-  comment Comment @relation(fields: [commentId], references: [id], onDelete: Cascade)
-
-  @@id([userId, commentId])
+  pura Pura @relation(fields: [puraId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 }
 
 model Pratima {

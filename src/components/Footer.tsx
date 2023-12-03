@@ -4,40 +4,39 @@ import Link from 'next/link';
 const Footer = () => {
 	return (
 		<div className=' bg-neutral-600'>
-			<div className='max-w-7xl container h-full py-12'>
-				<div className='flex-col justify-start items-center gap-[120px] flex'>
-					<div className='flex-col justify-start items-center gap-6 flex'>
+			<div className='container h-full pt-12 max-w-7xl'>
+				<div className='flex flex-col'>
+					{/* <div className='flex flex-col items-center justify-start gap-6'>
 						<h3 className='text-white text-[32px] font-medium leading-[38.40px]'>
 							Ada Pertanyaan atau Saran?
 						</h3>
-						<p className='text-center text-white text-base font-normal leading-normal'>
+						<p className='text-base font-normal leading-normal text-center text-white'>
 							Pesan Anda akan dikirimkan kepada kami untuk pengembangan website
 							ini. Yuk jangan ragu untuk memberikan pesan dengan kami!
 						</p>
 						<button className='px-3 py-4 border border-white justify-center items-center gap-2.5 inline-flex'>
-							<div className='text-white text-xs font-normal leading-normal'>
+							<div className='text-xs font-normal leading-normal text-white'>
 								Contact Us
 							</div>
 						</button>
-					</div>
-					<div className='pb-20 border-b border-white justify-between items-start gap-10 md:gap-[212px] flex md:flex-row flex-col'>
-						<div className='flex-col justify-start items-start gap-6 inline-flex'>
+					</div> */}
+					<div className='flex flex-col items-start justify-between gap-10 pb-20 border-b border-white md:flex-row'>
+						<div className='inline-flex flex-col items-start justify-start gap-6 max-w-[80%]'>
 							<h2 className='text-white text-[32px] font-medium leading-[38.40px]'>
 								LOGO
 							</h2>
-							<p className=' text-white text-base font-normal leading-normal'>
-								Sistem Informasi Pura adalah platform untuk mengeksplorasi dan
-								mempelajari Pura secara lebih menarik. Pengguna dapat merasakan
-								pengalaman berjalan-jalan di sekitar pura dengan tampilan 360
-								derajat yang memukau.
+							<p className='text-base font-normal leading-normal text-white '>
+								Sistem informasi dan virtual tour Pura menghadirkan kelestarian
+								Pura dalam bentuk digital melibatkan pengguna dalam pengalaman
+								interaktif yang mendalam.
 							</p>
 						</div>
-						<div className='flex-col justify-start items-start gap-6 inline-flex'>
+						<div className='inline-flex flex-col items-start justify-start gap-6'>
 							<h3 className='text-white text-2xl font-medium leading-[28.80px]'>
-								Informasi
+								Informasi terkait
 							</h3>
 							{footConfig?.length ? (
-								<div className='flex-col justify-center items-start gap-6 flex'>
+								<div className='flex flex-col items-start justify-center gap-6'>
 									{footConfig?.map((item, index) => (
 										<Link
 											key={index}
@@ -54,7 +53,7 @@ const Footer = () => {
 						</div>
 					</div>
 				</div>
-				<div className='text-white text-xs font-medium leading-[18px] p-3'>
+				<div className='text-white text-xs font-medium leading-[18px] py-3'>
 					© 2023 Website By Information Technology Universitas Udayana
 				</div>
 			</div>

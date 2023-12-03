@@ -7,10 +7,10 @@ export async function GET(req: Request) {
 
 	const session = await getAuthSession();
 
-	let followedCommunitiesIds: string[] = [];
+	let puraAccessIds: string[] = [];
 
 	if (session) {
-		const followedCommunities = await db.userRole.findMany({
+		const puraAccess = await db.userRole.findMany({
 			where: {
 				userId: session.user.id,
 			},
@@ -19,35 +19,35 @@ export async function GET(req: Request) {
 			},
 		});
 
-		followedCommunitiesIds = followedCommunities.map((sub) => sub.pura.id);
+		puraAccessIds = puraAccess.map((sub) => sub.pura.id);
 	}
 
 	try {
-		const { limit, page, subredditName } = z
+		const { limit, page, puraName } = z
 			.object({
 				limit: z.string(),
 				page: z.string(),
-				subredditName: z.string().nullish().optional(),
+				puraName: z.string().nullish().optional(),
 			})
 			.parse({
-				subredditName: url.searchParams.get('subredditName'),
+				puraName: url.searchParams.get('puraName'),
 				limit: url.searchParams.get('limit'),
 				page: url.searchParams.get('page'),
 			});
 
 		let whereClause = {};
 
-		if (subredditName) {
+		if (puraName) {
 			whereClause = {
 				pura: {
-					name: subredditName,
+					name: puraName,
 				},
 			};
 		} else if (session) {
 			whereClause = {
 				pura: {
 					id: {
-						in: followedCommunitiesIds,
+						in: puraAccessIds,
 					},
 				},
 			};
@@ -61,15 +61,13 @@ export async function GET(req: Request) {
 			},
 			include: {
 				pura: true,
-				votes: true,
 				user: true,
-				comments: true,
 			},
 			where: whereClause,
 		});
 
 		return new Response(JSON.stringify(kegiatans));
 	} catch (error) {
-		return new Response('Could not fetch kegiatans', { status: 500 });
+		return new Response('Could not fetch kegiatan', { status: 500 });
 	}
 }

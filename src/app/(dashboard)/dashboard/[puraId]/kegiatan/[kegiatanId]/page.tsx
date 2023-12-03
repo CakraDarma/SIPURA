@@ -1,10 +1,10 @@
 import EditorOutput from '@/components/EditorOutput';
 import { db } from '@/lib/db';
 import { formatTimeToNow } from '@/lib/utils';
-import { Kegiatan, User, Vote } from '@prisma/client';
+import { Kegiatan, User } from '@prisma/client';
 import { notFound } from 'next/navigation';
 
-interface SubRedditPostPageProps {
+interface KegiatanPuraPageProps {
 	params: {
 		kegiatanId: string;
 	};
@@ -13,15 +13,14 @@ interface SubRedditPostPageProps {
 export const dynamic = 'force-dynamic';
 export const fetchCache = 'force-no-store';
 
-const SubRedditPostPage = async ({ params }: SubRedditPostPageProps) => {
-	let post: (Kegiatan & { votes: Vote[]; user: User }) | null = null;
+const KegiatanPuraPage = async ({ params }: KegiatanPuraPageProps) => {
+	let post: (Kegiatan & { user: User }) | null = null;
 
 	post = await db.kegiatan.findFirst({
 		where: {
 			id: params.kegiatanId,
 		},
 		include: {
-			votes: true,
 			user: true,
 		},
 	});
@@ -47,4 +46,4 @@ const SubRedditPostPage = async ({ params }: SubRedditPostPageProps) => {
 	);
 };
 
-export default SubRedditPostPage;
+export default KegiatanPuraPage;

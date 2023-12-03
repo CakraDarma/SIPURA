@@ -21,15 +21,15 @@ const CardPura = ({ pura }: CardPuraProps) => {
 				quality={100}
 				className='w-full h-[150.18px] object-cover'
 			/>
-			<div className='flex flex-col gap-3 w-full p-2'>
-				<p className='text-orange-dark text-xs font-bold leading-4 mt-3'>
+			<div className='flex flex-col w-full gap-3 p-2'>
+				<p className='mt-3 text-xs font-bold leading-4 text-orange-dark'>
 					Karangasem
 				</p>
-				<h3 className=' text-black text-2xl font-medium leading-4'>
+				<h3 className='text-2xl font-medium leading-4 text-black '>
 					Pura {pura.name}
 				</h3>
 				<hr className='w-24 h-1 mx-auto my-4 bg-orange-dark'></hr>
-				<p className=' text-zinc-800 text-xs font-thin'>
+				<p className='text-xs font-thin text-zinc-800'>
 					Desa Besakih, Kecamatan Rendang, Kabupaten Karangasem
 				</p>
 			</div>

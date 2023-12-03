@@ -24,7 +24,7 @@ export const UserAccountNav = ({ user }: UserAccountNavProps) => {
 			<DropdownMenuTrigger>
 				<UserAvatar
 					user={{ name: user.name || null, image: user.image || null }}
-					className='h-8 w-8'
+					className='w-8 h-8'
 				/>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className='bg-white' align='end'>

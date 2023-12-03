@@ -2,6 +2,7 @@ import { db } from '@/lib/db';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { NextAuthOptions, getServerSession } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
+import { nanoid } from 'nanoid';
 
 export const authOptions: NextAuthOptions = {
 	adapter: PrismaAdapter(db),
@@ -40,6 +41,17 @@ export const authOptions: NextAuthOptions = {
 			if (!dbUser) {
 				token.id = user!.id;
 				return token;
+			}
+
+			if (!dbUser.name) {
+				await db.user.update({
+					where: {
+						id: dbUser.id,
+					},
+					data: {
+						name: nanoid(10),
+					},
+				});
 			}
 
 			return {

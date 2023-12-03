@@ -8,15 +8,13 @@ const GeneralFeed = async () => {
 			createdAt: 'desc',
 		},
 		include: {
-			votes: true,
 			user: true,
-			comments: true,
 			pura: true,
 		},
 		take: INFINITE_SCROLL_PAGINATION_RESULTS, // 4 to demonstrate infinite scroll, should be higher in production
 	});
 
-	return <KegiatanFeed initialPosts={kegiatans} />;
+	return <KegiatanFeed initialKegiatans={kegiatans} />;
 };
 
 export default GeneralFeed;
