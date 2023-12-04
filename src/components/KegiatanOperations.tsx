@@ -62,14 +62,14 @@ export default function KegiatanOperations({
 	return (
 		<>
 			<DropdownMenu>
-				<DropdownMenuTrigger className='flex h-8 w-8 items-center justify-center rounded-md border transition-colors hover:bg-muted'>
-					<Icons.ellipsis className='h-4 w-4' />
+				<DropdownMenuTrigger className='flex items-center justify-center w-8 h-8 transition-colors border rounded-md hover:bg-muted'>
+					<Icons.ellipsis className='w-4 h-4' />
 					<span className='sr-only'>Open</span>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent align='end'>
 					<DropdownMenuItem>
 						<Link
-							href={`dashboard/${params.puraId}/kegiatan/${kegiatan.id}/edit`}
+							href={`/dashboard/${params.puraId}/kegiatan/${kegiatan.id}/edit`}
 							className='flex w-full'
 						>
 							Sunting
@@ -77,7 +77,7 @@ export default function KegiatanOperations({
 					</DropdownMenuItem>
 					<DropdownMenuSeparator />
 					<DropdownMenuItem
-						className='flex cursor-pointer items-center text-destructive focus:text-destructive'
+						className='flex items-center cursor-pointer text-destructive focus:text-destructive'
 						onSelect={() => setShowDeleteAlert(true)}
 					>
 						Hapus
@@ -104,9 +104,9 @@ export default function KegiatanOperations({
 							className='bg-red-600 focus:ring-red-600'
 						>
 							{isLoading ? (
-								<Icons.spinner className='mr-2 h-4 w-4 animate-spin' />
+								<Icons.spinner className='w-4 h-4 mr-2 animate-spin' />
 							) : (
-								<Icons.trash className='mr-2 h-4 w-4' />
+								<Icons.trash className='w-4 h-4 mr-2' />
 							)}
 							<span>Hapus</span>
 						</AlertDialogAction>

@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { Kegiatan } from '@prisma/client';
 
-import { formatDate } from '@/lib/utils';
 import { Skeleton } from '@/components/ui/skeleton';
 import KegiatanOperations from '@/components/KegiatanOperations';
+import { format } from 'date-fns';
 
 interface KegiatanItemProps {
 	kegiatan: Pick<Kegiatan, 'id' | 'title' | 'createdAt'>;
@@ -20,9 +20,12 @@ export default function KegiatanItem({ kegiatan }: KegiatanItemProps) {
 					{kegiatan.title}
 				</Link>
 				<div>
-					<p className='text-sm text-muted-foreground'>
-						{formatDate(kegiatan.createdAt?.toDateString())}
-					</p>
+					<time
+						dateTime={kegiatan.createdAt.toDateString()}
+						className='text-sm text-muted-foreground'
+					>
+						{format(kegiatan.createdAt, 'd MMMM yyyy')}
+					</time>
 				</div>
 			</div>
 			<KegiatanOperations
@@ -36,8 +39,8 @@ KegiatanItem.Skeleton = function KegiatanItemSkeleton() {
 	return (
 		<div className='p-4'>
 			<div className='space-y-3'>
-				<Skeleton className='h-5 w-2/5' />
-				<Skeleton className='h-4 w-4/5' />
+				<Skeleton className='w-2/5 h-5' />
+				<Skeleton className='w-4/5 h-4' />
 			</div>
 		</div>
 	);

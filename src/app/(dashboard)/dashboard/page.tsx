@@ -31,33 +31,35 @@ export default async function DashboardPage() {
 	});
 
 	return (
-		<DashboardShell>
-			<div className='ml-6'>
-				<DashboardHeader
-					heading='Dashboard'
-					text='Kelola semua aspek terkait dengan Pura dalam satu lokasi yang
+		<div className='container flex flex-col h-full space-y-6 max-w-7xl'>
+			<DashboardShell>
+				<div className='ml-6'>
+					<DashboardHeader
+						heading='Dashboard'
+						text='Kelola semua aspek terkait dengan Pura dalam satu lokasi yang
 						nyaman.'
-				/>
-			</div>
-			<div>
-				{pura?.length ? (
-					<div className='flex-col items-center justify-center flex md:flex-row gap-6'>
-						{pura.map((pura, index) => (
-							<CardPura key={index} pura={pura} />
-						))}
-					</div>
-				) : (
-					<EmptyPlaceholder>
-						<EmptyPlaceholder.Icon name='kegiatan' />
-						<EmptyPlaceholder.Title>Tidak ada Pura</EmptyPlaceholder.Title>
-						<EmptyPlaceholder.Description>
-							Anda belum memiliki Pura yang tersedia. Silahkan tambahkan Pura
-							terlebih dahulu
-						</EmptyPlaceholder.Description>
-						{/* <PostCreateButton variant='outline' /> */}
-					</EmptyPlaceholder>
-				)}
-			</div>
-		</DashboardShell>
+					/>
+				</div>
+				<div>
+					{pura?.length ? (
+						<div className='flex flex-col items-center justify-center gap-6 md:flex-row'>
+							{pura.map((pura, index) => (
+								<CardPura key={index} pura={pura} />
+							))}
+						</div>
+					) : (
+						<EmptyPlaceholder>
+							<EmptyPlaceholder.Icon name='kegiatan' />
+							<EmptyPlaceholder.Title>Tidak ada Pura</EmptyPlaceholder.Title>
+							<EmptyPlaceholder.Description>
+								Anda belum memiliki Pura yang tersedia. Silahkan tambahkan Pura
+								terlebih dahulu
+							</EmptyPlaceholder.Description>
+							{/* <PostCreateButton variant='outline' /> */}
+						</EmptyPlaceholder>
+					)}
+				</div>
+			</DashboardShell>
+		</div>
 	);
 }

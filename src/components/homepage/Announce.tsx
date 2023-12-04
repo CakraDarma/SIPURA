@@ -4,15 +4,15 @@ import Link from 'next/link';
 
 const announce = () => {
 	return (
-		<div className='max-w-7xl container py-20'>
-			<div className='flex-col justify-start flex my-6'>
-				<h1 className='w-96 text-zinc-800 self-stretch '>
+		<div className='container py-20 max-w-7xl'>
+			<div className='flex flex-col justify-start my-6'>
+				<h1 className='self-stretch w-96 text-zinc-800 '>
 					Informasi, Pengumuman, Acara Terbaru
 				</h1>
 			</div>
 			{/* box */}
 			{blogConfig?.length ? (
-				<div className='flex-col items-center justify-center gap-12 flex md:flex-row mt-6'>
+				<div className='flex flex-col items-center justify-center gap-12 mt-6 md:flex-row'>
 					{blogConfig?.map((item, index) => (
 						<Link
 							className='flex-col justify-start items-start inline-flex gap-4 w-[405px]'
@@ -27,11 +27,11 @@ const announce = () => {
 								quality={100}
 								className='w-[405px] h-[234.18px] object-cover'
 							/>
-							<div className='flex-col justify-start items-center flex gap-3'>
-								<div className='text-zinc-800 text-xs font-bold leading-4'>
+							<div className='flex flex-col items-center justify-start gap-3'>
+								<div className='text-xs font-bold leading-4 text-zinc-800'>
 									{item.date}
 								</div>
-								<h3 className='text-center text-zinc-800 text-2xl font-medium leading-4'>
+								<h3 className='text-2xl font-medium leading-4 text-center text-zinc-800'>
 									{item.title}
 								</h3>
 								<hr className='w-48 h-1 mx-auto my-4 bg-orange-dark'></hr>
