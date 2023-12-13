@@ -23,7 +23,7 @@ import {
 	DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
 import { toast } from '@/hooks/use-toast';
-import { Icons } from '@/components/icons';
+import { Icons } from '@/components/Icons';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 

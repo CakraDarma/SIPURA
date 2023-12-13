@@ -18,7 +18,7 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
 	const session = await getAuthSession();
 
 	if (!session) {
-		redirect(authOptions?.pages?.signIn || '/login');
+		redirect(authOptions?.pages?.signIn || '/sign-in');
 	}
 
 	return (

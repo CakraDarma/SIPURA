@@ -27,7 +27,7 @@ export default async function EditorPage({ params }: EditorPageProps) {
 	const session = await getAuthSession();
 
 	if (!session) {
-		redirect(authOptions?.pages?.signIn || '/login');
+		redirect(authOptions?.pages?.signIn || '/sign-in');
 	}
 
 	const kegiatan = await getKegiatanForUser(params.kegiatanId, session.user.id);

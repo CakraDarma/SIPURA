@@ -14,7 +14,7 @@ export default async function SettingsPage() {
 	const session = await getAuthSession();
 
 	if (!session) {
-		redirect(authOptions?.pages?.signIn || '/login');
+		redirect(authOptions?.pages?.signIn || '/sign-in');
 	}
 	await new Promise((resolve) => setTimeout(resolve, 7000));
 

@@ -2,7 +2,7 @@
 
 import CloseModal from '@/components/CloseModal';
 import SignIn from '@/components/SignIn';
-import { Icons } from '@/components/icons';
+import { Icons } from '@/components/Icons';
 import { useOnClickOutside } from '@/hooks/use-on-click-outside';
 import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
@@ -19,18 +19,18 @@ const Page = () => {
 		router.back();
 	}
 	return (
-		<div className='fixed inset-0 bg-zinc-900/20 z-50'>
+		<div className='fixed inset-0 z-50 bg-zinc-900/20'>
 			<div className='container flex items-center h-full max-w-lg mx-auto'>
 				<div
-					className='relative bg-white w-full h-fit pt-16 pb-11 px-9 rounded-lg'
+					className='relative w-full pt-16 bg-white rounded-lg h-fit pb-11 px-9'
 					ref={modalRef}
 				>
-					<div className='absolute top-4 right-4 px-5'>
+					<div className='absolute px-5 top-4 right-4'>
 						<CloseModal />
 					</div>
 					<div className='flex flex-col space-y-2 text-center'>
-						<Icons.logo className='mx-auto h-6 w-6' />
-						<h1 className='text-2xl font-medium tracking-tight mb-2'>Login</h1>
+						<Icons.logo className='w-6 h-6 mx-auto' />
+						<h1 className='mb-2 text-2xl font-medium tracking-tight'>Login</h1>
 					</div>
 					<SignIn />
 				</div>

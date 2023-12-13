@@ -4,7 +4,7 @@ import { signIn } from 'next-auth/react';
 import * as React from 'react';
 import { Button } from '@/components/ui/Button';
 import { useToast } from '@/hooks/use-toast';
-import { Icons } from '@/components/icons';
+import { Icons } from '@/components/Icons';
 
 const UserAuthForm = () => {
 	const { toast } = useToast();
@@ -34,7 +34,7 @@ const UserAuthForm = () => {
 			onClick={loginWithGoogle}
 			disabled={isLoading}
 		>
-			{isLoading ? null : <Icons.google className='h-4 w-4 mr-2' />}
+			{isLoading ? null : <Icons.google className='w-4 h-4 mr-2' />}
 			Google
 		</Button>
 	);

@@ -5,7 +5,7 @@ import { useParams, usePathname } from 'next/navigation';
 
 import { cn } from '@/lib/utils';
 import { SidebarNavItem } from '@/types';
-import { Icons } from '@/components/icons';
+import { Icons } from '@/components/Icons';
 
 interface SidebarNavProps {
 	items: SidebarNavItem[];
@@ -40,7 +40,7 @@ export function SidebarNav({ items }: SidebarNavProps) {
 									item.disabled && 'cursor-not-allowed opacity-80'
 								)}
 							>
-								<Icon className='mr-2 h-4 w-4' />
+								<Icon className='w-4 h-4 mr-2' />
 								<span>{item.title}</span>
 							</span>
 						</Link>
