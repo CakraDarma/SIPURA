@@ -19,6 +19,7 @@ import {
 	Combine,
 	Command,
 	type Icon as LucideIcon,
+	Menu,
 } from 'lucide-react';
 
 // import { FaRegUserCircle } from 'react-icons/fa';
@@ -27,6 +28,7 @@ export type Icon = LucideIcon;
 
 export const Icons = {
 	pura: Building,
+	menu: Menu,
 	upacara: FileDiff,
 	inventory: Columns,
 	virtualTour: Combine,

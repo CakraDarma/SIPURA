@@ -20,7 +20,7 @@ export default async function DashboardLayout({
 	return (
 		<div className='flex flex-col min-h-screen'>
 			<header className='fixed inset-x-0 top-0 z-40 border-b bg-black-light backdrop-filter backdrop-blur-lg bg-opacity-30'>
-				<div className='container flex items-center justify-between h-16 py-4'>
+				<div className='container flex items-center justify-between h-16 gap-6 py-4 md:gap-4'>
 					<MainNav items={dashboardConfig.mainNav} />
 
 					{/* search bar */}
