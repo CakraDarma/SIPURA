@@ -16,7 +16,7 @@ import {
 	CommandList,
 } from '@/components/ui/Command';
 import { useOnClickOutside } from '@/hooks/use-on-click-outside';
-import { Users } from 'lucide-react';
+import { Building2Icon } from 'lucide-react';
 
 const SearchBar = () => {
 	const [input, setInput] = useState<string>('');
@@ -62,7 +62,7 @@ const SearchBar = () => {
 	return (
 		<Command
 			ref={commandRef}
-			className='relative z-50 max-w-sm overflow-visible border'
+			className='relative z-50 max-w-sm overflow-visible border h-fit'
 		>
 			<CommandInput
 				isLoading={isFetching}
@@ -89,7 +89,7 @@ const SearchBar = () => {
 									key={pura.id}
 									value={pura.name}
 								>
-									<Users className='w-4 h-4 mr-2' />
+									<Building2Icon className='w-4 h-4 mr-2' />
 									<a href={`/${pura.name}`}>{pura.name}</a>
 								</CommandItem>
 							))}
