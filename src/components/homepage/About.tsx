@@ -17,9 +17,9 @@ const About = () => {
 				</div>
 				<div className='bg-orange-light w-full md:w-[801px] h-[725px] xl:items-end items-center flex flex-col box-border px-16 pt-32 pb-[80px]'>
 					<div className='flex flex-col'>
-						<h1 className='text-3xl font-medium text-white md:text-4xl font-heading'>
+						<h2 className='text-3xl font-medium text-white md:text-4xl font-heading'>
 							Pura
-						</h1>
+						</h2>
 						<p className='max-w-sm mt-6 font-sans text-lg font-light leading-normal text-white sm:text-xl'>
 							Pura adalah istilah dalam bahasa Indonesia untuk merujuk pada kuil
 							Hindu. Kuil-kuil Hindu di Bali umumnya disebut sebagai pura
