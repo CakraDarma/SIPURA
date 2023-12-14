@@ -1,22 +1,24 @@
-// import Footer from '@/components/Footer';
 import { cn } from '@/lib/utils';
-import { Open_Sans } from 'next/font/google';
-import localFont from 'next/font/local';
+import { Archivo, Lora } from 'next/font/google';
 import Providers from '@/components/Providers';
 import { Toaster } from '@/components/ui/Toaster';
 import { TailwindIndicator } from '@/components/TailwindIndicator';
 
 import '@/styles/globals.css';
 
-const fontSans = Open_Sans({
+const fontSans = Archivo({
 	subsets: ['latin'],
 	variable: '--font-sans',
 });
-
-const fontHeading = localFont({
-	src: '../assets/fonts/CalSans-SemiBold.woff2',
+const fontHeading = Lora({
+	subsets: ['latin'],
 	variable: '--font-heading',
 });
+
+// const fontHeading = localFont({
+// 	src: '../assets/fonts/Didot.woff2',
+// 	variable: '--font-heading',
+// });
 
 export const metadata = {
 	title: 'SIPURA',
@@ -39,10 +41,10 @@ export default function RootLayout({
 				fontHeading.variable
 			)}
 		>
-			<body className='min-h-screen bg-white antialiased'>
+			<body className='min-h-screen antialiased bg-white'>
 				<Providers>
 					{authModal}
-					{/* <div className='container max-w-7xl mx-auto h-full pt-12'> */}
+					{/* <div className='container h-full pt-12 mx-auto max-w-7xl'> */}
 					{children}
 					{/* </div> */}
 				</Providers>

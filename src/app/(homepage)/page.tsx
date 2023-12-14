@@ -6,7 +6,7 @@ import About from '@/components/homepage/About';
 const Home = () => {
 	return (
 		<div className='flex flex-col gap-4'>
-			<Hero imageUrl='/images/hero.png' />
+			<Hero imageUrl='/images/hero2.jpg' />
 			<About />
 			<VideoInformation />
 			<Announce />

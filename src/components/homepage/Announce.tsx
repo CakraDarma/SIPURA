@@ -1,12 +1,13 @@
 import { blogConfig } from '@/config/blog';
 import Image from 'next/image';
 import Link from 'next/link';
+import { format } from 'date-fns';
 
 const announce = () => {
 	return (
 		<div className='container py-20 max-w-7xl'>
 			<div className='flex flex-col justify-start my-6'>
-				<h1 className='self-stretch w-96 text-zinc-800 '>
+				<h1 className='text-black text-2xl md:text-4xl font-medium leading-[76.80px]'>
 					Informasi, Pengumuman, Acara Terbaru
 				</h1>
 			</div>
@@ -31,13 +32,16 @@ const announce = () => {
 								<div className='text-xs font-bold leading-4 text-zinc-800'>
 									{item.date}
 								</div>
-								<h3 className='text-2xl font-medium leading-4 text-center text-zinc-800'>
+								{/* <time dateTime={item.date.toDateString()}>
+									{format(item.date, 'd MMMM yyyy')}
+								</time> */}
+								<h3 className='text-2xl font-semibold text-center text-zinc-800'>
 									{item.title}
 								</h3>
 								<hr className='w-48 h-1 mx-auto my-4 bg-orange-dark'></hr>
-								<div className=' text-center text-zinc-800 text-xs font-normal leading-[18.31px]'>
+								<p className=' text-justify text-zinc-800 text-sm font-normal leading-[18.31px]'>
 									{item.content}
-								</div>
+								</p>
 							</div>
 						</Link>
 					))}
