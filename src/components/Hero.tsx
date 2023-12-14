@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Button, buttonVariants } from './ui/Button';
+import { buttonVariants } from './ui/Button';
 
 interface postHero {
 	imageUrl: string;
