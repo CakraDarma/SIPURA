@@ -15,7 +15,6 @@ import {
 	kegiatanValidator,
 } from '@/lib/validators/kegiatan';
 import { useMutation } from '@tanstack/react-query';
-import { Kegiatan } from '@prisma/client';
 import axios from 'axios';
 
 import '@/styles/editor.css';
@@ -23,10 +22,10 @@ import '@/styles/editor.css';
 type FormData = z.infer<typeof kegiatanValidator>;
 
 interface EditorProps {
-	kegiatan: Pick<Kegiatan, 'id' | 'title' | 'content' | 'puraId'>;
+	puraId: string;
 }
 
-export const Editor = ({ kegiatan }: EditorProps) => {
+export const EditorCreateKegiatan = ({ puraId }: EditorProps) => {
 	const {
 		register,
 		handleSubmit,
@@ -34,9 +33,9 @@ export const Editor = ({ kegiatan }: EditorProps) => {
 	} = useForm<FormData>({
 		resolver: zodResolver(kegiatanValidator),
 		defaultValues: {
-			puraId: kegiatan.puraId,
-			title: kegiatan.title,
-			content: kegiatan.content,
+			puraId,
+			title: '',
+			content: null,
 		},
 	});
 
@@ -46,13 +45,10 @@ export const Editor = ({ kegiatan }: EditorProps) => {
 	const [isMounted, setIsMounted] = useState<boolean>(false);
 	const pathname = usePathname();
 
-	const { mutate: editKegiatan } = useMutation({
+	const { mutate: createKegiatan } = useMutation({
 		mutationFn: async ({ title, content, puraId }: KegiatanCreationRequest) => {
 			const payload: KegiatanCreationRequest = { title, content, puraId };
-			const { data } = await axios.patch(
-				`/api/pura/kegiatan/${kegiatan.id}`,
-				payload
-			);
+			const { data } = await axios.post('/api/pura/kegiatan', payload);
 			return data;
 		},
 		onError: () => {
@@ -64,7 +60,6 @@ export const Editor = ({ kegiatan }: EditorProps) => {
 			});
 		},
 		onSuccess: () => {
-			// turn pathname /r/mycommunity/submit into /r/mycommunity
 			const newPathname = pathname.split('/').slice(0, -1).join('/');
 			router.push(newPathname);
 
@@ -85,8 +80,6 @@ export const Editor = ({ kegiatan }: EditorProps) => {
 		const LinkTool = (await import('@editorjs/link')).default;
 		const ImageTool = (await import('@editorjs/image')).default;
 
-		const body = kegiatanValidator.parse(kegiatan);
-
 		if (!ref.current) {
 			const editor = new EditorJS({
 				holder: 'editor',
@@ -95,8 +88,7 @@ export const Editor = ({ kegiatan }: EditorProps) => {
 				},
 				placeholder: 'Ketik di sini untuk menulis postingan Anda...',
 				inlineToolbar: true,
-				data: body.content,
-				// data: { blocks: [] },
+				data: { blocks: [] },
 				tools: {
 					header: Header,
 					linkTool: {
@@ -175,10 +167,10 @@ export const Editor = ({ kegiatan }: EditorProps) => {
 		const payload: KegiatanCreationRequest = {
 			title: data.title,
 			content: blocks,
-			puraId: kegiatan.puraId,
+			puraId,
 		};
 
-		editKegiatan(payload);
+		createKegiatan(payload);
 	}
 
 	if (!isMounted) {
@@ -188,7 +180,7 @@ export const Editor = ({ kegiatan }: EditorProps) => {
 	const { ref: titleRef, ...rest } = register('title');
 
 	return (
-		<div className='w-full p-4 bg-zinc-50 rounded-lg border border-zinc-200'>
+		<div className='w-full p-4 border rounded-lg bg-zinc-50 border-zinc-200'>
 			<form
 				id='pura-kegiatan-form'
 				className='w-fit'
@@ -203,12 +195,12 @@ export const Editor = ({ kegiatan }: EditorProps) => {
 						}}
 						{...rest}
 						placeholder='Judul'
-						className='w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none'
+						className='w-full overflow-hidden text-5xl font-bold bg-transparent appearance-none resize-none focus:outline-none'
 					/>
 					<div id='editor' className='min-h-[500px]' />
 					<p className='text-sm text-gray-500'>
 						Gunakan{' '}
-						<kbd className='rounded-md border bg-muted px-1 text-xs uppercase'>
+						<kbd className='px-1 text-xs uppercase border rounded-md bg-muted'>
 							Tab
 						</kbd>{' '}
 						untuk membuka menu perintah

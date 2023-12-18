@@ -4,7 +4,7 @@ import { Kegiatan, User } from '@prisma/client';
 import { authOptions } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { getAuthSession } from '@/lib/auth';
-import { Editor } from '@/components/Editor';
+import { EditorEditKegiatan } from '@/components/EditorEditKegiatan';
 import { Button } from '@/components/ui/Button';
 
 async function getKegiatanForUser(
@@ -38,19 +38,19 @@ export default async function EditorPage({ params }: EditorPageProps) {
 	return (
 		<div className='flex flex-col items-start gap-6'>
 			{/* heading */}
-			<div className='border-b border-gray-200 pb-5'>
-				<div className='-ml-2 -mt-2 flex flex-wrap items-baseline'>
-					<h3 className='ml-2 mt-2 text-base font-semibold leading-6 text-gray-900'>
+			<div className='pb-5 border-b border-gray-200'>
+				<div className='flex flex-wrap items-baseline -mt-2 -ml-2'>
+					<h3 className='mt-2 ml-2 text-base font-semibold leading-6 text-gray-900'>
 						Buat postingan
 					</h3>
-					<p className='ml-2 mt-1 truncate text-sm text-gray-500'>
+					<p className='mt-1 ml-2 text-sm text-gray-500 truncate'>
 						di {params.puraId}
 					</p>
 				</div>
 			</div>
 
 			{/* form */}
-			<Editor
+			<EditorEditKegiatan
 				kegiatan={{
 					id: kegiatan.id,
 					title: kegiatan.title,
@@ -59,7 +59,7 @@ export default async function EditorPage({ params }: EditorPageProps) {
 				}}
 			/>
 
-			<div className='w-full flex justify-end'>
+			<div className='flex justify-end w-full'>
 				<Button type='submit' className='w-full' form='pura-kegiatan-form'>
 					Kegiatan
 				</Button>

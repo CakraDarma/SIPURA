@@ -10,22 +10,19 @@ import { z } from 'zod';
 
 import { toast } from '@/hooks/use-toast';
 import { uploadFiles } from '@/lib/uploadthing';
-import {
-	KegiatanCreationRequest,
-	kegiatanValidator,
-} from '@/lib/validators/kegiatan';
-import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
+import { kegiatanValidator } from '@/lib/validators/kegiatan';
 
 import '@/styles/editor.css';
+import { KontenPuraCreationRequest } from '@/lib/validators/pura';
 
 type FormData = z.infer<typeof kegiatanValidator>;
-
-interface EditorProps {
-	puraId: string;
+interface EditorCreatePuraProps {
+	updateParentData: (data: { title: string; content?: any }) => void;
 }
 
-export const Editor2 = ({ puraId }: EditorProps) => {
+export const EditorCreatePura = ({
+	updateParentData,
+}: EditorCreatePuraProps) => {
 	const {
 		register,
 		handleSubmit,
@@ -33,7 +30,6 @@ export const Editor2 = ({ puraId }: EditorProps) => {
 	} = useForm<FormData>({
 		resolver: zodResolver(kegiatanValidator),
 		defaultValues: {
-			puraId,
 			title: '',
 			content: null,
 		},
@@ -41,36 +37,7 @@ export const Editor2 = ({ puraId }: EditorProps) => {
 
 	const ref = useRef<EditorJS>();
 	const _titleRef = useRef<HTMLTextAreaElement>(null);
-	const router = useRouter();
 	const [isMounted, setIsMounted] = useState<boolean>(false);
-	const pathname = usePathname();
-
-	const { mutate: createKegiatan } = useMutation({
-		mutationFn: async ({ title, content, puraId }: KegiatanCreationRequest) => {
-			const payload: KegiatanCreationRequest = { title, content, puraId };
-			const { data } = await axios.post('/api/pura/kegiatan', payload);
-			return data;
-		},
-		onError: () => {
-			return toast({
-				title: 'Terjadi kesalahan.',
-				description:
-					'Kegiatan Anda tidak berhasil dipublikasikan. Silakan coba lagi.',
-				variant: 'destructive',
-			});
-		},
-		onSuccess: () => {
-			// turn pathname /r/mycommunity/submit into /r/mycommunity
-			const newPathname = pathname.split('/').slice(0, -1).join('/');
-			router.push(newPathname);
-
-			router.refresh();
-
-			return toast({
-				description: 'Kegiatan Anda berhasil dipublikasikan.',
-			});
-		},
-	});
 
 	const initializeEditor = useCallback(async () => {
 		const EditorJS = (await import('@editorjs/editorjs')).default;
@@ -165,13 +132,12 @@ export const Editor2 = ({ puraId }: EditorProps) => {
 	async function onSubmit(data: FormData) {
 		const blocks = await ref.current?.save();
 
-		const payload: KegiatanCreationRequest = {
+		const payload: KontenPuraCreationRequest = {
 			title: data.title,
 			content: blocks,
-			puraId,
 		};
 
-		createKegiatan(payload);
+		updateParentData(payload);
 	}
 
 	if (!isMounted) {
@@ -181,7 +147,7 @@ export const Editor2 = ({ puraId }: EditorProps) => {
 	const { ref: titleRef, ...rest } = register('title');
 
 	return (
-		<div className='w-full p-4 bg-zinc-50 rounded-lg border border-zinc-200'>
+		<div className='w-full p-4 border rounded-lg bg-zinc-50 border-zinc-200'>
 			<form
 				id='pura-kegiatan-form'
 				className='w-fit'
@@ -196,12 +162,12 @@ export const Editor2 = ({ puraId }: EditorProps) => {
 						}}
 						{...rest}
 						placeholder='Judul'
-						className='w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none'
+						className='w-full overflow-hidden text-5xl font-bold bg-transparent appearance-none resize-none focus:outline-none'
 					/>
 					<div id='editor' className='min-h-[500px]' />
 					<p className='text-sm text-gray-500'>
 						Gunakan{' '}
-						<kbd className='rounded-md border bg-muted px-1 text-xs uppercase'>
+						<kbd className='px-1 text-xs uppercase border rounded-md bg-muted'>
 							Tab
 						</kbd>{' '}
 						untuk membuka menu perintah

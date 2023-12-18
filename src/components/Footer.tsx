@@ -11,20 +11,20 @@ const Footer = () => {
 						<div className='inline-flex flex-col items-start justify-start gap-6 max-w-[80%]'>
 							<div className='flex items-center justify-center gap-3'>
 								<Icons.logo />
-								<h2 className=' text-2xl font-medium leading-[38.40px] flex'>
+								<h2 className=' text-2xl font-medium leading-[38.40px] flex font-heading'>
 									SIJALAN
 								</h2>
 							</div>
-							<p className='text-base font-normal leading-normal '>
+							<p className='text-base font-normal leading-normal font-sans'>
 								Sistem informasi dan virtual tour Pura menghadirkan kelestarian
-								Pura dalam bentuk digital melibatkan pengguna dalam pengalaman
-								interaktif yang mendalam.
+								Pura dalam bentuk digital memberikan pengalaman interaktif
+								kepada pengguna.
 							</p>
 						</div>
 						<div className='inline-flex flex-col items-start justify-start gap-6'>
-							<h3 className=' text-2xl font-medium leading-[28.80px]'>
+							<h2 className=' text-2xl font-medium leading-[28.80px] font-heading'>
 								Informasi terkait
-							</h3>
+							</h2>
 							{footConfig?.length ? (
 								<div className='flex flex-col items-start justify-center gap-4'>
 									{footConfig?.map((item, index) => (
@@ -32,7 +32,7 @@ const Footer = () => {
 											key={index}
 											href={item.href}
 											className={
-												'text-sm font-light leading-normal hover:font-semibold'
+												'text-sm font-light leading-normal hover:font-semibold font-sans'
 											}
 										>
 											{item.title}
@@ -43,7 +43,7 @@ const Footer = () => {
 						</div>
 					</div>
 				</div>
-				<div className=' text-xs font-medium leading-[18px] py-3'>
+				<div className=' text-xs font-medium leading-[18px] py-3 font-sans'>
 					© 2023 Website By Information Technology Universitas Udayana
 				</div>
 			</div>

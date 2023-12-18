@@ -87,6 +87,7 @@ model Pura {
   alamat       String?
   piodalan     String?
   kategori     CategoryPura?
+  thumbnail    String?
 
   user         User?         @relation(fields: [userId], references: [id])
   kegiatans    Kegiatan[]

@@ -20,14 +20,14 @@ export const dashboardConfig: DashboardConfig = {
 		},
 	],
 	dashboardNav: [
-		{
-			title: 'User',
-			href: '#',
-		},
-		{
-			title: 'Project',
-			href: '#',
-		},
+		// {
+		// 	title: 'User',
+		// 	href: '#',
+		// },
+		// {
+		// 	title: 'Project',
+		// 	href: '#',
+		// },
 	],
 	sidebarNav: [
 		{

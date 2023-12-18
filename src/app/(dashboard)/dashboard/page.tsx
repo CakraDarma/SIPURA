@@ -33,16 +33,15 @@ export default async function DashboardPage() {
 	return (
 		<div className='container flex flex-col h-full space-y-6 max-w-7xl'>
 			<DashboardShell>
-				<div className='ml-6'>
-					<DashboardHeader
-						heading='Dashboard'
-						text='Kelola semua aspek terkait dengan Pura dalam satu lokasi yang
+				<DashboardHeader
+					heading='Dashboard'
+					text='Kelola semua aspek terkait dengan Pura dalam satu lokasi yang
 						nyaman.'
-					/>
-				</div>
+				/>
+
 				<div>
 					{pura?.length ? (
-						<div className='flex flex-col items-center justify-center gap-6 md:flex-row'>
+						<div className='flex flex-col flex-wrap items-center justify-center gap-6 md:flex-row'>
 							{pura.map((pura, index) => (
 								<CardPura key={index} pura={pura} />
 							))}
@@ -55,7 +54,6 @@ export default async function DashboardPage() {
 								Anda belum memiliki Pura yang tersedia. Silahkan tambahkan Pura
 								terlebih dahulu
 							</EmptyPlaceholder.Description>
-							{/* <PostCreateButton variant='outline' /> */}
 						</EmptyPlaceholder>
 					)}
 				</div>
