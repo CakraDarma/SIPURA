@@ -41,7 +41,7 @@ export default async function DashboardPage() {
 
 				<div>
 					{pura?.length ? (
-						<div className='flex flex-col flex-wrap items-center justify-center gap-6 md:flex-row'>
+						<div className='flex flex-col flex-wrap items-center justify-center gap-6 mb-10 md:flex-row'>
 							{pura.map((pura, index) => (
 								<CardPura key={index} pura={pura} />
 							))}

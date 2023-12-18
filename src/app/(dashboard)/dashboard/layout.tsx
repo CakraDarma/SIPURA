@@ -52,7 +52,7 @@ export default async function DashboardLayout({
 			<main className='flex flex-col flex-1 w-full mt-24 overflow-hidden'>
 				{children}
 			</main>
-			<Footer />
+			{/* <Footer /> */}
 		</div>
 	);
 }

@@ -1,10 +1,11 @@
 import { Pura } from '@prisma/client';
 import Image from 'next/image';
 import Link from 'next/link';
+import PuraOperations from './PuraOperations';
 
 interface CardPuraProps extends React.HTMLAttributes<HTMLDivElement> {
 	// pick is utility typescript
-	pura: Pick<Pura, 'name'>;
+	pura: Pick<Pura, 'name' | 'id'>;
 }
 
 const CardPura = ({ pura }: CardPuraProps) => {
@@ -31,6 +32,9 @@ const CardPura = ({ pura }: CardPuraProps) => {
 					<h1 className='text-sm font-light text-gray-200 shadow-xl'>
 						Desa Besakih, Kecamatan Rendang, Kabupaten Karangasem
 					</h1>
+					<div className='flex justify-end w-[90%] mr-32'>
+						<PuraOperations pura={{ id: pura.id, name: pura.name }} />
+					</div>
 				</div>
 			</div>
 		</Link>
