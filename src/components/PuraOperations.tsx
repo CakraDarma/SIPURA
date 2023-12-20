@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { useRouter, useParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Pura } from '@prisma/client';
 
 import {
@@ -34,9 +34,9 @@ interface PuraOperationsProps {
 export default function PuraOperations({ pura }: PuraOperationsProps) {
 	const router = useRouter();
 	const [showDeleteAlert, setShowDeleteAlert] = React.useState<boolean>(false);
-	const params = useParams();
 
 	const { mutate: deletePura, isLoading } = useMutation({
+		// puraId dari props
 		mutationFn: async (puraId: string) => {
 			console.log(puraId);
 			const { data } = await axios.delete(`/api/pura/${puraId}`);

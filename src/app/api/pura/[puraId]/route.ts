@@ -44,8 +44,6 @@ export async function PATCH(
 			},
 		});
 
-		console.log(userRole);
-
 		if (!userRole) {
 			return new Response('Access Denied', { status: 403 });
 		}
@@ -116,7 +114,7 @@ export async function DELETE(
 
 		await db.pura.delete({
 			where: {
-				id: params.puraId,
+				id: params.puraId as string,
 			},
 		});
 
