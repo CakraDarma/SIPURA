@@ -86,11 +86,11 @@ export default function FormCreatePura() {
 				variant: 'destructive',
 			});
 		},
-		onSuccess: () => {
+		onSuccess: (res) => {
 			toast({
 				description: 'Berhasil menambahkan Pura',
 			});
-			router.push(`/dashboard`);
+			router.push(`/dashboard/${res}`);
 		},
 	});
 

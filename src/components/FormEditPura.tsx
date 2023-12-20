@@ -117,7 +117,7 @@ export default function FormEditPura({ pura }: FormEditPuraProps) {
 			toast({
 				description: 'Berhasil menyunting Pura',
 			});
-			router.push(`/dashboard`);
+			router.push(`/dashboard/${pura.name}`);
 		},
 	});
 
@@ -235,7 +235,6 @@ export default function FormEditPura({ pura }: FormEditPuraProps) {
 			tahunBerdiri: data.tahunBerdiri,
 			thumbnail: data.thumbnail,
 		};
-		console.log(payload);
 		createPura(payload);
 	}
 
@@ -401,7 +400,6 @@ export default function FormEditPura({ pura }: FormEditPuraProps) {
 							onChange={(file) => {
 								setFile(file);
 								setValue('thumbnail', file);
-								console.log(getValues('thumbnail'));
 							}}
 						/>
 					</div>
