@@ -38,6 +38,7 @@ export default function PuraOperations({ pura }: PuraOperationsProps) {
 
 	const { mutate: deletePura, isLoading } = useMutation({
 		mutationFn: async (puraId: string) => {
+			console.log(puraId);
 			const { data } = await axios.delete(`/api/pura/${puraId}`);
 			return data;
 		},
@@ -67,7 +68,7 @@ export default function PuraOperations({ pura }: PuraOperationsProps) {
 				<DropdownMenuContent align='end'>
 					<DropdownMenuItem>
 						<Link
-							href={`/dashboard/${params.puraId}/edit`}
+							href={`/dashboard/pura/${pura.name}/edit`}
 							className='flex w-full'
 						>
 							Sunting

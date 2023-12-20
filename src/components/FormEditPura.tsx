@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { toast } from '@/hooks/use-toast';
 import { useCustomToasts } from '@/hooks/use-custom-toasts';
 import { PuraValidator } from '@/lib/validators/pura';
@@ -11,34 +11,35 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Button } from './ui/Button';
-import { CategoryPura } from '@prisma/client';
-import { EditorCreatePura } from './EditorCreatePura';
+import { uploadFiles } from '@/lib/uploadthing';
+import EditorJS from '@editorjs/editorjs';
+import { kategoriPura } from '@/config/form';
+import { SingleFileDropzone } from './SingleFileDropzone';
+import { urlToBlobFile } from '@/lib/utils';
 
 type FormData = z.infer<typeof PuraValidator>;
 
-export default function FormCreatePura() {
-	const listKategori = [
-		{
-			id: 1,
-			kategori: 'Kawitan',
-			value: 'KAWITAN',
-		},
-		{
-			id: 2,
-			kategori: 'Swagina',
-			value: 'SWAGINA',
-		},
-		{
-			id: 3,
-			kategori: 'Kahyangan Desa',
-			value: 'KAHYANGAN_DESA',
-		},
-		{
-			id: 4,
-			kategori: 'Kahyangan Jagat',
-			value: 'KAHYANGAN_JAGAT',
-		},
-	];
+interface FormEditPuraProps {
+	pura: any;
+}
+export default function FormEditPura({ pura }: FormEditPuraProps) {
+	const [file, setFile] = useState<File>();
+	const listKategori = kategoriPura;
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const fetchedFile = await urlToBlobFile(pura.thumbnail, pura.thumbnail);
+				setFile(fetchedFile);
+				setValue('thumbnail', fetchedFile);
+			} catch (error) {
+				// Tangani kesalahan jika terjadi
+				console.error('Terjadi kesalahan:', error);
+			}
+		};
+
+		fetchData();
+	}, []);
 
 	const router = useRouter();
 	const { loginToast } = useCustomToasts();
@@ -47,12 +48,21 @@ export default function FormCreatePura() {
 		register,
 		formState: { errors },
 		setValue,
+		getValues,
 	} = useForm<FormData>({
 		resolver: zodResolver(PuraValidator),
-		defaultValues: {},
+		defaultValues: {
+			name: pura.name,
+			tahunBerdiri: pura.tahunBerdiri,
+			alamat: pura.alamat,
+			piodalan: pura.piodalan,
+			kategori: pura.kategori,
+			konten: pura.konten,
+			// thumbnail: file,
+		},
 	});
 
-	const { mutate: postPura, isLoading } = useMutation({
+	const { mutate: createPura, isLoading } = useMutation({
 		mutationFn: async ({
 			alamat,
 			kategori,
@@ -60,7 +70,9 @@ export default function FormCreatePura() {
 			piodalan,
 			tahunBerdiri,
 			konten,
+			thumbnail,
 		}: FormData) => {
+			const [res] = await uploadFiles([thumbnail], 'imageUploader');
 			const payload = {
 				alamat,
 				kategori,
@@ -68,8 +80,9 @@ export default function FormCreatePura() {
 				piodalan,
 				tahunBerdiri,
 				konten,
+				thumbnail: res.fileUrl,
 			};
-			const { data } = await axios.post('/api/pura', payload);
+			const { data } = await axios.patch(`/api/pura/${pura.id}`, payload);
 			return data as string;
 		},
 		onError: (err) => {
@@ -94,25 +107,140 @@ export default function FormCreatePura() {
 					return loginToast();
 				}
 			}
-
 			toast({
 				title: 'Terjadi kesalahan.',
 				description: 'Tidak dapat membuat pura.',
 				variant: 'destructive',
 			});
 		},
-		onSuccess: (data) => {
-			console.log(data);
+		onSuccess: () => {
+			toast({
+				description: 'Berhasil menyunting Pura',
+			});
 			router.push(`/dashboard`);
 		},
 	});
 
-	function receiveContent(data: { title: string; content?: any }) {
-		console.log(data);
-		setValue('konten', data.content);
+	// editor
+	const ref = useRef<EditorJS>();
+	const _titleRef = useRef<HTMLTextAreaElement>(null);
+	const [isMounted, setIsMounted] = useState<boolean>(false);
+
+	const initializeEditor = useCallback(async () => {
+		const EditorJS = (await import('@editorjs/editorjs')).default;
+		const Header = (await import('@editorjs/header')).default;
+		const Embed = (await import('@editorjs/embed')).default;
+		const Table = (await import('@editorjs/table')).default;
+		const List = (await import('@editorjs/list')).default;
+		const LinkTool = (await import('@editorjs/link')).default;
+		const ImageTool = (await import('@editorjs/image')).default;
+
+		const body = PuraValidator.parse(pura);
+
+		if (!ref.current) {
+			const editor = new EditorJS({
+				holder: 'editor',
+				onReady() {
+					ref.current = editor;
+				},
+				placeholder: 'Ketik di sini untuk menulis...',
+				inlineToolbar: true,
+				data: body.konten,
+				tools: {
+					header: Header,
+					linkTool: {
+						class: LinkTool,
+						config: {
+							endpoint: '/api/link',
+						},
+					},
+					image: {
+						class: ImageTool,
+						config: {
+							uploader: {
+								async uploadByFile(file: File) {
+									// upload to uploadthing
+									const [res] = await uploadFiles([file], 'imageUploader');
+
+									return {
+										success: 1,
+										file: {
+											url: res.fileUrl,
+										},
+									};
+								},
+							},
+						},
+					},
+					list: List,
+					table: Table,
+					embed: Embed,
+				},
+			});
+		}
+	}, []);
+
+	useEffect(() => {
+		if (Object.keys(errors).length) {
+			for (const [_key, value] of Object.entries(errors)) {
+				value;
+				toast({
+					title: 'Terjadi kesalahan.',
+					description: (value as { message: string }).message,
+					variant: 'destructive',
+				});
+			}
+		}
+	}, [errors]);
+
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			setIsMounted(true);
+		}
+	}, []);
+
+	useEffect(() => {
+		const init = async () => {
+			await initializeEditor();
+
+			setTimeout(() => {
+				_titleRef?.current?.focus();
+			}, 0);
+		};
+
+		if (isMounted) {
+			init();
+
+			return () => {
+				ref.current?.destroy();
+				ref.current = undefined;
+			};
+		}
+	}, [isMounted, initializeEditor]);
+
+	if (!isMounted) {
+		return null;
 	}
+
+	// submit file
+	async function onSubmit(data: FormData) {
+		const blocks = await ref.current?.save();
+
+		const payload: FormData = {
+			konten: blocks,
+			alamat: data.alamat,
+			kategori: data.kategori,
+			name: data.name,
+			piodalan: data.piodalan,
+			tahunBerdiri: data.tahunBerdiri,
+			thumbnail: data.thumbnail,
+		};
+		console.log(payload);
+		createPura(payload);
+	}
+
 	return (
-		<form onSubmit={handleSubmit((e) => postPura(e))}>
+		<form onSubmit={handleSubmit(onSubmit)}>
 			<div className='flex flex-wrap -mx-3'>
 				<div className='w-full px-3 sm:w-1/2'>
 					<div className='mb-5'>
@@ -215,8 +343,7 @@ export default function FormCreatePura() {
 						</label>
 						<select
 							id='kategori'
-							// @ts-ignore
-							onChange={(e) => setValue('kategori', e.target.value)}
+							{...register('kategori')}
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						>
 							<option value='' className='text-gray-500'>
@@ -237,13 +364,48 @@ export default function FormCreatePura() {
 				</div>
 			</div>
 			<div className='mb-5'>
+				{/* editor */}
 				<label
 					htmlFor='konten'
 					className='mb-3 block text-base font-medium text-[#07074D]'
 				>
-					Sejarah<span className='text-red-500'>*</span>
+					Deskripsi Pura<span className='text-red-500'>*</span>
 				</label>
-				<EditorCreatePura updateParentData={receiveContent} />
+				<div className='mx-auto w-[800px] prose prose-stone dark:prose-invert border shadow-sm'>
+					<div id='editor' className='min-h-[500px] ' />
+					<p className='text-sm text-gray-500'>
+						Gunakan{' '}
+						<kbd className='px-1 text-xs uppercase border rounded-md bg-muted'>
+							Tab
+						</kbd>{' '}
+						untuk membuka menu perintah
+					</p>
+				</div>
+			</div>
+			<div className='mb-5'>
+				<label
+					htmlFor='thumbnail'
+					className='mb-3 block text-base font-medium text-[#07074D]'
+				>
+					Thumbnail<span className='text-red-500'>*</span>
+				</label>
+				<div className='flex flex-col items-center justify-center w-full '>
+					<div className='w-fit'>
+						<SingleFileDropzone
+							width={200}
+							height={200}
+							value={getValues('thumbnail')}
+							dropzoneOptions={{
+								maxSize: 1024 * 1024 * 1, // 1MB
+							}}
+							onChange={(file) => {
+								setFile(file);
+								setValue('thumbnail', file);
+								console.log(getValues('thumbnail'));
+							}}
+						/>
+					</div>
+				</div>
 			</div>
 			<div className='flex justify-end gap-4'>
 				<Button

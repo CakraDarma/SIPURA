@@ -47,6 +47,13 @@ export async function POST(req: Request) {
 			},
 		});
 
+		await db.userRole.create({
+			data: {
+				userId: session.user.id,
+				puraId: pura.id,
+			},
+		});
+
 		return new Response(pura.name);
 	} catch (error) {
 		if (error instanceof z.ZodError) {

@@ -63,3 +63,11 @@ export function formatDate(input: string | number): string {
 		year: 'numeric',
 	});
 }
+
+export async function urlToBlobFile(fileUrl: string, fileKey: string) {
+	const response = await fetch(fileUrl);
+	const blob = await response.blob();
+
+	// Buat objek File dari Blob
+	return new File([blob], fileKey, { type: blob.type });
+}
