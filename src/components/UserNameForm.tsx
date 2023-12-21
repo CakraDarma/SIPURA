@@ -43,7 +43,7 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
 		},
 	});
 
-	const { mutate: updateUsername, isLoading } = useMutation({
+	const { mutate: updateUsername, isPending } = useMutation({
 		mutationFn: async ({ name }: FormData) => {
 			const payload: FormData = { name };
 
@@ -108,7 +108,7 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
 					</div>
 				</CardContent>
 				<CardFooter>
-					<Button isLoading={isLoading}>Simpan</Button>
+					<Button isLoading={isPending}>Simpan</Button>
 				</CardFooter>
 			</Card>
 		</form>
