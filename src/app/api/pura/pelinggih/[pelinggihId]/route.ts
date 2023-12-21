@@ -96,8 +96,6 @@ export async function DELETE(
 			},
 		});
 
-		console.log(userRole);
-
 		if (!userRole) {
 			return new Response('Access Denied', { status: 403 });
 		}

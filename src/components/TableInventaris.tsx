@@ -19,7 +19,6 @@ interface TableDataProps {
 	>[];
 }
 export default function TableInventaris({ data }: TableDataProps) {
-	console.log(data);
 	return (
 		<Table>
 			<TableCaption>Data Pelinggih Pura.</TableCaption>

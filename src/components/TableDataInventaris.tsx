@@ -41,7 +41,6 @@ interface TableDataProps {
 }
 
 export default function TableDataInventaris({ data, columns }: TableDataProps) {
-	console.log(data);
 	const [sorting, setSorting] = React.useState<SortingState>([]);
 	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
 		[]

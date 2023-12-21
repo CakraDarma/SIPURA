@@ -28,7 +28,6 @@ const page = async ({ params }: PageProps) => {
 		},
 	});
 
-	console.log(pura);
 	if (!pura) return notFound();
 	return (
 		<DashboardShell>

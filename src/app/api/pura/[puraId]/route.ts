@@ -18,8 +18,6 @@ export async function PATCH(
 
 		const body = await req.json();
 
-		console.log(body);
-
 		const {
 			alamat,
 			kategori,
@@ -110,7 +108,6 @@ export async function DELETE(
 		if (!userRole) {
 			return new Response('Access Denied', { status: 403 });
 		}
-		console.log(params.puraId);
 
 		await db.pura.delete({
 			where: {
