@@ -62,7 +62,7 @@ export default function FormEditPura({ pura }: FormEditPuraProps) {
 		},
 	});
 
-	const { mutate: createPura, isLoading } = useMutation({
+	const { mutate: createPura, isPending } = useMutation({
 		mutationFn: async ({
 			alamat,
 			kategori,
@@ -407,13 +407,13 @@ export default function FormEditPura({ pura }: FormEditPuraProps) {
 			</div>
 			<div className='flex justify-end gap-4'>
 				<Button
-					disabled={isLoading}
+					disabled={isPending}
 					variant='subtle'
 					onClick={() => router.back()}
 				>
 					Batalkan
 				</Button>
-				<Button isLoading={isLoading}>Buat Pura</Button>
+				<Button isLoading={isPending}>Buat Pura</Button>
 			</div>
 		</form>
 	);
