@@ -38,7 +38,7 @@ export default function KegiatanOperations({
 	const [showDeleteAlert, setShowDeleteAlert] = React.useState<boolean>(false);
 	const params = useParams();
 
-	const { mutate: deleteKegiatan, isLoading } = useMutation({
+	const { mutate: deleteKegiatan, isPending } = useMutation({
 		mutationFn: async (kegiatanId: string) => {
 			const { data } = await axios.delete(`/api/pura/kegiatan/${kegiatanId}`);
 			return data;
@@ -78,7 +78,10 @@ export default function KegiatanOperations({
 					<DropdownMenuSeparator />
 					<DropdownMenuItem
 						className='flex items-center cursor-pointer text-destructive focus:text-destructive'
-						onSelect={() => setShowDeleteAlert(true)}
+						onSelect={() => {
+							setShowDeleteAlert(true);
+							document.body.style.pointerEvents = '';
+						}}
 					>
 						Hapus
 					</DropdownMenuItem>
@@ -103,7 +106,7 @@ export default function KegiatanOperations({
 							}}
 							className='bg-red-600 focus:ring-red-600'
 						>
-							{isLoading ? (
+							{isPending ? (
 								<Icons.spinner className='w-4 h-4 mr-2 animate-spin' />
 							) : (
 								<Icons.trash className='w-4 h-4 mr-2' />

@@ -14,6 +14,7 @@ export const PelinggihValidator = z.object({
 	}),
 	tahunPeninggalan: z.number(),
 	thumbnail: z.any(),
+	puraId: z.string(),
 });
 
 export const PratimaValidator = z.object({
@@ -46,4 +47,5 @@ export const PratimaValidator = z.object({
 		}),
 	tahunPeninggalan: z.number(),
 	thumbnail: z.any(),
+	puraId: z.string(),
 });

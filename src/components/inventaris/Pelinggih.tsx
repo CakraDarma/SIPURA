@@ -1,12 +1,12 @@
-import { Link } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
-import { buttonVariants } from '../ui/Button';
-import { db } from '@/lib/db';
-import ColumnsInventaris from '../ColumnsInventaris';
-import TableDataInventaris from '../TableDataInventaris';
+'use client';
+
+import React, { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { Pura, Pelinggih } from '@prisma/client'; // Pastikan path sesuai dengan struktur folder Anda
+import { Pura, Pelinggih } from '@prisma/client';
+import TableInventaris from '../TableInventaris';
+import { useParams } from 'next/navigation';
+import { toast } from '@/hooks/use-toast';
 
 type PuraWithPelinggihs = Pura & {
 	pelinggihs: Pelinggih[];
@@ -15,29 +15,35 @@ type PuraWithPelinggihs = Pura & {
 export default function Pelinggih() {
 	const [data, setData] = useState<any>();
 	const [loading, setLoading] = useState(true);
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const response = await axios.get('/api/pelinggih/cakra');
-				const datas: PuraWithPelinggihs = response.data;
-				const pelinggihPura = datas?.pelinggihs.map(
-					({ id, tahunPeninggalan, thumbnail, createdAt, nama }) => ({
-						id,
-						nama,
-						tahunPeninggalan,
-						thumbnail,
-						createdAt,
-					})
-				);
-				setData(pelinggihPura);
-			} catch (error) {
-				console.log(error);
-			} finally {
-				setLoading(false);
-			}
-		};
-		fetchData();
+	const params = useParams();
+
+	const fetchData = useCallback(async () => {
+		try {
+			const response = await axios.get(`/api/pelinggih/${params.puraId}`);
+			const datas: PuraWithPelinggihs = response.data;
+			const pelinggihPura = datas?.pelinggihs.map(
+				({ id, tahunPeninggalan, thumbnail, createdAt, nama }) => ({
+					id,
+					nama,
+					tahunPeninggalan,
+					thumbnail,
+					createdAt,
+				})
+			);
+			setData(pelinggihPura);
+		} catch (error) {
+			return toast({
+				title: 'Gagal Menampilkan Data.',
+				description: 'Silakan coba beberapa saat kembali.',
+				variant: 'destructive',
+			});
+		}
+		setLoading(false);
 	}, []);
+
+	useEffect(() => {
+		fetchData();
+	}, [fetchData]);
 
 	return (
 		<div className='py-5 px-[50px] w-full mx-auto mt-5 bg-background container '>
@@ -46,8 +52,7 @@ export default function Pelinggih() {
 					<p>Loading...</p>
 				) : (
 					<div>
-						<p>Data: {JSON.stringify(data)}</p>
-						<TableDataInventaris data={data} columns={ColumnsInventaris} />
+						<TableInventaris data={data} />
 					</div>
 				)}
 			</div>

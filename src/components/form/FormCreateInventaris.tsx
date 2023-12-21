@@ -6,7 +6,7 @@ import { useCustomToasts } from '@/hooks/use-custom-toasts';
 import { PelinggihValidator } from '@/lib/validators/inventaris';
 import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -20,6 +20,7 @@ export default function FormCreateInventaris() {
 	const [file, setFile] = useState<File>();
 
 	const router = useRouter();
+	const params = useParams();
 	const { loginToast } = useCustomToasts();
 	const {
 		handleSubmit,
@@ -28,7 +29,9 @@ export default function FormCreateInventaris() {
 		setValue,
 	} = useForm<FormData>({
 		resolver: zodResolver(PelinggihValidator),
-		defaultValues: {},
+		defaultValues: {
+			puraId: params.puraId,
+		},
 	});
 
 	const { mutate: createPelinggih, isPending } = useMutation({
@@ -37,6 +40,7 @@ export default function FormCreateInventaris() {
 			tahunPeninggalan,
 			konten,
 			thumbnail,
+			puraId,
 		}: FormData) => {
 			const [res] = await uploadFiles([thumbnail], 'imageUploader');
 			const payload = {
@@ -44,8 +48,9 @@ export default function FormCreateInventaris() {
 				tahunPeninggalan,
 				konten,
 				thumbnail: res.fileUrl,
+				puraId,
 			};
-			const { data } = await axios.post('/api/inventaris/pelinggih', payload);
+			const { data } = await axios.post('/api/pura/pelinggih', payload);
 			return data as string;
 		},
 		onError: (err) => {
@@ -76,7 +81,6 @@ export default function FormCreateInventaris() {
 			router.push(`/dashboard/${res}/inventaris`);
 		},
 	});
-
 	// submit file
 	async function onSubmit(data: FormData) {
 		const payload: FormData = {
@@ -84,6 +88,7 @@ export default function FormCreateInventaris() {
 			tahunPeninggalan: data.tahunPeninggalan,
 			konten: data.konten,
 			thumbnail: data.thumbnail,
+			puraId: params.puraId,
 		};
 		createPelinggih(payload);
 	}
@@ -94,17 +99,17 @@ export default function FormCreateInventaris() {
 				<div className='w-full px-3 sm:w-1/2'>
 					<div className='mb-5'>
 						<label
-							htmlFor='name'
+							htmlFor='nama'
 							className='mb-3 block text-base font-medium text-[#07074D]'
 						>
-							Nama Pura<span className='text-red-500'>*</span>
+							Nama Pelinggih<span className='text-red-500'>*</span>
 						</label>
 						<input
 							{...register('nama')}
 							type='text'
-							name='name'
-							id='name'
-							placeholder='Masukan nama Pelinggih'
+							name='nama'
+							id='nama'
+							placeholder='Masukan tahun pelinggih dibangun'
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						/>
 						{errors?.nama && (

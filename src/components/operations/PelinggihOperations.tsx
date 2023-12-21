@@ -2,8 +2,8 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { Pura } from '@prisma/client';
+import { useParams } from 'next/navigation';
+import { Pelinggih } from '@prisma/client';
 
 import {
 	AlertDialog,
@@ -27,32 +27,34 @@ import { Icons } from '@/components/Icons';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 
-interface PuraOperationsProps {
-	pura: Pick<Pura, 'id' | 'name'>;
+interface PelinggihOperationsProps {
+	pelinggih: Pick<Pelinggih, 'id'>;
 }
 
-export default function PuraOperations({ pura }: PuraOperationsProps) {
-	const router = useRouter();
+export default function PelinggihOperations({
+	pelinggih,
+}: PelinggihOperationsProps) {
 	const [showDeleteAlert, setShowDeleteAlert] = React.useState<boolean>(false);
+	const params = useParams();
 
-	const { mutate: deletePura, isPending } = useMutation({
-		// puraId dari props
-		mutationFn: async (puraId: string) => {
-			const { data } = await axios.delete(`/api/pura/${puraId}`);
+	const { mutate: deletePelinggih, isPending } = useMutation({
+		mutationFn: async (pelinggihId: string) => {
+			const { data } = await axios.delete(`/api/pura/pelinggih/${pelinggihId}`);
 			return data;
 		},
 		onError: () => {
 			return toast({
 				title: 'Terjadi kesalahan.',
-				description: 'Pura Anda tidak berhasil dihapus. Silakan coba lagi.',
+				description:
+					'Pelinggih Anda tidak berhasil dihapus. Silakan coba lagi.',
 				variant: 'destructive',
 			});
 		},
 		onSuccess: () => {
 			toast({
-				description: 'Pura Anda berhasil dihapus.',
+				description: 'Pelinggih Anda berhasil dihapus.',
 			});
-			router.refresh();
+			window.location.reload();
 			setShowDeleteAlert(false);
 		},
 	});
@@ -60,14 +62,14 @@ export default function PuraOperations({ pura }: PuraOperationsProps) {
 	return (
 		<>
 			<DropdownMenu>
-				<DropdownMenuTrigger className='flex items-center justify-center w-8 h-8 transition-colors rounded-md hover:bg-muted'>
+				<DropdownMenuTrigger className='flex items-center justify-center w-8 h-8 transition-colors border rounded-md hover:bg-muted'>
 					<Icons.ellipsis className='w-4 h-4' />
 					<span className='sr-only'>Open</span>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent align='end'>
 					<DropdownMenuItem>
 						<Link
-							href={`/dashboard/pura/${pura.name}/edit`}
+							href={`/dashboard/${params.puraId}/pelinggih/${pelinggih.id}/edit`}
 							className='flex w-full'
 						>
 							Sunting
@@ -89,7 +91,7 @@ export default function PuraOperations({ pura }: PuraOperationsProps) {
 				<AlertDialogContent>
 					<AlertDialogHeader>
 						<AlertDialogTitle>
-							Apakah Anda yakin ingin menghapus Pura ini?
+							Apakah Anda yakin ingin menghapus pelinggih ini?
 						</AlertDialogTitle>
 						<AlertDialogDescription>
 							Tindakan ini tidak dapat dibatalkan.
@@ -100,7 +102,7 @@ export default function PuraOperations({ pura }: PuraOperationsProps) {
 						<AlertDialogAction
 							onClick={async (event) => {
 								event.preventDefault();
-								deletePura(pura.id);
+								deletePelinggih(pelinggih.id);
 							}}
 							className='bg-red-600 focus:ring-red-600'
 						>
