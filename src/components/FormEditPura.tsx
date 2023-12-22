@@ -33,8 +33,11 @@ export default function FormEditPura({ pura }: FormEditPuraProps) {
 				setFile(fetchedFile);
 				setValue('thumbnail', fetchedFile);
 			} catch (error) {
-				// Tangani kesalahan jika terjadi
-				console.error('Terjadi kesalahan:', error);
+				return toast({
+					title: 'Gagal menampilkan data.',
+					description: 'Silakan coba beberapa saat kembali.',
+					variant: 'destructive',
+				});
 			}
 		};
 
@@ -62,7 +65,7 @@ export default function FormEditPura({ pura }: FormEditPuraProps) {
 		},
 	});
 
-	const { mutate: createPura, isPending } = useMutation({
+	const { mutate: editPura, isPending } = useMutation({
 		mutationFn: async ({
 			alamat,
 			kategori,
@@ -109,7 +112,7 @@ export default function FormEditPura({ pura }: FormEditPuraProps) {
 			}
 			toast({
 				title: 'Terjadi kesalahan.',
-				description: 'Tidak dapat membuat pura.',
+				description: 'Tidak dapat menyunting pura.',
 				variant: 'destructive',
 			});
 		},
@@ -235,7 +238,7 @@ export default function FormEditPura({ pura }: FormEditPuraProps) {
 			tahunBerdiri: data.tahunBerdiri,
 			thumbnail: data.thumbnail,
 		};
-		createPura(payload);
+		editPura(payload);
 	}
 
 	return (
