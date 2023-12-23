@@ -46,8 +46,8 @@ export const dashboardConfig: DashboardConfig = {
 			icon: 'kegiatan',
 		},
 		{
-			title: 'Inventaris',
-			href: '/inventaris',
+			title: 'Pelinggih',
+			href: '/pelinggih',
 			icon: 'inventory',
 		},
 		{

@@ -64,7 +64,13 @@ export function formatDate(input: string | number): string {
 	});
 }
 
-export async function urlToBlobFile(fileUrl: string, fileKey: string) {
+export async function urlToBlobFile(
+	fileUrl: string | null,
+	fileKey: string | null
+) {
+	if (!fileUrl || !fileKey) {
+		return;
+	}
 	const response = await fetch(fileUrl);
 	const blob = await response.blob();
 

@@ -1,40 +1,78 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { toast } from '@/hooks/use-toast';
 import { useCustomToasts } from '@/hooks/use-custom-toasts';
 import { PelinggihValidator } from '@/lib/validators/inventaris';
 import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
-import { useRouter, useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Button } from '@/ui/Button';
+import { Button } from '@/components/ui/Button';
 import { uploadFiles } from '@/lib/uploadthing';
 import { SingleFileDropzone } from '@/components/SingleFileDropzone';
+import { urlToBlobFile } from '@/lib/utils';
+import { Pelinggih } from '@prisma/client';
 
 type FormData = z.infer<typeof PelinggihValidator>;
 
-export default function FormCreateInventaris() {
+interface FormEditPelinggihProps {
+	// pelinggih: FormData;
+	// pelinggih: FormData;
+	pelinggih: Pick<
+		Pelinggih,
+		'id' | 'konten' | 'nama' | 'puraId' | 'tahunPeninggalan' | 'thumbnail'
+	>;
+}
+export default function FormEditPelinggih({
+	pelinggih,
+}: FormEditPelinggihProps) {
 	const [file, setFile] = useState<File>();
-
 	const router = useRouter();
 	const params = useParams();
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const fetchedFile = await urlToBlobFile(
+					pelinggih.thumbnail,
+					pelinggih.thumbnail
+				);
+				setFile(fetchedFile);
+				setValue('thumbnail', fetchedFile);
+			} catch (error) {
+				return toast({
+					title: 'Gagal menampilkan data.',
+					description: 'Silakan coba beberapa saat kembali.',
+					variant: 'destructive',
+				});
+			}
+		};
+
+		fetchData();
+	}, []);
+
 	const { loginToast } = useCustomToasts();
 	const {
 		handleSubmit,
 		register,
 		formState: { errors },
 		setValue,
+		getValues,
 	} = useForm<FormData>({
 		resolver: zodResolver(PelinggihValidator),
 		defaultValues: {
-			puraId: params.puraId,
+			nama: pelinggih.nama,
+			tahunPeninggalan: pelinggih.tahunPeninggalan,
+			konten: pelinggih.konten,
+			// thumbnail: pelinggih.,
+			puraId: pelinggih.puraId,
 		},
 	});
 
-	const { mutate: createPelinggih, isPending } = useMutation({
+	const { mutate: editPelinggih, isPending } = useMutation({
 		mutationFn: async ({
 			nama,
 			tahunPeninggalan,
@@ -47,10 +85,13 @@ export default function FormCreateInventaris() {
 				nama,
 				tahunPeninggalan,
 				konten,
-				thumbnail: res.fileUrl,
 				puraId,
+				thumbnail: res.fileUrl,
 			};
-			const { data } = await axios.post('/api/pura/pelinggih', payload);
+			const { data } = await axios.patch(
+				`/api/pura/pelinggih/${pelinggih.id}`,
+				payload
+			);
 			return data as string;
 		},
 		onError: (err) => {
@@ -62,25 +103,25 @@ export default function FormCreateInventaris() {
 						variant: 'destructive',
 					});
 				}
-
 				if (err.response?.status === 401) {
 					return loginToast();
 				}
 			}
-
 			toast({
 				title: 'Terjadi kesalahan.',
-				description: 'Tidak dapat membuat Pelinggih.',
+				description: 'Tidak dapat menyunting pelinggih.',
 				variant: 'destructive',
 			});
 		},
 		onSuccess: (res) => {
 			toast({
-				description: 'Berhasil menambahkan Pelinggih',
+				description: 'Berhasil menyunting Pelinggih',
 			});
-			router.push(`/dashboard/${res}/inventaris`);
+			router.refresh();
+			router.push(`/dashboard/${params.puraId}/pelinggih`);
 		},
 	});
+
 	// submit file
 	async function onSubmit(data: FormData) {
 		const payload: FormData = {
@@ -88,9 +129,9 @@ export default function FormCreateInventaris() {
 			tahunPeninggalan: data.tahunPeninggalan,
 			konten: data.konten,
 			thumbnail: data.thumbnail,
-			puraId: params.puraId,
+			puraId: pelinggih.puraId,
 		};
-		createPelinggih(payload);
+		editPelinggih(payload);
 	}
 
 	return (
@@ -157,7 +198,7 @@ export default function FormCreateInventaris() {
 					required
 					className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md h-40'
 				></textarea>
-				{errors?.konten && (
+				{errors?.konten && typeof errors.konten.message === 'string' && (
 					<p className='px-1 text-xs text-red-600'>{errors.konten.message}</p>
 				)}
 			</div>
@@ -172,7 +213,7 @@ export default function FormCreateInventaris() {
 					<SingleFileDropzone
 						width={200}
 						height={200}
-						value={file}
+						value={getValues('thumbnail')}
 						dropzoneOptions={{
 							maxSize: 1024 * 1024 * 1, // 1MB
 						}}

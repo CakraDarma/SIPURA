@@ -13,9 +13,9 @@ type PuraWithPelinggihs = Pura & {
 };
 
 export default function Pelinggih() {
+	const params = useParams();
 	const [data, setData] = useState<any>();
 	const [loading, setLoading] = useState(true);
-	const params = useParams();
 
 	const fetchData = useCallback(async () => {
 		try {

@@ -1,3 +1,4 @@
+import { json } from 'stream/consumers';
 import { z } from 'zod';
 
 export const PelinggihValidator = z.object({
@@ -9,9 +10,7 @@ export const PelinggihValidator = z.object({
 		.max(128, {
 			message: 'Nama Pelinggih tidak boleh lebih dari 128 karakter',
 		}),
-	konten: z.string().min(3, {
-		message: 'Isi konten harus lebih dari 3 karakter',
-	}),
+	konten: z.any(),
 	tahunPeninggalan: z.number(),
 	thumbnail: z.any(),
 	puraId: z.string(),

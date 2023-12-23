@@ -13,10 +13,12 @@ import { Pelinggih } from '@prisma/client';
 import PelinggihOperations from './operations/PelinggihOperations';
 
 interface TableDataProps {
-	data: Pick<
-		Pelinggih,
-		'id' | 'nama' | 'createdAt' | 'tahunPeninggalan' | 'thumbnail'
-	>[];
+	data:
+		| Pick<
+				Pelinggih,
+				'id' | 'nama' | 'createdAt' | 'tahunPeninggalan' | 'thumbnail'
+		  >[]
+		| undefined;
 }
 export default function TableInventaris({ data }: TableDataProps) {
 	return (
@@ -32,13 +34,13 @@ export default function TableInventaris({ data }: TableDataProps) {
 				</TableRow>
 			</TableHeader>
 			<TableBody>
-				{data.map((data) => (
+				{data?.map((data) => (
 					<TableRow key={data.id}>
 						<TableCell className='font-medium'>{data.nama}</TableCell>
 						<TableCell>{data.tahunPeninggalan}</TableCell>
 						<TableCell>{data.nama}</TableCell>
 						<TableCell>{data.nama}</TableCell>
-						<TableCell className=' flex justify-end'>
+						<TableCell className='flex justify-end '>
 							<PelinggihOperations pelinggih={{ id: data.id }} />
 						</TableCell>
 					</TableRow>

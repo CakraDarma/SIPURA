@@ -20,16 +20,3 @@ export const kategoriPura = [
 		value: 'KAHYANGAN_JAGAT',
 	},
 ];
-
-export const kategoriInventaris = [
-	{
-		id: 1,
-		kategori: 'Pelinggih',
-		value: 'PELINGGIH',
-	},
-	{
-		id: 2,
-		kategori: 'Pratima',
-		value: 'pratima',
-	},
-];

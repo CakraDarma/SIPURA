@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { Pelinggih } from '@prisma/client';
 
 import {
@@ -36,6 +36,7 @@ export default function PelinggihOperations({
 }: PelinggihOperationsProps) {
 	const [showDeleteAlert, setShowDeleteAlert] = React.useState<boolean>(false);
 	const params = useParams();
+	const router = useRouter();
 
 	const { mutate: deletePelinggih, isPending } = useMutation({
 		mutationFn: async (pelinggihId: string) => {
@@ -54,7 +55,8 @@ export default function PelinggihOperations({
 			toast({
 				description: 'Pelinggih Anda berhasil dihapus.',
 			});
-			window.location.reload();
+			// window.location.reload();
+			router.refresh();
 			setShowDeleteAlert(false);
 		},
 	});
