@@ -18,7 +18,7 @@ export async function PATCH(
 
 		const body = await req.json();
 
-		const { nama, puraId, tahunPeninggalan, konten, thumbnail } =
+		const { nama, puraId, tahunPeninggalan, konten, thumbnail, bahan, jenis } =
 			PratimaValidator.parse(body);
 		const session = await getAuthSession();
 
@@ -43,6 +43,8 @@ export async function PATCH(
 			},
 			data: {
 				nama,
+				bahan,
+				jenis,
 				konten,
 				thumbnail,
 				tahunPeninggalan,

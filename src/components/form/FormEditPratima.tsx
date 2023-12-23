@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from '@/hooks/use-toast';
 import { useCustomToasts } from '@/hooks/use-custom-toasts';
-import { PelinggihValidator } from '@/lib/validators/inventaris';
+import { PratimaValidator } from '@/lib/validators/inventaris';
 import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
 import { useParams, useRouter } from 'next/navigation';
@@ -14,21 +14,24 @@ import { Button } from '@/components/ui/Button';
 import { uploadFiles } from '@/lib/uploadthing';
 import { SingleFileDropzone } from '@/components/SingleFileDropzone';
 import { urlToBlobFile } from '@/lib/utils';
-import { Pelinggih } from '@prisma/client';
+import { Pratima } from '@prisma/client';
 
-type FormData = z.infer<typeof PelinggihValidator>;
+type FormData = z.infer<typeof PratimaValidator>;
 
-interface FormEditPelinggihProps {
-	// pelinggih: FormData;
-	// pelinggih: FormData;
-	pelinggih: Pick<
-		Pelinggih,
-		'id' | 'konten' | 'nama' | 'puraId' | 'tahunPeninggalan' | 'thumbnail'
+interface FormEditPratimaProps {
+	pratima: Pick<
+		Pratima,
+		| 'id'
+		| 'konten'
+		| 'nama'
+		| 'puraId'
+		| 'tahunPeninggalan'
+		| 'thumbnail'
+		| 'bahan'
+		| 'jenis'
 	>;
 }
-export default function FormEditPelinggih({
-	pelinggih,
-}: FormEditPelinggihProps) {
+export default function FormEditPratima({ pratima }: FormEditPratimaProps) {
 	const [file, setFile] = useState<File>();
 	const router = useRouter();
 	const params = useParams();
@@ -37,8 +40,8 @@ export default function FormEditPelinggih({
 		const fetchData = async () => {
 			try {
 				const fetchedFile = await urlToBlobFile(
-					pelinggih.thumbnail,
-					pelinggih.thumbnail
+					pratima.thumbnail,
+					pratima.thumbnail
 				);
 				setFile(fetchedFile);
 				setValue('thumbnail', fetchedFile);
@@ -60,24 +63,27 @@ export default function FormEditPelinggih({
 		register,
 		formState: { errors },
 		setValue,
-		getValues,
 	} = useForm<FormData>({
-		resolver: zodResolver(PelinggihValidator),
+		resolver: zodResolver(PratimaValidator),
 		defaultValues: {
-			nama: pelinggih.nama,
-			tahunPeninggalan: pelinggih.tahunPeninggalan,
-			konten: pelinggih.konten,
-			// thumbnail: pelinggih.,
-			puraId: pelinggih.puraId,
+			nama: pratima.nama,
+			tahunPeninggalan: pratima.tahunPeninggalan,
+			bahan: pratima.bahan,
+			jenis: pratima.jenis,
+			konten: pratima.konten,
+			// thumbnail: pratima.,
+			puraId: pratima.puraId,
 		},
 	});
 
-	const { mutate: editPelinggih, isPending } = useMutation({
+	const { mutate: editPratima, isPending } = useMutation({
 		mutationFn: async ({
 			nama,
 			tahunPeninggalan,
 			konten,
 			thumbnail,
+			jenis,
+			bahan,
 			puraId,
 		}: FormData) => {
 			const [res] = await uploadFiles([thumbnail], 'imageUploader');
@@ -86,10 +92,12 @@ export default function FormEditPelinggih({
 				tahunPeninggalan,
 				konten,
 				puraId,
+				jenis,
+				bahan,
 				thumbnail: res.fileUrl,
 			};
 			const { data } = await axios.patch(
-				`/api/pura/pelinggih/${pelinggih.id}`,
+				`/api/pura/pratima/${pratima.id}`,
 				payload
 			);
 			return data as string;
@@ -109,16 +117,16 @@ export default function FormEditPelinggih({
 			}
 			toast({
 				title: 'Terjadi kesalahan.',
-				description: 'Tidak dapat menyunting pelinggih.',
+				description: 'Tidak dapat menyunting pratima.',
 				variant: 'destructive',
 			});
 		},
-		onSuccess: (res) => {
+		onSuccess: () => {
 			toast({
-				description: 'Berhasil menyunting Pelinggih',
+				description: 'Berhasil menyunting Pratima',
 			});
 			router.refresh();
-			router.push(`/dashboard/${params.puraId}/pelinggih`);
+			router.push(`/dashboard/${params.puraId}/pratima`);
 		},
 	});
 
@@ -129,9 +137,11 @@ export default function FormEditPelinggih({
 			tahunPeninggalan: data.tahunPeninggalan,
 			konten: data.konten,
 			thumbnail: data.thumbnail,
-			puraId: pelinggih.puraId,
+			puraId: pratima.puraId,
+			jenis: pratima.jenis,
+			bahan: pratima.bahan,
 		};
-		editPelinggih(payload);
+		editPratima(payload);
 	}
 
 	return (
@@ -143,14 +153,14 @@ export default function FormEditPelinggih({
 							htmlFor='nama'
 							className='mb-3 block text-base font-medium text-[#07074D]'
 						>
-							Nama Pelinggih<span className='text-red-500'>*</span>
+							Nama Pratima<span className='text-red-500'>*</span>
 						</label>
 						<input
 							{...register('nama')}
 							type='text'
 							name='nama'
 							id='nama'
-							placeholder='Masukan tahun pelinggih dibangun'
+							placeholder='Masukan nama dari pratima'
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						/>
 						{errors?.nama && (
@@ -173,7 +183,53 @@ export default function FormEditPelinggih({
 							type='number'
 							name='tahunPeninggalan'
 							id='tahunPeninggalan'
-							placeholder='Masukan tahun pelinggih dibangun'
+							placeholder='Masukan tahun pratima dibangun'
+							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
+						/>
+						{errors?.tahunPeninggalan && (
+							<p className='px-1 text-xs text-red-600'>
+								{errors.tahunPeninggalan.message}
+							</p>
+						)}
+					</div>
+				</div>
+			</div>
+			<div className='flex flex-wrap -mx-3'>
+				<div className='w-full px-3 sm:w-1/2'>
+					<div className='mb-5'>
+						<label
+							htmlFor='bahan'
+							className='mb-3 block text-base font-medium text-[#07074D]'
+						>
+							Bahan<span className='text-red-500'>*</span>
+						</label>
+						<input
+							{...register('bahan')}
+							type='text'
+							name='bahan'
+							id='bahan'
+							placeholder='Masukan bahan dari pratima'
+							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
+						/>
+						{errors?.nama && (
+							<p className='px-1 text-xs text-red-600'>{errors.nama.message}</p>
+						)}
+					</div>
+				</div>
+				<div className='w-full px-3 sm:w-1/2'>
+					<div className='mb-5'>
+						<label
+							htmlFor='jenis'
+							className='mb-3 block text-base font-medium text-[#07074D]'
+						>
+							Jenis<span className='text-red-500'>*</span>
+						</label>
+						<input
+							{...register('jenis')}
+							type='text'
+							name='jenis'
+							id='jenis'
+							placeholder='Masukan jenis dari pratima'
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						/>
 						{errors?.tahunPeninggalan && (
@@ -189,12 +245,12 @@ export default function FormEditPelinggih({
 					htmlFor='konten'
 					className='mb-3 block text-base font-medium text-[#07074D]'
 				>
-					Deskripsi Pelinggih<span className='text-red-500'>*</span>
+					Deskripsi Pratima<span className='text-red-500'>*</span>
 				</label>
 				<textarea
 					{...register('konten')}
 					id='konten'
-					placeholder='Tambahkan deskripsi dari Pelinggih'
+					placeholder='Tambahkan deskripsi dari Pratima'
 					required
 					className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md h-40'
 				></textarea>
@@ -213,7 +269,7 @@ export default function FormEditPelinggih({
 					<SingleFileDropzone
 						width={200}
 						height={200}
-						value={getValues('thumbnail')}
+						value={file}
 						dropzoneOptions={{
 							maxSize: 1024 * 1024 * 1, // 1MB
 						}}
@@ -232,7 +288,7 @@ export default function FormEditPelinggih({
 				>
 					Batalkan
 				</Button>
-				<Button isLoading={isPending}>Buat Pelinggih</Button>
+				<Button isLoading={isPending}>Buat Pratima</Button>
 			</div>
 		</form>
 	);

@@ -9,21 +9,21 @@ import {
 	TableHeader,
 	TableRow,
 } from '@/components/ui/Table';
-import { Pelinggih } from '@prisma/client';
-import PelinggihOperations from './operations/PelinggihOperations';
+import { Pratima } from '@prisma/client';
+import PratimaOperations from '../operations/PratimaOperations';
 
 interface TableDataProps {
 	data:
 		| Pick<
-				Pelinggih,
+				Pratima,
 				'id' | 'nama' | 'createdAt' | 'tahunPeninggalan' | 'thumbnail'
 		  >[]
 		| undefined;
 }
-export default function TableInventaris({ data }: TableDataProps) {
+export default function TablePratima({ data }: TableDataProps) {
 	return (
 		<Table>
-			<TableCaption>Data Pelinggih Pura.</TableCaption>
+			<TableCaption>Data Pratima Pura.</TableCaption>
 			<TableHeader>
 				<TableRow>
 					<TableHead className='w-[100px]'>Nama</TableHead>
@@ -41,7 +41,7 @@ export default function TableInventaris({ data }: TableDataProps) {
 						<TableCell>{data.nama}</TableCell>
 						<TableCell>{data.nama}</TableCell>
 						<TableCell className='flex justify-end '>
-							<PelinggihOperations pelinggih={{ id: data.id }} />
+							<PratimaOperations pratima={{ id: data.id }} />
 						</TableCell>
 					</TableRow>
 				))}

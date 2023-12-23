@@ -1,17 +1,17 @@
 import DashboardHeader from '@/components/DashboardHeader';
 import DashboardShell from '@/components/DashboardShell';
-import TableInventaris from '@/components/TableInventaris';
+import TablePratima from '@/components/table/TablePratima';
 import { buttonVariants } from '@/components/ui/Button';
 import { db } from '@/lib/db';
 import Link from 'next/link';
 
-interface InventarisPageProps {
+interface PratimaPageProps {
 	params: {
 		puraId: string;
 	};
 }
 
-const InventarisPage = async ({ params }: InventarisPageProps) => {
+const PratimaPage = async ({ params }: PratimaPageProps) => {
 	let data = await db.pura.findFirst({
 		where: { name: params.puraId },
 		include: {
@@ -35,8 +35,8 @@ const InventarisPage = async ({ params }: InventarisPageProps) => {
 	return (
 		<DashboardShell>
 			<DashboardHeader
-				heading='Inventaris Pura'
-				text='Kelola inventaris di dalam Pura.'
+				heading='Pratima Pura'
+				text='Kelola pratima di dalam Pura.'
 			/>
 			<div className='flex flex-row justify-between'>
 				<Link
@@ -49,9 +49,9 @@ const InventarisPage = async ({ params }: InventarisPageProps) => {
 					Tambahkan Kegiatan
 				</Link>
 			</div>
-			<TableInventaris data={pratimaPura} />
+			<TablePratima data={pratimaPura} />
 		</DashboardShell>
 	);
 };
 
-export default InventarisPage;
+export default PratimaPage;

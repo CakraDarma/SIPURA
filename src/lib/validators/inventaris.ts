@@ -1,4 +1,3 @@
-import { json } from 'stream/consumers';
 import { z } from 'zod';
 
 export const PelinggihValidator = z.object({
@@ -25,9 +24,7 @@ export const PratimaValidator = z.object({
 		.max(128, {
 			message: 'Nama Pratima tidak boleh lebih dari 128 karakter',
 		}),
-	konten: z.string().min(3, {
-		message: 'Isi konten harus lebih dari 3 karakter',
-	}),
+	konten: z.any(),
 	bahan: z
 		.string()
 		.min(3, {
