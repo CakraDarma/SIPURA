@@ -51,6 +51,11 @@ export const dashboardConfig: DashboardConfig = {
 			icon: 'inventory',
 		},
 		{
+			title: 'Pratima',
+			href: '/pratima',
+			icon: 'inventory',
+		},
+		{
 			title: 'Virtual Tour',
 			href: '/virtual-tour',
 			icon: 'virtualTour',

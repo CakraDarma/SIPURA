@@ -15,7 +15,7 @@ const InventarisPage = async ({ params }: InventarisPageProps) => {
 	let data = await db.pura.findFirst({
 		where: { name: params.puraId },
 		include: {
-			pelinggihs: {
+			pratimas: {
 				orderBy: {
 					createdAt: 'desc',
 				},
@@ -23,7 +23,7 @@ const InventarisPage = async ({ params }: InventarisPageProps) => {
 		},
 	});
 
-	const pelinggihPura = data?.pelinggihs.map(
+	const pratimaPura = data?.pratimas.map(
 		({ id, tahunPeninggalan, thumbnail, createdAt, nama }) => ({
 			id,
 			nama,
@@ -44,12 +44,12 @@ const InventarisPage = async ({ params }: InventarisPageProps) => {
 						variant: 'outline',
 						className: 'w-60',
 					})}
-					href={`/dashboard/${params.puraId}/pelinggih/create`}
+					href={`/dashboard/${params.puraId}/pratima/create`}
 				>
 					Tambahkan Kegiatan
 				</Link>
 			</div>
-			<TableInventaris data={pelinggihPura} />
+			<TableInventaris data={pratimaPura} />
 		</DashboardShell>
 	);
 };
