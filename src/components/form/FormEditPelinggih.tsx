@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from '@/hooks/use-toast';
 import { useCustomToasts } from '@/hooks/use-custom-toasts';
 import { PelinggihValidator } from '@/lib/validators/inventaris';
@@ -113,7 +113,7 @@ export default function FormEditPelinggih({
 				variant: 'destructive',
 			});
 		},
-		onSuccess: (res) => {
+		onSuccess: () => {
 			toast({
 				description: 'Berhasil menyunting Pelinggih',
 			});
