@@ -3,7 +3,7 @@
 import { formatTimeToNow } from '@/lib/utils';
 import { Kegiatan, User } from '@prisma/client';
 import { useRef } from 'react';
-import EditorOutput from './EditorOutput';
+import EditorOutput from '@/components/EditorOutput';
 import Link from 'next/link';
 
 interface KegiatanProps {

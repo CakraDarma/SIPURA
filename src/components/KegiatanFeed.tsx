@@ -7,7 +7,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Loader2 } from 'lucide-react';
 import { useEffect, useRef } from 'react';
-import Kegiatan from './Kegiatan';
+import Kegiatan from '@/components/Kegiatan';
 import { useSession } from 'next-auth/react';
 
 interface KegiatanFeedProps {

@@ -2,6 +2,7 @@ import Hero from '@/components/Hero';
 import VideoInformation from '@/components/homepage/VideoInformation';
 import Announce from '@/components/homepage/Announce';
 import About from '@/components/homepage/About';
+import JoinUsPage from '@/components/homepage/JoinUs';
 // import Features from '@/components/homepage/Features';
 
 const Home = () => {
@@ -12,6 +13,7 @@ const Home = () => {
 			<About />
 			<VideoInformation />
 			<Announce />
+			<JoinUsPage />
 		</div>
 	);
 };

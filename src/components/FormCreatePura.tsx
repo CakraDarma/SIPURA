@@ -10,11 +10,11 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Button } from './ui/Button';
+import { Button } from '@/components/ui/Button';
 import { uploadFiles } from '@/lib/uploadthing';
 import EditorJS from '@editorjs/editorjs';
 import { kategoriPura } from '@/config/form';
-import { SingleFileDropzone } from './SingleFileDropzone';
+import { SingleFileDropzone } from '@/components/SingleFileDropzone';
 
 type FormData = z.infer<typeof PuraValidator>;
 

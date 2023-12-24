@@ -1,7 +1,7 @@
 import { INFINITE_SCROLL_PAGINATION_RESULTS } from '@/config';
 import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
-import KegiatanFeed from '../KegiatanFeed';
+import KegiatanFeed from '@/components/KegiatanFeed';
 import { notFound } from 'next/navigation';
 
 const CustomFeed = async () => {

@@ -1,5 +1,5 @@
 import { db } from '@/lib/db';
-import KegiatanFeed from '../KegiatanFeed';
+import KegiatanFeed from '@/components/KegiatanFeed';
 import { INFINITE_SCROLL_PAGINATION_RESULTS } from '@/config';
 
 const GeneralFeed = async () => {

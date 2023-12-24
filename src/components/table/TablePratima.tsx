@@ -10,7 +10,7 @@ import {
 	TableRow,
 } from '@/components/ui/Table';
 import { Pratima } from '@prisma/client';
-import PratimaOperations from '../operations/PratimaOperations';
+import PratimaOperations from '@/components/operations/PratimaOperations';
 
 interface TableDataProps {
 	data:

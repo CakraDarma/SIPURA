@@ -1,7 +1,7 @@
 import React from 'react';
-import { Icons } from '../Icons';
+import { Icons } from '@/components/Icons';
 import Link from 'next/link';
-import { buttonVariants } from '../ui/Button';
+import { buttonVariants } from '@/components/ui/Button';
 
 export default function Features() {
 	return (

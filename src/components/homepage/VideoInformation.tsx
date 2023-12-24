@@ -15,7 +15,7 @@ const VideoInformation = () => {
 					<h3 className='max-w-3xl text-xl text-white md:text-2xl font-heading'>
 						Nikmati Video Pengenalan Pura dan Pelajari Keunikan Pura di Bali
 					</h3>
-					<p className='max-w-3xl text-lg font-light text-justify text-zinc-200 sm:text-xl'>
+					<p className='max-w-3xl font-sans text-lg font-light text-justify text-zinc-200 sm:text-xl'>
 						Kami menyajikan video pengenalan Pura untuk memberikan gambaran
 						sejarah dan keunikan setiap Pura di Bali kepada Anda. Nikmati
 						pengalaman menarik dan mendalam dengan menonton video ini, serta

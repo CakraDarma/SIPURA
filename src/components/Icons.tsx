@@ -18,6 +18,7 @@ import {
 	Columns,
 	Combine,
 	Command,
+	PlusIcon,
 	type Icon as LucideIcon,
 	Menu,
 } from 'lucide-react';
@@ -27,6 +28,7 @@ import {
 export type Icon = LucideIcon;
 
 export const Icons = {
+	plus: PlusIcon,
 	pura: Building,
 	menu: Menu,
 	upacara: FileDiff,

@@ -2,7 +2,7 @@
 
 import { X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { Button } from './ui/Button';
+import { Button } from '@/components/ui/Button';
 
 const CloseModal = () => {
 	const router = useRouter();

@@ -1,7 +1,7 @@
 import { Pura } from '@prisma/client';
 import Image from 'next/image';
 import Link from 'next/link';
-import PuraOperations from './PuraOperations';
+import PuraOperations from '@/components/operations/PuraOperations';
 
 interface CardPuraProps extends React.HTMLAttributes<HTMLDivElement> {
 	// pick is utility typescript

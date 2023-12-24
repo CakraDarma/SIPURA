@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { Pura, Pelinggih } from '@prisma/client';
-import TableInventaris from '../table/TablePelinggih';
+import TableInventaris from '@/components/table/TablePelinggih';
 import { useParams } from 'next/navigation';
 import { toast } from '@/hooks/use-toast';
 

@@ -10,7 +10,7 @@ import {
 	TableRow,
 } from '@/components/ui/Table';
 import { Pelinggih } from '@prisma/client';
-import PelinggihOperations from '../operations/PelinggihOperations';
+import PelinggihOperations from '@/components/operations/PelinggihOperations';
 
 interface TableDataProps {
 	data:
