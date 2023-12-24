@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 
-import { authOptions, getAuthSession } from '@/lib/auth';
+import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
 import DashboardHeader from '@/components/DashboardHeader';
 import DashboardShell from '@/components/DashboardShell';
@@ -15,7 +15,7 @@ export default async function DashboardPage() {
 	const session = await getAuthSession();
 
 	if (!session) {
-		redirect(authOptions?.pages?.signIn || '/sign-in');
+		redirect('/sign-in');
 	}
 
 	const pura = await db.pura.findMany({
