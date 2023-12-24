@@ -16,7 +16,7 @@ const CardPura = ({ pura }: CardPuraProps) => {
 		>
 			<div className='relative flex m-0 shadow-xl group h-72 w-80 sm:w-96 rounded-xl ring-gray-900/5 sm:mx-auto sm:max-w-lg'>
 				<Link
-					href={`/dashboard/${pura.name}/`}
+					href={`/dashboard/${pura.id}/`}
 					className='z-10 w-full h-full overflow-hidden transition duration-300 ease-in-out border border-gray-200 rounded-xl opacity-80 group-hover:opacity-100 dark:border-gray-700 dark:opacity-70'
 				>
 					<Image

@@ -54,7 +54,7 @@ export async function POST(req: Request) {
 			},
 		});
 
-		return new Response(pura.name);
+		return new Response(pura.id);
 	} catch (error) {
 		if (error instanceof z.ZodError) {
 			return new Response(error.message, { status: 422 });

@@ -5,12 +5,12 @@ import { authOptions } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { getAuthSession } from '@/lib/auth';
 import DashboardHeader from '@/components/DashboardHeader';
-import FormEditPura from '@/components/FormEditPura';
+import FormEditPura from '@/components/form/FormEditPura';
 
 async function getPuraForUser(puraId: Pura['id'], userId: User['id']) {
 	return await db.pura.findFirst({
 		where: {
-			name: puraId,
+			id: puraId,
 			userId: userId,
 		},
 	});
@@ -33,13 +33,14 @@ export default async function EditorPage({ params }: EditorPageProps) {
 	}
 
 	return (
-		<div className='container flex flex-col w-full h-full space-y-6'>
-			<DashboardHeader
-				heading='Dashboard'
-				text='Kelola semua aspek terkait dengan Pura dalam satu lokasi yang nyaman.'
-			/>
-			<hr className='h-px bg-red-500' />
-			<FormEditPura pura={pura} />
+		<div className='max-w-4xl mx-auto'>
+			<div className='grid items-start gap-8'>
+				<DashboardHeader
+					heading='Dashboard'
+					text='Kelola semua aspek terkait dengan Pura dalam satu lokasi yang nyaman.'
+				/>
+				<FormEditPura pura={pura} />
+			</div>
 		</div>
 	);
 }

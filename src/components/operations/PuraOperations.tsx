@@ -67,7 +67,7 @@ export default function PuraOperations({ pura }: PuraOperationsProps) {
 				<DropdownMenuContent align='end'>
 					<DropdownMenuItem>
 						<Link
-							href={`/dashboard/pura/${pura.name}/edit`}
+							href={`/dashboard/pura/${pura.id}/edit`}
 							className='flex w-full'
 						>
 							Sunting

@@ -17,7 +17,7 @@ export async function POST(req: Request) {
 
 		const pura = await db.pura.findFirst({
 			where: {
-				name: puraId,
+				id: puraId,
 			},
 		});
 		if (!pura) {

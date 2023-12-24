@@ -1,4 +1,4 @@
-import { EditorCreateKegiatan } from '@/components/EditorCreateKegiatan';
+import { EditorCreateKegiatan } from '@/components/form/EditorCreateKegiatan';
 import { Button } from '@/components/ui/Button';
 import { db } from '@/lib/db';
 import { notFound } from 'next/navigation';
@@ -12,7 +12,7 @@ interface pageProps {
 const page = async ({ params }: pageProps) => {
 	const pura = await db.pura.findFirst({
 		where: {
-			name: params.puraId,
+			id: params.puraId,
 		},
 	});
 
@@ -27,7 +27,7 @@ const page = async ({ params }: pageProps) => {
 						Buat postingan
 					</h3>
 					<p className='mt-1 ml-2 text-sm text-gray-500 truncate'>
-						di {params.puraId}
+						di {pura.name}
 					</p>
 				</div>
 			</div>

@@ -1,4 +1,5 @@
 import DashboardHeader from '@/components/DashboardHeader';
+import DashboardShell from '@/components/DashboardShell';
 import FormEditPratima from '@/components/form/FormEditPratima';
 import { authOptions, getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
@@ -26,7 +27,7 @@ const EditPratimaPage = async ({ params }: EditPratimaPageProps) => {
 	}
 
 	return (
-		<div className='container flex flex-col w-full h-full space-y-6'>
+		<DashboardShell>
 			<DashboardHeader
 				heading='Dashboard'
 				text='Kelola semua aspek terkait dengan Pura dalam satu lokasi yang nyaman.'
@@ -44,7 +45,7 @@ const EditPratimaPage = async ({ params }: EditPratimaPageProps) => {
 					thumbnail: pratima.thumbnail,
 				}}
 			/>
-		</div>
+		</DashboardShell>
 	);
 };
 

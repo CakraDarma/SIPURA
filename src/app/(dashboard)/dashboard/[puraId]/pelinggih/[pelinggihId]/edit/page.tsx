@@ -1,4 +1,5 @@
 import DashboardHeader from '@/components/DashboardHeader';
+import DashboardShell from '@/components/DashboardShell';
 import FormEditPelinggih from '@/components/form/FormEditPelinggih';
 import { authOptions, getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
@@ -26,7 +27,7 @@ const EditPelinggihPage = async ({ params }: EditPelinggihPageProps) => {
 	}
 
 	return (
-		<div className='container flex flex-col w-full h-full space-y-6'>
+		<DashboardShell>
 			<DashboardHeader
 				heading='Dashboard'
 				text='Kelola semua aspek terkait dengan Pura dalam satu lokasi yang nyaman.'
@@ -42,7 +43,7 @@ const EditPelinggihPage = async ({ params }: EditPelinggihPageProps) => {
 					thumbnail: pelinggih.thumbnail,
 				}}
 			/>
-		</div>
+		</DashboardShell>
 	);
 };
 

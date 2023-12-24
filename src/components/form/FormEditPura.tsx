@@ -16,11 +16,12 @@ import EditorJS from '@editorjs/editorjs';
 import { kategoriPura } from '@/config/form';
 import { SingleFileDropzone } from '@/components/SingleFileDropzone';
 import { urlToBlobFile } from '@/lib/utils';
+import { Pura } from '@prisma/client';
 
 type FormData = z.infer<typeof PuraValidator>;
 
 interface FormEditPuraProps {
-	pura: any;
+	pura: Pura;
 }
 export default function FormEditPura({ pura }: FormEditPuraProps) {
 	const [file, setFile] = useState<File>();
@@ -120,7 +121,7 @@ export default function FormEditPura({ pura }: FormEditPuraProps) {
 			toast({
 				description: 'Berhasil menyunting Pura',
 			});
-			router.push(`/dashboard/${pura.name}`);
+			router.push(`/dashboard/${pura.id}`);
 		},
 	});
 

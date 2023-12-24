@@ -22,7 +22,7 @@ const Layout = async ({
 	const session = await getAuthSession();
 
 	const pura = await db.pura.findFirst({
-		where: { name: puraId },
+		where: { id: puraId },
 		include: {
 			kegiatans: {
 				include: {
@@ -37,14 +37,14 @@ const Layout = async ({
 	const prajuruCount = await db.userRole.count({
 		where: {
 			pura: {
-				name: puraId,
+				id: puraId,
 			},
 		},
 	});
 	const kegiatanCount = await db.kegiatan.count({
 		where: {
 			pura: {
-				name: puraId,
+				id: puraId,
 			},
 		},
 	});

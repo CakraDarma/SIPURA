@@ -24,7 +24,7 @@ export default async function DashboardLayout({
 		where: {
 			userId: session.user.id,
 			pura: {
-				name: params.puraId,
+				id: params.puraId,
 			},
 		},
 	});

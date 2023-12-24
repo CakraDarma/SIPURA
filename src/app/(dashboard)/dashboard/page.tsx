@@ -6,6 +6,8 @@ import DashboardHeader from '@/components/DashboardHeader';
 import DashboardShell from '@/components/DashboardShell';
 import EmptyPlaceholder from '@/components/EmptyPlaceholder';
 import CardPura from '@/components/CardPura';
+import Link from 'next/link';
+import { buttonVariants } from '@/components/ui/Button';
 
 export const metadata = {
 	title: 'Dashboard',
@@ -36,24 +38,36 @@ export default async function DashboardPage() {
 						nyaman.'
 				/>
 
-				<div>
-					{pura?.length ? (
+				{pura?.length ? (
+					<div>
+						<Link
+							className={buttonVariants({})}
+							href={`/dashboard/pura/create`}
+						>
+							Tambah
+						</Link>
 						<div className='flex flex-col flex-wrap items-center justify-center gap-6 mb-10 md:flex-row'>
 							{pura.map((pura, index) => (
 								<CardPura key={index} pura={pura} />
 							))}
 						</div>
-					) : (
-						<EmptyPlaceholder>
-							<EmptyPlaceholder.Icon name='kegiatan' />
-							<EmptyPlaceholder.Title>Tidak ada Pura</EmptyPlaceholder.Title>
-							<EmptyPlaceholder.Description>
-								Anda belum memiliki Pura yang tersedia. Silahkan tambahkan Pura
-								terlebih dahulu
-							</EmptyPlaceholder.Description>
-						</EmptyPlaceholder>
-					)}
-				</div>
+					</div>
+				) : (
+					<EmptyPlaceholder>
+						<EmptyPlaceholder.Icon name='kegiatan' />
+						<EmptyPlaceholder.Title>Tidak ada Pura</EmptyPlaceholder.Title>
+						<EmptyPlaceholder.Description>
+							Anda belum memiliki Pura yang tersedia. Silahkan tambahkan Pura
+							terlebih dahulu
+						</EmptyPlaceholder.Description>
+						<Link
+							className={buttonVariants({})}
+							href={`/dashboard/pura/create`}
+						>
+							Tambah
+						</Link>
+					</EmptyPlaceholder>
+				)}
 			</DashboardShell>
 		</div>
 	);

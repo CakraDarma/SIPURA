@@ -18,7 +18,7 @@ const page = async ({ params }: PageProps) => {
 	const { puraId } = params;
 	let pura: (Pura & { kegiatans: Kegiatan[] }) | null = null;
 	pura = await db.pura.findFirst({
-		where: { name: puraId },
+		where: { id: puraId },
 		include: {
 			kegiatans: {
 				orderBy: {
@@ -36,7 +36,7 @@ const page = async ({ params }: PageProps) => {
 			/>
 			<div>
 				{pura?.kegiatans.length ? (
-					<div className='divide-y divide-border rounded-md border'>
+					<div className='border divide-y rounded-md divide-border'>
 						{pura.kegiatans.map((kegiatan) => (
 							<KegiatanItem key={kegiatan.id} kegiatan={kegiatan} />
 						))}

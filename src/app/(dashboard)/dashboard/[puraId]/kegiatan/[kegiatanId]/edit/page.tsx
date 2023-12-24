@@ -4,7 +4,7 @@ import { Kegiatan, User } from '@prisma/client';
 import { authOptions } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { getAuthSession } from '@/lib/auth';
-import { EditorEditKegiatan } from '@/components/EditorEditKegiatan';
+import { EditorEditKegiatan } from '@/components/form/EditorEditKegiatan';
 import { Button } from '@/components/ui/Button';
 
 async function getKegiatanForUser(

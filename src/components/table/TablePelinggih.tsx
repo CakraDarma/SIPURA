@@ -23,7 +23,6 @@ interface TableDataProps {
 export default function TablePelinggih({ data }: TableDataProps) {
 	return (
 		<Table>
-			<TableCaption>Data Pelinggih Pura.</TableCaption>
 			<TableHeader>
 				<TableRow>
 					<TableHead className='w-[100px]'>Nama</TableHead>

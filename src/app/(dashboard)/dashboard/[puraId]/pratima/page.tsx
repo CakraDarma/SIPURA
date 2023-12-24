@@ -1,5 +1,6 @@
 import DashboardHeader from '@/components/DashboardHeader';
 import DashboardShell from '@/components/DashboardShell';
+import EmptyPlaceholder from '@/components/EmptyPlaceholder';
 import TablePratima from '@/components/table/TablePratima';
 import { buttonVariants } from '@/components/ui/Button';
 import { db } from '@/lib/db';
@@ -13,7 +14,7 @@ interface PratimaPageProps {
 
 const PratimaPage = async ({ params }: PratimaPageProps) => {
 	let data = await db.pura.findFirst({
-		where: { name: params.puraId },
+		where: { id: params.puraId },
 		include: {
 			pratimas: {
 				orderBy: {
@@ -38,18 +39,34 @@ const PratimaPage = async ({ params }: PratimaPageProps) => {
 				heading='Pratima Pura'
 				text='Kelola pratima di dalam Pura.'
 			/>
-			<div className='flex flex-row justify-between'>
-				<Link
-					className={buttonVariants({
-						variant: 'outline',
-						className: 'w-60',
-					})}
-					href={`/dashboard/${params.puraId}/pratima/create`}
-				>
-					Tambahkan Kegiatan
-				</Link>
-			</div>
-			<TablePratima data={pratimaPura} />
+			{pratimaPura?.length ? (
+				<div>
+					<div className='flex flex-row justify-end'>
+						<Link
+							className={buttonVariants()}
+							href={`/dashboard/${params.puraId}/pratima/create`}
+						>
+							Tambah
+						</Link>
+					</div>
+					<TablePratima data={pratimaPura} />
+				</div>
+			) : (
+				<EmptyPlaceholder>
+					<EmptyPlaceholder.Icon name='kegiatan' />
+					<EmptyPlaceholder.Title>Belum ada pratima</EmptyPlaceholder.Title>
+					<EmptyPlaceholder.Description>
+						Anda belum memiliki pratima yang dimasukkan. Mulai tambahkan
+						sekarang.
+					</EmptyPlaceholder.Description>
+					<Link
+						className={buttonVariants({})}
+						href={`/dashboard/${params.puraId}/pratima/create`}
+					>
+						Tambah
+					</Link>
+				</EmptyPlaceholder>
+			)}
 		</DashboardShell>
 	);
 };

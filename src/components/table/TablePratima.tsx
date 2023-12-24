@@ -23,7 +23,6 @@ interface TableDataProps {
 export default function TablePratima({ data }: TableDataProps) {
 	return (
 		<Table>
-			<TableCaption>Data Pratima Pura.</TableCaption>
 			<TableHeader>
 				<TableRow>
 					<TableHead className='w-[100px]'>Nama</TableHead>

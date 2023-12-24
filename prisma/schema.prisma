@@ -77,19 +77,19 @@ model User {
 }
 
 model Pura {
-  id           String        @id @default(cuid())
-  name         String        @unique
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
-  userId       String?
+  id           String       @id @default(cuid())
+  name         String       @unique
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  userId       String
   konten       Json?
-  tahunBerdiri Int?
-  alamat       String?
-  piodalan     String?
-  kategori     CategoryPura?
-  thumbnail    String?
+  tahunBerdiri Int
+  alamat       String
+  piodalan     String
+  kategori     CategoryPura
+  thumbnail    String
 
-  user         User?         @relation(fields: [userId], references: [id])
+  user         User          @relation(fields: [userId], references: [id])
   kegiatans    Kegiatan[]
   subscribers  UserRole[]
   upacaras     Upacara[]
@@ -134,7 +134,7 @@ model Pratima {
   tahunPeninggalan Int
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
-  thumbnail        String?
+  thumbnail        String
 
   pura Pura @relation(fields: [puraId], references: [id], onDelete: Cascade)
   user User @relation(fields: [userId], references: [id])
@@ -145,11 +145,11 @@ model Pelinggih {
   puraId           String
   userId           String
   nama             String
-  konten           Json
+  konten           Json?
   tahunPeninggalan Int
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
-  thumbnail        String?
+  thumbnail        String
 
   pura    Pura     @relation(fields: [puraId], references: [id])
   user    User     @relation(fields: [userId], references: [id])
