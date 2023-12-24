@@ -1,6 +1,6 @@
 import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
-import { UsernameValidator } from '@/lib/validators/username';
+import { UserValidator } from '@/lib/validators/user';
 import { z } from 'zod';
 
 export async function PATCH(req: Request) {
@@ -12,7 +12,7 @@ export async function PATCH(req: Request) {
 		}
 
 		const body = await req.json();
-		const { name } = UsernameValidator.parse(body);
+		const { name, alamat, telepon, thumbnail } = UserValidator.parse(body);
 
 		// update username
 		await db.user.update({
@@ -21,6 +21,9 @@ export async function PATCH(req: Request) {
 			},
 			data: {
 				name,
+				alamat,
+				telepon,
+				image: thumbnail,
 			},
 		});
 
