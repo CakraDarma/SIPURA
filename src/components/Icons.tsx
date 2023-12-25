@@ -19,8 +19,11 @@ import {
 	Combine,
 	Command,
 	PlusIcon,
+	AlignVerticalJustifyCenterIcon,
+	UserCogIcon,
 	type Icon as LucideIcon,
 	Menu,
+	UserCog,
 } from 'lucide-react';
 
 // import { FaRegUserCircle } from 'react-icons/fa';
@@ -28,11 +31,13 @@ import {
 export type Icon = LucideIcon;
 
 export const Icons = {
+	prajuru: UserCog,
 	plus: PlusIcon,
 	pura: Building,
 	menu: Menu,
 	upacara: FileDiff,
-	inventory: Columns,
+	pelinggih: AlignVerticalJustifyCenterIcon,
+	pratima: Columns,
 	virtualTour: Combine,
 	check: Check,
 	spinner: Loader2,

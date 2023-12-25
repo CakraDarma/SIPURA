@@ -48,12 +48,12 @@ export const dashboardConfig: DashboardConfig = {
 		{
 			title: 'Pelinggih',
 			href: '/pelinggih',
-			icon: 'inventory',
+			icon: 'pelinggih',
 		},
 		{
 			title: 'Pratima',
 			href: '/pratima',
-			icon: 'inventory',
+			icon: 'pratima',
 		},
 		{
 			title: 'Virtual Tour',
@@ -61,9 +61,9 @@ export const dashboardConfig: DashboardConfig = {
 			icon: 'virtualTour',
 		},
 		{
-			title: 'Pengaturan',
-			href: '/dashboard/settings',
-			icon: 'settings',
+			title: 'Prajuru',
+			href: '/prajuru',
+			icon: 'prajuru',
 		},
 	],
 };

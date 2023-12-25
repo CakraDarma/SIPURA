@@ -32,7 +32,8 @@
 		"**/*.ts",
 		"**/*.tsx",
 		".next/types/**/*.ts",
-		"src/app/(auth)/sign-in"
+		"src/app/(auth)/sign-in",
+		"src/app/(dashboard)/dashboard/coba/page.tsx"
 	],
 	"exclude": ["node_modules"]
 }

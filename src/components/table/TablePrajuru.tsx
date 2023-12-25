@@ -8,18 +8,15 @@ import {
 	TableHeader,
 	TableRow,
 } from '@/components/ui/Table';
-import { Pratima } from '@prisma/client';
-import PratimaOperations from '@/components/operations/PratimaOperations';
+import { User } from '@prisma/client';
+import PelinggihOperations from '@/components/operations/PelinggihOperations';
 
 interface TableDataProps {
 	data:
-		| Pick<
-				Pratima,
-				'id' | 'nama' | 'createdAt' | 'tahunPeninggalan' | 'thumbnail'
-		  >[]
+		| Pick<User, 'id' | 'name' | 'email' | 'alamat' | 'telepon'>[]
 		| undefined;
 }
-export default function TablePratima({ data }: TableDataProps) {
+export default function TablePelinggih({ data }: TableDataProps) {
 	return (
 		<Table>
 			<TableHeader>
@@ -34,12 +31,12 @@ export default function TablePratima({ data }: TableDataProps) {
 			<TableBody>
 				{data?.map((data) => (
 					<TableRow key={data.id}>
-						<TableCell className='font-medium'>{data.nama}</TableCell>
-						<TableCell>{data.tahunPeninggalan}</TableCell>
-						<TableCell>{data.nama}</TableCell>
-						<TableCell>{data.nama}</TableCell>
+						<TableCell className='font-medium'>{data.name}</TableCell>
+						<TableCell>{data.email}</TableCell>
+						<TableCell>{data.telepon}</TableCell>
+						<TableCell>{data.alamat}</TableCell>
 						<TableCell className='flex justify-end '>
-							<PratimaOperations pratima={{ id: data.id }} />
+							<PelinggihOperations pelinggih={{ id: data.id }} />
 						</TableCell>
 					</TableRow>
 				))}
