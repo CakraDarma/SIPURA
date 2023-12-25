@@ -1,6 +1,6 @@
 import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
-import { SubredditUserRoleValidator } from '@/lib/validators/pura';
+import { UserRolesValidator } from '@/lib/validators/prajuru';
 import { z } from 'zod';
 
 export async function POST(req: Request) {
@@ -12,18 +12,18 @@ export async function POST(req: Request) {
 		}
 
 		const body = await req.json();
-		const { puraId } = SubredditUserRoleValidator.parse(body);
+		const { puraId, userId } = UserRolesValidator.parse(body);
 
 		// check if user has already subscribed to pura
 		const userRoleExists = await db.userRole.findFirst({
 			where: {
 				puraId,
-				userId: session.user.id,
+				userId,
 			},
 		});
 
 		if (userRoleExists) {
-			return new Response("You've already subscribed to this pura", {
+			return new Response("You've already prajuru to this pura", {
 				status: 400,
 			});
 		}
@@ -32,7 +32,7 @@ export async function POST(req: Request) {
 		await db.userRole.create({
 			data: {
 				puraId,
-				userId: session.user.id,
+				userId,
 			},
 		});
 
@@ -44,7 +44,7 @@ export async function POST(req: Request) {
 		}
 
 		return new Response(
-			'Could not subscribe to pura at this time. Please try later',
+			'Could not make prajuru to this pura at this time. Please try later',
 			{ status: 500 }
 		);
 	}

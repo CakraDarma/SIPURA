@@ -4,14 +4,13 @@ export const SubredditValidator = z.object({
 	name: z.string().min(3).max(21),
 });
 
-export const SubredditUserRoleValidator = z.object({
+export const UserRoleValidator = z.object({
 	puraId: z.string(),
+	userId: z.string(),
 });
 
 export type CreateSubredditPayload = z.infer<typeof SubredditValidator>;
-export type SubscribeToSubredditPayload = z.infer<
-	typeof SubredditUserRoleValidator
->;
+export type SubscribeToSubredditPayload = z.infer<typeof UserRoleValidator>;
 
 export const PuraValidator = z.object({
 	name: z
