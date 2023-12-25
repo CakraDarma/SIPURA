@@ -3,8 +3,18 @@ import { db } from '@/lib/db';
 import { UserRolesValidator } from '@/lib/validators/prajuru';
 import { z } from 'zod';
 
-export async function POST(req: Request) {
+const routeContextSchema = z.object({
+	params: z.object({
+		puraId: z.string(),
+	}),
+});
+
+export async function POST(
+	req: Request,
+	context: z.infer<typeof routeContextSchema>
+) {
 	try {
+		const { params } = routeContextSchema.parse(context);
 		const session = await getAuthSession();
 
 		if (!session?.user) {
@@ -12,12 +22,12 @@ export async function POST(req: Request) {
 		}
 
 		const body = await req.json();
-		const { puraId, userId } = UserRolesValidator.parse(body);
+		const { userId } = UserRolesValidator.parse(body);
 
 		// check if user has already subscribed to pura
 		const userRoleExists = await db.userRole.findFirst({
 			where: {
-				puraId,
+				puraId: params.puraId,
 				userId,
 			},
 		});
@@ -31,12 +41,12 @@ export async function POST(req: Request) {
 		// create pura and associate it with the user
 		await db.userRole.create({
 			data: {
-				puraId,
+				puraId: params.puraId,
 				userId,
 			},
 		});
 
-		return new Response(puraId);
+		return new Response('Ok');
 	} catch (error) {
 		error;
 		if (error instanceof z.ZodError) {

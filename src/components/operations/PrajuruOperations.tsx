@@ -19,7 +19,6 @@ import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
-	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
 import { toast } from '@/hooks/use-toast';
@@ -27,18 +26,22 @@ import { Icons } from '@/components/Icons';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 
-interface PrajuruOperationsProps {
+interface UserRolesOperationsProps {
 	prajuru: Pick<User, 'id'>;
 }
 
-export default function PrajuruOperations({ prajuru }: PrajuruOperationsProps) {
+export default function UserRolesOperations({
+	prajuru,
+}: UserRolesOperationsProps) {
 	const [showDeleteAlert, setShowDeleteAlert] = React.useState<boolean>(false);
-	const params = useParams();
 	const router = useRouter();
-
+	const params = useParams();
+	console.log(params);
 	const { mutate: deletePrajuru, isPending } = useMutation({
 		mutationFn: async (prajuruId: string) => {
-			const { data } = await axios.delete(`/api/pura/prajuru/${prajuruId}`);
+			const { data } = await axios.delete(
+				`/api/pura/${params.puraId}/userRoles/${prajuruId}`
+			);
 			return data;
 		},
 		onError: () => {
@@ -52,7 +55,6 @@ export default function PrajuruOperations({ prajuru }: PrajuruOperationsProps) {
 			toast({
 				description: 'Prajuru Anda berhasil dihapus.',
 			});
-			// window.location.reload();
 			router.refresh();
 			setShowDeleteAlert(false);
 		},
@@ -66,15 +68,6 @@ export default function PrajuruOperations({ prajuru }: PrajuruOperationsProps) {
 					<span className='sr-only'>Open</span>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent align='end'>
-					<DropdownMenuItem>
-						<Link
-							href={`/dashboard/${params.puraId}/prajuru/${prajuru.id}/edit`}
-							className='flex w-full'
-						>
-							Sunting
-						</Link>
-					</DropdownMenuItem>
-					<DropdownMenuSeparator />
 					<DropdownMenuItem
 						className='flex items-center cursor-pointer text-destructive focus:text-destructive'
 						onSelect={() => {

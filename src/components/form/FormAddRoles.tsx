@@ -59,12 +59,15 @@ export default function FormAddRoles({ prajuru, puraId }: FormAddRolesProps) {
 	});
 
 	const { mutate: addUserRoles, isPending } = useMutation({
-		mutationFn: async ({ userId, puraId }: FormData) => {
+		mutationFn: async ({ userId }: FormData) => {
 			const payload = {
 				userId,
-				puraId,
+				puraId: params.puraId,
 			};
-			const { data } = await axios.post(`/api/pura/userRoles`, payload);
+			const { data } = await axios.post(
+				`/api/pura/${puraId}/userRoles`,
+				payload
+			);
 			return data as string;
 		},
 		onError: (err) => {
@@ -98,10 +101,8 @@ export default function FormAddRoles({ prajuru, puraId }: FormAddRolesProps) {
 	// submit file
 	async function onSubmit(data: FormData) {
 		const payload: FormData = {
-			puraId: puraId,
 			userId: data.userId,
 		};
-		console.log(payload);
 		addUserRoles(payload);
 	}
 
@@ -125,7 +126,6 @@ export default function FormAddRoles({ prajuru, puraId }: FormAddRolesProps) {
 							placeholder='Tambahkan User'
 							value={selectedPrajuru}
 							onChange={(selectedOption) => {
-								console.log(selectedOption);
 								setselectedPrajuru(selectedOption);
 								setValue('userId', selectedOption.value);
 							}}
