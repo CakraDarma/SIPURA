@@ -22,10 +22,13 @@ export default async function DashboardPage() {
 
 	const pura = await db.pura.findMany({
 		where: {
-			userId: session.user.id,
-		},
-		orderBy: {
-			name: 'asc',
+			subscribers: {
+				some: {
+					userId: {
+						equals: session.user.id,
+					},
+				},
+			},
 		},
 	});
 

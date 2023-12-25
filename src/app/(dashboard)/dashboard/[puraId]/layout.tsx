@@ -1,5 +1,6 @@
 import { SidebarNav } from '@/components/SidebarNav';
 import { dashboardConfig } from '@/config/dashboard';
+import { toast } from '@/hooks/use-toast';
 import { authOptions, getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { redirect } from 'next/navigation';
