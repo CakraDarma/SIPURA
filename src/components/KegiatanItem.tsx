@@ -3,7 +3,7 @@ import { Kegiatan } from '@prisma/client';
 
 import { Skeleton } from '@/components/ui/skeleton';
 import KegiatanOperations from '@/components/operations/KegiatanOperations';
-import { format } from 'date-fns';
+import { formatDate } from '@/lib/utils';
 
 interface KegiatanItemProps {
 	kegiatan: Pick<Kegiatan, 'id' | 'title' | 'createdAt'>;
@@ -24,7 +24,7 @@ export default function KegiatanItem({ kegiatan }: KegiatanItemProps) {
 						dateTime={kegiatan.createdAt.toDateString()}
 						className='text-sm text-muted-foreground'
 					>
-						{format(kegiatan.createdAt, 'd MMMM yyyy')}
+						{formatDate(kegiatan.createdAt)}
 					</time>
 				</div>
 			</div>

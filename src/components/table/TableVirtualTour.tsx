@@ -29,7 +29,7 @@ export default function TableVirtualTour({ data }: TableDataProps) {
 				{data?.map((data) => (
 					<TableRow key={data.id}>
 						<TableCell className='font-medium'>{data.virtualTour}</TableCell>
-						<TableCell>{data.id}</TableCell>
+						<TableCell>{formatDate(data.createdAt)}</TableCell>
 						<TableCell className='flex justify-end '>
 							<VirtualTourOperations virtualTour={{ id: data.id }} />
 						</TableCell>

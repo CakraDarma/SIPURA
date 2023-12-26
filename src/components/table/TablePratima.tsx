@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/Table';
 import { Pratima } from '@prisma/client';
 import PratimaOperations from '@/components/operations/PratimaOperations';
+import { formatDate } from '@/lib/utils';
 
 interface TableDataProps {
 	data:
@@ -27,7 +28,7 @@ export default function TablePratima({ data }: TableDataProps) {
 					<TableHead className='w-[100px]'>Nama</TableHead>
 					<TableHead>Tahun dibangun</TableHead>
 					<TableHead>Thumbnail</TableHead>
-					<TableHead>Created at</TableHead>
+					<TableHead>Dibuat</TableHead>
 					<TableHead className='text-right'>Aksi</TableHead>
 				</TableRow>
 			</TableHeader>
@@ -37,7 +38,7 @@ export default function TablePratima({ data }: TableDataProps) {
 						<TableCell className='font-medium'>{data.nama}</TableCell>
 						<TableCell>{data.tahunPeninggalan}</TableCell>
 						<TableCell>{data.nama}</TableCell>
-						<TableCell>{data.nama}</TableCell>
+						<TableCell>{formatDate(data.createdAt)}</TableCell>
 						<TableCell className='flex justify-end '>
 							<PratimaOperations pratima={{ id: data.id }} />
 						</TableCell>

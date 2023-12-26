@@ -2,7 +2,7 @@ import ToFeedButton from '@/components/ToFeedButton';
 import { buttonVariants } from '@/components/ui/Button';
 import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
-import { format } from 'date-fns';
+import { formatDate } from '@/lib/utils';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -63,10 +63,10 @@ const Layout = async ({
 						</div>
 						<dl className='px-6 py-4 text-sm leading-6 bg-white divide-y divide-gray-100'>
 							<div className='flex justify-between py-3 gap-x-4'>
-								<dt className='text-gray-500'>Created</dt>
+								<dt className='text-gray-500'>Dibuat</dt>
 								<dd className='text-gray-700'>
 									<time dateTime={pura.createdAt.toDateString()}>
-										{format(pura.createdAt, 'd MMMM yyyy')}
+										{formatDate(pura.createdAt)}
 									</time>
 								</dd>
 							</div>

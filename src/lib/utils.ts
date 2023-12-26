@@ -55,11 +55,11 @@ export function formatTimeToNow(date: Date): string {
 	});
 }
 
-export function formatDate(input: string | number): string {
+export function formatDate(input: string | number | Date): string {
 	const date = new Date(input);
-	return date.toLocaleDateString('en-US', {
-		month: 'long',
+	return date.toLocaleDateString('id', {
 		day: 'numeric',
+		month: 'long',
 		year: 'numeric',
 	});
 }
