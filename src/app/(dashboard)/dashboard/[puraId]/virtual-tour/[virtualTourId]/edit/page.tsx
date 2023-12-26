@@ -1,28 +1,28 @@
 import DashboardHeader from '@/components/DashboardHeader';
 import DashboardShell from '@/components/DashboardShell';
-import FormEditPelinggih from '@/components/form/FormEditPelinggih';
+import FormEditVirtualTour from '@/components/form/FormEditVirtualTour';
 import { authOptions, getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { notFound, redirect } from 'next/navigation';
 
-interface EditPelinggihPageProps {
-	params: { pelinggihId: string; puraId: string };
+interface EditVirtualTourPageProps {
+	params: { virtualTourId: string; puraId: string };
 }
 
-const EditPelinggihPage = async ({ params }: EditPelinggihPageProps) => {
+const EditVirtualTourPage = async ({ params }: EditVirtualTourPageProps) => {
 	const session = await getAuthSession();
 
 	if (!session) {
 		redirect(authOptions?.pages?.signIn || '/sign-in');
 	}
 
-	const pelinggih = await db.pelinggih.findFirst({
+	const virtualTour = await db.virtualTour.findFirst({
 		where: {
-			id: params.pelinggihId,
+			id: params.virtualTourId,
 			userId: session.user.id,
 		},
 	});
-	if (!pelinggih) {
+	if (!virtualTour) {
 		notFound();
 	}
 
@@ -33,18 +33,15 @@ const EditPelinggihPage = async ({ params }: EditPelinggihPageProps) => {
 				text='Kelola semua aspek terkait dengan Pura dalam satu lokasi yang nyaman.'
 			/>
 			<hr className='h-px bg-red-500' />
-			<FormEditPelinggih
-				pelinggih={{
-					nama: pelinggih.nama,
-					konten: pelinggih.konten,
-					puraId: pelinggih.puraId,
-					id: pelinggih.id,
-					tahunPeninggalan: pelinggih.tahunPeninggalan,
-					thumbnail: pelinggih.thumbnail,
+			<FormEditVirtualTour
+				virtualTour={{
+					id: virtualTour.id,
+					virtualTour: virtualTour.virtualTour,
+					puraId: virtualTour.puraId,
 				}}
 			/>
 		</DashboardShell>
 	);
 };
 
-export default EditPelinggihPage;
+export default EditVirtualTourPage;

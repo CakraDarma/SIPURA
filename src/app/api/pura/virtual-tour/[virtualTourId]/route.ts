@@ -1,11 +1,11 @@
 import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { z } from 'zod';
-import { PelinggihValidator } from '@/lib/validators/inventaris';
+import { VirtualTourValidator } from '@/lib/validators/virtualTour';
 
 const routeContextSchema = z.object({
 	params: z.object({
-		pelinggihId: z.string(),
+		virtualTourId: z.string(),
 	}),
 });
 
@@ -15,11 +15,12 @@ export async function PATCH(
 ) {
 	try {
 		const { params } = routeContextSchema.parse(context);
+		console.log(params, 'sdfaaaaaaaaaaakjasdklfjlasjf');
 
 		const body = await req.json();
 
-		const { nama, puraId, tahunPeninggalan, konten, thumbnail } =
-			PelinggihValidator.parse(body);
+		const { puraId, virtualTour } = VirtualTourValidator.parse(body);
+		console.log(body, 'bodyyyyy');
 		const session = await getAuthSession();
 
 		if (!session?.user) {
@@ -33,19 +34,18 @@ export async function PATCH(
 			},
 		});
 
+		console.log(userRole);
+
 		if (!userRole) {
 			return new Response('Access Denied', { status: 403 });
 		}
 
-		await db.pelinggih.update({
+		await db.virtualTour.update({
 			where: {
-				id: params.pelinggihId,
+				id: params.virtualTourId,
 			},
 			data: {
-				nama,
-				konten,
-				thumbnail,
-				tahunPeninggalan,
+				virtualTour,
 				userId: session.user.id,
 			},
 		});
@@ -57,7 +57,7 @@ export async function PATCH(
 		}
 
 		return new Response(
-			'Could not change Pelinggih to the Pura at this time. Please try again later.',
+			'Could not change Virtual Tour to the Pura at this time. Please try again later.',
 			{ status: 500 }
 		);
 	}
@@ -76,9 +76,9 @@ export async function DELETE(
 			return new Response('Unauthorized', { status: 401 });
 		}
 
-		const pura = await db.pelinggih.findFirst({
+		const pura = await db.virtualTour.findFirst({
 			where: {
-				id: params.pelinggihId,
+				id: params.virtualTourId,
 			},
 			select: {
 				puraId: true,
@@ -101,9 +101,9 @@ export async function DELETE(
 			return new Response('Access Denied', { status: 403 });
 		}
 
-		await db.pelinggih.delete({
+		await db.virtualTour.delete({
 			where: {
-				id: params.pelinggihId,
+				id: params.virtualTourId,
 			},
 		});
 
@@ -114,7 +114,7 @@ export async function DELETE(
 		}
 
 		return new Response(
-			'Could not delete Pelinggih to the Pura at this time. Please try again later.',
+			'Could not deleteVirtualTour to the Pura at this time. Please try again later.',
 			{ status: 500 }
 		);
 	}

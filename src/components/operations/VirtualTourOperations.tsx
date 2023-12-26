@@ -41,7 +41,7 @@ export default function VirtualTourOperations({
 	const { mutate: deleteVirtualTour, isPending } = useMutation({
 		mutationFn: async (virtualTourId: string) => {
 			const { data } = await axios.delete(
-				`/api/pura/virtualTour/${virtualTourId}`
+				`/api/pura/virtual-tour/${virtualTourId}`
 			);
 			return data;
 		},
@@ -73,7 +73,7 @@ export default function VirtualTourOperations({
 				<DropdownMenuContent align='end'>
 					<DropdownMenuItem>
 						<Link
-							href={`/dashboard/${params.puraId}/virtualTour/${virtualTour.id}/edit`}
+							href={`/dashboard/${params.puraId}/virtual-tour/${virtualTour.id}/edit`}
 							className='flex w-full'
 						>
 							Sunting

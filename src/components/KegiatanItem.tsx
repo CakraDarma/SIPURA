@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Kegiatan } from '@prisma/client';
 
 import { Skeleton } from '@/components/ui/skeleton';
-import KegiatanOperations from '@/components/KegiatanOperations';
+import KegiatanOperations from '@/components/operations/KegiatanOperations';
 import { format } from 'date-fns';
 
 interface KegiatanItemProps {
