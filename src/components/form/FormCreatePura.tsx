@@ -1,5 +1,5 @@
 'use client';
-
+import Select from 'react-select';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { toast } from '@/hooks/use-toast';
 import { useCustomToasts } from '@/hooks/use-custom-toasts';
@@ -15,12 +15,42 @@ import { uploadFiles } from '@/lib/uploadthing';
 import EditorJS from '@editorjs/editorjs';
 import { kategoriPura } from '@/config/form';
 import { SingleFileDropzone } from '@/components/SingleFileDropzone';
+import { Desa } from '@prisma/client';
 
 type FormData = z.infer<typeof PuraValidator>;
 
-export default function FormCreatePura() {
+interface DesaOption {
+	value: string;
+	label: string;
+}
+
+interface Kecamatan {
+	id: string;
+	kecamatan: string;
+	desas: Desa[];
+}
+interface FormCreatePuraProps {
+	data: Kecamatan[];
+}
+
+export default function FormCreatePura({ data }: FormCreatePuraProps) {
 	const [file, setFile] = useState<File>();
 	const listKategori = kategoriPura;
+
+	const [selectedDesa, setSelectedDesa] = useState<DesaOption | null>(null);
+
+	const desaOptions: DesaOption[] = data.reduce<DesaOption[]>(
+		(options, kecamatan) => {
+			const desaList = kecamatan.desas.map((desa) => ({
+				value: desa.id,
+				label: `Desa ${desa.desa || 'Unknown'}, Kecamatan ${
+					kecamatan.kecamatan
+				}`,
+			}));
+			return options.concat(desaList);
+		},
+		[]
+	);
 
 	const router = useRouter();
 	const { loginToast } = useCustomToasts();
@@ -43,6 +73,7 @@ export default function FormCreatePura() {
 			tahunBerdiri,
 			konten,
 			thumbnail,
+			desaId,
 		}: FormData) => {
 			const [res] = await uploadFiles([thumbnail], 'imageUploader');
 			const payload = {
@@ -53,6 +84,7 @@ export default function FormCreatePura() {
 				tahunBerdiri,
 				konten,
 				thumbnail: res.fileUrl,
+				desaId,
 			};
 			const { data } = await axios.post('/api/pura', payload);
 			return data as string;
@@ -205,6 +237,7 @@ export default function FormCreatePura() {
 			piodalan: data.piodalan,
 			tahunBerdiri: data.tahunBerdiri,
 			thumbnail: data.thumbnail,
+			desaId: data.desaId,
 		};
 		createPura(payload);
 	}
@@ -279,6 +312,28 @@ export default function FormCreatePura() {
 					<p className='px-1 text-xs text-red-600'>{errors.alamat.message}</p>
 				)}
 			</div>
+			<div className='mb-5'>
+				<label
+					htmlFor='alamat'
+					className='mb-3 block text-base font-medium text-[#07074D]'
+				>
+					Desa<span className='text-red-500'>*</span>
+				</label>
+				<Select
+					options={desaOptions}
+					value={selectedDesa}
+					onChange={(selectedOption) => {
+						if (!selectedOption) return '';
+						setSelectedDesa(selectedOption);
+						setValue('desaId', selectedOption.value);
+					}}
+					placeholder='Pilih Desa...'
+					className='z-10'
+				/>
+				{errors?.alamat && (
+					<p className='px-1 text-xs text-red-600'>{errors.alamat.message}</p>
+				)}
+			</div>
 
 			<div className='flex flex-wrap -mx-3'>
 				<div className='w-full px-3 sm:w-1/2'>
@@ -287,7 +342,7 @@ export default function FormCreatePura() {
 							htmlFor='piodalan'
 							className='mb-3 block text-base font-medium texpiodalant-[#07074D]'
 						>
-							piodalan<span className='text-red-500'>*</span>
+							Piodalan<span className='text-red-500'>*</span>
 						</label>
 						<input
 							{...register('piodalan')}

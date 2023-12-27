@@ -41,6 +41,7 @@ export const PuraValidator = z.object({
 		}),
 	kategori: z.enum(['KAWITAN', 'SWAGINA', 'KAHYANGAN_DESA', 'KAHYANGAN_JAGAT']),
 	thumbnail: z.any(),
+	desaId: z.string(),
 });
 
 export const KontenPuraValidator = z.object({

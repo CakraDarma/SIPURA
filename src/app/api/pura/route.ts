@@ -20,8 +20,8 @@ export async function POST(req: Request) {
 			tahunBerdiri,
 			konten,
 			thumbnail,
+			desaId,
 		} = PuraValidator.parse(body);
-
 		// check if pura already exists
 		const puraExists = await db.pura.findFirst({
 			where: {
@@ -38,6 +38,7 @@ export async function POST(req: Request) {
 			data: {
 				name,
 				alamat,
+				desaId,
 				kategori,
 				piodalan,
 				tahunBerdiri,
