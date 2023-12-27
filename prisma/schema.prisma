@@ -82,14 +82,17 @@ model Pura {
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
   userId       String
+  desaId       String
   konten       Json?
   tahunBerdiri Int
   alamat       String
   piodalan     String
+  actived      Boolean      @default(false)
   kategori     CategoryPura
   thumbnail    String
 
-  user         User          @relation(fields: [userId], references: [id])
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  desa         Desa          @relation(fields: [desaId], references: [id], onDelete: Cascade)
   kegiatans    Kegiatan[]
   subscribers  UserRole[]
   upacaras     Upacara[]
@@ -104,7 +107,7 @@ model UserRole {
   userId String
   puraId String
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   pura Pura @relation(fields: [puraId], references: [id], onDelete: Cascade)
 
   @@id([userId, puraId])
@@ -120,7 +123,7 @@ model Kegiatan {
   puraId    String
 
   pura Pura @relation(fields: [puraId], references: [id], onDelete: Cascade)
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Pratima {
@@ -137,7 +140,7 @@ model Pratima {
   thumbnail        String
 
   pura Pura @relation(fields: [puraId], references: [id], onDelete: Cascade)
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Pelinggih {
@@ -151,8 +154,8 @@ model Pelinggih {
   updatedAt        DateTime @updatedAt
   thumbnail        String
 
-  pura    Pura     @relation(fields: [puraId], references: [id])
-  user    User     @relation(fields: [userId], references: [id])
+  pura    Pura     @relation(fields: [puraId], references: [id], onDelete: Cascade)
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   bantens Banten[]
 }
 
@@ -163,7 +166,7 @@ model User_refresh_token {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @default(now())
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VirtualTour {
@@ -175,7 +178,7 @@ model VirtualTour {
   updatedAt   DateTime @updatedAt
 
   pura Pura @relation(fields: [puraId], references: [id], onDelete: Cascade)
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Banten {
@@ -187,8 +190,8 @@ model Banten {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  pelinggih Pelinggih @relation(fields: [pelinggihId], references: [id])
-  upacara   Upacara   @relation(fields: [upacaraId], references: [id])
+  pelinggih Pelinggih @relation(fields: [pelinggihId], references: [id], onDelete: Cascade)
+  upacara   Upacara   @relation(fields: [upacaraId], references: [id], onDelete: Cascade)
 }
 
 model Upacara {
@@ -201,7 +204,41 @@ model Upacara {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  pura    Pura     @relation(fields: [puraId], references: [id])
-  user    User     @relation(fields: [userId], references: [id])
+  pura    Pura     @relation(fields: [puraId], references: [id], onDelete: Cascade)
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   bantens Banten[]
+}
+
+// schema.prisma
+
+model Desa {
+  id          String    @id @default(cuid())
+  desa        String?
+  kecamatanId String
+  kecamatan   Kecamatan @relation(fields: [kecamatanId], references: [id], onDelete: Cascade)
+  pos         Int?
+  puras       Pura[]
+}
+
+model Kecamatan {
+  id          String    @id @default(cuid())
+  kecamatan   String
+  kabupatenId String
+  desas       Desa[]
+  kabupaten   Kabupaten @relation(fields: [kabupatenId], references: [id], onDelete: Cascade)
+}
+
+model Kabupaten {
+  id         String      @id @default(cuid())
+  kabupaten  String
+  ibuKota    String
+  provinsiId String
+  kecamatans Kecamatan[]
+  provinsi   Provinsi    @relation(fields: [provinsiId], references: [id], onDelete: Cascade)
+}
+
+model Provinsi {
+  id         String      @id @default(cuid())
+  provinsi   String
+  kabupatens Kabupaten[]
 }

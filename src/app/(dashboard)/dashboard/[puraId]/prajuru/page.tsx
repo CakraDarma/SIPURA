@@ -38,6 +38,7 @@ const PrajuruPage = async ({ params }: PrajuruPageProps) => {
 				heading='Prajuru Pura'
 				text='Kelola prajuru di dalam Pura.'
 			/>
+
 			{prajuruPura?.length ? (
 				<div>
 					<div className='flex flex-row justify-end'>
