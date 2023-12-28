@@ -1,5 +1,5 @@
 'use client';
-
+import Select from 'react-select';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { toast } from '@/hooks/use-toast';
 import { useCustomToasts } from '@/hooks/use-custom-toasts';
@@ -16,21 +16,64 @@ import EditorJS from '@editorjs/editorjs';
 import { kategoriPura } from '@/config/form';
 import { SingleFileDropzone } from '@/components/SingleFileDropzone';
 import { urlToBlobFile } from '@/lib/utils';
-import { Pura } from '@prisma/client';
+import { Desa, Pura } from '@prisma/client';
 
 type FormData = z.infer<typeof PuraValidator>;
 
 interface FormEditPuraProps {
 	pura: Pura;
+	data: Kecamatan[];
 }
-export default function FormEditPura({ pura }: FormEditPuraProps) {
+interface DesaOption {
+	value: string;
+	label: string;
+}
+
+interface Kecamatan {
+	id: string;
+	kecamatan: string;
+	desas: Desa[];
+}
+
+export default function FormEditPura({ pura, data }: FormEditPuraProps) {
 	const [file, setFile] = useState<File>();
 	const listKategori = kategoriPura;
+
+	const [selectedDesa, setSelectedDesa] = useState<DesaOption | null>(null);
+
+	const desaOptions: DesaOption[] = data.reduce<DesaOption[]>(
+		(options, kecamatan) => {
+			const desaList = kecamatan.desas.map((desa) => ({
+				value: desa.id,
+				label: `Desa ${desa.desa || 'Unknown'}, Kecamatan ${
+					kecamatan.kecamatan
+				}`,
+			}));
+			return options.concat(desaList);
+		},
+		[]
+	);
+
+	const findLabelByValue = (
+		value: string
+	): { value: string; label: string } | null => {
+		const selectedDesaOption = desaOptions.find(
+			(option) => option.value === value
+		);
+		return (
+			selectedDesaOption || {
+				value,
+				label: `Desa ${value}, Kecamatan ${value}`,
+			}
+		);
+	};
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
 				const fetchedFile = await urlToBlobFile(pura.thumbnail, pura.thumbnail);
+				const labelDesa = findLabelByValue(pura.desaId);
+				setSelectedDesa(labelDesa);
 				setFile(fetchedFile);
 				setValue('thumbnail', fetchedFile);
 			} catch (error) {
@@ -62,6 +105,7 @@ export default function FormEditPura({ pura }: FormEditPuraProps) {
 			piodalan: pura.piodalan,
 			kategori: pura.kategori,
 			konten: pura.konten,
+			desaId: pura.desaId,
 			// thumbnail: file,
 		},
 	});
@@ -75,6 +119,7 @@ export default function FormEditPura({ pura }: FormEditPuraProps) {
 			tahunBerdiri,
 			konten,
 			thumbnail,
+			desaId,
 		}: FormData) => {
 			const [res] = await uploadFiles([thumbnail], 'imageUploader');
 			const payload = {
@@ -84,6 +129,7 @@ export default function FormEditPura({ pura }: FormEditPuraProps) {
 				piodalan,
 				tahunBerdiri,
 				konten,
+				desaId,
 				thumbnail: res.fileUrl,
 			};
 			const { data } = await axios.patch(`/api/pura/${pura.id}`, payload);
@@ -238,6 +284,7 @@ export default function FormEditPura({ pura }: FormEditPuraProps) {
 			piodalan: data.piodalan,
 			tahunBerdiri: data.tahunBerdiri,
 			thumbnail: data.thumbnail,
+			desaId: data.desaId,
 		};
 		editPura(payload);
 	}
@@ -307,6 +354,30 @@ export default function FormEditPura({ pura }: FormEditPuraProps) {
 					placeholder='Masukan Alamat Pura'
 					min='0'
 					className='w-full appearance-none rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
+				/>
+				{errors?.alamat && (
+					<p className='px-1 text-xs text-red-600'>{errors.alamat.message}</p>
+				)}
+			</div>
+
+			<div className='mb-5'>
+				<label
+					htmlFor='alamat'
+					className='mb-3 block text-base font-medium text-[#07074D]'
+				>
+					Desa<span className='text-red-500'>*</span>
+				</label>
+				<Select
+					options={desaOptions}
+					value={selectedDesa}
+					onChange={(selectedOption) => {
+						if (!selectedOption) return '';
+						console.log(selectedOption);
+						setSelectedDesa(selectedOption);
+						setValue('desaId', selectedOption.value);
+					}}
+					placeholder='Pilih Desa...'
+					className='z-10'
 				/>
 				{errors?.alamat && (
 					<p className='px-1 text-xs text-red-600'>{errors.alamat.message}</p>

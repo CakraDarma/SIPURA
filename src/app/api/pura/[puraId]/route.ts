@@ -17,7 +17,7 @@ export async function PATCH(
 		const { params } = routeContextSchema.parse(context);
 
 		const body = await req.json();
-
+		console.log(body);
 		const {
 			alamat,
 			kategori,
@@ -26,6 +26,7 @@ export async function PATCH(
 			tahunBerdiri,
 			konten,
 			thumbnail,
+			desaId,
 		} = PuraValidator.parse(body);
 
 		const session = await getAuthSession();
@@ -58,6 +59,7 @@ export async function PATCH(
 				tahunBerdiri,
 				konten,
 				thumbnail,
+				desaId,
 			},
 		});
 

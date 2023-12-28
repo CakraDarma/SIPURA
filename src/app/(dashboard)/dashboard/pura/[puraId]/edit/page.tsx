@@ -28,6 +28,11 @@ export default async function EditorPage({ params }: EditorPageProps) {
 	}
 
 	const pura = await getPuraForUser(params.puraId, session.user.id);
+	const kecamatans = await db.kecamatan.findMany({
+		include: {
+			desas: true,
+		},
+	});
 	if (!pura) {
 		notFound();
 	}
@@ -39,7 +44,7 @@ export default async function EditorPage({ params }: EditorPageProps) {
 					heading='Dashboard'
 					text='Kelola semua aspek terkait dengan Pura dalam satu lokasi yang nyaman.'
 				/>
-				<FormEditPura pura={pura} />
+				<FormEditPura pura={pura} data={kecamatans} />
 			</div>
 		</div>
 	);

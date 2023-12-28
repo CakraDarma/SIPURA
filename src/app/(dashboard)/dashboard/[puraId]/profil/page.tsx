@@ -24,6 +24,11 @@ const page = async ({ params }: PageProps) => {
 			id: puraId,
 		},
 	});
+	const kecamatans = await db.kecamatan.findMany({
+		include: {
+			desas: true,
+		},
+	});
 
 	if (!pura) return notFound();
 	return (
@@ -33,7 +38,7 @@ const page = async ({ params }: PageProps) => {
 				text='Kelola informasi profil Pura.'
 			/>
 			<div>
-				<FormEditPura pura={pura} />
+				<FormEditPura pura={pura} data={kecamatans} />
 			</div>
 		</DashboardShell>
 	);
