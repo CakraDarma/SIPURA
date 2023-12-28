@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { toast } from '@/hooks/use-toast';
 import { useCustomToasts } from '@/hooks/use-custom-toasts';
 import { VirtualTourValidator } from '@/lib/validators/virtualTour';
@@ -11,9 +11,6 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Button } from '@/components/ui/Button';
-import { uploadFiles } from '@/lib/uploadthing';
-import { SingleFileDropzone } from '@/components/SingleFileDropzone';
-import { urlToBlobFile } from '@/lib/utils';
 import { VirtualTour } from '@prisma/client';
 
 type FormData = z.infer<typeof VirtualTourValidator>;
@@ -24,51 +21,29 @@ interface FormEditVirtualTourProps {
 export default function FormEditVirtualTour({
 	virtualTour,
 }: FormEditVirtualTourProps) {
-	const [file, setFile] = useState<File>();
 	const router = useRouter();
 	const params = useParams();
-
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const fetchedFile = await urlToBlobFile(
-					virtualTour.virtualTour,
-					virtualTour.virtualTour
-				);
-				setFile(fetchedFile);
-				setValue('virtualTour', fetchedFile);
-			} catch (error) {
-				return toast({
-					title: 'Gagal menampilkan data.',
-					description: 'Silakan coba beberapa saat kembali.',
-					variant: 'destructive',
-				});
-			}
-		};
-
-		fetchData();
-	}, []);
+	const [preview, setPreview] = useState(virtualTour.virtualTour);
 
 	const { loginToast } = useCustomToasts();
 	const {
 		handleSubmit,
 		register,
-		formState: { errors },
-		setValue,
 		getValues,
+		formState: { errors },
 	} = useForm<FormData>({
 		resolver: zodResolver(VirtualTourValidator),
 		defaultValues: {
 			puraId: virtualTour.puraId,
+			virtualTour: virtualTour.virtualTour,
 		},
 	});
 
 	const { mutate: editVirtualTour, isPending } = useMutation({
 		mutationFn: async ({ virtualTour, puraId }: FormData) => {
-			const [res] = await uploadFiles([virtualTour], 'imageUploader');
 			const payload = {
 				puraId,
-				virtualTour: res.fileUrl,
+				virtualTour,
 			};
 			const { data } = await axios.patch(
 				`/api/pura/virtual-tour/${params.virtualTourId}`,
@@ -115,45 +90,62 @@ export default function FormEditVirtualTour({
 	}
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
-			<div className='mb-5'>
-				<label
-					htmlFor='virtualTour'
-					className='mb-3 block text-base font-medium text-[#07074D]'
-				>
-					Virtual Tour<span className='text-red-500'>*</span>
-				</label>
-				<div className='flex flex-row items-center justify-center w-full '>
-					<SingleFileDropzone
-						width={200}
-						height={200}
-						value={getValues('virtualTour')}
-						dropzoneOptions={{
-							maxSize: 1024 * 1024 * 1, // 1MB
-						}}
-						onChange={(file) => {
-							setFile(file);
-							setValue('virtualTour', file);
-						}}
-					/>
+		<div>
+			{preview && (
+				<div className='flex flex-col items-center justify-center'>
+					<iframe
+						src={`${preview}`}
+						width='600'
+						height='400'
+						frameBorder='0'
+						allowFullScreen
+					></iframe>
 				</div>
-				{errors?.virtualTour &&
-					typeof errors.virtualTour.message === 'string' && (
+			)}
+			<form onSubmit={handleSubmit(onSubmit)}>
+				<div className='mb-5'>
+					<label
+						htmlFor='virtualTour'
+						className='mb-3 block text-base font-medium text-[#07074D]'
+					>
+						Virtual Tour<span className='text-red-500'>*</span>
+					</label>
+					<input
+						{...register('virtualTour')}
+						type='text'
+						name='virtualTour'
+						id='virtualTour'
+						placeholder='Masukan url virtual tour'
+						min='0'
+						className='w-full appearance-none rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
+					/>
+					{errors?.virtualTour && (
 						<p className='px-1 text-xs text-red-600'>
 							{errors.virtualTour.message}
 						</p>
 					)}
-			</div>
-			<div className='flex justify-end gap-4'>
-				<Button
-					disabled={isPending}
-					variant='subtle'
-					onClick={() => router.back()}
-				>
-					Batalkan
-				</Button>
-				<Button isLoading={isPending}>Buat Virtual Tour</Button>
-			</div>
-		</form>
+				</div>
+				<div className='flex justify-end gap-4'>
+					<Button
+						disabled={isPending}
+						variant='subtle'
+						onClick={() => router.back()}
+					>
+						Batalkan
+					</Button>
+					<Button
+						className='text-white bg-blue-500'
+						variant='subtle'
+						onClick={(e) => {
+							e.preventDefault();
+							setPreview(getValues('virtualTour'));
+						}}
+					>
+						Preview
+					</Button>
+					<Button isLoading={isPending}>Buat Virtual Tour</Button>
+				</div>
+			</form>
+		</div>
 	);
 }

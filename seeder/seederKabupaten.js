@@ -5,7 +5,7 @@ const fs = require('fs/promises');
 
 const prisma = new PrismaClient();
 
-async function importData() {
+async function importDataKabupaten() {
 	try {
 		// Baca data Kabupaten dari file JSON
 		const kabupatenData = await fs.readFile(
@@ -37,4 +37,4 @@ async function importData() {
 }
 
 // Jalankan skrip
-importData();
+module.exports = importDataKabupaten;
