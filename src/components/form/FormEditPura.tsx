@@ -487,7 +487,7 @@ export default function FormEditPura({ pura, data }: FormEditPuraProps) {
 				>
 					Batalkan
 				</Button>
-				<Button isLoading={isPending}>Buat Pura</Button>
+				<Button isLoading={isPending}>Sunting Pura</Button>
 			</div>
 		</form>
 	);

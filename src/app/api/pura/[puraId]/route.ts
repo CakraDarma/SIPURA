@@ -1,6 +1,7 @@
 import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { PuraValidator } from '@/lib/validators/pura';
+import { Role } from '@prisma/client';
 import { z } from 'zod';
 
 const routeContextSchema = z.object({
@@ -30,20 +31,24 @@ export async function PATCH(
 
 		const session = await getAuthSession();
 
+		console.log(session);
+
 		if (!session?.user) {
 			return new Response('Unauthorized', { status: 401 });
 		}
+		// verify user is ADMIN
+		// @ts-ignore
+		if (session.user.role !== Role.ADMIN) {
+			const userRole = await db.userRole.findFirst({
+				where: {
+					puraId: params.puraId,
+					userId: session.user.id,
+				},
+			});
 
-		// verify user is prajuru to passed pura id
-		const userRole = await db.userRole.findFirst({
-			where: {
-				puraId: params.puraId,
-				userId: session.user.id,
-			},
-		});
-
-		if (!userRole) {
-			return new Response('Access Denied', { status: 403 });
+			if (!userRole) {
+				return new Response('Access Denied', { status: 403 });
+			}
 		}
 
 		await db.pura.update({
@@ -98,16 +103,18 @@ export async function DELETE(
 			return new Response('Pura not found', { status: 403 });
 		}
 
-		// verify user is prajuru to passed pura id
-		const userRole = await db.userRole.findFirst({
-			where: {
-				puraId: pura.id,
-				userId: session.user.id,
-			},
-		});
+		// @ts-ignore
+		if (session.user.role !== Role.ADMIN) {
+			const userRole = await db.userRole.findFirst({
+				where: {
+					puraId: pura.id,
+					userId: session.user.id,
+				},
+			});
 
-		if (!userRole) {
-			return new Response('Access Denied', { status: 403 });
+			if (!userRole) {
+				return new Response('Access Denied', { status: 403 });
+			}
 		}
 
 		await db.pura.delete({
@@ -115,7 +122,6 @@ export async function DELETE(
 				id: params.puraId as string,
 			},
 		});
-
 		return new Response('OK');
 	} catch (error) {
 		if (error instanceof z.ZodError) {

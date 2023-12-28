@@ -115,6 +115,14 @@ export default function ConfirmPuraOperations({
 							<Icons.spinner className='w-4 h-4 ml-2 animate-spin' />
 						)}
 					</DropdownMenuItem>
+					<DropdownMenuItem>
+						<Link
+							href={`/dashboard/pura/${pura.id}/edit`}
+							className='flex w-full'
+						>
+							Sunting
+						</Link>
+					</DropdownMenuItem>
 					<DropdownMenuSeparator />
 					<DropdownMenuItem
 						className='flex items-center cursor-pointer text-destructive focus:text-destructive'
