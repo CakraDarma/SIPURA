@@ -25,7 +25,6 @@ export default async function DashboardPage() {
 			actived: false,
 		},
 	});
-	console.log(pura);
 
 	return (
 		<div className='container flex flex-col h-full space-y-6 max-w-7xl'>

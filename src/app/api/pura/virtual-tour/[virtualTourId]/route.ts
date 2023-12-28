@@ -15,12 +15,10 @@ export async function PATCH(
 ) {
 	try {
 		const { params } = routeContextSchema.parse(context);
-		console.log(params, 'sdfaaaaaaaaaaakjasdklfjlasjf');
 
 		const body = await req.json();
 
 		const { puraId, virtualTour } = VirtualTourValidator.parse(body);
-		console.log(body, 'bodyyyyy');
 		const session = await getAuthSession();
 
 		if (!session?.user) {
@@ -33,8 +31,6 @@ export async function PATCH(
 				userId: session.user.id,
 			},
 		});
-
-		console.log(userRole);
 
 		if (!userRole) {
 			return new Response('Access Denied', { status: 403 });

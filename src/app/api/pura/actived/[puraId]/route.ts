@@ -24,7 +24,6 @@ export async function PATCH(
 		if (!session?.user) {
 			return new Response('Unauthorized', { status: 401 });
 		}
-		console.log(body);
 		const userRole = await db.userRole.findFirst({
 			where: {
 				puraId: params.puraId,

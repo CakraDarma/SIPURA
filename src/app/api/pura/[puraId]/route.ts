@@ -17,7 +17,6 @@ export async function PATCH(
 		const { params } = routeContextSchema.parse(context);
 
 		const body = await req.json();
-		console.log(body);
 		const {
 			alamat,
 			kategori,
@@ -70,7 +69,7 @@ export async function PATCH(
 		}
 
 		return new Response(
-			'Could not change Kegiatan to the Pura at this time. Please try again later.',
+			'Could not change Pura to the Pura at this time. Please try again later.',
 			{ status: 500 }
 		);
 	}

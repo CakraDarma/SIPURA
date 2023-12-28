@@ -26,7 +26,6 @@ import { toast } from '@/hooks/use-toast';
 import { Icons } from '@/components/Icons';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import { Button } from '../ui/Button';
 
 interface ConfirmPuraOperationsProps {
 	pura: Pick<Pura, 'id'>;
@@ -40,22 +39,22 @@ export default function ConfirmPuraOperations({
 	const router = useRouter();
 
 	const { mutate: deletePura, isPending } = useMutation({
+		// puraId dari props
 		mutationFn: async (puraId: string) => {
-			const { data } = await axios.delete(`/api/pura/actived/${puraId}`);
+			const { data } = await axios.delete(`/api/pura/${puraId}`);
 			return data;
 		},
 		onError: () => {
 			return toast({
 				title: 'Terjadi kesalahan.',
-				description: 'Pura Anda tidak berhasil dihapus. Silakan coba lagi.',
+				description: 'Pura tidak berhasil dihapus. Silakan coba lagi.',
 				variant: 'destructive',
 			});
 		},
 		onSuccess: () => {
 			toast({
-				description: 'Pura Anda berhasil dihapus.',
+				description: 'Pura berhasil dihapus.',
 			});
-			// window.location.reload();
 			router.refresh();
 			setShowDeleteAlert(false);
 		},
@@ -152,7 +151,7 @@ export default function ConfirmPuraOperations({
 							) : (
 								<Icons.close className='w-4 h-4 mr-2' />
 							)}
-							<span>Tolak</span>
+							<span>Hapus</span>
 						</AlertDialogAction>
 					</AlertDialogFooter>
 				</AlertDialogContent>

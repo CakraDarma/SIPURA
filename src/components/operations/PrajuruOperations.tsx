@@ -36,7 +36,6 @@ export default function UserRolesOperations({
 	const [showDeleteAlert, setShowDeleteAlert] = React.useState<boolean>(false);
 	const router = useRouter();
 	const params = useParams();
-	console.log(params);
 	const { mutate: deletePrajuru, isPending } = useMutation({
 		mutationFn: async (prajuruId: string) => {
 			const { data } = await axios.delete(

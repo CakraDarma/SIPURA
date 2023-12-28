@@ -372,7 +372,6 @@ export default function FormEditPura({ pura, data }: FormEditPuraProps) {
 					value={selectedDesa}
 					onChange={(selectedOption) => {
 						if (!selectedOption) return '';
-						console.log(selectedOption);
 						setSelectedDesa(selectedOption);
 						setValue('desaId', selectedOption.value);
 					}}
