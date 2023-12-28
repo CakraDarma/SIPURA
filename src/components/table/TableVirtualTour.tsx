@@ -14,13 +14,16 @@ import { formatDate } from '@/lib/utils';
 import Link from 'next/link';
 
 interface TableDataProps {
-	data: Pick<VirtualTour, 'id' | 'virtualTour' | 'createdAt'>[] | undefined;
+	data:
+		| Pick<VirtualTour, 'id' | 'virtualTour' | 'createdAt' | 'nama'>[]
+		| undefined;
 }
 export default function TableVirtualTour({ data }: TableDataProps) {
 	return (
 		<Table>
 			<TableHeader>
 				<TableRow>
+					<TableHead>Nama</TableHead>
 					<TableHead className='w-[200px]'>Virtual Tour</TableHead>
 					<TableHead>Dibuat</TableHead>
 					<TableHead className='text-right'>Aksi</TableHead>
@@ -29,6 +32,7 @@ export default function TableVirtualTour({ data }: TableDataProps) {
 			<TableBody>
 				{data?.map((data) => (
 					<TableRow key={data.id}>
+						<TableCell>{data.nama}</TableCell>
 						<TableCell className='font-medium'>
 							<Link
 								className='text-blue-400 underline'

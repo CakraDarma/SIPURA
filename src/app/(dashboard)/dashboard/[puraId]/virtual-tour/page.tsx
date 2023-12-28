@@ -25,9 +25,10 @@ const VirtualTourPage = async ({ params }: VirtualTourPageProps) => {
 	});
 
 	const virtualTourPura = data?.virtualTours.map(
-		({ id, virtualTour, createdAt }) => ({
+		({ id, virtualTour, createdAt, nama }) => ({
 			id,
 			virtualTour,
+			nama,
 			createdAt,
 		})
 	);

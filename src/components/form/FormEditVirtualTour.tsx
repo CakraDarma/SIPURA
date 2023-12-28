@@ -16,7 +16,7 @@ import { VirtualTour } from '@prisma/client';
 type FormData = z.infer<typeof VirtualTourValidator>;
 
 interface FormEditVirtualTourProps {
-	virtualTour: Pick<VirtualTour, 'id' | 'virtualTour' | 'puraId'>;
+	virtualTour: Pick<VirtualTour, 'id' | 'virtualTour' | 'puraId' | 'nama'>;
 }
 export default function FormEditVirtualTour({
 	virtualTour,
@@ -36,14 +36,16 @@ export default function FormEditVirtualTour({
 		defaultValues: {
 			puraId: virtualTour.puraId,
 			virtualTour: virtualTour.virtualTour,
+			nama: virtualTour.nama,
 		},
 	});
 
 	const { mutate: editVirtualTour, isPending } = useMutation({
-		mutationFn: async ({ virtualTour, puraId }: FormData) => {
+		mutationFn: async ({ virtualTour, puraId, nama }: FormData) => {
 			const payload = {
 				puraId,
 				virtualTour,
+				nama,
 			};
 			const { data } = await axios.patch(
 				`/api/pura/virtual-tour/${params.virtualTourId}`,
@@ -66,13 +68,13 @@ export default function FormEditVirtualTour({
 			}
 			toast({
 				title: 'Terjadi kesalahan.',
-				description: 'Tidak dapat menyunting virtualTour.',
+				description: 'Tidak dapat menyunting virtual Tour.',
 				variant: 'destructive',
 			});
 		},
 		onSuccess: () => {
 			toast({
-				description: 'Berhasil menyunting VirtualTour',
+				description: 'Berhasil menyunting virtual tour',
 			});
 			router.refresh();
 			router.push(`/dashboard/${params.puraId}/virtual-tour`);
@@ -82,6 +84,7 @@ export default function FormEditVirtualTour({
 	// submit file
 	async function onSubmit(data: FormData) {
 		const payload: FormData = {
+			nama: data.nama,
 			virtualTour: data.virtualTour,
 			puraId: virtualTour.puraId,
 		};
@@ -103,6 +106,26 @@ export default function FormEditVirtualTour({
 				</div>
 			)}
 			<form onSubmit={handleSubmit(onSubmit)}>
+				<div className='mb-5'>
+					<label
+						htmlFor='nama'
+						className='mb-3 block text-base font-medium text-[#07074D]'
+					>
+						Nama<span className='text-red-500'>*</span>
+					</label>
+					<input
+						{...register('nama')}
+						type='text'
+						name='nama'
+						id='nama'
+						placeholder='Masukan nama virtual tour'
+						min='0'
+						className='w-full appearance-none rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
+					/>
+					{errors?.nama && (
+						<p className='px-1 text-xs text-red-600'>{errors.nama.message}</p>
+					)}
+				</div>
 				<div className='mb-5'>
 					<label
 						htmlFor='virtualTour'
@@ -143,7 +166,7 @@ export default function FormEditVirtualTour({
 					>
 						Preview
 					</Button>
-					<Button isLoading={isPending}>Buat Virtual Tour</Button>
+					<Button isLoading={isPending}>Sunting Virtual Tour</Button>
 				</div>
 			</form>
 		</div>

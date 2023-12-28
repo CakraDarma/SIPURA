@@ -32,8 +32,9 @@ export default function FormCreateVirtualTour() {
 	});
 
 	const { mutate: createVirtualTour, isPending } = useMutation({
-		mutationFn: async ({ virtualTour, puraId }: FormData) => {
+		mutationFn: async ({ virtualTour, puraId, nama }: FormData) => {
 			const payload = {
+				nama,
 				virtualTour,
 				puraId,
 			};
@@ -72,6 +73,7 @@ export default function FormCreateVirtualTour() {
 	// submit file
 	async function onSubmit(data: FormData) {
 		const payload: FormData = {
+			nama: data.nama,
 			virtualTour: data.virtualTour,
 			puraId: params.puraId,
 		};
@@ -92,6 +94,26 @@ export default function FormCreateVirtualTour() {
 				</div>
 			)}
 			<form onSubmit={handleSubmit(onSubmit)}>
+				<div className='mb-5'>
+					<label
+						htmlFor='nama'
+						className='mb-3 block text-base font-medium text-[#07074D]'
+					>
+						Nama<span className='text-red-500'>*</span>
+					</label>
+					<input
+						{...register('nama')}
+						type='text'
+						name='nama'
+						id='nama'
+						placeholder='Masukan nama virtual tour'
+						min='0'
+						className='w-full appearance-none rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
+					/>
+					{errors?.nama && (
+						<p className='px-1 text-xs text-red-600'>{errors.nama.message}</p>
+					)}
+				</div>
 				<div className='mb-5'>
 					<label
 						htmlFor='virtualTour'
