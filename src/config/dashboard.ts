@@ -61,9 +61,14 @@ export const dashboardConfig: DashboardConfig = {
 			icon: 'virtualTour',
 		},
 		{
-			title: 'Prajuru',
+			title: 'Akses Prajuru',
 			href: '/prajuru',
 			icon: 'prajuru',
+		},
+		{
+			title: 'Konfirmasi Pura',
+			href: '/confirm-pura',
+			icon: 'notif',
 		},
 	],
 };

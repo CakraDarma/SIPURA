@@ -56,4 +56,8 @@ export const KontenPuraValidator = z.object({
 	content: z.any(),
 });
 
+export const ActivedPuraValidator = z.object({
+	actived: z.boolean(),
+});
+
 export type KontenPuraCreationRequest = z.infer<typeof KontenPuraValidator>;
