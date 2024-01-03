@@ -16,7 +16,6 @@ import {
 	CommandList,
 } from '@/components/ui/Command';
 import { useOnClickOutside } from '@/hooks/use-on-click-outside';
-import { Building2Icon } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar';
 
 const SearchBar = () => {
