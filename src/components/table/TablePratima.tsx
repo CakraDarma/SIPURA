@@ -17,7 +17,7 @@ interface TableDataProps {
 	data:
 		| Pick<
 				Pratima,
-				'id' | 'nama' | 'createdAt' | 'tahunPeninggalan' | 'thumbnail'
+				'id' | 'nama' | 'createdAt' | 'tahunDitemukan' | 'thumbnail'
 		  >[]
 		| undefined;
 }
@@ -37,7 +37,7 @@ export default function TablePratima({ data }: TableDataProps) {
 				{data?.map((data) => (
 					<TableRow key={data.id}>
 						<TableCell className='font-medium'>{data.nama}</TableCell>
-						<TableCell>{data.tahunPeninggalan}</TableCell>
+						<TableCell>{data.tahunDitemukan}</TableCell>
 						<TableCell>
 							<Link
 								className='text-blue-400 underline'

@@ -25,23 +25,7 @@ export const PratimaValidator = z.object({
 			message: 'Nama Pratima tidak boleh lebih dari 128 karakter',
 		}),
 	konten: z.any(),
-	bahan: z
-		.string()
-		.min(3, {
-			message: 'Nama bahan Pratima harus lebih dari 3 karakter',
-		})
-		.max(128, {
-			message: 'Nama bahan Pratima tidak boleh lebih dari 128 karakter',
-		}),
-	jenis: z
-		.string()
-		.min(3, {
-			message: 'Nama jenis Pratima harus lebih dari 3 karakter',
-		})
-		.max(128, {
-			message: 'Nama jenis Pratima tidak boleh lebih dari 128 karakter',
-		}),
-	tahunPeninggalan: z.number(),
+	tahunDitemukan: z.number(),
 	thumbnail: z.any(),
 	puraId: z.string(),
 });

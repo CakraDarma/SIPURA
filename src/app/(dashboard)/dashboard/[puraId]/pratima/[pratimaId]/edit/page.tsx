@@ -38,10 +38,8 @@ const EditPratimaPage = async ({ params }: EditPratimaPageProps) => {
 					nama: pratima.nama,
 					konten: pratima.konten,
 					puraId: pratima.puraId,
-					jenis: pratima.jenis,
-					bahan: pratima.bahan,
 					id: pratima.id,
-					tahunPeninggalan: pratima.tahunPeninggalan,
+					tahunDitemukan: pratima.tahunDitemukan,
 					thumbnail: pratima.thumbnail,
 				}}
 			/>

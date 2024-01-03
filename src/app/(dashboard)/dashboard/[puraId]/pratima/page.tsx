@@ -25,10 +25,10 @@ const PratimaPage = async ({ params }: PratimaPageProps) => {
 	});
 
 	const pratimaPura = data?.pratimas.map(
-		({ id, tahunPeninggalan, thumbnail, createdAt, nama }) => ({
+		({ id, tahunDitemukan, thumbnail, createdAt, nama }) => ({
 			id,
 			nama,
-			tahunPeninggalan,
+			tahunDitemukan,
 			thumbnail,
 			createdAt,
 		})

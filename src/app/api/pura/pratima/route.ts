@@ -6,7 +6,7 @@ import { z } from 'zod';
 export async function POST(req: Request) {
 	try {
 		const body = await req.json();
-		const { konten, nama, tahunPeninggalan, thumbnail, puraId, bahan, jenis } =
+		const { konten, nama, tahunDitemukan, thumbnail, puraId } =
 			PratimaValidator.parse(body);
 
 		const session = await getAuthSession();
@@ -40,10 +40,8 @@ export async function POST(req: Request) {
 			data: {
 				konten,
 				nama,
-				tahunPeninggalan,
+				tahunDitemukan,
 				thumbnail,
-				bahan,
-				jenis,
 				userId: session.user.id,
 				puraId: pura.id,
 			},

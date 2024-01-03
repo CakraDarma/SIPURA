@@ -21,14 +21,7 @@ type FormData = z.infer<typeof PratimaValidator>;
 interface FormEditPratimaProps {
 	pratima: Pick<
 		Pratima,
-		| 'id'
-		| 'konten'
-		| 'nama'
-		| 'puraId'
-		| 'tahunPeninggalan'
-		| 'thumbnail'
-		| 'bahan'
-		| 'jenis'
+		'id' | 'konten' | 'nama' | 'puraId' | 'tahunDitemukan' | 'thumbnail'
 	>;
 }
 export default function FormEditPratima({ pratima }: FormEditPratimaProps) {
@@ -67,9 +60,7 @@ export default function FormEditPratima({ pratima }: FormEditPratimaProps) {
 		resolver: zodResolver(PratimaValidator),
 		defaultValues: {
 			nama: pratima.nama,
-			tahunPeninggalan: pratima.tahunPeninggalan,
-			bahan: pratima.bahan,
-			jenis: pratima.jenis,
+			tahunDitemukan: pratima.tahunDitemukan,
 			konten: pratima.konten,
 			// thumbnail: pratima.,
 			puraId: pratima.puraId,
@@ -79,21 +70,17 @@ export default function FormEditPratima({ pratima }: FormEditPratimaProps) {
 	const { mutate: editPratima, isPending } = useMutation({
 		mutationFn: async ({
 			nama,
-			tahunPeninggalan,
+			tahunDitemukan,
 			konten,
 			thumbnail,
-			jenis,
-			bahan,
 			puraId,
 		}: FormData) => {
 			const [res] = await uploadFiles([thumbnail], 'imageUploader');
 			const payload = {
 				nama,
-				tahunPeninggalan,
+				tahunDitemukan,
 				konten,
 				puraId,
-				jenis,
-				bahan,
 				thumbnail: res.fileUrl,
 			};
 			const { data } = await axios.patch(
@@ -134,12 +121,10 @@ export default function FormEditPratima({ pratima }: FormEditPratimaProps) {
 	async function onSubmit(data: FormData) {
 		const payload: FormData = {
 			nama: data.nama,
-			tahunPeninggalan: data.tahunPeninggalan,
+			tahunDitemukan: data.tahunDitemukan,
 			konten: data.konten,
 			thumbnail: data.thumbnail,
 			puraId: pratima.puraId,
-			jenis: pratima.jenis,
-			bahan: pratima.bahan,
 		};
 		editPratima(payload);
 	}
@@ -171,70 +156,24 @@ export default function FormEditPratima({ pratima }: FormEditPratimaProps) {
 				<div className='w-full px-3 sm:w-1/2'>
 					<div className='mb-5'>
 						<label
-							htmlFor='tahunPeninggalan'
+							htmlFor='tahunDitemukan'
 							className='mb-3 block text-base font-medium text-[#07074D]'
 						>
 							Tahun Pembangunan<span className='text-red-500'>*</span>
 						</label>
 						<input
-							{...register('tahunPeninggalan', {
+							{...register('tahunDitemukan', {
 								valueAsNumber: true,
 							})}
 							type='number'
-							name='tahunPeninggalan'
-							id='tahunPeninggalan'
+							name='tahunDitemukan'
+							id='tahunDitemukan'
 							placeholder='Masukan tahun pratima dibangun'
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						/>
-						{errors?.tahunPeninggalan && (
+						{errors?.tahunDitemukan && (
 							<p className='px-1 text-xs text-red-600'>
-								{errors.tahunPeninggalan.message}
-							</p>
-						)}
-					</div>
-				</div>
-			</div>
-			<div className='flex flex-wrap -mx-3'>
-				<div className='w-full px-3 sm:w-1/2'>
-					<div className='mb-5'>
-						<label
-							htmlFor='bahan'
-							className='mb-3 block text-base font-medium text-[#07074D]'
-						>
-							Bahan<span className='text-red-500'>*</span>
-						</label>
-						<input
-							{...register('bahan')}
-							type='text'
-							name='bahan'
-							id='bahan'
-							placeholder='Masukan bahan dari pratima'
-							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
-						/>
-						{errors?.nama && (
-							<p className='px-1 text-xs text-red-600'>{errors.nama.message}</p>
-						)}
-					</div>
-				</div>
-				<div className='w-full px-3 sm:w-1/2'>
-					<div className='mb-5'>
-						<label
-							htmlFor='jenis'
-							className='mb-3 block text-base font-medium text-[#07074D]'
-						>
-							Jenis<span className='text-red-500'>*</span>
-						</label>
-						<input
-							{...register('jenis')}
-							type='text'
-							name='jenis'
-							id='jenis'
-							placeholder='Masukan jenis dari pratima'
-							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
-						/>
-						{errors?.tahunPeninggalan && (
-							<p className='px-1 text-xs text-red-600'>
-								{errors.tahunPeninggalan.message}
+								{errors.tahunDitemukan.message}
 							</p>
 						)}
 					</div>

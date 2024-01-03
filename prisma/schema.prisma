@@ -127,17 +127,15 @@ model Kegiatan {
 }
 
 model Pratima {
-  id               String   @id @default(cuid())
-  nama             String
-  konten           Json?
-  puraId           String
-  bahan            String
-  jenis            String
-  userId           String
-  tahunPeninggalan Int
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-  thumbnail        String
+  id             String   @id @default(cuid())
+  nama           String
+  konten         Json?
+  puraId         String
+  userId         String
+  tahunDitemukan Int
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  thumbnail      String
 
   pura Pura @relation(fields: [puraId], references: [id], onDelete: Cascade)
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
