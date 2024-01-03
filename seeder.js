@@ -10,3 +10,6 @@
 
 const importDataPelinggih = require('./seeder/seederPelinggih');
 importDataPelinggih();
+
+// const importDataPratima = require('./seeder/seederPratima');
+// importDataPratima();
