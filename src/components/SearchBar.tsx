@@ -17,6 +17,7 @@ import {
 } from '@/components/ui/Command';
 import { useOnClickOutside } from '@/hooks/use-on-click-outside';
 import { Building2Icon } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar';
 
 const SearchBar = () => {
 	const [input, setInput] = useState<string>('');
@@ -89,7 +90,14 @@ const SearchBar = () => {
 									key={pura.id}
 									value={pura.name}
 								>
-									<Building2Icon className='w-4 h-4 mr-2' />
+									{/* <Building2Icon className='w-4 h-4 mr-2' /> */}
+									<Avatar className='w-5 h-5 mr-2'>
+										<AvatarImage
+											src={`${pura.thumbnail}`}
+											alt={`${pura.name}`}
+										/>
+										<AvatarFallback>P</AvatarFallback>
+									</Avatar>
 									<a href={`/${pura.name}`}>{pura.name}</a>
 								</CommandItem>
 							))}
