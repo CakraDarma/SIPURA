@@ -29,7 +29,7 @@ const KegiatanPuraPage = async ({ params }: KegiatanPuraPageProps) => {
 	if (!post) return notFound();
 
 	return (
-		<div className='container py-10 mt-10 max-w-7xl'>
+		<div className='container py-10 max-w-7xl'>
 			<div className='flex flex-col items-center justify-between h-full sm:flex-row sm:items-start'>
 				<div className='flex-1 w-full p-4 bg-white rounded-sm sm:w-0'>
 					<ToFeedButton />

@@ -1,7 +1,5 @@
 import EmptyPlaceholder from '@/components/EmptyPlaceholder';
-import Hero from '@/components/Hero';
 import KegiatanList from '@/components/KegiatanList';
-import PuraNav from '@/components/PuraNav';
 import { db } from '@/lib/db';
 import { redirect } from 'next/navigation';
 import React from 'react';
@@ -31,12 +29,6 @@ export default async function kegiatanPurapage({
 	}
 	return (
 		<>
-			<Hero
-				imageUrl={pura?.thumbnail}
-				heading={pura?.name}
-				text='Temukan Informasi Pura'
-			/>
-			<PuraNav />
 			<div className='container py-10 max-w-7xl'>
 				<h2 className='mb-6 text-3xl font-medium tracking-wide text-gray-800 border-b-2 dark:text-white md:text-4xl font-heading border-orange-light w-fit'>
 					Kegiatan

@@ -24,12 +24,6 @@ export default async function Purapage({ params }: PuraPageProps) {
 	}
 	return (
 		<>
-			<Hero
-				imageUrl={pura?.thumbnail}
-				heading={pura?.name}
-				text='Temukan Informasi Pura'
-			/>
-			<PuraNav />
 			<div className='container py-10 max-w-7xl'>
 				<h2 className='mb-3 text-3xl font-medium tracking-wide text-gray-800 border-b-2 dark:text-white md:text-4xl font-heading border-orange-light w-fit'>
 					Profil
