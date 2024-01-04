@@ -24,6 +24,7 @@ import {
 	type Icon as LucideIcon,
 	Menu,
 	UserCog,
+	Clock,
 } from 'lucide-react';
 
 // import { FaRegUserCircle } from 'react-icons/fa';
@@ -53,6 +54,7 @@ export const Icons = {
 	ellipsis: MoreVertical,
 	close: X,
 	logo: Command,
+	jam: Clock,
 	google: (props: LucideProps) => (
 		<svg {...props} viewBox='0 0 24 24'>
 			<path

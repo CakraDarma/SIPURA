@@ -7,7 +7,6 @@ import { cn } from '@/lib/utils';
 import { Icons } from '@/components/Icons';
 import SearchBar from '@/components/SearchBar';
 import Footer from '@/components/Footer';
-import Hero from '@/components/Hero';
 
 interface DashboardLayoutProps {
 	children?: React.ReactNode;
@@ -45,11 +44,6 @@ export default async function DashboardLayout({
 				</div>
 			</header>
 			<main className='flex flex-col flex-1 w-full overflow-hidden'>
-				<Hero
-					imageUrl='/images/hero-list-pura.jpg'
-					heading='List Pura'
-					text='Temukan Informasi Pura'
-				/>
 				{children}
 			</main>
 			<Footer />

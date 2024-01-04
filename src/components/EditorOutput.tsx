@@ -20,17 +20,17 @@ const renderers = {
 
 const style = {
 	paragraph: {
-		fontSize: '0.875rem',
-		lineHeight: '1.25rem',
+		fontSize: '1rem',
+		fontWeight: 200,
+		textAlign: 'justify',
 	},
 };
 
 const EditorOutput = ({ content }: EditorOutputProps) => {
 	return (
-		// @ts-expect-error
 		<Output
 			style={style}
-			className='text-sm'
+			className='font-sans text-base text'
 			renderers={renderers}
 			data={content}
 		/>
