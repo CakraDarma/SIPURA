@@ -3,9 +3,11 @@ import { buttonVariants } from '@/components/ui/Button';
 
 interface postHero {
 	imageUrl: string;
+	heading: string;
+	text: string;
 }
 
-const Hero = ({ imageUrl }: postHero) => {
+const Hero = ({ imageUrl, text, heading }: postHero) => {
 	const divStyle = {
 		backgroundImage: `url(${imageUrl})`,
 	};
@@ -18,10 +20,10 @@ const Hero = ({ imageUrl }: postHero) => {
 			>
 				<div className='container flex flex-col items-center justify-center gap-6 md:px-40'>
 					<h1 className='text-center text-white text-3xl  md:text-5xl font-normal md:leading-[76.80px] font-heading '>
-						Eksplorasi Pura Melalui Portal Informasi yang Interaktif
+						{heading}
 					</h1>
 					<p className='text-sm font-thin text-center text-white md:text-xl font-heading'>
-						SIPURA: Sistem Informasi dan Virtual Tour Pura
+						{text}
 					</p>
 					<Link
 						href={'/'}

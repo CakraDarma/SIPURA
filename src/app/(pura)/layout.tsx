@@ -45,7 +45,11 @@ export default async function DashboardLayout({
 				</div>
 			</header>
 			<main className='flex flex-col flex-1 w-full overflow-hidden'>
-				<Hero imageUrl='/images/hero2.jpg' />
+				<Hero
+					imageUrl='/images/hero-list-pura.jpg'
+					heading='List Pura'
+					text='Temukan Informasi Pura'
+				/>
 				{children}
 			</main>
 			<Footer />
