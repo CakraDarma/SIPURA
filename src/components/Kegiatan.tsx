@@ -46,7 +46,7 @@ const Kegiatan = ({ kegiatan, puraName }: KegiatanProps) => {
 						ref={pRef}
 					>
 						<EditorOutput content={kegiatan.content} />
-						{pRef.current?.clientHeight === 160 ? (
+						{pRef.current?.clientHeight === 100 ? (
 							// blur bottom if content is too long
 							<div className='absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white to-transparent'></div>
 						) : null}
