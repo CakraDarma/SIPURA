@@ -9,7 +9,7 @@ export const metadata = {
 	description: 'Penelusuran Pura SIPURA.',
 };
 
-export default async function SettingsPage() {
+export default async function purasPage() {
 	const pura = await db.pura.findMany({});
 
 	return (
