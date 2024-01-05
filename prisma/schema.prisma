@@ -129,7 +129,7 @@ model Kegiatan {
 model Pratima {
   id             String   @id @default(cuid())
   nama           String
-  konten         Json?
+  konten         String?  @db.Text
   puraId         String
   userId         String
   tahunDitemukan Int
@@ -146,7 +146,7 @@ model Pelinggih {
   puraId           String
   userId           String
   nama             String
-  konten           Json?
+  konten           String?  @db.Text
   tahunPeninggalan Int
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt

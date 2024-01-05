@@ -1,7 +1,5 @@
 import EditorOutput from '@/components/EditorOutput';
-import Hero from '@/components/Hero';
 import { Icons } from '@/components/Icons';
-import PuraNav from '@/components/PuraNav';
 import { db } from '@/lib/db';
 import { formatDate } from '@/lib/utils';
 import { redirect } from 'next/navigation';
