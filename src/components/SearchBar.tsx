@@ -96,7 +96,7 @@ const SearchBar = () => {
 										/>
 										<AvatarFallback>P</AvatarFallback>
 									</Avatar>
-									<a href={`/${pura.name}`}>{pura.name}</a>
+									<a href={`/pura/${pura.id}`}>{pura.name}</a>
 								</CommandItem>
 							))}
 						</CommandGroup>
