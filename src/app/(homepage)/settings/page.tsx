@@ -21,7 +21,7 @@ export default async function SettingsPage() {
 		},
 	});
 
-	await new Promise((resolve) => setTimeout(resolve, 7000));
+	// await new Promise((resolve) => setTimeout(resolve, 7000));
 
 	return (
 		<div className='max-w-4xl py-12 mx-auto mt-10'>

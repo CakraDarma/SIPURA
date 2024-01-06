@@ -4,7 +4,7 @@ import { buttonVariants } from '@/components/ui/Button';
 interface postHero {
 	imageUrl: string;
 	heading: string;
-	text: string;
+	text: string | null;
 }
 
 const Hero = ({ imageUrl, text, heading }: postHero) => {

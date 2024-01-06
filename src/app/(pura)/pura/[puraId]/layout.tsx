@@ -18,6 +18,9 @@ export default async function DashboardLayout({
 		where: {
 			id: params.puraId,
 		},
+		include: {
+			desa: true,
+		},
 	});
 	if (!pura) {
 		redirect('/');
@@ -27,7 +30,7 @@ export default async function DashboardLayout({
 			<Hero
 				imageUrl={pura?.thumbnail}
 				heading={pura?.name}
-				text='Temukan Informasi Pura'
+				text={`Desa ${pura.desa.desa}`}
 			/>
 			<PuraNav />
 			{children}
