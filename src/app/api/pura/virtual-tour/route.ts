@@ -6,7 +6,8 @@ import { z } from 'zod';
 export async function POST(req: Request) {
 	try {
 		const body = await req.json();
-		const { virtualTour, puraId, nama } = VirtualTourValidator.parse(body);
+		const { virtualTour, puraId, nama, thumbnail } =
+			VirtualTourValidator.parse(body);
 
 		const session = await getAuthSession();
 
@@ -37,8 +38,9 @@ export async function POST(req: Request) {
 
 		await db.virtualTour.create({
 			data: {
-				virtualTour,
 				nama,
+				virtualTour,
+				thumbnail,
 				userId: session.user.id,
 				puraId: pura.id,
 			},

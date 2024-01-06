@@ -18,7 +18,8 @@ export async function PATCH(
 
 		const body = await req.json();
 
-		const { puraId, virtualTour, nama } = VirtualTourValidator.parse(body);
+		const { puraId, virtualTour, nama, thumbnail } =
+			VirtualTourValidator.parse(body);
 		const session = await getAuthSession();
 
 		if (!session?.user) {
@@ -42,6 +43,7 @@ export async function PATCH(
 			},
 			data: {
 				nama,
+				thumbnail,
 				virtualTour,
 				userId: session.user.id,
 			},

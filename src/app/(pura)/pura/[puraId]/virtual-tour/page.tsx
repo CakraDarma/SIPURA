@@ -39,6 +39,7 @@ export default async function VirtualTourPuraPage({
 								src={virtualTour.virtualTour}
 								allowFullScreen
 							></iframe>
+							<img src={virtualTour.virtualTour} alt='f' />
 						</div>
 					))}
 				</div>

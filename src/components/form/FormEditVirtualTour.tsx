@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from '@/hooks/use-toast';
 import { useCustomToasts } from '@/hooks/use-custom-toasts';
 import { VirtualTourValidator } from '@/lib/validators/virtualTour';
@@ -12,24 +12,56 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Button } from '@/components/ui/Button';
 import { VirtualTour } from '@prisma/client';
-
+import { urlToBlobFile } from '@/lib/utils';
+import { uploadFiles } from '@/lib/uploadthing';
+import { SingleFileDropzone } from '@/components/SingleFileDropzone';
 type FormData = z.infer<typeof VirtualTourValidator>;
 
 interface FormEditVirtualTourProps {
-	virtualTour: Pick<VirtualTour, 'id' | 'virtualTour' | 'puraId' | 'nama'>;
+	virtualTour: Pick<
+		VirtualTour,
+		'id' | 'virtualTour' | 'puraId' | 'nama' | 'thumbnail'
+	>;
 }
 export default function FormEditVirtualTour({
 	virtualTour,
 }: FormEditVirtualTourProps) {
+	const [file, setFile] = useState<File>();
 	const router = useRouter();
 	const params = useParams();
 	const [preview, setPreview] = useState(virtualTour.virtualTour);
 
 	const { loginToast } = useCustomToasts();
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const fetchedFile = await urlToBlobFile(
+					virtualTour.thumbnail,
+					virtualTour.thumbnail
+				);
+
+				setFile(fetchedFile);
+				setValue('thumbnail', fetchedFile);
+
+				getValues('thumbnail');
+			} catch (error) {
+				return toast({
+					title: 'Gagal menampilkan data.',
+					description: 'Silakan coba beberapa saat kembali.',
+					variant: 'destructive',
+				});
+			}
+		};
+
+		fetchData();
+	}, []);
+
 	const {
 		handleSubmit,
 		register,
 		getValues,
+		setValue,
 		formState: { errors },
 	} = useForm<FormData>({
 		resolver: zodResolver(VirtualTourValidator),
@@ -41,11 +73,13 @@ export default function FormEditVirtualTour({
 	});
 
 	const { mutate: editVirtualTour, isPending } = useMutation({
-		mutationFn: async ({ virtualTour, puraId, nama }: FormData) => {
+		mutationFn: async ({ virtualTour, puraId, nama, thumbnail }: FormData) => {
+			const [res] = await uploadFiles([thumbnail], 'imageUploader');
 			const payload = {
 				puraId,
 				virtualTour,
 				nama,
+				thumbnail: res.fileUrl,
 			};
 			const { data } = await axios.patch(
 				`/api/pura/virtual-tour/${params.virtualTourId}`,
@@ -87,6 +121,7 @@ export default function FormEditVirtualTour({
 			nama: data.nama,
 			virtualTour: data.virtualTour,
 			puraId: virtualTour.puraId,
+			thumbnail: data.thumbnail,
 		};
 
 		editVirtualTour(payload);
@@ -147,6 +182,28 @@ export default function FormEditVirtualTour({
 							{errors.virtualTour.message}
 						</p>
 					)}
+				</div>
+				<div className='mb-5'>
+					<label
+						htmlFor='thumbnail'
+						className='mb-3 block text-base font-medium text-[#07074D]'
+					>
+						Thumbnail<span className='text-red-500'>*</span>
+					</label>
+					<div className='flex flex-row items-center justify-center w-full '>
+						<SingleFileDropzone
+							width={200}
+							height={200}
+							value={file}
+							dropzoneOptions={{
+								maxSize: 1024 * 1024 * 1, // 1MB
+							}}
+							onChange={(file) => {
+								setFile(file);
+								setValue('thumbnail', file);
+							}}
+						/>
+					</div>
 				</div>
 				<div className='flex justify-end gap-4'>
 					<Button

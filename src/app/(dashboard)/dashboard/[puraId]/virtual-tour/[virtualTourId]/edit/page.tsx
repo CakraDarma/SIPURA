@@ -39,6 +39,7 @@ const EditVirtualTourPage = async ({ params }: EditVirtualTourPageProps) => {
 					virtualTour: virtualTour.virtualTour,
 					nama: virtualTour.nama,
 					puraId: virtualTour.puraId,
+					thumbnail: virtualTour.thumbnail,
 				}}
 			/>
 		</DashboardShell>

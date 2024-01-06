@@ -11,10 +11,13 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Button } from '@/ui/Button';
+import { uploadFiles } from '@/lib/uploadthing';
+import { SingleFileDropzone } from '@/components/SingleFileDropzone';
 
 type FormData = z.infer<typeof VirtualTourValidator>;
 
 export default function FormCreateVirtualTour() {
+	const [file, setFile] = useState<File>();
 	const router = useRouter();
 	const params = useParams();
 	const [preview, setPreview] = useState<string>();
@@ -23,6 +26,7 @@ export default function FormCreateVirtualTour() {
 		handleSubmit,
 		register,
 		getValues,
+		setValue,
 		formState: { errors },
 	} = useForm<FormData>({
 		resolver: zodResolver(VirtualTourValidator),
@@ -32,11 +36,13 @@ export default function FormCreateVirtualTour() {
 	});
 
 	const { mutate: createVirtualTour, isPending } = useMutation({
-		mutationFn: async ({ virtualTour, puraId, nama }: FormData) => {
+		mutationFn: async ({ virtualTour, puraId, nama, thumbnail }: FormData) => {
+			const [res] = await uploadFiles([thumbnail], 'imageUploader');
 			const payload = {
 				nama,
 				virtualTour,
 				puraId,
+				thumbnail: res.fileUrl,
 			};
 			const { data } = await axios.post('/api/pura/virtual-tour', payload);
 			return data as string;
@@ -76,6 +82,7 @@ export default function FormCreateVirtualTour() {
 			nama: data.nama,
 			virtualTour: data.virtualTour,
 			puraId: params.puraId,
+			thumbnail: data.thumbnail,
 		};
 		createVirtualTour(payload);
 	}
@@ -135,6 +142,28 @@ export default function FormCreateVirtualTour() {
 							{errors.virtualTour.message}
 						</p>
 					)}
+				</div>
+				<div className='mb-5'>
+					<label
+						htmlFor='thumbnail'
+						className='mb-3 block text-base font-medium text-[#07074D]'
+					>
+						Thumbnail<span className='text-red-500'>*</span>
+					</label>
+					<div className='flex flex-row items-center justify-center w-full '>
+						<SingleFileDropzone
+							width={200}
+							height={200}
+							value={file}
+							dropzoneOptions={{
+								maxSize: 1024 * 1024 * 1, // 1MB
+							}}
+							onChange={(file) => {
+								setFile(file);
+								setValue('thumbnail', file);
+							}}
+						/>
+					</div>
 				</div>
 				<div className='flex justify-end gap-4'>
 					<Button

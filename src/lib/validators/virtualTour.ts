@@ -18,4 +18,5 @@ export const VirtualTourValidator = z.object({
 			message: 'Link tidak valid',
 		}),
 	puraId: z.string(),
+	thumbnail: z.any(),
 });

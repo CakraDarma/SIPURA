@@ -62,7 +62,6 @@ export default function FormEditPratima({ pratima }: FormEditPratimaProps) {
 			nama: pratima.nama,
 			tahunDitemukan: pratima.tahunDitemukan,
 			konten: pratima.konten,
-			// thumbnail: pratima.,
 			puraId: pratima.puraId,
 		},
 	});
