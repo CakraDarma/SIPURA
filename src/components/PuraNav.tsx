@@ -9,8 +9,6 @@ export default function PuraNav() {
 	const params = useParams();
 	const path = usePathname();
 
-	console.log(path);
-
 	return (
 		<div className='bg-gray-200'>
 			<div className='container flex flex-row justify-center w-full gap-12 py-3 max-w-7xl'>
