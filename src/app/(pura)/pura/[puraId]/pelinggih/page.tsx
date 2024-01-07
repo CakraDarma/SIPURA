@@ -1,4 +1,4 @@
-import CardPelinggih from '@/components/CardPelinggih';
+import Card from '@/components/Card';
 import EmptyPlaceholder from '@/components/EmptyPlaceholder';
 import { db } from '@/lib/db';
 import React from 'react';
@@ -31,7 +31,13 @@ export default async function PelinggihPuraPage({
 			{pura?.pelinggihs.length ? (
 				<div className='flex flex-col flex-wrap items-center justify-center gap-10 mb-10 md:items-start md:flex-row'>
 					{pura.pelinggihs.map((pelinggih) => (
-						<CardPelinggih key={pelinggih.id} pelinggih={pelinggih} />
+						<Card
+							key={pelinggih.id}
+							thumbnail={pelinggih.thumbnail}
+							deskripsi={pelinggih?.konten}
+							nama={pelinggih.nama}
+							link={`pura/${pura.id}/pelinggih/${pelinggih.id}`}
+						/>
 					))}
 				</div>
 			) : (

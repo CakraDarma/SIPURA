@@ -1,7 +1,7 @@
 import { db } from '@/lib/db';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-import CardPelinggih from '@/components/CardPelinggih';
+import Card from '@/components/Card';
 
 interface PelinggihPuraPageProps {
 	params: {
@@ -134,7 +134,13 @@ const PelinggihPuraPage = async ({ params }: PelinggihPuraPageProps) => {
 					</div>
 					<div className='flex flex-col items-center justify-between gap-6 p-3 sm:flex-row'>
 						{pura?.pelinggihs.slice(0, 4).map((pelinggih) => (
-							<CardPelinggih key={pelinggih.id} pelinggih={pelinggih} />
+							<Card
+								key={pelinggih.id}
+								thumbnail={pelinggih.thumbnail}
+								deskripsi={pelinggih?.konten}
+								nama={pelinggih.nama}
+								link={`pura/${pura.id}/pelinggih/${pelinggih.id}`}
+							/>
 						))}
 					</div>
 				</div>
