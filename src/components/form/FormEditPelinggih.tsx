@@ -215,7 +215,7 @@ export default function FormEditPelinggih({
 						height={200}
 						value={getValues('thumbnail')}
 						dropzoneOptions={{
-							maxSize: 1024 * 1024 * 1, // 1MB
+							maxSize: 1024 * 1024 * 4, // 4MB
 						}}
 						onChange={(file) => {
 							setFile(file);

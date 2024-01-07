@@ -196,7 +196,7 @@ export default function FormEditVirtualTour({
 							height={200}
 							value={file}
 							dropzoneOptions={{
-								maxSize: 1024 * 1024 * 1, // 1MB
+								maxSize: 1024 * 1024 * 4, // 4MB
 							}}
 							onChange={(file) => {
 								setFile(file);
