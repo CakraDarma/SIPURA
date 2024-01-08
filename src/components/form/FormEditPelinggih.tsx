@@ -80,19 +80,34 @@ export default function FormEditPelinggih({
 			thumbnail,
 			puraId,
 		}: FormData) => {
-			const [res] = await uploadFiles([thumbnail], 'imageUploader');
-			const payload = {
-				nama,
-				tahunPeninggalan,
-				konten,
-				puraId,
-				thumbnail: res.fileUrl,
-			};
-			const { data } = await axios.patch(
-				`/api/pura/pelinggih/${pelinggih.id}`,
-				payload
-			);
-			return data as string;
+			if (thumbnail.name == pelinggih.thumbnail) {
+				const payload = {
+					nama,
+					tahunPeninggalan,
+					konten,
+					puraId,
+					thumbnail: pelinggih.thumbnail,
+				};
+				const { data } = await axios.patch(
+					`/api/pura/pelinggih/${pelinggih.id}`,
+					payload
+				);
+				return data as string;
+			} else {
+				const [res] = await uploadFiles([thumbnail], 'imageUploader');
+				const payload = {
+					nama,
+					tahunPeninggalan,
+					konten,
+					puraId,
+					thumbnail: res.fileUrl,
+				};
+				const { data } = await axios.patch(
+					`/api/pura/pelinggih/${pelinggih.id}`,
+					payload
+				);
+				return data as string;
+			}
 		},
 		onError: (err) => {
 			if (err instanceof AxiosError) {
@@ -232,7 +247,7 @@ export default function FormEditPelinggih({
 				>
 					Batalkan
 				</Button>
-				<Button isLoading={isPending}>Buat Pelinggih</Button>
+				<Button isLoading={isPending}>Sunting</Button>
 			</div>
 		</form>
 	);

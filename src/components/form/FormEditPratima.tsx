@@ -74,19 +74,34 @@ export default function FormEditPratima({ pratima }: FormEditPratimaProps) {
 			thumbnail,
 			puraId,
 		}: FormData) => {
-			const [res] = await uploadFiles([thumbnail], 'imageUploader');
-			const payload = {
-				nama,
-				tahunDitemukan,
-				konten,
-				puraId,
-				thumbnail: res.fileUrl,
-			};
-			const { data } = await axios.patch(
-				`/api/pura/pratima/${pratima.id}`,
-				payload
-			);
-			return data as string;
+			if (thumbnail.name == pratima.thumbnail) {
+				const payload = {
+					nama,
+					tahunDitemukan,
+					konten,
+					puraId,
+					thumbnail: pratima.thumbnail,
+				};
+				const { data } = await axios.patch(
+					`/api/pura/pratima/${pratima.id}`,
+					payload
+				);
+				return data as string;
+			} else {
+				const [res] = await uploadFiles([thumbnail], 'imageUploader');
+				const payload = {
+					nama,
+					tahunDitemukan,
+					konten,
+					puraId,
+					thumbnail: res.fileUrl,
+				};
+				const { data } = await axios.patch(
+					`/api/pura/pratima/${pratima.id}`,
+					payload
+				);
+				return data as string;
+			}
 		},
 		onError: (err) => {
 			if (err instanceof AxiosError) {
@@ -226,7 +241,7 @@ export default function FormEditPratima({ pratima }: FormEditPratimaProps) {
 				>
 					Batalkan
 				</Button>
-				<Button isLoading={isPending}>Buat Pratima</Button>
+				<Button isLoading={isPending}>Sunting</Button>
 			</div>
 		</form>
 	);

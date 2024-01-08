@@ -73,19 +73,38 @@ export default function FormEditVirtualTour({
 	});
 
 	const { mutate: editVirtualTour, isPending } = useMutation({
-		mutationFn: async ({ virtualTour, puraId, nama, thumbnail }: FormData) => {
-			const [res] = await uploadFiles([thumbnail], 'imageUploader');
-			const payload = {
-				puraId,
-				virtualTour,
-				nama,
-				thumbnail: res.fileUrl,
-			};
-			const { data } = await axios.patch(
-				`/api/pura/virtual-tour/${params.virtualTourId}`,
-				payload
-			);
-			return data as string;
+		mutationFn: async ({
+			virtualTour: vt,
+			puraId,
+			nama,
+			thumbnail,
+		}: FormData) => {
+			if (thumbnail.name == virtualTour.thumbnail) {
+				const payload = {
+					puraId,
+					virtualTour: vt,
+					nama,
+					thumbnail: virtualTour.thumbnail,
+				};
+				const { data } = await axios.patch(
+					`/api/pura/virtual-tour/${params.virtualTourId}`,
+					payload
+				);
+				return data as string;
+			} else {
+				const [res] = await uploadFiles([thumbnail], 'imageUploader');
+				const payload = {
+					puraId,
+					virtualTour: vt,
+					nama,
+					thumbnail: res.fileUrl,
+				};
+				const { data } = await axios.patch(
+					`/api/pura/virtual-tour/${params.virtualTourId}`,
+					payload
+				);
+				return data as string;
+			}
 		},
 		onError: (err) => {
 			if (err instanceof AxiosError) {
@@ -223,7 +242,7 @@ export default function FormEditVirtualTour({
 					>
 						Preview
 					</Button>
-					<Button isLoading={isPending}>Sunting Virtual Tour</Button>
+					<Button isLoading={isPending}>Sunting</Button>
 				</div>
 			</form>
 		</div>

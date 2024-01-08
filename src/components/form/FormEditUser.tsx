@@ -61,16 +61,26 @@ export function FormEditUser({ user, className, ...props }: FormEditUserProps) {
 
 	const { mutate: updateUsername, isPending } = useMutation({
 		mutationFn: async ({ name, telepon, alamat, thumbnail }: FormData) => {
-			const [res] = await uploadFiles([thumbnail], 'imageUploader');
-			const payload: FormData = {
-				name,
-				telepon,
-				alamat,
-				thumbnail: res.fileUrl,
-			};
-
-			const { data } = await axios.patch(`/api/user/`, payload);
-			return data;
+			if (thumbnail.name == user.image) {
+				const payload: FormData = {
+					name,
+					telepon,
+					alamat,
+					thumbnail: user.image,
+				};
+				const { data } = await axios.patch(`/api/user/`, payload);
+				return data;
+			} else {
+				const [res] = await uploadFiles([thumbnail], 'imageUploader');
+				const payload: FormData = {
+					name,
+					telepon,
+					alamat,
+					thumbnail: res.fileUrl,
+				};
+				const { data } = await axios.patch(`/api/user/`, payload);
+				return data;
+			}
 		},
 		onError: (err) => {
 			if (err instanceof AxiosError) {

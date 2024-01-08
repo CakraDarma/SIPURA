@@ -121,19 +121,34 @@ export default function FormEditPura({ pura, data }: FormEditPuraProps) {
 			thumbnail,
 			desaId,
 		}: FormData) => {
-			const [res] = await uploadFiles([thumbnail], 'imageUploader');
-			const payload = {
-				alamat,
-				kategori,
-				name,
-				piodalan,
-				tahunBerdiri,
-				konten,
-				desaId,
-				thumbnail: res.fileUrl,
-			};
-			const { data } = await axios.patch(`/api/pura/${pura.id}`, payload);
-			return data as string;
+			if (thumbnail.name == pura.thumbnail) {
+				const payload = {
+					alamat,
+					kategori,
+					name,
+					piodalan,
+					tahunBerdiri,
+					konten,
+					desaId,
+					thumbnail: pura.thumbnail,
+				};
+				const { data } = await axios.patch(`/api/pura/${pura.id}`, payload);
+				return data as string;
+			} else {
+				const [res] = await uploadFiles([thumbnail], 'imageUploader');
+				const payload = {
+					alamat,
+					kategori,
+					name,
+					piodalan,
+					tahunBerdiri,
+					konten,
+					desaId,
+					thumbnail: res.fileUrl,
+				};
+				const { data } = await axios.patch(`/api/pura/${pura.id}`, payload);
+				return data as string;
+			}
 		},
 		onError: (err) => {
 			if (err instanceof AxiosError) {
