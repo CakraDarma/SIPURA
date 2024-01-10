@@ -23,7 +23,7 @@ export default function TablePura({ data }: TableDataProps) {
 		<Table>
 			<TableHeader>
 				<TableRow>
-					<TableHead className='w-[100px]'>Nama</TableHead>
+					<TableHead>Nama</TableHead>
 					<TableHead>Alamat</TableHead>
 					<TableHead>Thumbnail</TableHead>
 					<TableHead>Dibuat</TableHead>

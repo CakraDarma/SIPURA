@@ -3,6 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Pura } from '@prisma/client';
 import { db } from '@/lib/db';
+import PuraOperations from '@/components/operations/PuraOperations';
+import { getAuthSession } from '@/lib/auth';
 
 interface CardPuraProps {
 	pura: Pura;
@@ -33,6 +35,7 @@ export default async function CardPuras({ pura, link }: CardPuraProps) {
 	});
 	const formattedResult = `Desa ${result?.desa}, Kecamatan ${result?.kecamatan?.kecamatan}, Kabupaten ${result?.kecamatan?.kabupaten?.kabupaten}, Provinsi ${result?.kecamatan?.kabupaten?.provinsi?.provinsi}`;
 
+	const session = await getAuthSession();
 	return (
 		<Link href={link}>
 			<div className='relative flex w-full max-w-[23rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg'>
@@ -55,6 +58,14 @@ export default async function CardPuras({ pura, link }: CardPuraProps) {
 					<p className='block font-sans text-sm antialiased font-light leading-relaxed text-gray-500'>
 						{formattedResult}
 					</p>
+				</div>
+				<div className='flex flex-row justify-end w-full'>
+					{
+						// @ts-ignore
+						session?.user.role === 'ADMIN' ? (
+							<PuraOperations pura={{ id: pura.id, name: pura.name }} />
+						) : null
+					}
 				</div>
 			</div>
 		</Link>

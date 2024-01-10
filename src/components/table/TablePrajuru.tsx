@@ -21,7 +21,7 @@ export default function TablePrajuru({ data }: TableDataProps) {
 		<Table>
 			<TableHeader>
 				<TableRow>
-					<TableHead className='w-[100px]'>Nama</TableHead>
+					<TableHead>Nama</TableHead>
 					<TableHead>Email</TableHead>
 					<TableHead>Telepon</TableHead>
 					<TableHead>Alamat</TableHead>

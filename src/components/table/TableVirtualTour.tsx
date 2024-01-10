@@ -24,7 +24,7 @@ export default function TableVirtualTour({ data }: TableDataProps) {
 			<TableHeader>
 				<TableRow>
 					<TableHead>Nama</TableHead>
-					<TableHead className='w-[200px]'>Virtual Tour</TableHead>
+					<TableHead>Virtual Tour</TableHead>
 					<TableHead>Dibuat</TableHead>
 					<TableHead className='text-right'>Aksi</TableHead>
 				</TableRow>

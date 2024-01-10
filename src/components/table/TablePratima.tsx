@@ -26,7 +26,7 @@ export default function TablePratima({ data }: TableDataProps) {
 		<Table>
 			<TableHeader>
 				<TableRow>
-					<TableHead className='w-[100px]'>Nama</TableHead>
+					<TableHead>Nama</TableHead>
 					<TableHead>Tahun dibangun</TableHead>
 					<TableHead>Thumbnail</TableHead>
 					<TableHead>Dibuat</TableHead>
