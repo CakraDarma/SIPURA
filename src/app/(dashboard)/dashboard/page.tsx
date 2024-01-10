@@ -5,9 +5,9 @@ import { db } from '@/lib/db';
 import DashboardHeader from '@/components/DashboardHeader';
 import DashboardShell from '@/components/DashboardShell';
 import EmptyPlaceholder from '@/components/EmptyPlaceholder';
-import CardPura from '@/components/CardPura';
 import Link from 'next/link';
 import { buttonVariants } from '@/components/ui/Button';
+import CardPuras from '@/components/CardPuras';
 
 export const metadata = {
 	title: 'Dashboard',
@@ -29,6 +29,7 @@ export default async function DashboardPage() {
 					},
 				},
 			},
+			actived: true,
 		},
 	});
 
@@ -51,7 +52,11 @@ export default async function DashboardPage() {
 						</Link>
 						<div className='flex flex-col flex-wrap items-center justify-center gap-6 mb-10 md:flex-row'>
 							{pura.map((pura, index) => (
-								<CardPura key={index} pura={pura} />
+								<CardPuras
+									key={index}
+									pura={pura}
+									link={`dashboard/${pura.id}`}
+								/>
 							))}
 						</div>
 					</div>

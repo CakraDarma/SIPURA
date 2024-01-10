@@ -11,7 +11,11 @@ export const metadata = {
 };
 
 export default async function purasPage() {
-	const pura = await db.pura.findMany({});
+	const pura = await db.pura.findMany({
+		where: {
+			actived: true,
+		},
+	});
 
 	return (
 		<>
@@ -25,7 +29,7 @@ export default async function purasPage() {
 					<div>
 						<div className='flex flex-col flex-wrap items-center justify-center gap-6 mb-10 md:flex-row'>
 							{pura.map((pura, index) => (
-								<CardPuras key={index} pura={pura} />
+								<CardPuras key={index} pura={pura} link={`pura/${pura.id}`} />
 							))}
 						</div>
 					</div>

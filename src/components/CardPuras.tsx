@@ -6,9 +6,10 @@ import { db } from '@/lib/db';
 
 interface CardPuraProps {
 	pura: Pura;
+	link: string;
 }
 
-export default async function CardPuras({ pura }: CardPuraProps) {
+export default async function CardPuras({ pura, link }: CardPuraProps) {
 	const result = await db.desa.findUnique({
 		where: { id: `${pura.desaId}` }, // Gantilah "your-desa-id" dengan ID desa yang diinginkan
 		select: {
@@ -33,7 +34,7 @@ export default async function CardPuras({ pura }: CardPuraProps) {
 	const formattedResult = `Desa ${result?.desa}, Kecamatan ${result?.kecamatan?.kecamatan}, Kabupaten ${result?.kecamatan?.kabupaten?.kabupaten}, Provinsi ${result?.kecamatan?.kabupaten?.provinsi?.provinsi}`;
 
 	return (
-		<Link href={`pura/${pura.id}`}>
+		<Link href={link}>
 			<div className='relative flex w-full max-w-[23rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg'>
 				<div className='relative mx-4 mt-4 overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40'>
 					<Image

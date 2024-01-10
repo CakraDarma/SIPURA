@@ -25,15 +25,6 @@ const Hero = ({ imageUrl, text, heading }: postHero) => {
 					<p className='text-sm font-thin text-center text-white md:text-xl font-heading'>
 						{text}
 					</p>
-					<Link
-						href={'/'}
-						className={buttonVariants({
-							variant: 'outline',
-							className: 'text-sm w-32',
-						})}
-					>
-						Selengkapnya
-					</Link>
 				</div>
 			</section>
 		</>
