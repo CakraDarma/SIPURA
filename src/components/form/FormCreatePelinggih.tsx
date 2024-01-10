@@ -70,13 +70,13 @@ export default function FormCreatePelinggih() {
 
 			toast({
 				title: 'Terjadi kesalahan.',
-				description: 'Tidak dapat membuat Pelinggih.',
+				description: 'Tidak dapat membuat pelinggih.',
 				variant: 'destructive',
 			});
 		},
 		onSuccess: () => {
 			toast({
-				description: 'Berhasil menambahkan Pelinggih',
+				description: 'Berhasil menambahkan pelinggih',
 			});
 			router.refresh();
 			router.push(`/dashboard/${params.puraId}/pelinggih`);
@@ -110,7 +110,7 @@ export default function FormCreatePelinggih() {
 							type='text'
 							name='nama'
 							id='nama'
-							placeholder='Masukan tahun pelinggih dibangun'
+							placeholder='Masukkan tahun pelinggih dibangun'
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						/>
 						{errors?.nama && (
@@ -133,7 +133,7 @@ export default function FormCreatePelinggih() {
 							type='number'
 							name='tahunPeninggalan'
 							id='tahunPeninggalan'
-							placeholder='Masukan tahun pelinggih dibangun'
+							placeholder='Masukkan tahun pelinggih dibangun'
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						/>
 						{errors?.tahunPeninggalan && (

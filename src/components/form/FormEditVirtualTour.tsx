@@ -121,7 +121,7 @@ export default function FormEditVirtualTour({
 			}
 			toast({
 				title: 'Terjadi kesalahan.',
-				description: 'Tidak dapat menyunting virtual Tour.',
+				description: 'Tidak dapat menyunting virtual tour.',
 				variant: 'destructive',
 			});
 		},
@@ -172,7 +172,7 @@ export default function FormEditVirtualTour({
 						type='text'
 						name='nama'
 						id='nama'
-						placeholder='Masukan nama virtual tour'
+						placeholder='Masukkan nama virtual tour'
 						min='0'
 						className='w-full appearance-none rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 					/>
@@ -192,7 +192,7 @@ export default function FormEditVirtualTour({
 						type='text'
 						name='virtualTour'
 						id='virtualTour'
-						placeholder='Masukan url virtual tour'
+						placeholder='Masukkan url virtual tour'
 						min='0'
 						className='w-full appearance-none rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 					/>

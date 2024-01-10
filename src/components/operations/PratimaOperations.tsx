@@ -97,7 +97,7 @@ export default function PratimaOperations({ pratima }: PratimaOperationsProps) {
 						</AlertDialogDescription>
 					</AlertDialogHeader>
 					<AlertDialogFooter>
-						<AlertDialogCancel>Cancel</AlertDialogCancel>
+						<AlertDialogCancel>Batalkan</AlertDialogCancel>
 						<AlertDialogAction
 							onClick={async (event) => {
 								event.preventDefault();

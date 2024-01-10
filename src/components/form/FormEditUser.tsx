@@ -127,7 +127,7 @@ export function FormEditUser({ user, className, ...props }: FormEditUserProps) {
 							type='text'
 							name='name'
 							id='name'
-							placeholder='Masukan Username'
+							placeholder='Masukkan Username'
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						/>
 						{errors?.name && (
@@ -148,7 +148,7 @@ export function FormEditUser({ user, className, ...props }: FormEditUserProps) {
 							type='number'
 							name='telepon'
 							id='telepon'
-							placeholder='Masukan nomor telepon'
+							placeholder='Masukkan nomor telepon'
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						/>
 						{errors?.telepon && (
@@ -169,7 +169,7 @@ export function FormEditUser({ user, className, ...props }: FormEditUserProps) {
 				<textarea
 					{...register('alamat')}
 					id='alamat'
-					placeholder='Masukan alamat rumah'
+					placeholder='Masukkan alamat rumah'
 					required
 					className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md h-40'
 				></textarea>

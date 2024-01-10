@@ -95,14 +95,14 @@ export default function VirtualTourOperations({
 				<AlertDialogContent>
 					<AlertDialogHeader>
 						<AlertDialogTitle>
-							Apakah Anda yakin ingin menghapus virtualTour ini?
+							Apakah Anda yakin ingin menghapus virtual Tour ini?
 						</AlertDialogTitle>
 						<AlertDialogDescription>
 							Tindakan ini tidak dapat dibatalkan.
 						</AlertDialogDescription>
 					</AlertDialogHeader>
 					<AlertDialogFooter>
-						<AlertDialogCancel>Cancel</AlertDialogCancel>
+						<AlertDialogCancel>Batalkan</AlertDialogCancel>
 						<AlertDialogAction
 							onClick={async (event) => {
 								event.preventDefault();

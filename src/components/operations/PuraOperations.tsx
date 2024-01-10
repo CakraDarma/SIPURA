@@ -96,7 +96,7 @@ export default function PuraOperations({ pura }: PuraOperationsProps) {
 						</AlertDialogDescription>
 					</AlertDialogHeader>
 					<AlertDialogFooter>
-						<AlertDialogCancel>Cancel</AlertDialogCancel>
+						<AlertDialogCancel>Batalkan</AlertDialogCancel>
 						<AlertDialogAction
 							onClick={async (event) => {
 								event.preventDefault();

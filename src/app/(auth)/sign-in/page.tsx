@@ -14,7 +14,7 @@ export default function AuthenticationPage() {
 				<div className='flex flex-col space-y-2 text-center'>
 					<h1 className='text-2xl font-semibold tracking-tight'>Login Akun</h1>
 					<p className='text-sm text-muted-foreground'>
-						Masukan email dan password untuk login ke akun Anda
+						Masukkan email dan password untuk login ke akun Anda
 					</p>
 				</div>
 				<SignIn />

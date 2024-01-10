@@ -114,7 +114,7 @@ export default function FormCreatePura({ data }: FormCreatePuraProps) {
 
 			toast({
 				title: 'Terjadi kesalahan.',
-				description: 'Tidak dapat membuat pura.',
+				description: 'Tidak dapat membuat Pura.',
 				variant: 'destructive',
 			});
 		},
@@ -258,7 +258,7 @@ export default function FormCreatePura({ data }: FormCreatePuraProps) {
 							type='text'
 							name='name'
 							id='name'
-							placeholder='Masukan nama Pura'
+							placeholder='Masukkan nama Pura'
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						/>
 						{errors?.name && (
@@ -281,7 +281,7 @@ export default function FormCreatePura({ data }: FormCreatePuraProps) {
 							type='number'
 							name='tahunBerdiri'
 							id='tahunBerdiri'
-							placeholder='Masukan Tahun Berdiri Pura'
+							placeholder='Masukkan tahun berdiri Pura'
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						/>
 						{errors?.tahunBerdiri && (
@@ -304,7 +304,7 @@ export default function FormCreatePura({ data }: FormCreatePuraProps) {
 					type='text'
 					name='alamat'
 					id='alamat'
-					placeholder='Masukan Alamat Pura'
+					placeholder='Masukkan alamat Pura'
 					min='0'
 					className='w-full appearance-none rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 				/>
@@ -327,7 +327,7 @@ export default function FormCreatePura({ data }: FormCreatePuraProps) {
 						setSelectedDesa(selectedOption);
 						setValue('desaId', selectedOption.value);
 					}}
-					placeholder='Pilih Desa...'
+					placeholder='Pilih desa...'
 					className='z-10'
 				/>
 				{errors?.alamat && (
@@ -349,6 +349,7 @@ export default function FormCreatePura({ data }: FormCreatePuraProps) {
 							type='text'
 							name='piodalan'
 							id='piodalan'
+							placeholder='Masukkan piodalan Pura'
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						/>
 						{errors?.piodalan && (
@@ -372,8 +373,8 @@ export default function FormCreatePura({ data }: FormCreatePuraProps) {
 							onChange={(e) => setValue('kategori', e.target.value)}
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						>
-							<option value='' className='text-gray-500'>
-								-- Pilih Kategori Pura --
+							<option value='' className='text-[#6B7280]'>
+								-- Pilih kategori Pura --
 							</option>
 							{listKategori.map((data) => (
 								<option key={data.id} value={data.value}>
@@ -438,7 +439,7 @@ export default function FormCreatePura({ data }: FormCreatePuraProps) {
 				>
 					Batalkan
 				</Button>
-				<Button isLoading={isPending}>Buat Pura</Button>
+				<Button isLoading={isPending}>Simpan</Button>
 			</div>
 		</form>
 	);

@@ -70,13 +70,13 @@ export default function FormCreatePratima() {
 
 			toast({
 				title: 'Terjadi kesalahan.',
-				description: 'Tidak dapat membuat Pratima.',
+				description: 'Tidak dapat membuat pratima.',
 				variant: 'destructive',
 			});
 		},
 		onSuccess: () => {
 			toast({
-				description: 'Berhasil menambahkan Pratima',
+				description: 'Berhasil menambahkan pratima',
 			});
 			router.refresh();
 			router.push(`/dashboard/${params.puraId}/pratima`);
@@ -110,7 +110,7 @@ export default function FormCreatePratima() {
 							type='text'
 							name='nama'
 							id='nama'
-							placeholder='Masukan nama dari pratima'
+							placeholder='Masukkan nama dari pratima'
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						/>
 						{errors?.nama && (
@@ -133,7 +133,7 @@ export default function FormCreatePratima() {
 							type='number'
 							name='tahunDitemukan'
 							id='tahunDitemukan'
-							placeholder='Masukan tahun pratima ditemukan'
+							placeholder='Masukkan tahun pratima ditemukan'
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						/>
 						{errors?.tahunDitemukan && (

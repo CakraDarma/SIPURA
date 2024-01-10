@@ -16,7 +16,7 @@ export default function AuthenticationPage() {
 						Register Akun
 					</h1>
 					<p className='text-sm text-muted-foreground'>
-						Masukan data untuk melakukan register akun
+						Masukkan data untuk melakukan register akun
 					</p>
 				</div>
 				<SignUp />

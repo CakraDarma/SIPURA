@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { useParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Pura } from '@prisma/client';
 
 import {
@@ -35,7 +35,6 @@ export default function ConfirmPuraOperations({
 	pura,
 }: ConfirmPuraOperationsProps) {
 	const [showDeleteAlert, setShowDeleteAlert] = React.useState<boolean>(false);
-	const params = useParams();
 	const router = useRouter();
 
 	const { mutate: deletePura, isPending } = useMutation({

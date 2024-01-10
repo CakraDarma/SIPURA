@@ -174,7 +174,7 @@ export default function FormEditPura({ pura, data }: FormEditPuraProps) {
 			}
 			toast({
 				title: 'Terjadi kesalahan.',
-				description: 'Tidak dapat menyunting pura.',
+				description: 'Tidak dapat menyunting Pura.',
 				variant: 'destructive',
 			});
 		},
@@ -320,7 +320,7 @@ export default function FormEditPura({ pura, data }: FormEditPuraProps) {
 							type='text'
 							name='name'
 							id='name'
-							placeholder='Masukan nama Pura'
+							placeholder='Masukkan nama Pura'
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						/>
 						{errors?.name && (
@@ -343,7 +343,7 @@ export default function FormEditPura({ pura, data }: FormEditPuraProps) {
 							type='number'
 							name='tahunBerdiri'
 							id='tahunBerdiri'
-							placeholder='Masukan Tahun Berdiri Pura'
+							placeholder='Masukkan tahun berdiri Pura'
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						/>
 						{errors?.tahunBerdiri && (
@@ -366,7 +366,7 @@ export default function FormEditPura({ pura, data }: FormEditPuraProps) {
 					type='text'
 					name='alamat'
 					id='alamat'
-					placeholder='Masukan Alamat Pura'
+					placeholder='Masukkan alamat Pura'
 					min='0'
 					className='w-full appearance-none rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 				/>
@@ -411,6 +411,7 @@ export default function FormEditPura({ pura, data }: FormEditPuraProps) {
 							{...register('piodalan')}
 							type='text'
 							name='piodalan'
+							placeholder='Masukkan piodalan Pura'
 							id='piodalan'
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						/>
@@ -435,7 +436,7 @@ export default function FormEditPura({ pura, data }: FormEditPuraProps) {
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						>
 							<option value='' className='text-gray-500'>
-								-- Pilih Kategori Pura --
+								-- Pilih kategori Pura --
 							</option>
 							{listKategori.map((data) => (
 								<option key={data.id} value={data.value}>
@@ -502,7 +503,7 @@ export default function FormEditPura({ pura, data }: FormEditPuraProps) {
 				>
 					Batalkan
 				</Button>
-				<Button isLoading={isPending}>Sunting Pura</Button>
+				<Button isLoading={isPending}>Sunting</Button>
 			</div>
 		</form>
 	);
