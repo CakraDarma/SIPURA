@@ -19,8 +19,6 @@ import { Pelinggih } from '@prisma/client';
 type FormData = z.infer<typeof PelinggihValidator>;
 
 interface FormEditPelinggihProps {
-	// pelinggih: FormData;
-	// pelinggih: FormData;
 	pelinggih: Pick<
 		Pelinggih,
 		'id' | 'konten' | 'nama' | 'puraId' | 'tahunPeninggalan' | 'thumbnail'
@@ -165,7 +163,7 @@ export default function FormEditPelinggih({
 							type='text'
 							name='nama'
 							id='nama'
-							placeholder='Masukkan tahun pelinggih dibangun'
+							placeholder='Masukkan nama pelinggih'
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						/>
 						{errors?.nama && (
@@ -209,7 +207,7 @@ export default function FormEditPelinggih({
 				<textarea
 					{...register('konten')}
 					id='konten'
-					placeholder='Tambahkan deskripsi dari Pelinggih'
+					placeholder='Masukkan deskripsi dari pelinggih'
 					required
 					className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md h-40'
 				></textarea>
