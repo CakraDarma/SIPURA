@@ -20,6 +20,7 @@ interface UserAccountNavProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const UserAccountNav = ({ user }: UserAccountNavProps) => {
+	const notificationCount = 1;
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger>
@@ -46,7 +47,21 @@ export const UserAccountNav = ({ user }: UserAccountNavProps) => {
 						<Link href={item.href}>{item.title}</Link>
 					</DropdownMenuItem>
 				))}
-
+				<DropdownMenuItem>
+					<Link
+						href={'/dashboard/pura/confirm-pura'}
+						className='flex flex-row justify-between w-full'
+					>
+						<div className='flex flex-row justify-between w-full '>
+							<p>Konfirmasi Pura</p>
+							{notificationCount > 0 && (
+								<div className='flex items-center justify-center w-5 h-5 text-white bg-red-500 rounded-full '>
+									<p className='text-[9px] '>{notificationCount}</p>
+								</div>
+							)}
+						</div>
+					</Link>
+				</DropdownMenuItem>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem
 					className='cursor-pointer'

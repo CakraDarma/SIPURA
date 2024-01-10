@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import SignIn from '@/components/SignIn';
+import SignUp from '@/components/SignUp';
 
 export const metadata: Metadata = {
 	title: 'Sign Up',
@@ -19,7 +19,7 @@ export default function AuthenticationPage() {
 						Masukan data untuk melakukan register akun
 					</p>
 				</div>
-				<SignIn />
+				<SignUp />
 			</div>
 		</div>
 	);

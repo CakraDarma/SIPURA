@@ -43,11 +43,6 @@ export const dashboardConfig: DashboardConfig = {
 			href: '/prajuru',
 			icon: 'prajuru',
 		},
-		{
-			title: 'Konfirmasi Pura',
-			href: '/confirm-pura',
-			icon: 'notif',
-		},
 	],
 	dashboardNav: [
 		{

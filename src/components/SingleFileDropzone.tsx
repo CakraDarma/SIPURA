@@ -161,7 +161,7 @@ const SingleFileDropzone = React.forwardRef<HTMLInputElement, InputProps>(
 								void onChange?.(undefined);
 							}}
 						>
-							<div className='flex items-center justify-center w-5 h-5 transition-all duration-300 bg-black border border-solid rounded-md border-white/70 hover:h-6 hover:w-6'>
+							<div className='flex items-center justify-center w-5 h-5 mt-4 mr-4 transition-all duration-300 bg-black border border-solid rounded-md border-white/70 hover:h-6 hover:w-6'>
 								<X className='text-white/70' width={18} height={18} />
 							</div>
 						</div>

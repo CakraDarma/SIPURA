@@ -14,7 +14,7 @@ export default async function AuthLayout({ children }: AuthLayoutProps) {
 		redirect('/');
 	}
 	const divStyle = {
-		backgroundImage: `url(/images/hero.png)`,
+		backgroundImage: `url(/images/auth-page.jpg)`,
 	};
 
 	return (
@@ -35,7 +35,7 @@ export default async function AuthLayout({ children }: AuthLayoutProps) {
 						<p className='text-lg'>
 							&ldquo;Sistem informasi dan virtual tour Pura memperkaya
 							pengalaman pengunjung dengan informasi Pura yang mendalam dan
-							mempermudah pengelolaan Pura.&rdquo;
+							mempermudah manajemen informasi Pura.&rdquo;
 						</p>
 					</blockquote>
 				</div>

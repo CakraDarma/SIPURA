@@ -37,12 +37,6 @@ export default async function DashboardPage() {
 
 				{pura?.length ? (
 					<div>
-						<Link
-							className={buttonVariants({})}
-							href={`/dashboard/pura/create`}
-						>
-							Tambah
-						</Link>
 						<div className='flex flex-col flex-wrap items-center justify-center gap-6 mb-10 md:flex-row'>
 							<TablePura data={pura} />
 						</div>
