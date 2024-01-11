@@ -95,7 +95,7 @@ export default function VirtualTourOperations({
 				<AlertDialogContent>
 					<AlertDialogHeader>
 						<AlertDialogTitle>
-							Apakah Anda yakin ingin menghapus virtual Tour ini?
+							Apakah Anda yakin ingin menghapus virtual tour ini?
 						</AlertDialogTitle>
 						<AlertDialogDescription>
 							Tindakan ini tidak dapat dibatalkan.

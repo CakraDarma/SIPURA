@@ -58,7 +58,7 @@ const VirtualTourPage = async ({ params }: VirtualTourPageProps) => {
 						Belum ada virtual tour
 					</EmptyPlaceholder.Title>
 					<EmptyPlaceholder.Description>
-						Anda belum memiliki virtual Tour yang dimasukkan. Mulai tambahkan
+						Anda belum memiliki virtual tour yang dimasukkan. Mulai tambahkan
 						sekarang.
 					</EmptyPlaceholder.Description>
 					<Link

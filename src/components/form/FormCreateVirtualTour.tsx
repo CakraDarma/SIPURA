@@ -183,7 +183,7 @@ export default function FormCreateVirtualTour() {
 					>
 						Preview
 					</Button>
-					<Button isLoading={isPending}>Buat VirtualTour</Button>
+					<Button isLoading={isPending}>Simpan</Button>
 				</div>
 			</form>
 		</div>
