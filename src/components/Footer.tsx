@@ -12,10 +12,10 @@ const Footer = () => {
 							<div className='flex items-center justify-center gap-3'>
 								<Icons.logo />
 								<h2 className=' text-2xl font-medium leading-[38.40px] flex font-heading'>
-									SIJALAN
+									SIPURA
 								</h2>
 							</div>
-							<p className='text-base font-normal leading-normal font-sans'>
+							<p className='font-sans text-base font-normal leading-normal'>
 								Sistem informasi dan virtual tour Pura menghadirkan kelestarian
 								Pura dalam bentuk digital memberikan pengalaman interaktif
 								kepada pengguna.

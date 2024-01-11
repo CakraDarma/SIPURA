@@ -8,7 +8,7 @@ export default function Features() {
 		<div className=' bg-neutral-900'>
 			<div className='container my-12'>
 				<h1 className='text-4xl font-semibold text-orange-dark font-heading'>
-					Apa itu SIJALAN
+					Apa itu SIPura
 				</h1>
 			</div>
 			<div className='container flex flex-col items-center justify-center gap-2 md:flex-row'>

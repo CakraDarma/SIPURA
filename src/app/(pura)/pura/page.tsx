@@ -40,12 +40,6 @@ export default async function purasPage() {
 						<EmptyPlaceholder.Description>
 							Tidak ada data Pura. Anda memiliki informasi Pura?
 						</EmptyPlaceholder.Description>
-						<Link
-							className={buttonVariants({})}
-							href={`/dashboard/pura/create`}
-						>
-							Tambah
-						</Link>
 					</EmptyPlaceholder>
 				)}
 			</div>

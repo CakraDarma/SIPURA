@@ -38,9 +38,6 @@ export default function KegiatanList({
 								<span>Dikirim oleh {userName}</span>{' '}
 								{formatTimeToNow(new Date(kegiatan.createdAt))}
 							</div>
-							<KegiatanOperations
-								kegiatan={{ id: kegiatan.id, title: kegiatan.title }}
-							/>
 						</div>
 						<h2 className='font-semibold '>{kegiatan.title}</h2>
 						<div>
@@ -56,12 +53,9 @@ export default function KegiatanList({
 							ref={pRef}
 						>
 							<EditorOutput content={kegiatan.content} />
-							{pRef.current?.clientHeight == 112 ? (
-								// blur bottom if content is too long
-								<div className='absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white to-transparent'>
-									{' '}
-								</div>
-							) : null}
+							<div className='absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white to-transparent'>
+								{' '}
+							</div>
 						</div>
 					</div>
 				</div>

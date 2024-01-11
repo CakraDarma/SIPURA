@@ -81,7 +81,7 @@ export default function UserRolesOperations({
 				<AlertDialogContent>
 					<AlertDialogHeader>
 						<AlertDialogTitle>
-							Apakah Anda yakin ingin menghapus prajuru ini?
+							Apakah Anda yakin ingin menghapus hak akses prajuru ini?
 						</AlertDialogTitle>
 						<AlertDialogDescription>
 							Tindakan ini tidak dapat dibatalkan.

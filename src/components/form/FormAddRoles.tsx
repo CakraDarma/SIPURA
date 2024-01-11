@@ -123,7 +123,7 @@ export default function FormAddRoles({ prajuru, puraId }: FormAddRolesProps) {
 							Prajuru<span className='text-red-500'>*</span>
 						</label>
 						<Select
-							placeholder='Tambahkan User'
+							placeholder='Tambahkan Prajuru'
 							value={selectedPrajuru}
 							onChange={(selectedOption) => {
 								setselectedPrajuru(selectedOption);
