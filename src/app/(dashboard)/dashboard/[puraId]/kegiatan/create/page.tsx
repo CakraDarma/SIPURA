@@ -34,12 +34,6 @@ const page = async ({ params }: pageProps) => {
 
 			{/* form */}
 			<EditorCreateKegiatan puraId={pura.id} />
-
-			<div className='flex justify-end w-full'>
-				<Button type='submit' className='w-full' form='pura-kegiatan-form'>
-					Kegiatan
-				</Button>
-			</div>
 		</div>
 	);
 };

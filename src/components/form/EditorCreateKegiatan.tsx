@@ -18,6 +18,7 @@ import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 
 import '@/styles/editor.css';
+import { Button } from '@/components/ui/Button';
 
 type FormData = z.infer<typeof kegiatanValidator>;
 
@@ -45,7 +46,7 @@ export const EditorCreateKegiatan = ({ puraId }: EditorProps) => {
 	const [isMounted, setIsMounted] = useState<boolean>(false);
 	const pathname = usePathname();
 
-	const { mutate: createKegiatan } = useMutation({
+	const { mutate: createKegiatan, isPending } = useMutation({
 		mutationFn: async ({ title, content, puraId }: KegiatanCreationRequest) => {
 			const payload: KegiatanCreationRequest = { title, content, puraId };
 			const { data } = await axios.post('/api/pura/kegiatan', payload);
@@ -180,33 +181,45 @@ export const EditorCreateKegiatan = ({ puraId }: EditorProps) => {
 	const { ref: titleRef, ...rest } = register('title');
 
 	return (
-		<div className='w-full p-4 border rounded-lg bg-zinc-50 border-zinc-200'>
-			<form
-				id='pura-kegiatan-form'
-				className='w-fit'
-				onSubmit={handleSubmit(onSubmit)}
-			>
-				<div className='prose prose-stone dark:prose-invert'>
-					<TextareaAutosize
-						ref={(e) => {
-							titleRef(e);
-							// @ts-ignore
-							_titleRef.current = e;
-						}}
-						{...rest}
-						placeholder='Judul'
-						className='w-full overflow-hidden text-5xl font-bold bg-transparent appearance-none resize-none focus:outline-none'
-					/>
-					<div id='editor' className='min-h-[500px]' />
-					<p className='text-sm text-gray-500'>
-						Gunakan{' '}
-						<kbd className='px-1 text-xs uppercase border rounded-md bg-muted'>
-							Tab
-						</kbd>{' '}
-						untuk membuka menu perintah
-					</p>
-				</div>
-			</form>
-		</div>
+		<>
+			<div className='w-full p-4 border rounded-lg bg-zinc-50 border-zinc-200'>
+				<form
+					id='pura-kegiatan-form'
+					className='w-fit'
+					onSubmit={handleSubmit(onSubmit)}
+				>
+					<div className='prose prose-stone dark:prose-invert'>
+						<TextareaAutosize
+							ref={(e) => {
+								titleRef(e);
+								// @ts-ignore
+								_titleRef.current = e;
+							}}
+							{...rest}
+							placeholder='Judul'
+							className='w-full overflow-hidden text-5xl font-bold bg-transparent appearance-none resize-none focus:outline-none'
+						/>
+						<div id='editor' className='min-h-[500px]' />
+						<p className='text-sm text-gray-500'>
+							Gunakan{' '}
+							<kbd className='px-1 text-xs uppercase border rounded-md bg-muted'>
+								Tab
+							</kbd>{' '}
+							untuk membuka menu perintah
+						</p>
+					</div>
+				</form>
+			</div>
+			<div className='flex justify-end w-full'>
+				<Button
+					type='submit'
+					className='w-full'
+					form='pura-kegiatan-form'
+					isLoading={isPending}
+				>
+					Tambah
+				</Button>
+			</div>
+		</>
 	);
 };
