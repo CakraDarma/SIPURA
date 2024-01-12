@@ -189,6 +189,7 @@ export default function FormCreatePratima() {
 					disabled={isPending}
 					variant='subtle'
 					onClick={() => router.back()}
+					type='button'
 				>
 					Batalkan
 				</Button>

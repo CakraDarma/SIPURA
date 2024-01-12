@@ -242,6 +242,7 @@ export default function FormEditPelinggih({
 					disabled={isPending}
 					variant='subtle'
 					onClick={() => router.back()}
+					type='button'
 				>
 					Batalkan
 				</Button>

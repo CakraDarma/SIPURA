@@ -229,6 +229,7 @@ export default function FormEditVirtualTour({
 						disabled={isPending}
 						variant='subtle'
 						onClick={() => router.back()}
+						type='button'
 					>
 						Batalkan
 					</Button>

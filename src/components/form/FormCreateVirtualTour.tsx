@@ -180,6 +180,7 @@ export default function FormCreateVirtualTour() {
 							e.preventDefault();
 							setPreview(getValues('virtualTour'));
 						}}
+						type='button'
 					>
 						Preview
 					</Button>

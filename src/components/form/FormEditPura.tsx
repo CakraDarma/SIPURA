@@ -500,6 +500,7 @@ export default function FormEditPura({ pura, data }: FormEditPuraProps) {
 					disabled={isPending}
 					variant='subtle'
 					onClick={() => router.back()}
+					type='button'
 				>
 					Batalkan
 				</Button>

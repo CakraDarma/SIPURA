@@ -204,6 +204,7 @@ export function FormEditUser({ user, className, ...props }: FormEditUserProps) {
 					disabled={isPending}
 					variant='subtle'
 					onClick={() => router.back()}
+					type='button'
 				>
 					Batalkan
 				</Button>

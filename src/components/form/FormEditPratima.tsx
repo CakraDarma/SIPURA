@@ -238,6 +238,7 @@ export default function FormEditPratima({ pratima }: FormEditPratimaProps) {
 					disabled={isPending}
 					variant='subtle'
 					onClick={() => router.back()}
+					type='button'
 				>
 					Batalkan
 				</Button>

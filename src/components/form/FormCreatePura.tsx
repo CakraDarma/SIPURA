@@ -436,6 +436,7 @@ export default function FormCreatePura({ data }: FormCreatePuraProps) {
 					disabled={isPending}
 					variant='subtle'
 					onClick={() => router.back()}
+					type='button'
 				>
 					Batalkan
 				</Button>

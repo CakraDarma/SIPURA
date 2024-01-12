@@ -144,6 +144,7 @@ export default function FormAddRoles({ prajuru, puraId }: FormAddRolesProps) {
 					disabled={isPending}
 					variant='subtle'
 					onClick={() => router.back()}
+					type='button'
 				>
 					Batalkan
 				</Button>
