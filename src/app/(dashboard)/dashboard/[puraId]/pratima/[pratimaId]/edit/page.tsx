@@ -19,7 +19,6 @@ const EditPratimaPage = async ({ params }: EditPratimaPageProps) => {
 	const pratima = await db.pratima.findFirst({
 		where: {
 			id: params.pratimaId,
-			userId: session.user.id,
 		},
 	});
 	if (!pratima) {

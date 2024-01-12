@@ -32,7 +32,7 @@ export async function POST(req: Request) {
 			},
 		});
 
-		if (!userRole) {
+		if (!userRole && session.user.role !== 'ADMIN') {
 			return new Response('Access Denied', { status: 403 });
 		}
 

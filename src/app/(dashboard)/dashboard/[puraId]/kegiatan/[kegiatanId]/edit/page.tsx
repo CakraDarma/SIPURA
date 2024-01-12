@@ -14,7 +14,6 @@ async function getKegiatanForUser(
 	return await db.kegiatan.findFirst({
 		where: {
 			id: kegiatanId,
-			userId: userId,
 		},
 	});
 }

@@ -14,6 +14,10 @@ export async function PATCH(req: Request) {
 		const body = await req.json();
 		const { name, alamat, telepon, thumbnail } = UserValidator.parse(body);
 
+		if (session.user.name !== name && session.user.role !== 'ADMIN') {
+			return new Response('Unauthorized', { status: 401 });
+		}
+
 		// update username
 		await db.user.update({
 			where: {

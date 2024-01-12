@@ -20,7 +20,6 @@ const page = async ({ params }: PageProps) => {
 	const { puraId } = params;
 	const pura = await db.pura.findFirst({
 		where: {
-			userId: session.user.id,
 			id: puraId,
 		},
 	});

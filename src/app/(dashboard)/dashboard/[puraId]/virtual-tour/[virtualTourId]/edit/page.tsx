@@ -19,7 +19,6 @@ const EditVirtualTourPage = async ({ params }: EditVirtualTourPageProps) => {
 	const virtualTour = await db.virtualTour.findFirst({
 		where: {
 			id: params.virtualTourId,
-			userId: session.user.id,
 		},
 	});
 	if (!virtualTour) {

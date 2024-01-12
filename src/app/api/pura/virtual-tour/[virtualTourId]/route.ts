@@ -33,7 +33,7 @@ export async function PATCH(
 			},
 		});
 
-		if (!userRole) {
+		if (!userRole && session.user.role !== 'ADMIN') {
 			return new Response('Access Denied', { status: 403 });
 		}
 
@@ -96,7 +96,7 @@ export async function DELETE(
 			},
 		});
 
-		if (!userRole) {
+		if (!userRole && session.user.role !== 'ADMIN') {
 			return new Response('Access Denied', { status: 403 });
 		}
 

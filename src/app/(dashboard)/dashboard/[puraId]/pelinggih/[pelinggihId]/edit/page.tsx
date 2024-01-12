@@ -19,7 +19,6 @@ const EditPelinggihPage = async ({ params }: EditPelinggihPageProps) => {
 	const pelinggih = await db.pelinggih.findFirst({
 		where: {
 			id: params.pelinggihId,
-			userId: session.user.id,
 		},
 	});
 	if (!pelinggih) {
