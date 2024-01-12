@@ -42,6 +42,12 @@ export default async function DashboardPage() {
 		});
 	}
 
+	const puraNotActived = await db.pura.findMany({
+		where: { actived: false, userId: session.user.id },
+	});
+
+	const countPuraIsUnactived = puraNotActived.length;
+
 	return (
 		<div className='container flex flex-col h-full space-y-6 max-w-7xl'>
 			<DashboardShell>
@@ -53,12 +59,27 @@ export default async function DashboardPage() {
 
 				{pura?.length ? (
 					<div>
-						<Link
-							className={buttonVariants({})}
-							href={`/dashboard/pura/create`}
-						>
-							Tambah
-						</Link>
+						<div className='flex flex-row gap-2'>
+							<Link
+								className={buttonVariants({})}
+								href={`/dashboard/pura/create`}
+							>
+								Tambah
+							</Link>
+							<Link
+								href={'/dashboard/pura/pending'}
+								className={buttonVariants({})}
+							>
+								<div className='flex flex-row justify-between w-full gap-3'>
+									<p className='text-sm text-white '>Pending</p>
+									{countPuraIsUnactived > 0 && (
+										<div className='flex items-center justify-center w-5 h-5 text-white bg-red-500 rounded-full '>
+											<p className='text-[9px] '>{countPuraIsUnactived}</p>
+										</div>
+									)}
+								</div>
+							</Link>
+						</div>
 						<div className='flex flex-col flex-wrap items-center justify-center gap-6 mb-10 md:flex-row'>
 							{pura.map((pura, index) => (
 								<CardPuras
