@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 import { Icons } from '@/components/Icons';
 import SearchBar from '@/components/SearchBar';
 import { MainNavDashboard } from '@/components/MainNavDashboard';
+import { db } from '@/lib/db';
 
 interface DashboardLayoutProps {
 	children?: React.ReactNode;
@@ -17,7 +18,9 @@ export default async function DashboardLayout({
 	children,
 }: DashboardLayoutProps) {
 	const session = await getAuthSession();
-
+	const puraNotActived = await db.pura.findMany({
+		where: { actived: false },
+	});
 	if (!session) {
 		redirect(authOptions?.pages?.signIn || '/sign-in');
 	}
@@ -32,7 +35,16 @@ export default async function DashboardLayout({
 					<SearchBar />
 
 					{session?.user ? (
-						<UserAccountNav user={session.user} />
+						<UserAccountNav
+							user={{
+								id: session.user.id,
+								name: session.user.name,
+								email: session.user.email,
+								role: session.user.role,
+								image: session.user.image,
+							}}
+							countPuraIsUnactived={puraNotActived.length}
+						/>
 					) : (
 						<Link
 							href='/sign-in'

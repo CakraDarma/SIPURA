@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { User } from 'next-auth';
 import { signOut } from 'next-auth/react';
 import { userNavConfig } from '@/config/userNav';
 
@@ -16,11 +15,20 @@ import { UserAvatar } from '@/components/UserAvatar';
 
 interface UserAccountNavProps extends React.HTMLAttributes<HTMLDivElement> {
 	// pick is utility typescript
-	user: Pick<User, 'name' | 'image' | 'email'>;
+	user: {
+		id: string;
+		name: string | null | undefined;
+		email: string | undefined | null;
+		role: any;
+		image: string | null | undefined;
+	};
+	countPuraIsUnactived: number;
 }
 
-export const UserAccountNav = ({ user }: UserAccountNavProps) => {
-	const notificationCount = 1;
+export const UserAccountNav = ({
+	user,
+	countPuraIsUnactived,
+}: UserAccountNavProps) => {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger>
@@ -53,10 +61,12 @@ export const UserAccountNav = ({ user }: UserAccountNavProps) => {
 						className='flex flex-row justify-between w-full'
 					>
 						<div className='flex flex-row justify-between w-full '>
-							<p>Konfirmasi Pura</p>
-							{notificationCount > 0 && (
+							<p className='w-[200px] truncate text-sm text-muted-foreground'>
+								Konfirmasi Pura
+							</p>
+							{countPuraIsUnactived > 0 && user.role == 'ADMIN' && (
 								<div className='flex items-center justify-center w-5 h-5 text-white bg-red-500 rounded-full '>
-									<p className='text-[9px] '>{notificationCount}</p>
+									<p className='text-[9px] '>{countPuraIsUnactived}</p>
 								</div>
 							)}
 						</div>

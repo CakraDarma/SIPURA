@@ -46,15 +46,8 @@ export default async function DashboardPage() {
 						<EmptyPlaceholder.Icon name='kegiatan' />
 						<EmptyPlaceholder.Title>Tidak ada Pura</EmptyPlaceholder.Title>
 						<EmptyPlaceholder.Description>
-							Anda belum memiliki Pura yang tersedia. Silahkan tambahkan Pura
-							terlebih dahulu
+							Tidak ada Pura baru yang ditambahkan untuk dikonfirmasi oleh Anda
 						</EmptyPlaceholder.Description>
-						<Link
-							className={buttonVariants({})}
-							href={`/dashboard/pura/create`}
-						>
-							Tambah
-						</Link>
 					</EmptyPlaceholder>
 				)}
 			</DashboardShell>
