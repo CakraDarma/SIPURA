@@ -20,18 +20,27 @@ export default async function DashboardPage() {
 		redirect('/sign-in');
 	}
 
-	const pura = await db.pura.findMany({
-		where: {
-			subscribers: {
-				some: {
-					userId: {
-						equals: session.user.id,
+	let pura;
+	if (session.user.role == 'ADMIN') {
+		pura = await db.pura.findMany({
+			where: {
+				actived: true,
+			},
+		});
+	} else {
+		pura = await db.pura.findMany({
+			where: {
+				subscribers: {
+					some: {
+						userId: {
+							equals: session.user.id,
+						},
 					},
 				},
+				actived: true,
 			},
-			actived: true,
-		},
-	});
+		});
+	}
 
 	return (
 		<div className='container flex flex-col h-full space-y-6 max-w-7xl'>

@@ -55,23 +55,25 @@ export const UserAccountNav = ({
 						<Link href={item.href}>{item.title}</Link>
 					</DropdownMenuItem>
 				))}
-				<DropdownMenuItem>
-					<Link
-						href={'/dashboard/pura/confirm-pura'}
-						className='flex flex-row justify-between w-full'
-					>
-						<div className='flex flex-row justify-between w-full '>
-							<p className='w-[200px] truncate text-sm text-muted-foreground'>
-								Konfirmasi Pura
-							</p>
-							{countPuraIsUnactived > 0 && user.role == 'ADMIN' && (
-								<div className='flex items-center justify-center w-5 h-5 text-white bg-red-500 rounded-full '>
-									<p className='text-[9px] '>{countPuraIsUnactived}</p>
-								</div>
-							)}
-						</div>
-					</Link>
-				</DropdownMenuItem>
+				{user.role == 'ADMIN' && (
+					<DropdownMenuItem>
+						<Link
+							href={'/dashboard/pura/confirm-pura'}
+							className='flex flex-row justify-between w-full'
+						>
+							<div className='flex flex-row justify-between w-full '>
+								<p className='w-[200px] truncate text-sm text-muted-foreground'>
+									Konfirmasi Pura
+								</p>
+								{countPuraIsUnactived > 0 && (
+									<div className='flex items-center justify-center w-5 h-5 text-white bg-red-500 rounded-full '>
+										<p className='text-[9px] '>{countPuraIsUnactived}</p>
+									</div>
+								)}
+							</div>
+						</Link>
+					</DropdownMenuItem>
+				)}
 				<DropdownMenuSeparator />
 				<DropdownMenuItem
 					className='cursor-pointer'

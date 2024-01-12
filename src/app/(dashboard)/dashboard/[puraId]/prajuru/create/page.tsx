@@ -18,7 +18,7 @@ const AddPrajuruPage = async ({ params }: AddPrajuruPageProps) => {
 	}
 
 	const usersWithoutRolesForPura: User[] =
-		await db.$queryRaw`SELECT * FROM User WHERE id NOT IN (SELECT userId FROM UserRole WHERE puraId = 'clqjnlrlt0006vfqksa4g4w35')`;
+		await db.$queryRaw`SELECT * FROM User WHERE id NOT IN (SELECT userId FROM UserRole WHERE puraId = ${params.puraId})`;
 
 	if (!usersWithoutRolesForPura) {
 		notFound();

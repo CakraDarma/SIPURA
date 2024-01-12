@@ -15,11 +15,18 @@ export default async function DashboardLayout({
 	params,
 }: DashboardLayoutProps) {
 	const session = await getAuthSession();
-
 	if (!session) {
 		redirect(authOptions?.pages?.signIn || '/sign-in');
 	}
 
+	const statusPura = await db.pura.findFirst({
+		where: {
+			id: params.puraId,
+		},
+		select: {
+			actived: true,
+		},
+	});
 	const accessPage = await db.userRole.findFirst({
 		where: {
 			userId: session.user.id,
@@ -29,8 +36,11 @@ export default async function DashboardLayout({
 		},
 	});
 
-	if (!accessPage) {
-		redirect('/');
+	if (
+		statusPura?.actived != true ||
+		(!accessPage && session.user.role != 'ADMIN')
+	) {
+		redirect('/dashboard');
 	}
 
 	return (

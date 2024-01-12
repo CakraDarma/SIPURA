@@ -24,14 +24,8 @@ export async function PATCH(
 		if (!session?.user) {
 			return new Response('Unauthorized', { status: 401 });
 		}
-		const userRole = await db.userRole.findFirst({
-			where: {
-				puraId: params.puraId,
-				userId: session.user.id,
-			},
-		});
 
-		if (!userRole) {
+		if (session.user.role != 'ADMIN') {
 			return new Response('Access Denied', { status: 403 });
 		}
 
@@ -41,7 +35,6 @@ export async function PATCH(
 			},
 			data: {
 				actived,
-				userId: session.user.id,
 			},
 		});
 
@@ -81,15 +74,7 @@ export async function DELETE(
 			return new Response('Pura not found', { status: 401 });
 		}
 
-		// verify user is prajuru to passed pura id
-		const userRole = await db.userRole.findFirst({
-			where: {
-				puraId: params.puraId,
-				userId: session.user.id,
-			},
-		});
-
-		if (!userRole) {
+		if (session.user.role != 'ADMIN') {
 			return new Response('Access Denied', { status: 403 });
 		}
 

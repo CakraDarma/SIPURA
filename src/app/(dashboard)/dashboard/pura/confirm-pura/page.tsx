@@ -5,8 +5,6 @@ import { db } from '@/lib/db';
 import DashboardHeader from '@/components/DashboardHeader';
 import DashboardShell from '@/components/DashboardShell';
 import EmptyPlaceholder from '@/components/EmptyPlaceholder';
-import Link from 'next/link';
-import { buttonVariants } from '@/components/ui/Button';
 import TablePura from '@/components/table/TablePura';
 
 export const metadata = {
@@ -18,6 +16,8 @@ export default async function DashboardPage() {
 
 	if (!session) {
 		redirect('/sign-in');
+	} else if (session.user.role != 'ADMIN') {
+		redirect('/');
 	}
 
 	const pura = await db.pura.findMany({
