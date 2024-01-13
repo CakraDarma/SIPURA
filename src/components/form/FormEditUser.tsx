@@ -68,7 +68,8 @@ export function FormEditUser({ user, className, ...props }: FormEditUserProps) {
 					alamat,
 					thumbnail: user.image,
 				};
-				const { data } = await axios.patch(`/api/user/`, payload);
+				console.log(payload);
+				const { data } = await axios.patch(`/api/user/${user.id}`, payload);
 				return data;
 			} else {
 				const [res] = await uploadFiles([thumbnail], 'imageUploader');

@@ -58,6 +58,20 @@ export const UserAccountNav = ({
 				{user.role == 'ADMIN' && (
 					<DropdownMenuItem>
 						<Link
+							href={'/dashboard/pura/prajuru'}
+							className='flex flex-row justify-between w-full'
+						>
+							<div className='flex flex-row justify-between w-full '>
+								<p className='w-[200px] truncate text-sm text-muted-foreground'>
+									Prajuru
+								</p>
+							</div>
+						</Link>
+					</DropdownMenuItem>
+				)}
+				{user.role == 'ADMIN' && (
+					<DropdownMenuItem>
+						<Link
 							href={'/dashboard/pura/confirm-pura'}
 							className='flex flex-row justify-between w-full'
 						>
