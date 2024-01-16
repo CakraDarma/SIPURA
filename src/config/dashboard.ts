@@ -73,9 +73,5 @@ export const dashboardConfig: DashboardConfig = {
 			title: 'Akses Prajuru',
 			href: '/prajuru',
 		},
-		{
-			title: 'Konfirmasi Pura',
-			href: '/confirm-pura',
-		},
 	],
 };

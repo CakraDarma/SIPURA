@@ -30,7 +30,7 @@ export default async function SettingsPage({ params }: SettingsPageProps) {
 	// await new Promise((resolve) => setTimeout(resolve, 7000));
 
 	return (
-		<div className='max-w-4xl py-12 mx-auto mt-10'>
+		<div className='max-w-4xl py-1 mx-auto mt-2'>
 			<div className='grid items-start gap-8'>
 				<DashboardShell>
 					<DashboardHeader

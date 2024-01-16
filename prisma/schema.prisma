@@ -185,6 +185,7 @@ model Banten {
   id          String   @id @default(cuid())
   pelinggihId String
   upacaraId   String
+  thumbnail   String
   nama        String
   konten      Json?
   createdAt   DateTime @default(now())
@@ -199,6 +200,7 @@ model Upacara {
   puraId    String
   userId    String
   nama      String
+  thumbnail String
   biaya     String
   konten    Json?
   createdAt DateTime @default(now())

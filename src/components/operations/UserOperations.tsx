@@ -89,7 +89,7 @@ export default function UserOperations({ user }: UserOperationsProps) {
 				<AlertDialogContent>
 					<AlertDialogHeader>
 						<AlertDialogTitle>
-							Apakah Anda yakin ingin menghapus pengajuan User ini?
+							Apakah Anda yakin ingin menghapus user ini?
 						</AlertDialogTitle>
 						<AlertDialogDescription>
 							Tindakan ini akan dikirim ke pengaju User.

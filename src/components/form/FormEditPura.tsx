@@ -405,7 +405,7 @@ export default function FormEditPura({ pura, data }: FormEditPuraProps) {
 							htmlFor='piodalan'
 							className='mb-3 block text-base font-medium texpiodalant-[#07074D]'
 						>
-							piodalan<span className='text-red-500'>*</span>
+							Piodalan<span className='text-red-500'>*</span>
 						</label>
 						<input
 							{...register('piodalan')}

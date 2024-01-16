@@ -119,7 +119,7 @@ export default function ConfirmPuraOperations({
 							href={`/dashboard/pura/${pura.id}/edit`}
 							className='flex w-full'
 						>
-							Sunting
+							Lihat & Sunting
 						</Link>
 					</DropdownMenuItem>
 					<DropdownMenuSeparator />

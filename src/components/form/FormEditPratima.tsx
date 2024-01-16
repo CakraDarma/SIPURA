@@ -173,7 +173,7 @@ export default function FormEditPratima({ pratima }: FormEditPratimaProps) {
 							htmlFor='tahunDitemukan'
 							className='mb-3 block text-base font-medium text-[#07074D]'
 						>
-							Tahun Pembangunan<span className='text-red-500'>*</span>
+							Tahun Ditemukan<span className='text-red-500'>*</span>
 						</label>
 						<input
 							{...register('tahunDitemukan', {
@@ -182,7 +182,7 @@ export default function FormEditPratima({ pratima }: FormEditPratimaProps) {
 							type='number'
 							name='tahunDitemukan'
 							id='tahunDitemukan'
-							placeholder='Masukkan tahun pratima dibangun'
+							placeholder='Masukkan tahun pratima ditemukan'
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						/>
 						{errors?.tahunDitemukan && (
