@@ -11,6 +11,7 @@ export async function GET(req: Request) {
 			name: {
 				startsWith: q,
 			},
+			actived: true,
 		},
 		include: {
 			_count: true,

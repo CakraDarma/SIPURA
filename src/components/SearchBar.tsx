@@ -17,6 +17,7 @@ import {
 } from '@/components/ui/Command';
 import { useOnClickOutside } from '@/hooks/use-on-click-outside';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar';
+import Link from 'next/link';
 
 const SearchBar = () => {
 	const [input, setInput] = useState<string>('');
@@ -82,8 +83,7 @@ const SearchBar = () => {
 						<CommandGroup heading='Pura'>
 							{queryResults?.map((pura) => (
 								<CommandItem
-									onSelect={(e) => {
-										router.push(`/${e}`);
+									onSelect={() => {
 										router.refresh();
 									}}
 									key={pura.id}
@@ -96,7 +96,7 @@ const SearchBar = () => {
 										/>
 										<AvatarFallback>P</AvatarFallback>
 									</Avatar>
-									<a href={`/pura/${pura.id}`}>{pura.name}</a>
+									<Link href={`/pura/${pura.id}`}>{pura.name}</Link>
 								</CommandItem>
 							))}
 						</CommandGroup>
