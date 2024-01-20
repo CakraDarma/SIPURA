@@ -34,8 +34,9 @@ interface PuraOperationsProps {
 export default function PuraOperations({ pura }: PuraOperationsProps) {
 	const router = useRouter();
 	const [showDeleteAlert, setShowDeleteAlert] = React.useState<boolean>(false);
+	const [showUpdateAlert, setShowUpdateAlert] = React.useState<boolean>(false);
 
-	const { mutate: deletePura, isPending } = useMutation({
+	const { mutate: deletePura, isPending: isPending } = useMutation({
 		// puraId dari props
 		mutationFn: async (puraId: string) => {
 			const { data } = await axios.delete(`/api/pura/${puraId}`);
@@ -51,6 +52,41 @@ export default function PuraOperations({ pura }: PuraOperationsProps) {
 		onSuccess: () => {
 			toast({
 				description: 'Pura Anda berhasil dihapus.',
+			});
+			router.refresh();
+			setShowDeleteAlert(false);
+		},
+	});
+
+	const { mutate: unActivePura, isPending: isPendingUpdate } = useMutation({
+		// puraId dari props
+		mutationFn: async ({
+			actived,
+			puraId,
+		}: {
+			actived: boolean;
+			puraId: string;
+		}) => {
+			const payload = {
+				actived,
+			};
+			const { data } = await axios.patch(
+				`/api/pura/actived/${puraId}`,
+				payload
+			);
+			return data;
+		},
+		onError: () => {
+			return toast({
+				title: 'Terjadi kesalahan.',
+				description:
+					'Pura Anda tidak berhasil dinonaktifkan. Silakan coba lagi.',
+				variant: 'destructive',
+			});
+		},
+		onSuccess: () => {
+			toast({
+				description: 'Pura Anda berhasil dinonaktifkan.',
 			});
 			router.refresh();
 			setShowDeleteAlert(false);
@@ -74,6 +110,15 @@ export default function PuraOperations({ pura }: PuraOperationsProps) {
 						</Link>
 					</DropdownMenuItem>
 					<DropdownMenuSeparator />
+					<DropdownMenuItem
+						className='flex w-full'
+						onSelect={() => {
+							setShowUpdateAlert(true);
+							document.body.style.pointerEvents = '';
+						}}
+					>
+						Non Aktif
+					</DropdownMenuItem>
 					<DropdownMenuItem
 						className='flex items-center cursor-pointer text-destructive focus:text-destructive'
 						onSelect={() => {
@@ -110,6 +155,35 @@ export default function PuraOperations({ pura }: PuraOperationsProps) {
 								<Icons.trash className='w-4 h-4 mr-2' />
 							)}
 							<span>Hapus</span>
+						</AlertDialogAction>
+					</AlertDialogFooter>
+				</AlertDialogContent>
+			</AlertDialog>
+			<AlertDialog open={showUpdateAlert} onOpenChange={setShowUpdateAlert}>
+				<AlertDialogContent>
+					<AlertDialogHeader>
+						<AlertDialogTitle>
+							Apakah Anda yakin ingin menonaktifkan Pura ini?
+						</AlertDialogTitle>
+						<AlertDialogDescription>
+							Tindakan ini tidak dapat dibatalkan.
+						</AlertDialogDescription>
+					</AlertDialogHeader>
+					<AlertDialogFooter>
+						<AlertDialogCancel>Batalkan</AlertDialogCancel>
+						<AlertDialogAction
+							onClick={async (event) => {
+								event.preventDefault();
+								unActivePura({ actived: false, puraId: pura.id });
+							}}
+							className='ring-red-600 focus:ring-red-600'
+						>
+							{isPendingUpdate ? (
+								<Icons.spinner className='w-4 h-4 mr-2 animate-spin' />
+							) : (
+								<Icons.trash className='w-4 h-4 mr-2' />
+							)}
+							<span>Update</span>
 						</AlertDialogAction>
 					</AlertDialogFooter>
 				</AlertDialogContent>
