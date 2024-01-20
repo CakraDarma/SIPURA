@@ -7,14 +7,23 @@ const VideoInformation = () => {
 						Video
 					</h2>
 				</div>
-				<video className='mt-6' controls={true} width={863} height={552}>
-					{/* <source src='./videos/test.mp4' type='video/mp4' /> */}
-				</video>
+				{/* <video className='mt-6' controls={true} width={863} height={552}> */}
+				{/* <source src='./videos/test.mp4' type='video/mp4' /> */}
+				{/* </video> */}
+				<iframe
+					title='Virtual Tour'
+					width='863'
+					height='552'
+					src={'https://www.youtube.com/embed/_BYZyad-WwM?si=3TUCVuK_BCuf949C'}
+					allowFullScreen
+					className='mt-6'
+				></iframe>
 
 				<div className='flex flex-col items-end gap-6 mt-10'>
 					<h3 className='max-w-3xl text-xl text-white md:text-2xl font-heading'>
 						Nikmati Video Pengenalan Pura dan Pelajari Keunikan Pura di Bali
 					</h3>
+
 					<p className='max-w-3xl font-sans text-lg font-light text-justify text-zinc-200 sm:text-xl'>
 						Kami menyajikan video pengenalan Pura untuk memberikan gambaran
 						sejarah dan keunikan setiap Pura di Bali kepada Anda. Nikmati

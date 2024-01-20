@@ -44,7 +44,7 @@ const Footer = () => {
 					</div>
 				</div>
 				<div className=' text-xs font-medium leading-[18px] py-3 font-sans'>
-					© 2023 Website By Information Technology Universitas Udayana
+					© 2024 Website By Information Technology Universitas Udayana
 				</div>
 			</div>
 		</div>
