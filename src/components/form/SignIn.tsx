@@ -59,13 +59,13 @@ function SignIn({ className, ...props }: SignInProps) {
 					<span className='w-full border-t' />
 				</div>
 				<div className='relative flex justify-center text-xs uppercase'>
-					<span className='bg-background px-2 text-muted-foreground'>
+					<span className='px-2 bg-background text-muted-foreground'>
 						ATAU LOGIN MENGGUNAKAN
 					</span>
 				</div>
 			</div>
 			<UserAuthForm />
-			<p className='px-8 text-center text-sm text-muted-foreground leading-6'>
+			<p className='px-8 text-sm leading-6 text-center text-muted-foreground'>
 				Belum memiliki akun?{' '}
 				<Link
 					href='/sign-up'

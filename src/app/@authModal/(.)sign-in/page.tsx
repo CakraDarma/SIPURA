@@ -1,7 +1,7 @@
 'use client';
 
 import CloseModal from '@/components/CloseModal';
-import SignIn from '@/components/SignIn';
+import SignIn from '@/components/form/SignIn';
 import { Icons } from '@/components/Icons';
 import { useOnClickOutside } from '@/hooks/use-on-click-outside';
 import { useRouter } from 'next/navigation';
