@@ -5,7 +5,7 @@ import Image from 'next/image';
 export default function JoinUsPage() {
 	return (
 		<div className=' bg-gray-50'>
-			<div className='container flex flex-col-reverse px-6 py-12 mx-auto space-y-6 md:h-128 md:py-32 md:flex-row md:items-center md:space-x-6 gap-y-4'>
+			<div className='container flex flex-col-reverse px-6 py-12 mx-auto space-y-6 md:h-128 md:py-32 md:flex-row md:items-center md:space-x-6 max-w-7xl gap-y-4'>
 				<div className='flex flex-col items-center w-full md:flex-row md:w-1/2'>
 					<div className='max-w-lg md:mx-12 md:order-2'>
 						<h2 className='text-3xl font-medium tracking-wide text-gray-800 dark:text-white md:text-4xl font-heading'>
