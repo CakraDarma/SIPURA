@@ -6,51 +6,58 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Label } from '@/components/ui/Label';
 import { useForm } from 'react-hook-form';
-import { ResetValidator } from '@/lib/validators/auth';
+import { NewPasswordValidator } from '@/lib/validators/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from '@/hooks/use-toast';
-import { reset } from '@/actions/reset';
+import { newPassword } from '@/actions/new-password';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 interface SignInProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-function ResetPassword({ className, ...props }: SignInProps) {
+function NewPassword({ className, ...props }: SignInProps) {
+	const searchParams = useSearchParams();
+	const router = useRouter();
+	const token = searchParams.get('token');
+
 	const {
 		handleSubmit,
 		register,
 		formState: { errors },
-	} = useForm<z.infer<typeof ResetValidator>>({
-		resolver: zodResolver(ResetValidator),
+	} = useForm<z.infer<typeof NewPasswordValidator>>({
+		resolver: zodResolver(NewPasswordValidator),
 		defaultValues: {
-			email: '',
+			password: '',
 		},
 	});
 
-	const { mutate: LoginUser, isPending } = useMutation({
-		mutationFn: async (payload: z.infer<typeof ResetValidator>) => {
-			reset(payload).then((data) => {
+	const { mutate: resetPassword, isPending } = useMutation({
+		mutationFn: async (payload: z.infer<typeof NewPasswordValidator>) => {
+			newPassword(payload, token).then((data) => {
 				if (data.error) {
 					toast({
 						title: data.error,
-						description: 'Tidak dapat melakukan reset password.',
+						description: 'Tidak dapat merubah password Anda.',
 						variant: 'destructive',
 					});
 				} else {
 					toast({
 						title: data.success,
-						description: 'Silahkan periksa email Anda',
+						description: 'Password berhasil dirubah',
 					});
+
+					router.push(`/`);
 				}
 			});
 		},
 	});
 
-	async function onSubmit(data: z.infer<typeof ResetValidator>) {
-		const payload: z.infer<typeof ResetValidator> = {
-			email: data.email,
+	async function onSubmit(data: z.infer<typeof NewPasswordValidator>) {
+		const payload: z.infer<typeof NewPasswordValidator> = {
+			password: data.password,
 		};
-		LoginUser(payload);
+		resetPassword(payload);
 	}
 
 	return (
@@ -58,26 +65,26 @@ function ResetPassword({ className, ...props }: SignInProps) {
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<div className='grid gap-2'>
 					<div className='grid gap-1'>
-						<Label className='sr-only' htmlFor='email'>
-							Email
+						<Label className='sr-only' htmlFor='password'>
+							Password
 						</Label>
 						<Input
-							id='email'
-							placeholder='Email'
-							type='email'
+							id='password'
+							placeholder='Password'
+							type='password'
 							autoCapitalize='none'
-							autoComplete='email'
+							autoComplete='password'
 							autoCorrect='off'
 							disabled={isPending}
-							{...register('email')}
+							{...register('password')}
 						/>
-						{errors?.email && (
+						{errors?.password && (
 							<p className='px-1 text-xs text-red-600'>
-								{errors.email.message}
+								{errors.password.message}
 							</p>
 						)}
 					</div>
-					<Button disabled={isPending}>Kirim Email Verifikasi</Button>
+					<Button disabled={isPending}>Reset Password</Button>
 				</div>
 			</form>
 			<div className='relative'>
@@ -86,7 +93,7 @@ function ResetPassword({ className, ...props }: SignInProps) {
 				</div>
 				<div className='relative flex justify-center text-xs uppercase'>
 					<a
-						className='px-2 text-base underline bg-background text-muted-foreground underline-offset-4 hover:text-primary'
+						className='px-2 text-sm underline bg-background text-muted-foreground underline-offset-4 hover:text-primary'
 						href={'/sign-in'}
 					>
 						Kembali ke Login
@@ -97,4 +104,4 @@ function ResetPassword({ className, ...props }: SignInProps) {
 	);
 }
 
-export default ResetPassword;
+export default NewPassword;

@@ -131,7 +131,7 @@ function SignIn({ className, ...props }: SignInProps) {
 					href='/reset-password'
 					className='underline underline-offset-4 hover:text-primary'
 				>
-					Lupa password
+					lupa password
 				</Link>
 				.
 			</p>

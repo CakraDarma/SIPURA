@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import ResetPassword from '@/components/form/ResetPassword';
+import NewPassword from '@/components/form/NewPassword';
 
 export const metadata: Metadata = {
 	title: 'Sign In',
@@ -16,10 +16,10 @@ export default function AuthenticationPage() {
 						Reset Password
 					</h1>
 					<p className='text-sm text-muted-foreground'>
-						Masukkan email Anda untuk melakukan reset password
+						Masukkan password baru Anda untuk digunakan
 					</p>
 				</div>
-				<ResetPassword />
+				<NewPassword />
 			</div>
 		</div>
 	);

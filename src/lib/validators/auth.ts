@@ -52,3 +52,9 @@ export const ResetValidator = z.object({
 		message: 'Email tidak boleh kosong',
 	}),
 });
+
+export const NewPasswordValidator = z.object({
+	password: z.string().min(1, {
+		message: 'Password tidak boleh kosong',
+	}),
+});
