@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const LoginValidator = z.object({
+export const RegisterValidator = z.object({
 	name: z
 		.string()
 		.min(3, {
@@ -36,4 +36,13 @@ export const LoginValidator = z.object({
 		.max(14, {
 			message: 'Telepon tidak boleh lebih dari 14 karakter',
 		}),
+});
+
+export const LoginValidator = z.object({
+	email: z.string().email({
+		message: 'Email tidak boleh kosong',
+	}),
+	password: z.string().min(1, {
+		message: 'Password tidak boleh kosong',
+	}),
 });

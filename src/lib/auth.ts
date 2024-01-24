@@ -4,8 +4,8 @@ import { NextAuthOptions, getServerSession } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import { nanoid } from 'nanoid';
 import Credentials from 'next-auth/providers/credentials';
-import { LoginValidator } from './validators/login';
-import { getUserByEmail } from '@/data/user';
+import { LoginValidator } from './validators/auth';
+import { getUserByEmail, getUserById } from '@/data/user';
 import bcrypt from 'bcryptjs';
 
 export const authOptions: NextAuthOptions = {
@@ -30,6 +30,14 @@ export const authOptions: NextAuthOptions = {
 			clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
 		}),
 		Credentials({
+			credentials: {
+				email: {
+					label: 'email',
+					type: 'email',
+					placeholder: 'jsmith@example.com',
+				},
+				password: { label: 'Password', type: 'password' },
+			},
 			async authorize(credentials) {
 				const validatedFields = LoginValidator.safeParse(credentials);
 
@@ -46,11 +54,21 @@ export const authOptions: NextAuthOptions = {
 
 				return null;
 			},
-			// @ts-ignore
-			credentials: undefined,
 		}),
 	],
 	callbacks: {
+		async signIn({ user, account }) {
+			// Allow OAuth without email verification
+			if (account?.provider !== 'credentials') return true;
+
+			const existingUser = await getUserById(user.id);
+
+			// Prevent sign in without email verification
+			if (!existingUser?.emailVerified) return false;
+
+			return true;
+		},
+
 		async session({ token, session }) {
 			if (token) {
 				session.user.id = token.id;

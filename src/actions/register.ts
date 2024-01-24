@@ -7,7 +7,7 @@ import { db } from '@/lib/db';
 import { getUserByEmail } from '@/data/user';
 import { sendVerificationEmail } from '@/lib/mail';
 import { generateVerificationToken } from '@/lib/tokens';
-import { LoginValidator } from '@/lib/validators/login';
+import { LoginValidator } from '@/lib/validators/auth';
 
 export const register = async (values: z.infer<typeof LoginValidator>) => {
 	const validatedFields = LoginValidator.safeParse(values);

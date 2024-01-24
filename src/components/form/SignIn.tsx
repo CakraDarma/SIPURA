@@ -7,24 +7,65 @@ import { Input } from '@/components/ui/Input';
 import { Label } from '@/components/ui/Label';
 import UserAuthForm from '@/components/UserAuthForm';
 import Link from 'next/link';
+import { useForm } from 'react-hook-form';
+import { LoginValidator } from '@/lib/validators/auth';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { useMutation } from '@tanstack/react-query';
+import { login } from '@/actions/login';
+import { toast } from '@/hooks/use-toast';
+import { signIn } from 'next-auth/react';
 
 interface SignInProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 function SignIn({ className, ...props }: SignInProps) {
-	const [isLoading, setIsLoading] = React.useState<boolean>(false);
+	const {
+		handleSubmit,
+		register,
+		formState: { errors },
+	} = useForm<z.infer<typeof LoginValidator>>({
+		resolver: zodResolver(LoginValidator),
+		defaultValues: {
+			email: '',
+			password: '',
+		},
+	});
 
-	async function onSubmit(event: React.SyntheticEvent) {
-		event.preventDefault();
-		setIsLoading(true);
+	const { mutate: LoginUser, isPending } = useMutation({
+		mutationFn: async (payload: z.infer<typeof LoginValidator>) => {
+			login(payload).then((data) => {
+				if (data?.error) {
+					return toast({
+						title: data.error,
+						description: 'Tidak dapat melakukan login.',
+						variant: 'destructive',
+					});
+				} else if (data?.success) {
+					return toast({
+						title: data?.success,
+						description: 'Silahkan periksa email Anda',
+					});
+				} else {
+					signIn('credentials', {
+						email: payload.email,
+						password: payload.password,
+					});
+				}
+			});
+		},
+	});
 
-		setTimeout(() => {
-			setIsLoading(false);
-		}, 3000);
+	async function onSubmit(data: z.infer<typeof LoginValidator>) {
+		const payload: z.infer<typeof LoginValidator> = {
+			email: data.email,
+			password: data.password,
+		};
+		LoginUser(payload);
 	}
 
 	return (
 		<div className={cn('grid gap-6', className)} {...props}>
-			<form onSubmit={onSubmit}>
+			<form onSubmit={handleSubmit(onSubmit)}>
 				<div className='grid gap-2'>
 					<div className='grid gap-1'>
 						<Label className='sr-only' htmlFor='email'>
@@ -37,8 +78,14 @@ function SignIn({ className, ...props }: SignInProps) {
 							autoCapitalize='none'
 							autoComplete='email'
 							autoCorrect='off'
-							disabled={isLoading}
+							disabled={isPending}
+							{...register('email')}
 						/>
+						{errors?.email && (
+							<p className='px-1 text-xs text-red-600'>
+								{errors.email.message}
+							</p>
+						)}
 						<Label className='sr-only' htmlFor='password'>
 							Password
 						</Label>
@@ -48,10 +95,16 @@ function SignIn({ className, ...props }: SignInProps) {
 							type='password'
 							autoCapitalize='none'
 							autoCorrect='off'
-							disabled={isLoading}
+							disabled={isPending}
+							{...register('password')}
 						/>
+						{errors?.password && (
+							<p className='px-1 text-xs text-red-600'>
+								{errors.password.message}
+							</p>
+						)}
 					</div>
-					<Button disabled={isLoading}>Login</Button>
+					<Button disabled={isPending}>Login</Button>
 				</div>
 			</form>
 			<div className='relative'>

@@ -2,7 +2,6 @@
 
 import { cn } from '@/lib/utils';
 import * as React from 'react';
-import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import { newVerification } from '@/actions/new-verification';

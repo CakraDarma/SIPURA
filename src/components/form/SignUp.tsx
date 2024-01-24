@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/Label';
 import UserAuthForm from '@/components/UserAuthForm';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
-import { LoginValidator } from '@/lib/validators/login';
+import { RegisterValidator } from '@/lib/validators/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useMutation } from '@tanstack/react-query';
@@ -21,8 +21,8 @@ function SignIn({ className, ...props }: SignInProps) {
 		handleSubmit,
 		register,
 		formState: { errors },
-	} = useForm<z.infer<typeof LoginValidator>>({
-		resolver: zodResolver(LoginValidator),
+	} = useForm<z.infer<typeof RegisterValidator>>({
+		resolver: zodResolver(RegisterValidator),
 		defaultValues: {
 			email: '',
 			password: '',
@@ -31,7 +31,7 @@ function SignIn({ className, ...props }: SignInProps) {
 	});
 
 	const { mutate: registerUser, isPending } = useMutation({
-		mutationFn: async (payload: z.infer<typeof LoginValidator>) => {
+		mutationFn: async (payload: z.infer<typeof RegisterValidator>) => {
 			userRegister(payload).then((data) => {
 				if (data.error) {
 					toast({
@@ -49,8 +49,8 @@ function SignIn({ className, ...props }: SignInProps) {
 		},
 	});
 
-	async function onSubmit(data: z.infer<typeof LoginValidator>) {
-		const payload: z.infer<typeof LoginValidator> = {
+	async function onSubmit(data: z.infer<typeof RegisterValidator>) {
+		const payload: z.infer<typeof RegisterValidator> = {
 			name: data.name,
 			alamat: data.alamat,
 			email: data.email,
