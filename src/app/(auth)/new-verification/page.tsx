@@ -16,7 +16,7 @@ export default function AuthenticationPage() {
 						Verifikasi Email
 					</h1>
 					<p className='text-sm text-muted-foreground md:text-lg'>
-						Periksa hasil verifikasi email yang telah dikirimkan
+						Hasil verifikasi email yang telah dikirimkan
 					</p>
 				</div>
 				<NewVerification />

@@ -128,7 +128,7 @@ function SignIn({ className, ...props }: SignInProps) {
 				</Link>{' '}
 				atau{' '}
 				<Link
-					href='/forgot-password'
+					href='/reset-password'
 					className='underline underline-offset-4 hover:text-primary'
 				>
 					Lupa password

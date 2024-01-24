@@ -46,3 +46,9 @@ export const LoginValidator = z.object({
 		message: 'Password tidak boleh kosong',
 	}),
 });
+
+export const ResetValidator = z.object({
+	email: z.string().email({
+		message: 'Email tidak boleh kosong',
+	}),
+});
