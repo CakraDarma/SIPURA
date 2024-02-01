@@ -56,7 +56,6 @@ export default async function DashboardPage() {
 					text='Kelola semua aspek terkait dengan Pura dalam satu lokasi yang
 						nyaman.'
 				/>
-
 				{pura?.length ? (
 					<div>
 						<div className='flex flex-row gap-2'>
@@ -98,12 +97,29 @@ export default async function DashboardPage() {
 							Anda belum memiliki Pura yang tersedia. Silahkan tambahkan Pura
 							terlebih dahulu
 						</EmptyPlaceholder.Description>
-						<Link
-							className={buttonVariants({})}
-							href={`/dashboard/pura/create`}
-						>
-							Tambah
-						</Link>
+						<div className='flex flex-row gap-2'>
+							<Link
+								className={buttonVariants({})}
+								href={`/dashboard/pura/create`}
+							>
+								Tambah
+							</Link>
+							{countPuraIsUnactived > 0 && (
+								<Link
+									href={'/dashboard/pura/pending'}
+									className={buttonVariants({})}
+								>
+									<div className='flex flex-row justify-between w-full gap-3'>
+										<p className='text-sm text-white '>Pending</p>
+										{countPuraIsUnactived > 0 && (
+											<div className='flex items-center justify-center w-5 h-5 text-white bg-red-500 rounded-full '>
+												<p className='text-[9px] '>{countPuraIsUnactived}</p>
+											</div>
+										)}
+									</div>
+								</Link>
+							)}
+						</div>
 					</EmptyPlaceholder>
 				)}
 			</DashboardShell>

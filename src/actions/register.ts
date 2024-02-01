@@ -7,10 +7,10 @@ import { db } from '@/lib/db';
 import { getUserByEmail } from '@/data/user';
 import { sendVerificationEmail } from '@/lib/mail';
 import { generateVerificationToken } from '@/lib/tokens';
-import { LoginValidator } from '@/lib/validators/auth';
+import { RegisterValidator } from '@/lib/validators/auth';
 
-export const register = async (values: z.infer<typeof LoginValidator>) => {
-	const validatedFields = LoginValidator.safeParse(values);
+export const register = async (values: z.infer<typeof RegisterValidator>) => {
+	const validatedFields = RegisterValidator.safeParse(values);
 
 	if (!validatedFields.success) {
 		return { error: 'Invalid fields!' };

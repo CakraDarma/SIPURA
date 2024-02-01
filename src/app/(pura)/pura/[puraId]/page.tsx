@@ -31,10 +31,10 @@ export default async function Purapage({ params }: PuraPageProps) {
 						<Icons.jam className='w-5 h-5' />
 						{formatDate(pura.createdAt)}
 					</div>
-					<p>{pura.alamat}</p>
-					<p>{pura.kategori}</p>
-					<p>{pura.piodalan}</p>
-					<p>{pura.tahunBerdiri}</p>
+					<p>Alamat: {pura.alamat}</p>
+					<p>Kategori: {pura.kategori}</p>
+					<p>Piodalan: {pura.piodalan}</p>
+					<p>Tahun berdiri: {pura.tahunBerdiri}</p>
 				</div>
 				<EditorOutput content={pura.konten} />
 			</div>

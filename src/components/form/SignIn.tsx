@@ -15,10 +15,26 @@ import { useMutation } from '@tanstack/react-query';
 import { login } from '@/actions/login';
 import { toast } from '@/hooks/use-toast';
 import { signIn } from 'next-auth/react';
+import { useSearchParams } from 'next/navigation';
 
 interface SignInProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 function SignIn({ className, ...props }: SignInProps) {
+	const searchParams = useSearchParams();
+	// const callbackUrl = searchParams.get('callbackUrl');
+	const urlError =
+		searchParams.get('error') === 'OAuthAccountNotLinked'
+			? 'Email atau password salah!'
+			: '';
+
+	if (urlError) {
+		toast({
+			title: urlError,
+			description: 'Tidak dapat melakukan login.',
+			variant: 'destructive',
+		});
+	}
+
 	const {
 		handleSubmit,
 		register,
