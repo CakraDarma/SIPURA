@@ -6,12 +6,18 @@ export async function GET(req: Request) {
 
 	if (!q) return new Response('Invalid query', { status: 400 });
 
+	const keywords = q.split(' ');
+
+	const searchConditions = keywords.map((keyword) => ({
+		name: {
+			contains: keyword,
+		},
+		actived: true,
+	}));
+
 	const results = await db.pura.findMany({
 		where: {
-			name: {
-				startsWith: q,
-			},
-			actived: true,
+			OR: searchConditions,
 		},
 		include: {
 			_count: true,
