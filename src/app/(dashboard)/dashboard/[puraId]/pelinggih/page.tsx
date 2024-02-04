@@ -38,7 +38,7 @@ const PelinggihPage = async ({ params }: PelinggihPageProps) => {
 		<DashboardShell>
 			<DashboardHeader
 				heading='Pelinggih Pura'
-				text='Kelola pelinggih di dalam Pura.'
+				text='Kelola pelinggih di dalam pura.'
 			/>
 			{pelinggihPura?.length ? (
 				<div>

@@ -26,7 +26,7 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
 			<div className='ml-6'>
 				<DashboardHeader
 					heading='Dashboard'
-					text='Kelola semua aspek terkait dengan Pura dalam satu lokasi yang
+					text='Kelola semua aspek terkait dengan pura dalam satu lokasi yang
 						nyaman.'
 				/>
 			</div>

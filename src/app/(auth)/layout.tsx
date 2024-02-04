@@ -27,15 +27,15 @@ export default async function AuthLayout({ children }: AuthLayoutProps) {
 				<div className='relative z-20 flex items-center text-lg font-medium'>
 					<Link href='/' className='flex items-center gap-2'>
 						<Icons.logo className='w-8 h-8 sm:h-6 sm:w-6' />
-						<h4>Si Pura</h4>
+						<h4>SIPura</h4>
 					</Link>
 				</div>
 				<div className='relative z-20 mt-auto'>
 					<blockquote className='space-y-2'>
 						<p className='text-lg'>
-							&ldquo;Sistem informasi dan virtual tour Pura memperkaya
-							pengalaman pengunjung dengan informasi Pura yang mendalam dan
-							mempermudah manajemen informasi Pura.&rdquo;
+							&ldquo;Sistem informasi dan virtual tour pura memperkaya
+							pengalaman pengunjung dengan informasi pura yang mendalam dan
+							mempermudah manajemen informasi pura.&rdquo;
 						</p>
 					</blockquote>
 				</div>

@@ -13,7 +13,7 @@ const Home = () => {
 			<Hero
 				imageUrl='/images/hero2.jpg'
 				heading='Eksplorasi Pura Melalui Portal Informasi yang Interaktif'
-				text='SIPURA: Sistem Informasi dan Virtual Tour Pura'
+				text='SIPura: Sistem Informasi dan Virtual Tour Pura'
 			/>
 			{/* <Features /> */}
 			<About />

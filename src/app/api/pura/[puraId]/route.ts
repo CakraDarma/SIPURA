@@ -71,10 +71,9 @@ export async function PATCH(
 			return new Response(error.message, { status: 400 });
 		}
 
-		return new Response(
-			'Could not change Pura to the Pura at this time. Please try again later.',
-			{ status: 500 }
-		);
+		return new Response('Tidak dapat menyunting Pura. Coba lagi nanti.', {
+			status: 500,
+		});
 	}
 }
 
@@ -98,7 +97,7 @@ export async function DELETE(
 		});
 
 		if (!pura) {
-			return new Response('Pura not found', { status: 403 });
+			return new Response('Pura tidak ditemukan', { status: 403 });
 		}
 
 		// @ts-ignore
@@ -126,9 +125,8 @@ export async function DELETE(
 			return new Response(error.message, { status: 422 });
 		}
 
-		return new Response(
-			'Could not delete Puraat this time. Please try again later.',
-			{ status: 500 }
-		);
+		return new Response('Tidak dapat menghapus pura. Coba lagi nanti.', {
+			status: 500,
+		});
 	}
 }

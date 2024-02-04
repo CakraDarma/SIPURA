@@ -29,7 +29,7 @@ export default async function DashboardPage() {
 			<DashboardShell>
 				<DashboardHeader
 					heading='Pengajuan Pura'
-					text='Kelola semua aspek terkait dengan Pura dalam satu lokasi yang
+					text='Kelola semua aspek terkait dengan pura dalam satu lokasi yang
 						nyaman.'
 				/>
 
@@ -42,9 +42,9 @@ export default async function DashboardPage() {
 				) : (
 					<EmptyPlaceholder>
 						<EmptyPlaceholder.Icon name='kegiatan' />
-						<EmptyPlaceholder.Title>Tidak ada Pura</EmptyPlaceholder.Title>
+						<EmptyPlaceholder.Title>Tidak ada pura</EmptyPlaceholder.Title>
 						<EmptyPlaceholder.Description>
-							Tidak ada Pura baru yang ditambahkan untuk dikonfirmasi oleh Anda
+							Tidak ada pura baru yang ditambahkan untuk dikonfirmasi oleh Anda
 						</EmptyPlaceholder.Description>
 					</EmptyPlaceholder>
 				)}

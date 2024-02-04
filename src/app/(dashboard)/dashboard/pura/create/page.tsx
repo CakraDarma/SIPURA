@@ -13,7 +13,7 @@ const Page = async () => {
 			<div className='grid items-start gap-8'>
 				<DashboardHeader
 					heading='Dashboard'
-					text='Kelola semua aspek terkait dengan Pura dalam satu lokasi yang nyaman.'
+					text='Kelola semua aspek terkait dengan pura dalam satu lokasi yang nyaman.'
 				/>
 				<FormCreatePura data={kecamatans} />
 			</div>

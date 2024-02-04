@@ -37,7 +37,7 @@ const VirtualTourPage = async ({ params }: VirtualTourPageProps) => {
 		<DashboardShell>
 			<DashboardHeader
 				heading='Virtual Tour Pura'
-				text='Kelola Virtual Tour di dalam Pura.'
+				text='Kelola Virtual Tour di dalam pura.'
 			/>
 			{virtualTourPura?.length ? (
 				<div>

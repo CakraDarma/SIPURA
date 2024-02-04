@@ -32,7 +32,7 @@ const page = async ({ params }: PageProps) => {
 		<DashboardShell>
 			<DashboardHeader
 				heading='Kegiatan Pura'
-				text='Kelola kegiatan di dalam Pura.'
+				text='Kelola kegiatan di dalam pura.'
 			/>
 			<div>
 				{pura?.kegiatans.length ? (

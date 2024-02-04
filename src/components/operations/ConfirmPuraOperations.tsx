@@ -80,13 +80,13 @@ export default function ConfirmPuraOperations({
 		onError: () => {
 			return toast({
 				title: 'Terjadi kesalahan.',
-				description: 'Status Pura tidak berhasil dirubah. Silakan coba lagi.',
+				description: 'Status pura tidak berhasil dirubah. Silakan coba lagi.',
 				variant: 'destructive',
 			});
 		},
 		onSuccess: () => {
 			toast({
-				description: 'Status Pura berhasil dirubah.',
+				description: 'Status pura berhasil dirubah.',
 			});
 			// window.location.reload();
 			router.refresh();
@@ -138,10 +138,10 @@ export default function ConfirmPuraOperations({
 				<AlertDialogContent>
 					<AlertDialogHeader>
 						<AlertDialogTitle>
-							Apakah Anda yakin ingin menghapus pengajuan Pura ini?
+							Apakah Anda yakin ingin menghapus pengajuan pura ini?
 						</AlertDialogTitle>
 						<AlertDialogDescription>
-							Tindakan ini akan dikirim ke pengaju Pura.
+							Tindakan ini akan dikirim ke pengaju pura.
 						</AlertDialogDescription>
 					</AlertDialogHeader>
 					<AlertDialogFooter>

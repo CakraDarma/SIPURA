@@ -174,13 +174,13 @@ export default function FormEditPura({ pura, data }: FormEditPuraProps) {
 			}
 			toast({
 				title: 'Terjadi kesalahan.',
-				description: 'Tidak dapat menyunting Pura.',
+				description: 'Tidak dapat menyunting pura.',
 				variant: 'destructive',
 			});
 		},
 		onSuccess: () => {
 			toast({
-				description: 'Berhasil menyunting Pura',
+				description: 'Berhasil menyunting pura',
 			});
 			router.push(`/dashboard/${pura.id}`);
 		},
@@ -320,7 +320,7 @@ export default function FormEditPura({ pura, data }: FormEditPuraProps) {
 							type='text'
 							name='name'
 							id='name'
-							placeholder='Masukkan nama Pura'
+							placeholder='Masukkan nama pura'
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						/>
 						{errors?.name && (
@@ -343,7 +343,7 @@ export default function FormEditPura({ pura, data }: FormEditPuraProps) {
 							type='number'
 							name='tahunBerdiri'
 							id='tahunBerdiri'
-							placeholder='Masukkan tahun berdiri Pura'
+							placeholder='Masukkan tahun berdiri pura'
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						/>
 						{errors?.tahunBerdiri && (
@@ -366,7 +366,7 @@ export default function FormEditPura({ pura, data }: FormEditPuraProps) {
 					type='text'
 					name='alamat'
 					id='alamat'
-					placeholder='Masukkan alamat Pura'
+					placeholder='Masukkan alamat pura'
 					min='0'
 					className='w-full appearance-none rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 				/>
@@ -436,7 +436,7 @@ export default function FormEditPura({ pura, data }: FormEditPuraProps) {
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						>
 							<option value='' className='text-gray-500'>
-								-- Pilih kategori Pura --
+								-- Pilih kategori pura --
 							</option>
 							{listKategori.map((data) => (
 								<option key={data.id} value={data.value}>

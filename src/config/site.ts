@@ -5,6 +5,6 @@ export const siteConfig = {
 	url: 'https://tx.shadcn.com',
 	ogImage: 'https://tx.shadcn.com/og.jpg',
 	links: {
-		github: 'https://github.com/CakraDarma/SIPURA',
+		github: 'https://github.com/CakraDarma/SIPura',
 	},
 };

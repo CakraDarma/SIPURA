@@ -41,7 +41,7 @@ export default async function EditorPage({ params }: EditorPageProps) {
 			<div className='grid items-start gap-8'>
 				<DashboardHeader
 					heading='Dashboard'
-					text='Kelola semua aspek terkait dengan Pura dalam satu lokasi yang nyaman.'
+					text='Kelola semua aspek terkait dengan pura dalam satu lokasi yang nyaman.'
 				/>
 				<FormEditPura pura={pura} data={kecamatans} />
 			</div>

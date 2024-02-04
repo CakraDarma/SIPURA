@@ -27,7 +27,7 @@ export default async function DashboardPage() {
 			<DashboardShell>
 				<DashboardHeader
 					heading='Dashboard'
-					text='Kelola semua aspek terkait dengan Pura dalam satu lokasi yang
+					text='Kelola semua aspek terkait dengan pura dalam satu lokasi yang
 						nyaman.'
 				/>
 

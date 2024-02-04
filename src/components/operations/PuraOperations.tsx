@@ -134,7 +134,7 @@ export default function PuraOperations({ pura }: PuraOperationsProps) {
 				<AlertDialogContent>
 					<AlertDialogHeader>
 						<AlertDialogTitle>
-							Apakah Anda yakin ingin menghapus Pura ini?
+							Apakah Anda yakin ingin menghapus pura ini?
 						</AlertDialogTitle>
 						<AlertDialogDescription>
 							Tindakan ini tidak dapat dibatalkan.
@@ -163,7 +163,7 @@ export default function PuraOperations({ pura }: PuraOperationsProps) {
 				<AlertDialogContent>
 					<AlertDialogHeader>
 						<AlertDialogTitle>
-							Apakah Anda yakin ingin menonaktifkan Pura ini?
+							Apakah Anda yakin ingin menonaktifkan pura ini?
 						</AlertDialogTitle>
 						<AlertDialogDescription>
 							Tindakan ini tidak dapat dibatalkan.

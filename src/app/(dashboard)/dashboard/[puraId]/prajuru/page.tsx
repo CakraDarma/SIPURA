@@ -36,7 +36,7 @@ const PrajuruPage = async ({ params }: PrajuruPageProps) => {
 		<DashboardShell>
 			<DashboardHeader
 				heading='Prajuru Pura'
-				text='Kelola prajuru di dalam Pura.'
+				text='Kelola prajuru di dalam pura.'
 			/>
 
 			{prajuruPura?.length ? (

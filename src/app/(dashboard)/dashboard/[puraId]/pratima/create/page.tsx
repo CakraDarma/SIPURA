@@ -7,7 +7,7 @@ const Page = async () => {
 		<DashboardShell>
 			<DashboardHeader
 				heading='Dashboard'
-				text='Kelola semua aspek terkait dengan Pura dalam satu lokasi yang nyaman.'
+				text='Kelola semua aspek terkait dengan pura dalam satu lokasi yang nyaman.'
 			/>
 			<hr className='h-px bg-red-500' />
 			<FormCreatePratima />

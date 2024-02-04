@@ -53,7 +53,7 @@ export default async function DashboardPage() {
 			<DashboardShell>
 				<DashboardHeader
 					heading='Dashboard'
-					text='Kelola semua aspek terkait dengan Pura dalam satu lokasi yang
+					text='Kelola semua aspek terkait dengan pura dalam satu lokasi yang
 						nyaman.'
 				/>
 				{pura?.length ? (
@@ -92,9 +92,9 @@ export default async function DashboardPage() {
 				) : (
 					<EmptyPlaceholder>
 						<EmptyPlaceholder.Icon name='kegiatan' />
-						<EmptyPlaceholder.Title>Tidak ada Pura</EmptyPlaceholder.Title>
+						<EmptyPlaceholder.Title>Tidak ada pura</EmptyPlaceholder.Title>
 						<EmptyPlaceholder.Description>
-							Anda belum memiliki Pura yang tersedia. Silahkan tambahkan Pura
+							Anda belum memiliki pura yang tersedia. Silahkan tambahkan pura
 							terlebih dahulu
 						</EmptyPlaceholder.Description>
 						<div className='flex flex-row gap-2'>

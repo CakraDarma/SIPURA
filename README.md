@@ -1,4 +1,4 @@
-# SIPURA - Sistem Informasi Pura dan Virtual Tour Pura
+# SIPura - Sistem Informasi Pura dan Virtual Tour Pura
 
 ![alt](/public/og.jpg)
 
@@ -21,7 +21,7 @@ Built with the Next.js App Router, TypeScript, MYSql & Tailwind
 To get started with this project, run
 
 ```bash
-  git clone -b starter-code https://github.com/CakraDarma/SIPURA.git
+  git clone -b starter-code https://github.com/CakraDarma/SIPura.git
 ```
 
 and copy these .env.example variables into a separate .env file:

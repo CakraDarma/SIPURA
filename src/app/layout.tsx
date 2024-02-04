@@ -21,7 +21,7 @@ const fontHeading = Lora({
 // });
 
 export const metadata = {
-	title: 'SIPURA',
+	title: 'SIPura',
 	description: 'Sistem Informasi Pura Beserta Virtual Tour Pura',
 };
 

@@ -54,7 +54,7 @@ export async function DELETE(
 		}
 
 		return new Response(
-			'Could not delete Kegiatan to the Pura at this time. Please try again later.',
+			'Tidak dapat menghapus kegiatan pura. Coba lagi nanti.',
 			{ status: 500 }
 		);
 	}

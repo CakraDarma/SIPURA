@@ -12,12 +12,12 @@ const Footer = () => {
 							<div className='flex items-center justify-center gap-3'>
 								<Icons.logo />
 								<h2 className=' text-2xl font-medium leading-[38.40px] flex font-heading'>
-									SIPURA
+									SIPura
 								</h2>
 							</div>
 							<p className='font-sans text-base font-normal leading-normal'>
-								Sistem informasi dan virtual tour Pura menghadirkan kelestarian
-								Pura dalam bentuk digital memberikan pengalaman interaktif
+								Sistem informasi dan virtual tour pura menghadirkan kelestarian
+								pura dalam bentuk digital memberikan pengalaman interaktif
 								kepada pengguna.
 							</p>
 						</div>

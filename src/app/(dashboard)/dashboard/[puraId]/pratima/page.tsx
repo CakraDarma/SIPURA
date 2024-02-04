@@ -37,7 +37,7 @@ const PratimaPage = async ({ params }: PratimaPageProps) => {
 		<DashboardShell>
 			<DashboardHeader
 				heading='Pratima Pura'
-				text='Kelola pratima di dalam Pura.'
+				text='Kelola pratima di dalam pura.'
 			/>
 			{pratimaPura?.length ? (
 				<div>

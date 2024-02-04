@@ -25,8 +25,8 @@ const VideoInformation = () => {
 					</h3>
 
 					<p className='max-w-3xl font-sans text-lg font-light text-justify text-zinc-200 sm:text-xl'>
-						Kami menyajikan video pengenalan Pura untuk memberikan gambaran
-						sejarah dan keunikan setiap Pura di Bali kepada Anda. Nikmati
+						Kami menyajikan video pengenalan pura untuk memberikan gambaran
+						sejarah dan keunikan setiap pura di Bali kepada Anda. Nikmati
 						pengalaman menarik dan mendalam dengan menonton video ini, serta
 						pelajari lebih banyak tentang kebudayaan dan agama Hindu di Bali.
 					</p>
