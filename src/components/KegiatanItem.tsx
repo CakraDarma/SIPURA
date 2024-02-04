@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { Kegiatan } from '@prisma/client';
 
 import { Skeleton } from '@/components/ui/skeleton';
@@ -13,12 +12,7 @@ export default function KegiatanItem({ kegiatan }: KegiatanItemProps) {
 	return (
 		<div className='flex items-center justify-between p-4'>
 			<div className='grid gap-1'>
-				<Link
-					href={`/editor/${kegiatan.id}`}
-					className='font-semibold hover:underline'
-				>
-					{kegiatan.title}
-				</Link>
+				<div className='font-semibold hover:underline'>{kegiatan.title}</div>
 				<div>
 					<time
 						dateTime={kegiatan.createdAt.toDateString()}
