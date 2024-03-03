@@ -12,7 +12,6 @@ const Home = () => {
 				heading='Eksplorasi Pura Melalui Portal Informasi yang Interaktif'
 				text='SIPura: Sistem Informasi dan Virtual Tour Pura'
 			/>
-			{/* <Features /> */}
 			<About />
 			<VideoInformation />
 			<Announce />

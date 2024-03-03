@@ -37,7 +37,7 @@ export default async function CardPuras({ pura, link }: CardPuraProps) {
 
 	const session = await getAuthSession();
 	return (
-		<div className='relative flex w-full max-w-[23rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg'>
+		<div className='flex w-full sm:max-w-[23rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg'>
 			<Link href={link}>
 				<div>
 					<div className='relative mx-4 mt-4 overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40'>
@@ -47,7 +47,7 @@ export default async function CardPuras({ pura, link }: CardPuraProps) {
 							width={1000}
 							height={1000}
 							quality={100}
-							className='w-[336px] h-[224px] object-cover'
+							className='w-full sm:w-[336px] h-[224px] object-cover'
 						/>
 					</div>
 					<div className='p-6'>

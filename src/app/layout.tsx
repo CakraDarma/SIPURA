@@ -48,7 +48,7 @@ export default function RootLayout({
 					{children}
 					{/* </div> */}
 				</Providers>
-				{/* <TailwindIndicator /> */}
+				<TailwindIndicator />
 				<Toaster />
 			</body>
 		</html>
