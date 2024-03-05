@@ -7,7 +7,7 @@ const Footer = () => {
 		<div className='border-t-2'>
 			<div className='container h-full pt-6 max-w-7xl'>
 				<div className='flex flex-col'>
-					<div className='flex flex-col items-start justify-between gap-10 pb-10 border-b md:flex-row'>
+					<div className='flex flex-col items-start justify-between gap-10 pb-4 border-b md:flex-row'>
 						<div className='inline-flex flex-col items-start justify-start gap-6 max-w-[80%]'>
 							<div className='flex items-center justify-center gap-3'>
 								<Icons.logo />
@@ -16,9 +16,8 @@ const Footer = () => {
 								</h2>
 							</div>
 							<p className='font-sans text-base font-normal leading-normal'>
-								Sistem informasi dan virtual tour pura menghadirkan kelestarian
-								pura dalam bentuk digital memberikan pengalaman interaktif
-								kepada pengguna.
+								Jelajahi informasi pura secara digital melalui media sistem
+								informasi
 							</p>
 						</div>
 						<div className='inline-flex flex-col items-start justify-start gap-6'>
@@ -43,7 +42,7 @@ const Footer = () => {
 						</div>
 					</div>
 				</div>
-				<div className=' text-xs font-medium leading-[18px] py-3 font-sans'>
+				<div className=' text-sm font-medium leading-[18px] py-3 font-sans'>
 					© 2024 Website By Information Technology Universitas Udayana
 				</div>
 			</div>

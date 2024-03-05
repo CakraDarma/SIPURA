@@ -15,9 +15,7 @@ const announce = async () => {
 	return (
 		<div className='container py-20 max-w-7xl'>
 			<div className='flex flex-col justify-start my-6'>
-				<h2 className='text-4xl font-medium text-black md:text-5xl font-heading'>
-					Informasi, Pura Terbaru
-				</h2>
+				<h2 className='text-black  heading-2'>Informasi, Pura Terbaru</h2>
 			</div>
 			{/* box */}
 			{pura?.length ? (

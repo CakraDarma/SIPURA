@@ -1,17 +1,5 @@
 import { z } from 'zod';
 
-export const SubredditValidator = z.object({
-	name: z.string().min(3).max(21),
-});
-
-export const UserRoleValidator = z.object({
-	puraId: z.string(),
-	userId: z.string(),
-});
-
-export type CreateSubredditPayload = z.infer<typeof SubredditValidator>;
-export type SubscribeToSubredditPayload = z.infer<typeof UserRoleValidator>;
-
 export const PuraValidator = z.object({
 	name: z
 		.string()
@@ -44,20 +32,6 @@ export const PuraValidator = z.object({
 	desaId: z.string(),
 });
 
-export const KontenPuraValidator = z.object({
-	title: z
-		.string()
-		.min(3, {
-			message: 'Title must be at least 3 characters long',
-		})
-		.max(128, {
-			message: 'Title must be less than 128 characters long',
-		}),
-	content: z.any(),
-});
-
 export const ActivedPuraValidator = z.object({
 	actived: z.boolean(),
 });
-
-export type KontenPuraCreationRequest = z.infer<typeof KontenPuraValidator>;

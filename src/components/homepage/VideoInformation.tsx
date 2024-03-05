@@ -19,11 +19,11 @@ const VideoInformation = () => {
 				</div>
 
 				<div className='flex flex-col items-end gap-6 mt-10'>
-					<h3 className='max-w-3xl text-2xl leading-relaxed text-white md:text-3xl font-heading'>
+					<h3 className='max-w-3xl text-white heading-3'>
 						Nikmati Video Pengenalan SIPura dan Pelajari Keunikan Pura di Bali
 					</h3>
 
-					<p className='max-w-3xl font-sans text-xl font-light text-justify text-zinc-200 sm:text-2xl'>
+					<p className='max-w-3xl text-justify body-1 text-white-dark '>
 						Kami menyajikan video pengenalan SIPura untuk memberikan gambaran
 						mengenai aplikasi ini serta pelajari lebih banyak tentang kebudayaan
 						agama Hindu di Bali.

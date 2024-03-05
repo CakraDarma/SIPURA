@@ -18,14 +18,12 @@ const Hero = ({ imageUrl, text, heading }: postHero) => {
 		<>
 			<section
 				id='home'
-				className={`flex flex-col justify-center items-center h-[100vh] object-center bg-center bg-cover`}
+				className={`flex flex-col justify-center items-center h-[100vh] object-center bg-center bg-cover `}
 				style={divStyle}
 			>
 				<div className='container flex flex-col items-center justify-center gap-6 md:px-40'>
-					<h1 className='text-center text-white text-3xl  md:text-5xl font-normal md:leading-[76.80px] font-heading '>
-						{heading}
-					</h1>
-					<p className='text-sm font-thin text-center text-white md:text-xl font-heading'>
+					<h1 className='text-center text-white heading-1'>{heading}</h1>
+					<p className='text-sm font-thin text-center text-white md:text-xl font-heading '>
 						{text}
 					</p>
 				</div>

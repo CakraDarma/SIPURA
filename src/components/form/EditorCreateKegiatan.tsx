@@ -182,7 +182,7 @@ export const EditorCreateKegiatan = ({ puraId }: EditorProps) => {
 
 	return (
 		<>
-			<div className='w-full p-4 border rounded-lg bg-zinc-50 border-zinc-200'>
+			<div className='w-full p-4 border rounded-lg bg-zinc-50 border-white-dark'>
 				<form
 					id='pura-kegiatan-form'
 					className='w-fit'

@@ -15,25 +15,22 @@ const About = () => {
 						/>
 					</div>
 				</div>
-				<div className='bg-orange-light w-full md:w-[801px] h-[725px] xl:items-end items-center flex flex-col box-border px-16 pt-32 pb-[80px]'>
+				<div className='bg-orange-dark w-full md:w-[801px] h-[725px] xl:items-end items-center flex flex-col box-border px-16 pt-32 pb-[80px]'>
 					<div className='flex flex-col'>
-						<h2 className='text-4xl font-medium text-white md:text-5xl font-heading'>
-							SIPura
-						</h2>
-						<p className='max-w-sm mt-6 font-sans text-xl font-light text-justify text-zinc-200 sm:text-2xl'>
+						<h2 className='text-white heading-2'>SIPura</h2>
+						<p className='max-w-sm mt-6 text-justify body-1 text-white-dark'>
 							SIPura adalah sistem informasi dan virtual tour pura yang
 							memungkinkan Anda untuk mengakses dan menjelajahi pura secara
 							online
 						</p>
-						<br />
-						<p className='max-w-sm mt-6 font-sans text-xl font-light text-justify text-zinc-200 sm:text-2xl'>
+						<p className='max-w-sm mt-6 text-justify body-1 text-white-dark'>
 							Nikmati pengalaman mengakses informasi mengenai pura secara cepat
 							dan interaktif untuk menjaga warisan budaya yang bernilai
 						</p>
 						<div className='flex justify-center mt-16'>
 							<Button
 								variant='outline'
-								className='text-white bg-orange-light hover:bg-orange-dark'
+								className='text-white bg-orange-dark hover:bg-orange-light'
 							>
 								Selengkapnya
 							</Button>

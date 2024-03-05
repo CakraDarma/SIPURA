@@ -36,7 +36,7 @@ export default function RootLayout({
 		<html
 			lang='en'
 			className={cn(
-				'bg-white text-slate-900 antialiased light',
+				'bg-white text-black',
 				fontSans.variable,
 				fontHeading.variable
 			)}
@@ -44,9 +44,7 @@ export default function RootLayout({
 			<body className='min-h-screen antialiased bg-white'>
 				<Providers>
 					{authModal}
-					{/* <div className='container h-full pt-12 mx-auto max-w-7xl'> */}
 					{children}
-					{/* </div> */}
 				</Providers>
 				<TailwindIndicator />
 				<Toaster />

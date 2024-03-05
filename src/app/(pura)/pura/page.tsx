@@ -19,7 +19,7 @@ export default async function purasPage() {
 		<>
 			<Hero
 				imageUrl='/images/hero-list-pura.jpg'
-				heading='List Pura'
+				heading='Daftar Pura'
 				text='Temukan Informasi Pura'
 			/>
 			<div className='container py-20 max-w-7xl'>

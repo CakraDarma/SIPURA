@@ -52,13 +52,9 @@ export default async function CardPuras({ pura, link }: CardPuraProps) {
 				/>
 				<div className='p-6'>
 					<div className='flex items-center justify-between mb-3'>
-						<h5 className='block font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-black-light'>
-							{pura.name}
-						</h5>
+						<h5 className='text-black heading-5'>{pura.name}</h5>
 					</div>
-					<p className='block font-sans text-sm antialiased font-light leading-relaxed text-gray-500'>
-						{formattedResult}
-					</p>
+					<p className='text-black-light body-2'>{formattedResult}</p>
 				</div>
 			</Link>
 			<div className='flex flex-row justify-end w-full'>
