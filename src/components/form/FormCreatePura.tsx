@@ -17,6 +17,8 @@ import { kategoriPura } from '@/config/form';
 import { SingleFileDropzone } from '@/components/SingleFileDropzone';
 import { Desa } from '@prisma/client';
 
+import '@/styles/editor.css';
+
 type FormData = z.infer<typeof PuraValidator>;
 
 interface DesaOption {
@@ -398,8 +400,8 @@ export default function FormCreatePura({ data }: FormCreatePuraProps) {
 				>
 					Deskripsi Pura<span className='text-red-500'>*</span>
 				</label>
-				<div className='mx-auto w-[800px] prose prose-stone dark:prose-invert border shadow-sm'>
-					<div id='editor' className='min-h-[500px] ' />
+				<div className='w-full mx-auto border shadow-sm '>
+					<div id='editor' className='min-h-[500px] w-full' />
 					<p className='text-sm text-gray-500'>
 						Gunakan{' '}
 						<kbd className='px-1 text-xs uppercase border rounded-md bg-muted'>

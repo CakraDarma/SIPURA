@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from 'react';
 import Link from 'next/link';
 
@@ -6,15 +8,21 @@ import { cn } from '@/lib/utils';
 import { useLockBody } from '@/hooks/use-lock-body';
 import { Icons } from '@/components/Icons';
 import { MainNavItem } from '@/types';
+import { useParams } from 'next/navigation';
 
 interface MobileNavProps {
 	items: MainNavItem[];
 	children?: React.ReactNode;
+	setShowMobileMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export function MobileNav({ items, children }: MobileNavProps) {
+export function MobileNav({
+	items,
+	children,
+	setShowMobileMenu,
+}: MobileNavProps) {
 	useLockBody();
-
+	const params = useParams();
 	return (
 		<div
 			className={cn(
@@ -30,11 +38,18 @@ export function MobileNav({ items, children }: MobileNavProps) {
 					{items.map((item, index) => (
 						<Link
 							key={index}
-							href={item.disabled ? '#' : item.href}
+							href={
+								params.puraId
+									? `/dashboard/${params.puraId + item.href}`
+									: `/dashboard/${item.href}`
+							}
 							className={cn(
 								'flex w-full items-center rounded-md p-2 text-sm font-medium hover:underline',
 								item.disabled && 'cursor-not-allowed opacity-60'
 							)}
+							onClick={() => {
+								setShowMobileMenu(false);
+							}}
 						>
 							{item.title}
 						</Link>

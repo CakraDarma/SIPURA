@@ -3,12 +3,14 @@ import { redirect } from 'next/navigation';
 import { dashboardConfig } from '@/config/dashboard';
 import { authOptions, getAuthSession } from '@/lib/auth';
 import { UserAccountNav } from '@/components/UserAccountNav';
-import { Link } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/Icons';
 import SearchBar from '@/components/SearchBar';
 import { MainNavDashboard } from '@/components/MainNavDashboard';
 import { db } from '@/lib/db';
+import { siteConfig } from '@/config/site';
+import Link from 'next/link';
+import Footer from '@/components/Footer';
 
 interface DashboardLayoutProps {
 	children?: React.ReactNode;
@@ -30,7 +32,12 @@ export default async function DashboardLayout({
 			<header className='fixed inset-x-0 top-0 z-40 border-b bg-black-light backdrop-filter backdrop-blur-lg bg-opacity-30'>
 				<div className='container flex items-center justify-between h-16 gap-6 py-4 md:gap-4'>
 					<MainNavDashboard items={dashboardConfig.dashboardNav} />
-
+					<Link href='/' className='items-center hidden space-x-2 md:flex'>
+						<Icons.logo />
+						<span className='hidden font-bold sm:inline-block'>
+							{siteConfig.name}
+						</span>
+					</Link>
 					{/* search bar */}
 					<SearchBar />
 
@@ -63,7 +70,7 @@ export default async function DashboardLayout({
 			<main className='flex flex-col flex-1 w-full mt-24 overflow-hidden'>
 				{children}
 			</main>
-			{/* <Footer /> */}
+			<Footer />
 		</div>
 	);
 }

@@ -193,10 +193,10 @@ export const EditorEditKegiatan = ({ kegiatan }: EditorProps) => {
 			<div className='w-full p-4 border rounded-lg bg-zinc-50 border-white-dark'>
 				<form
 					id='pura-kegiatan-form'
-					className='w-fit'
+					className='w-full '
 					onSubmit={handleSubmit(onSubmit)}
 				>
-					<div className='prose prose-stone dark:prose-invert'>
+					<div className='flex flex-col items-center justify-center w-full mx-auto'>
 						<TextareaAutosize
 							ref={(e) => {
 								titleRef(e);
@@ -205,9 +205,9 @@ export const EditorEditKegiatan = ({ kegiatan }: EditorProps) => {
 							}}
 							{...rest}
 							placeholder='Judul'
-							className='w-full overflow-hidden text-5xl font-bold bg-transparent appearance-none resize-none focus:outline-none'
+							className='w-full overflow-hidden text-5xl font-bold bg-transparent resize-none sm:pl-16 focus:outline-none'
 						/>
-						<div id='editor' className='min-h-[500px]' />
+						<div id='editor' className='min-h-[500px] w-full ' />
 						<p className='text-sm text-gray-500'>
 							Gunakan{' '}
 							<kbd className='px-1 text-xs uppercase border rounded-md bg-muted'>

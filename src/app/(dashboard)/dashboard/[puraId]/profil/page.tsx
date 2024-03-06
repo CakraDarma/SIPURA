@@ -36,9 +36,7 @@ const page = async ({ params }: PageProps) => {
 				heading='Profil Pura'
 				text='Kelola informasi profil Pura.'
 			/>
-			<div>
-				<FormEditPura pura={pura} data={kecamatans} />
-			</div>
+			<FormEditPura pura={pura} data={kecamatans} />
 		</DashboardShell>
 	);
 };

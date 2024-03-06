@@ -9,14 +9,12 @@ const Page = async () => {
 		},
 	});
 	return (
-		<div className='max-w-4xl mx-auto'>
-			<div className='grid items-start gap-8'>
-				<DashboardHeader
-					heading='Dashboard'
-					text='Kelola semua aspek terkait dengan pura dalam satu lokasi yang nyaman.'
-				/>
-				<FormCreatePura data={kecamatans} />
-			</div>
+		<div className='container mx-auto space-y-10 max-w-7xl'>
+			<DashboardHeader
+				heading='Dashboard'
+				text='Kelola semua aspek terkait dengan pura dalam satu lokasi yang nyaman.'
+			/>
+			<FormCreatePura data={kecamatans} />
 		</div>
 	);
 };

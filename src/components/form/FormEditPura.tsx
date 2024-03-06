@@ -17,9 +17,9 @@ import { kategoriPura } from '@/config/form';
 import { SingleFileDropzone } from '@/components/SingleFileDropzone';
 import { urlToBlobFile } from '@/lib/utils';
 import { Desa, Pura } from '@prisma/client';
-
 type FormData = z.infer<typeof PuraValidator>;
 
+import '@/styles/editor.css';
 interface FormEditPuraProps {
 	pura: Pura;
 	data: Kecamatan[];
@@ -211,6 +211,7 @@ export default function FormEditPura({ pura, data }: FormEditPuraProps) {
 				placeholder: 'Ketik di sini untuk menulis...',
 				inlineToolbar: true,
 				data: body.konten,
+
 				tools: {
 					header: Header,
 					linkTool: {
@@ -307,26 +308,24 @@ export default function FormEditPura({ pura, data }: FormEditPuraProps) {
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<div className='flex flex-wrap -mx-3'>
-				<div className='w-full px-3 sm:w-1/2'>
-					<div className='mb-5'>
-						<label
-							htmlFor='name'
-							className='mb-3 block text-base font-medium text-[#07074D]'
-						>
-							Nama Pura<span className='text-red-500'>*</span>
-						</label>
-						<input
-							{...register('name')}
-							type='text'
-							name='name'
-							id='name'
-							placeholder='Masukkan nama pura'
-							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
-						/>
-						{errors?.name && (
-							<p className='px-1 text-xs text-red-600'>{errors.name.message}</p>
-						)}
-					</div>
+				<div className='w-full px-3 mb-5 sm:w-1/2'>
+					<label
+						htmlFor='name'
+						className='mb-3 block text-base font-medium text-[#07074D]'
+					>
+						Nama Pura<span className='text-red-500'>*</span>
+					</label>
+					<input
+						{...register('name')}
+						type='text'
+						name='name'
+						id='name'
+						placeholder='Masukkan nama pura'
+						className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
+					/>
+					{errors?.name && (
+						<p className='px-1 text-xs text-red-600'>{errors.name.message}</p>
+					)}
 				</div>
 				<div className='w-full px-3 sm:w-1/2'>
 					<div className='mb-5'>
@@ -460,8 +459,8 @@ export default function FormEditPura({ pura, data }: FormEditPuraProps) {
 				>
 					Deskripsi Pura<span className='text-red-500'>*</span>
 				</label>
-				<div className='mx-auto w-[800px] prose prose-stone dark:prose-invert border shadow-sm'>
-					<div id='editor' className='min-h-[500px] ' />
+				<div className='w-full mx-auto border shadow-sm '>
+					<div id='editor' className='min-h-[500px] w-full' />
 					<p className='text-sm text-gray-500'>
 						Gunakan{' '}
 						<kbd className='px-1 text-xs uppercase border rounded-md bg-muted'>

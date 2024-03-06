@@ -53,7 +53,9 @@ export function MainNav({ items, children }: MainNavProps) {
 				{showMobileMenu ? <Icons.close /> : <Icons.menu />}
 			</button>
 			{showMobileMenu && items && (
-				<MobileNav items={items}>{children}</MobileNav>
+				<MobileNav setShowMobileMenu={setShowMobileMenu} items={items}>
+					{children}
+				</MobileNav>
 			)}
 		</div>
 	);

@@ -36,11 +36,22 @@ const page = async ({ params }: PageProps) => {
 			/>
 			<div>
 				{pura?.kegiatans.length ? (
-					<div className='border divide-y rounded-md divide-border'>
-						{pura.kegiatans.map((kegiatan) => (
-							<KegiatanItem key={kegiatan.id} kegiatan={kegiatan} />
-						))}
-					</div>
+					<>
+						<div className='border divide-y rounded-md divide-border'>
+							{pura.kegiatans.map((kegiatan) => (
+								<KegiatanItem key={kegiatan.id} kegiatan={kegiatan} />
+							))}
+						</div>
+						<Link
+							className={buttonVariants({
+								variant: 'outline',
+								className: 'w-full mt-12',
+							})}
+							href={`/dashboard/${puraId}/kegiatan/create`}
+						>
+							Tambahkan Kegiatan
+						</Link>
+					</>
 				) : (
 					<EmptyPlaceholder>
 						<EmptyPlaceholder.Icon name='kegiatan' />
