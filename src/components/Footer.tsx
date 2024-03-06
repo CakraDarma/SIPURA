@@ -4,7 +4,7 @@ import { Icons } from '@/components/Icons';
 
 const Footer = () => {
 	return (
-		<div className='border-t-2'>
+		<div className='border-t-2 mt-14'>
 			<div className='container h-full pt-6 max-w-7xl'>
 				<div className='flex flex-col'>
 					<div className='flex flex-col items-start justify-between gap-10 pb-4 border-b md:flex-row'>

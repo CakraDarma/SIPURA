@@ -152,10 +152,8 @@ export default function FormEditVirtualTour({
 				<div className='flex flex-col items-center justify-center'>
 					<iframe
 						src={`${preview}`}
-						width='600'
-						height='400'
-						frameBorder='0'
 						allowFullScreen
+						className='w-full mb-5 aspect-video'
 					></iframe>
 				</div>
 			)}
