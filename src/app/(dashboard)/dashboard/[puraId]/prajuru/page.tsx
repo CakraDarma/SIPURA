@@ -40,7 +40,7 @@ const PrajuruPage = async ({ params }: PrajuruPageProps) => {
 			/>
 
 			{prajuruPura?.length ? (
-				<div>
+				<div className='overflow-x-auto '>
 					<div className='flex flex-row justify-end'>
 						<Link
 							className={buttonVariants()}

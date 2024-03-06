@@ -41,7 +41,7 @@ const PelinggihPage = async ({ params }: PelinggihPageProps) => {
 				text='Kelola pelinggih di dalam pura.'
 			/>
 			{pelinggihPura?.length ? (
-				<div>
+				<div className='overflow-x-auto '>
 					<div className='flex flex-row justify-end'>
 						<Link
 							className={buttonVariants()}
