@@ -50,7 +50,11 @@ export function MainNav({ items, children }: MainNavProps) {
 				className='flex items-center space-x-2 md:hidden'
 				onClick={() => setShowMobileMenu(!showMobileMenu)}
 			>
-				{showMobileMenu ? <Icons.close /> : <Icons.menu />}
+				{showMobileMenu ? (
+					<Icons.close color='white' />
+				) : (
+					<Icons.menu color='white' />
+				)}
 			</button>
 			{showMobileMenu && items && (
 				<MobileNav setShowMobileMenu={setShowMobileMenu} items={items}>

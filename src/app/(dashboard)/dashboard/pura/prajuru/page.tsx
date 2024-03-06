@@ -23,7 +23,7 @@ export default async function DashboardPage() {
 	const users = await db.user.findMany({});
 
 	return (
-		<div className='container flex flex-col h-full space-y-6 max-w-7xl'>
+		<div className='container flex flex-col h-full space-y-6 max-w-7xl wfull'>
 			<DashboardShell>
 				<DashboardHeader
 					heading='Dashboard'
@@ -32,7 +32,7 @@ export default async function DashboardPage() {
 				/>
 
 				{users?.length ? (
-					<div>
+					<div className='overflow-x-auto'>
 						<div className='flex flex-col flex-wrap items-center justify-center gap-6 mb-10 md:flex-row'>
 							<TableUser data={users} />
 						</div>

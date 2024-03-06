@@ -51,7 +51,7 @@ export default async function DashboardLayout({
 							)}
 						>
 							Login
-							<Icons.user className='text-white' />
+							<Icons.user className='text-white' color='white' />
 						</Link>
 					)}
 				</div>

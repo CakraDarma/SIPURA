@@ -76,7 +76,9 @@ export const UserAccountNav = ({
 									<p className='w-[200px] truncate text-sm'>Pengajuan Pura</p>
 									{countPuraIsUnactived > 0 && (
 										<div className='flex items-center justify-center w-5 h-5 text-white bg-red-500 rounded-full '>
-											<p className='text-[9px] '>{countPuraIsUnactived}</p>
+											<p className='text-[9px] text-white'>
+												{countPuraIsUnactived}
+											</p>
 										</div>
 									)}
 								</div>

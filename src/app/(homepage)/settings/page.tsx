@@ -24,26 +24,24 @@ export default async function SettingsPage() {
 	// await new Promise((resolve) => setTimeout(resolve, 7000));
 
 	return (
-		<div className='max-w-4xl py-12 mx-auto mt-10'>
-			<div className='grid items-start gap-8'>
-				<DashboardShell>
-					<DashboardHeader
-						heading='Profil Akun'
-						text='Kelola informasi pribadi anda.'
+		<div className='container md:py-20 max-w-7xl'>
+			<DashboardShell>
+				<DashboardHeader
+					heading='Profil Akun'
+					text='Kelola informasi pribadi anda.'
+				/>
+				<div className='grid gap-10'>
+					<FormEditUser
+						user={{
+							id: session.user.id,
+							name: session.user.name || '',
+							image: session.user.image || '',
+							alamat: user?.alamat || '',
+							telepon: user?.telepon || '',
+						}}
 					/>
-					<div className='grid gap-10'>
-						<FormEditUser
-							user={{
-								id: session.user.id,
-								name: session.user.name || '',
-								image: session.user.image || '',
-								alamat: user?.alamat || '',
-								telepon: user?.telepon || '',
-							}}
-						/>
-					</div>
-				</DashboardShell>
-			</div>
+				</div>
+			</DashboardShell>
 		</div>
 	);
 }
