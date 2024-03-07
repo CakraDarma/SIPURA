@@ -45,13 +45,13 @@ export default async function DashboardLayout({
 						<Link
 							href='/sign-in'
 							className={cn(
-								'text-white text-sm ',
+								'text-black text-base ',
 								'flex items-center justify-center gap-1',
-								'hover:border-b-2 border-gray-50'
+								'hover:border-b-2 border-black font-medium'
 							)}
 						>
 							Login
-							<Icons.user className='text-white' color='white' />
+							<Icons.user color='black' />
 						</Link>
 					)}
 				</div>

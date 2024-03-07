@@ -22,8 +22,8 @@ export function MainNav({ items, children }: MainNavProps) {
 	return (
 		<div className='flex gap-6 md:gap-10'>
 			<Link href='/' className='items-center hidden space-x-2 md:flex'>
-				<Icons.logo />
-				<span className='hidden font-bold sm:inline-block'>
+				<Icons.logo color='black' />
+				<span className='hidden text-lg font-semibold text-black sm:inline-block'>
 					{siteConfig.name}
 				</span>
 			</Link>
@@ -34,7 +34,7 @@ export function MainNav({ items, children }: MainNavProps) {
 							key={index}
 							href={item.disabled ? '#' : item.href}
 							className={cn(
-								'flex items-center text-lg font-medium hover:border-b-2 border-foreground sm:text-sm',
+								'flex items-center text-lg font-medium hover:border-b-2 border-foreground sm:text-base',
 								item.href.startsWith(`/${segment}`)
 									? 'text-primary'
 									: 'text-foreground',
