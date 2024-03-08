@@ -1,5 +1,6 @@
 import { db } from '@/lib/db';
 import CardPuras from '@/components/CardPuras';
+import Link from 'next/link';
 
 const announce = async () => {
 	const pura = await db.pura.findMany({
@@ -15,7 +16,15 @@ const announce = async () => {
 	return (
 		<div className='container py-20 max-w-7xl'>
 			<div className='flex flex-col justify-start my-6'>
-				<h2 className='text-black  heading-2'>Informasi, Pura Terbaru</h2>
+				<h2 className='text-black heading-2'>Informasi, Pura Terbaru</h2>
+			</div>
+			<div className='flex flex-row justify-end'>
+				<Link
+					className='font-medium border-b-2 text-orange-dark border-orange-dark'
+					href={'/pura'}
+				>
+					Lihat Semua
+				</Link>
 			</div>
 			{/* box */}
 			{pura?.length ? (

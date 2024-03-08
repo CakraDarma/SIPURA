@@ -10,7 +10,7 @@ export default function DashboardHeader({
 	children,
 }: DashboardHeaderProps) {
 	return (
-		<div className='flex items-center justify-between px-2'>
+		<div className='flex items-center justify-between'>
 			<div className='grid gap-1'>
 				<h1 className='font-sans text-3xl font-medium md:text-4xl'>
 					{heading}

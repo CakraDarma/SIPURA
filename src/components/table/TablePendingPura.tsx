@@ -48,7 +48,7 @@ export default function TablePendingPura({ data }: TableDataProps) {
 						</TableCell>
 						<TableCell>{formatDate(data.createdAt)}</TableCell>
 						<TableCell
-							className={`p-2 rounded-xl w-fit ${
+							className={` rounded-xl w-fit ${
 								data.actived ? 'bg-green-500' : 'bg-yellow-500'
 							} text-white`}
 						>

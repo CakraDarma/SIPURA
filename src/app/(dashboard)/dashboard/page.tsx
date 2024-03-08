@@ -73,7 +73,9 @@ export default async function DashboardPage() {
 									<p className='text-sm text-white '>Pending</p>
 									{countPuraIsUnactived > 0 && (
 										<div className='flex items-center justify-center w-5 h-5 text-white bg-red-500 rounded-full '>
-											<p className='text-[9px] '>{countPuraIsUnactived}</p>
+											<p className='text-[9px] text-white'>
+												{countPuraIsUnactived}
+											</p>
 										</div>
 									)}
 								</div>
@@ -113,7 +115,9 @@ export default async function DashboardPage() {
 										<p className='text-sm text-white '>Pending</p>
 										{countPuraIsUnactived > 0 && (
 											<div className='flex items-center justify-center w-5 h-5 text-white bg-red-500 rounded-full '>
-												<p className='text-[9px] '>{countPuraIsUnactived}</p>
+												<p className='text-[9px] text-white'>
+													{countPuraIsUnactived}
+												</p>
 											</div>
 										)}
 									</div>

@@ -37,11 +37,13 @@ export default async function DashboardPage() {
 						nyaman.'
 				/>
 
+				<p className='text-yellow-400 body-2 '>
+					Pengajuan Pura Anda sedang diverifikasi oleh admin
+				</p>
+
 				{pura?.length ? (
-					<div>
-						<div className='flex flex-col flex-wrap items-center justify-center gap-6 mb-10 md:flex-row'>
-							<TablePendingPura data={pura} />
-						</div>
+					<div className='flex flex-col flex-wrap items-center justify-center gap-6 mb-10 overflow-x-scroll md:flex-row sm:overflow-auto'>
+						<TablePendingPura data={pura} />
 					</div>
 				) : (
 					<EmptyPlaceholder>
