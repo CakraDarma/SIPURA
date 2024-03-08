@@ -38,7 +38,11 @@ export function MobileNav({
 					{items.map((item, index) => (
 						<Link
 							key={index}
-							href={'/pura'}
+							href={
+								params.puraId
+									? `/dashboard/${params.puraId + item.href}`
+									: `/dashboard/${item.href}`
+							}
 							className={cn(
 								'flex w-full items-center rounded-md p-2 text-sm font-medium hover:underline',
 								item.disabled && 'cursor-not-allowed opacity-60'

@@ -20,7 +20,7 @@ const renderers = {
 
 const style = {
 	paragraph: {
-		fontSize: '1rem',
+		fontSize: '1.3rem',
 		fontWeight: 200,
 		textAlign: 'justify',
 	},
@@ -30,7 +30,7 @@ const EditorOutput = ({ content }: EditorOutputProps) => {
 	return (
 		<Output
 			style={style}
-			className='font-sans text-base text'
+			className='font-sans text-base '
 			renderers={renderers}
 			data={content}
 		/>

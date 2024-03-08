@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { MobileNav } from '@/components/MobileNav';
+import { MobileNav } from '@/components/MobileNavDashboard';
 import { MainNavItem } from '@/types';
 import { Icons } from '@/components/Icons';
 

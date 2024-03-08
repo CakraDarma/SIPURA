@@ -11,7 +11,7 @@ export default function PuraNav() {
 
 	return (
 		<div className='bg-gray-200'>
-			<div className='container flex flex-row justify-center w-full gap-12 py-3 max-w-7xl'>
+			<div className='container flex flex-row justify-center w-full gap-12 py-3 overflow-x-scroll sm:overflow-hidden max-w-7xl'>
 				{puraNavConfig?.map((item, index) => (
 					<Link
 						key={index}

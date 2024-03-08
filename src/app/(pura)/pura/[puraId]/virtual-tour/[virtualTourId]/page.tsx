@@ -1,3 +1,4 @@
+import BackButton from '@/components/BackButton';
 import Card from '@/components/Card';
 import { db } from '@/lib/db';
 import React from 'react';
@@ -39,7 +40,10 @@ export default async function VirtualTourPuraPage({
 	});
 	return (
 		<section className='overflow-hidden text-gray-700 bg-white body-font'>
-			<div className='container px-5 py-24 mx-auto'>
+			<div className='container px-5 py-4 mx-auto'>
+				<div className='mb-6 lg:translate-x-36 w-fit'>
+					<BackButton />
+				</div>
 				<iframe
 					title='Virtual Tour'
 					width='100%'
@@ -48,7 +52,7 @@ export default async function VirtualTourPuraPage({
 					allowFullScreen
 				></iframe>
 			</div>
-			<div className='container mb-10 max-w-7xl'>
+			<div className='container px-5 mb-10'>
 				<div className='flex flex-col mx-auto lg:w-4/5'>
 					<div className='flex flex-col gap-2 mb-4 border-b-2 border-gray-200'>
 						<h3 className='font-sans text-xl font-semibold md:text-2xl'>
@@ -72,35 +76,5 @@ export default async function VirtualTourPuraPage({
 				</div>
 			</div>
 		</section>
-		// <div className='container py-10 max-w-7xl'>
-		// 	<h2 className='mb-6 text-3xl font-medium tracking-wide text-gray-800 border-b-2 dark:text-white md:text-4xl font-heading border-orange-light w-fit'>
-		// 		Virtual Tour
-		// 	</h2>
-
-		// 	{pura?.virtualTours.length ? (
-		// 		<div className='flex flex-col flex-wrap items-center justify-center gap-10 mb-10 md:items-start md:flex-row'>
-		// 			{pura.virtualTours.map((virtualTour) => (
-		// 				<div key={virtualTour.id} className='w-full'>
-		// 					<iframe
-		// 						title='Virtual Tour'
-		// 						width='100%'
-		// 						height='600'
-		// 						src={virtualTour.virtualTour}
-		// 						allowFullScreen
-		// 					></iframe>
-		// 					<img src={virtualTour.virtualTour} alt='f' />
-		// 				</div>
-		// 			))}
-		// 		</div>
-		// 	) : (
-		// 		<EmptyPlaceholder>
-		// 			<EmptyPlaceholder.Icon name='kegiatan' />
-		// 			<EmptyPlaceholder.Title>Belum ada VirtualTour</EmptyPlaceholder.Title>
-		// 			<EmptyPlaceholder.Description>
-		// 				Belum ada VirtualTour yang ditambahkan
-		// 			</EmptyPlaceholder.Description>
-		// 		</EmptyPlaceholder>
-		// 	)}
-		// </div>
 	);
 }
