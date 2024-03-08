@@ -4,6 +4,7 @@ import DashboardHeader from '@/components/DashboardHeader';
 import DashboardShell from '@/components/DashboardShell';
 import { FormEditUser } from '@/components/form/FormEditUser';
 import { db } from '@/lib/db';
+import BackButton from '@/components/BackButton';
 
 export const metadata = {
 	title: 'Settings',
@@ -30,26 +31,27 @@ export default async function SettingsPage({ params }: SettingsPageProps) {
 	// await new Promise((resolve) => setTimeout(resolve, 7000));
 
 	return (
-		<div className='max-w-4xl py-1 mx-auto mt-2'>
-			<div className='grid items-start gap-8'>
-				<DashboardShell>
-					<DashboardHeader
-						heading='Profil Akun'
-						text='Kelola informasi pengguna'
-					/>
-					<div className='grid gap-10'>
-						<FormEditUser
-							user={{
-								id: user?.id || '',
-								name: user?.name || '',
-								image: user?.image || '',
-								alamat: user?.alamat || '',
-								telepon: user?.telepon || '',
-							}}
-						/>
-					</div>
-				</DashboardShell>
+		<div className='container md:py-5 max-w-7xl'>
+			<div className=' w-fit'>
+				<BackButton />
 			</div>
+			<DashboardShell>
+				<DashboardHeader
+					heading='Profil Akun'
+					text='Kelola informasi pengguna'
+				/>
+				<div className='grid gap-10'>
+					<FormEditUser
+						user={{
+							id: user?.id || '',
+							name: user?.name || '',
+							image: user?.image || '',
+							alamat: user?.alamat || '',
+							telepon: user?.telepon || '',
+						}}
+					/>
+				</div>
+			</DashboardShell>
 		</div>
 	);
 }

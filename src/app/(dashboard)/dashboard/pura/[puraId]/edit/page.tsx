@@ -37,14 +37,12 @@ export default async function EditorPage({ params }: EditorPageProps) {
 	}
 
 	return (
-		<div className='max-w-4xl mx-auto'>
-			<div className='grid items-start gap-8'>
-				<DashboardHeader
-					heading='Dashboard'
-					text='Kelola semua aspek terkait dengan pura dalam satu lokasi yang nyaman.'
-				/>
-				<FormEditPura pura={pura} data={kecamatans} />
-			</div>
+		<div className='container md:py-5 max-w-7xl'>
+			<DashboardHeader
+				heading='Dashboard'
+				text='Kelola semua aspek terkait dengan pura dalam satu lokasi yang nyaman.'
+			/>
+			<FormEditPura pura={pura} data={kecamatans} />
 		</div>
 	);
 }

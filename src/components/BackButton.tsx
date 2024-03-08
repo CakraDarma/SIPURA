@@ -24,7 +24,6 @@ const BackButton = () => {
 
 const gePath = (pathname: string) => {
 	const splitPath = pathname.split('/');
-	console.log(splitPath);
 	// /dashboard/agung/kegiatan
 	// Array(4)[('', 'dashboard', 'agung', 'kegiatan')];
 	if (splitPath.length === 3) return '/';
