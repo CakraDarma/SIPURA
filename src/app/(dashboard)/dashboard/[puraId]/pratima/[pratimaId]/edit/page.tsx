@@ -1,3 +1,4 @@
+import BackButton from '@/components/BackButton';
 import DashboardHeader from '@/components/DashboardHeader';
 import DashboardShell from '@/components/DashboardShell';
 import FormEditPratima from '@/components/form/FormEditPratima';
@@ -26,23 +27,28 @@ const EditPratimaPage = async ({ params }: EditPratimaPageProps) => {
 	}
 
 	return (
-		<DashboardShell>
-			<DashboardHeader
-				heading='Dashboard'
-				text='Kelola semua aspek terkait dengan pura dalam satu lokasi yang nyaman.'
-			/>
-			<hr className='h-px bg-red-500' />
-			<FormEditPratima
-				pratima={{
-					nama: pratima.nama,
-					konten: pratima.konten,
-					puraId: pratima.puraId,
-					id: pratima.id,
-					tahunDitemukan: pratima.tahunDitemukan,
-					thumbnail: pratima.thumbnail,
-				}}
-			/>
-		</DashboardShell>
+		<>
+			<div className=' w-fit'>
+				<BackButton />
+			</div>
+			<DashboardShell>
+				<DashboardHeader
+					heading='Dashboard'
+					text='Kelola semua aspek terkait dengan pura dalam satu lokasi yang nyaman.'
+				/>
+				<hr className='h-px bg-red-500' />
+				<FormEditPratima
+					pratima={{
+						nama: pratima.nama,
+						konten: pratima.konten,
+						puraId: pratima.puraId,
+						id: pratima.id,
+						tahunDitemukan: pratima.tahunDitemukan,
+						thumbnail: pratima.thumbnail,
+					}}
+				/>
+			</DashboardShell>
+		</>
 	);
 };
 

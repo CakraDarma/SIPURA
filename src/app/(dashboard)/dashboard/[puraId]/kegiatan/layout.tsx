@@ -1,4 +1,4 @@
-import ToFeedButton from '@/components/ToFeedButton';
+import BackButton from '@/components/BackButton';
 import { db } from '@/lib/db';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -47,7 +47,7 @@ const Layout = async ({
 	return (
 		<div className='h-full mx-auto sm:container max-w-7xl'>
 			<div>
-				<ToFeedButton />
+				<BackButton />
 				<div className='grid grid-cols-1 lg:grid-cols-3 gap-y-4 lg:gap-x-4'>
 					<div className='flex flex-col col-span-2 space-y-6'>{children}</div>
 

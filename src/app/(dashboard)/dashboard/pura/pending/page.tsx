@@ -6,6 +6,7 @@ import DashboardHeader from '@/components/DashboardHeader';
 import DashboardShell from '@/components/DashboardShell';
 import EmptyPlaceholder from '@/components/EmptyPlaceholder';
 import TablePendingPura from '@/components/table/TablePendingPura';
+import BackButton from '@/components/BackButton';
 
 export const metadata = {
 	title: 'Dashboard',
@@ -26,6 +27,9 @@ export default async function DashboardPage() {
 
 	return (
 		<div className='container flex flex-col h-full space-y-6 max-w-7xl'>
+			<div className=' w-fit'>
+				<BackButton />
+			</div>
 			<DashboardShell>
 				<DashboardHeader
 					heading='Pengajuan Pura'

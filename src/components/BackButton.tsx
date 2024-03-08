@@ -3,6 +3,8 @@
 import { ChevronLeft } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { buttonVariants } from '@/components/ui/Button';
+import Link from 'next/link';
+import { split } from 'postcss/lib/list';
 
 const BackButton = () => {
 	const pathname = usePathname();
@@ -10,25 +12,27 @@ const BackButton = () => {
 	// if path is /r/[slug], turn into /
 	// if path is /r/[slug]/post/[slug2], turn into /r/[slug] index 1 dan 2
 
-	const subredditPath = getSubredditPath(pathname);
+	const subredditPath = gePath(pathname);
 
 	return (
-		<a href={subredditPath} className={buttonVariants({ variant: 'ghost' })}>
+		<Link href={subredditPath} className={buttonVariants({ variant: 'ghost' })}>
 			<ChevronLeft className='w-4 h-4' />
 			{subredditPath === '/' ? 'Beranda' : 'Kembali'}
-		</a>
+		</Link>
 	);
 };
 
-const getSubredditPath = (pathname: string) => {
+const gePath = (pathname: string) => {
 	const splitPath = pathname.split('/');
+	console.log(splitPath);
 	// /dashboard/agung/kegiatan
 	// Array(4)[('', 'dashboard', 'agung', 'kegiatan')];
 	if (splitPath.length === 3) return '/';
-	if (splitPath.length === 5)
+	else if (splitPath.length === 5)
 		return `/${splitPath[1]}/${splitPath[2]}/${splitPath[3]}`;
-	else if (splitPath.length > 3) return `/${splitPath[1]}/${splitPath[2]}`;
-	// default path, in case pathname does not match expected format
+	else if (splitPath.length === 4) return `/${splitPath[1]}/${splitPath[2]}`;
+	else if (splitPath.length === 6)
+		return `/${splitPath[1]}/${splitPath[2]}/${splitPath[3]}`;
 	else return '/';
 };
 

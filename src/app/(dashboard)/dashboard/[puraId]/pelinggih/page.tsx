@@ -1,3 +1,4 @@
+import BackButton from '@/components/BackButton';
 import DashboardHeader from '@/components/DashboardHeader';
 import DashboardShell from '@/components/DashboardShell';
 import EmptyPlaceholder from '@/components/EmptyPlaceholder';
@@ -35,40 +36,45 @@ const PelinggihPage = async ({ params }: PelinggihPageProps) => {
 	);
 
 	return (
-		<DashboardShell>
-			<DashboardHeader
-				heading='Pelinggih Pura'
-				text='Kelola pelinggih di dalam pura.'
-			/>
-			{pelinggihPura?.length ? (
-				<div className='overflow-x-auto '>
-					<div className='flex flex-row justify-end'>
+		<>
+			<div className=' w-fit'>
+				<BackButton />
+			</div>
+			<DashboardShell>
+				<DashboardHeader
+					heading='Pelinggih Pura'
+					text='Kelola pelinggih di dalam pura.'
+				/>
+				{pelinggihPura?.length ? (
+					<div className='overflow-x-auto '>
+						<div className='flex flex-row justify-end'>
+							<Link
+								className={buttonVariants()}
+								href={`/dashboard/${params.puraId}/pelinggih/create`}
+							>
+								Tambah
+							</Link>
+						</div>
+						<TablePelinggih data={pelinggihPura} />
+					</div>
+				) : (
+					<EmptyPlaceholder>
+						<EmptyPlaceholder.Icon name='kegiatan' />
+						<EmptyPlaceholder.Title>Belum ada pelinggih</EmptyPlaceholder.Title>
+						<EmptyPlaceholder.Description>
+							Anda belum memiliki pelinggih yang dimasukkan. Mulai tambahkan
+							sekarang.
+						</EmptyPlaceholder.Description>
 						<Link
-							className={buttonVariants()}
+							className={buttonVariants({})}
 							href={`/dashboard/${params.puraId}/pelinggih/create`}
 						>
 							Tambah
 						</Link>
-					</div>
-					<TablePelinggih data={pelinggihPura} />
-				</div>
-			) : (
-				<EmptyPlaceholder>
-					<EmptyPlaceholder.Icon name='kegiatan' />
-					<EmptyPlaceholder.Title>Belum ada pelinggih</EmptyPlaceholder.Title>
-					<EmptyPlaceholder.Description>
-						Anda belum memiliki pelinggih yang dimasukkan. Mulai tambahkan
-						sekarang.
-					</EmptyPlaceholder.Description>
-					<Link
-						className={buttonVariants({})}
-						href={`/dashboard/${params.puraId}/pelinggih/create`}
-					>
-						Tambah
-					</Link>
-				</EmptyPlaceholder>
-			)}
-		</DashboardShell>
+					</EmptyPlaceholder>
+				)}
+			</DashboardShell>
+		</>
 	);
 };
 

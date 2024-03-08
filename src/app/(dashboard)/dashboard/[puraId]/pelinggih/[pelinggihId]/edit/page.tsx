@@ -1,3 +1,4 @@
+import BackButton from '@/components/BackButton';
 import DashboardHeader from '@/components/DashboardHeader';
 import DashboardShell from '@/components/DashboardShell';
 import FormEditPelinggih from '@/components/form/FormEditPelinggih';
@@ -26,23 +27,28 @@ const EditPelinggihPage = async ({ params }: EditPelinggihPageProps) => {
 	}
 
 	return (
-		<DashboardShell>
-			<DashboardHeader
-				heading='Dashboard'
-				text='Kelola semua aspek terkait dengan pura dalam satu lokasi yang nyaman.'
-			/>
-			<hr className='h-px bg-red-500' />
-			<FormEditPelinggih
-				pelinggih={{
-					nama: pelinggih.nama,
-					konten: pelinggih.konten,
-					puraId: pelinggih.puraId,
-					id: pelinggih.id,
-					tahunPeninggalan: pelinggih.tahunPeninggalan,
-					thumbnail: pelinggih.thumbnail,
-				}}
-			/>
-		</DashboardShell>
+		<>
+			<div className=' w-fit'>
+				<BackButton />
+			</div>
+			<DashboardShell>
+				<DashboardHeader
+					heading='Dashboard'
+					text='Kelola semua aspek terkait dengan pura dalam satu lokasi yang nyaman.'
+				/>
+				<hr className='h-px bg-red-500' />
+				<FormEditPelinggih
+					pelinggih={{
+						nama: pelinggih.nama,
+						konten: pelinggih.konten,
+						puraId: pelinggih.puraId,
+						id: pelinggih.id,
+						tahunPeninggalan: pelinggih.tahunPeninggalan,
+						thumbnail: pelinggih.thumbnail,
+					}}
+				/>
+			</DashboardShell>
+		</>
 	);
 };
 

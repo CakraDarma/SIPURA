@@ -1,3 +1,4 @@
+import BackButton from '@/components/BackButton';
 import DashboardHeader from '@/components/DashboardHeader';
 import DashboardShell from '@/components/DashboardShell';
 import EmptyPlaceholder from '@/components/EmptyPlaceholder';
@@ -34,42 +35,47 @@ const VirtualTourPage = async ({ params }: VirtualTourPageProps) => {
 	);
 
 	return (
-		<DashboardShell>
-			<DashboardHeader
-				heading='Virtual Tour Pura'
-				text='Kelola Virtual Tour di dalam pura.'
-			/>
-			{virtualTourPura?.length ? (
-				<div>
-					<div className='flex flex-row justify-end'>
+		<>
+			<div className=' w-fit'>
+				<BackButton />
+			</div>
+			<DashboardShell>
+				<DashboardHeader
+					heading='Virtual Tour Pura'
+					text='Kelola Virtual Tour di dalam pura.'
+				/>
+				{virtualTourPura?.length ? (
+					<div>
+						<div className='flex flex-row justify-end'>
+							<Link
+								className={buttonVariants()}
+								href={`/dashboard/${params.puraId}/virtual-tour/create`}
+							>
+								Tambah
+							</Link>
+						</div>
+						<TableVirtualTour data={virtualTourPura} />
+					</div>
+				) : (
+					<EmptyPlaceholder>
+						<EmptyPlaceholder.Icon name='kegiatan' />
+						<EmptyPlaceholder.Title>
+							Belum ada virtual tour
+						</EmptyPlaceholder.Title>
+						<EmptyPlaceholder.Description>
+							Anda belum memiliki virtual tour yang dimasukkan. Mulai tambahkan
+							sekarang.
+						</EmptyPlaceholder.Description>
 						<Link
-							className={buttonVariants()}
+							className={buttonVariants({})}
 							href={`/dashboard/${params.puraId}/virtual-tour/create`}
 						>
 							Tambah
 						</Link>
-					</div>
-					<TableVirtualTour data={virtualTourPura} />
-				</div>
-			) : (
-				<EmptyPlaceholder>
-					<EmptyPlaceholder.Icon name='kegiatan' />
-					<EmptyPlaceholder.Title>
-						Belum ada virtual tour
-					</EmptyPlaceholder.Title>
-					<EmptyPlaceholder.Description>
-						Anda belum memiliki virtual tour yang dimasukkan. Mulai tambahkan
-						sekarang.
-					</EmptyPlaceholder.Description>
-					<Link
-						className={buttonVariants({})}
-						href={`/dashboard/${params.puraId}/virtual-tour/create`}
-					>
-						Tambah
-					</Link>
-				</EmptyPlaceholder>
-			)}
-		</DashboardShell>
+					</EmptyPlaceholder>
+				)}
+			</DashboardShell>
+		</>
 	);
 };
 

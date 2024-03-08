@@ -1,3 +1,4 @@
+import BackButton from '@/components/BackButton';
 import DashboardHeader from '@/components/DashboardHeader';
 import DashboardShell from '@/components/DashboardShell';
 import FormAddRoles from '@/components/form/FormAddRoles';
@@ -25,14 +26,22 @@ const AddPrajuruPage = async ({ params }: AddPrajuruPageProps) => {
 	}
 
 	return (
-		<DashboardShell>
-			<DashboardHeader
-				heading='Dashboard'
-				text='Kelola semua aspek terkait dengan pura dalam satu lokasi yang nyaman.'
-			/>
-			<hr className='h-px bg-red-500' />
-			<FormAddRoles prajuru={usersWithoutRolesForPura} puraId={params.puraId} />
-		</DashboardShell>
+		<>
+			<div className=' w-fit'>
+				<BackButton />
+			</div>
+			<DashboardShell>
+				<DashboardHeader
+					heading='Dashboard'
+					text='Kelola semua aspek terkait dengan pura dalam satu lokasi yang nyaman.'
+				/>
+				<hr className='h-px bg-red-500' />
+				<FormAddRoles
+					prajuru={usersWithoutRolesForPura}
+					puraId={params.puraId}
+				/>
+			</DashboardShell>
+		</>
 	);
 };
 

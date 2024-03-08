@@ -1,3 +1,4 @@
+import BackButton from '@/components/BackButton';
 import DashboardHeader from '@/components/DashboardHeader';
 import DashboardShell from '@/components/DashboardShell';
 import EmptyPlaceholder from '@/components/EmptyPlaceholder';
@@ -34,40 +35,45 @@ const PratimaPage = async ({ params }: PratimaPageProps) => {
 		})
 	);
 	return (
-		<DashboardShell>
-			<DashboardHeader
-				heading='Pratima Pura'
-				text='Kelola pratima di dalam pura.'
-			/>
-			{pratimaPura?.length ? (
-				<div>
-					<div className='flex flex-row justify-end'>
+		<>
+			<div className=' w-fit'>
+				<BackButton />
+			</div>
+			<DashboardShell>
+				<DashboardHeader
+					heading='Pratima Pura'
+					text='Kelola pratima di dalam pura.'
+				/>
+				{pratimaPura?.length ? (
+					<div>
+						<div className='flex flex-row justify-end'>
+							<Link
+								className={buttonVariants()}
+								href={`/dashboard/${params.puraId}/pratima/create`}
+							>
+								Tambah
+							</Link>
+						</div>
+						<TablePratima data={pratimaPura} />
+					</div>
+				) : (
+					<EmptyPlaceholder>
+						<EmptyPlaceholder.Icon name='kegiatan' />
+						<EmptyPlaceholder.Title>Belum ada pratima</EmptyPlaceholder.Title>
+						<EmptyPlaceholder.Description>
+							Anda belum memiliki pratima yang dimasukkan. Mulai tambahkan
+							sekarang.
+						</EmptyPlaceholder.Description>
 						<Link
-							className={buttonVariants()}
+							className={buttonVariants({})}
 							href={`/dashboard/${params.puraId}/pratima/create`}
 						>
 							Tambah
 						</Link>
-					</div>
-					<TablePratima data={pratimaPura} />
-				</div>
-			) : (
-				<EmptyPlaceholder>
-					<EmptyPlaceholder.Icon name='kegiatan' />
-					<EmptyPlaceholder.Title>Belum ada pratima</EmptyPlaceholder.Title>
-					<EmptyPlaceholder.Description>
-						Anda belum memiliki pratima yang dimasukkan. Mulai tambahkan
-						sekarang.
-					</EmptyPlaceholder.Description>
-					<Link
-						className={buttonVariants({})}
-						href={`/dashboard/${params.puraId}/pratima/create`}
-					>
-						Tambah
-					</Link>
-				</EmptyPlaceholder>
-			)}
-		</DashboardShell>
+					</EmptyPlaceholder>
+				)}
+			</DashboardShell>
+		</>
 	);
 };
 

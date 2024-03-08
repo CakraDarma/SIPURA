@@ -4,6 +4,7 @@ import { db } from '@/lib/db';
 import { notFound, redirect } from 'next/navigation';
 import { getAuthSession } from '@/lib/auth';
 import FormEditPura from '@/components/form/FormEditPura';
+import BackButton from '@/components/BackButton';
 
 interface PageProps {
 	params: {
@@ -31,13 +32,18 @@ const page = async ({ params }: PageProps) => {
 
 	if (!pura) return notFound();
 	return (
-		<DashboardShell>
-			<DashboardHeader
-				heading='Profil Pura'
-				text='Kelola informasi profil Pura.'
-			/>
-			<FormEditPura pura={pura} data={kecamatans} />
-		</DashboardShell>
+		<>
+			<div className=' w-fit'>
+				<BackButton />
+			</div>
+			<DashboardShell>
+				<DashboardHeader
+					heading='Profil Pura'
+					text='Kelola informasi profil Pura.'
+				/>
+				<FormEditPura pura={pura} data={kecamatans} />
+			</DashboardShell>
+		</>
 	);
 };
 
