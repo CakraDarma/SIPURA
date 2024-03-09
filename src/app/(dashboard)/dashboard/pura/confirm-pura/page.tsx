@@ -37,7 +37,7 @@ export default async function DashboardPage() {
 
 				{pura?.length ? (
 					<div>
-						<div className='flex flex-col flex-wrap items-center justify-center gap-6 mb-10 md:flex-row'>
+						<div className='flex flex-col flex-wrap items-center justify-center gap-6 mb-10 overflow-x-scroll md:flex-row sm:overflow-auto'>
 							<TablePura data={pura} />
 						</div>
 					</div>
