@@ -23,6 +23,56 @@ enum CategoryPura {
   KAHYANGAN_JAGAT
 }
 
+enum Wuku {
+  SINTA
+  LANDEP
+  UKIR
+  KULANTIR
+  TOLU
+  GUMBREG
+  WARIGA
+  WARIGADEAN
+  JULUNGWANG
+  SUNGSANG
+  DUNGULAN
+  KUNINGAN
+  LANGKIR
+  MEDANGSIA
+  PUJUT
+  PAHANG
+  KRULUT
+  MERAKIH
+  TAMBIR
+  MEDANGKUNGAN
+  MATAL
+  UYE
+  MENAIL
+  PRANGBAKAT
+  BALA
+  UGU
+  WAYANG
+  KLAWU
+  DUKUT
+  WATUGUNUNG
+}
+
+enum PancaWara {
+  PAING
+  ProvinsiWAGE
+  KLIWON
+  UMANIS
+}
+
+enum SaptaWara {
+  REDITE
+  SOMA
+  ANGGARA
+  BUDA
+  WRASPATI
+  SUKRA
+  SANISCARA
+}
+
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -87,6 +137,9 @@ model Pura {
   tahunBerdiri Int
   alamat       String
   piodalan     String
+  wuku         Wuku
+  pancaWara    PancaWara
+  saptaWara    SaptaWara
   actived      Boolean      @default(false)
   kategori     CategoryPura
   thumbnail    String
@@ -201,7 +254,7 @@ model Upacara {
   userId    String
   nama      String
   thumbnail String
-  biaya     String
+  biaya     Int
   konten    Json?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
