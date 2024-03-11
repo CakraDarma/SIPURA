@@ -32,7 +32,7 @@ enum Wuku {
   GUMBREG
   WARIGA
   WARIGADEAN
-  JULUNGWANG
+  JULUNGWANGI
   SUNGSANG
   DUNGULAN
   KUNINGAN
@@ -58,7 +58,8 @@ enum Wuku {
 
 enum PancaWara {
   PAING
-  ProvinsiWAGE
+  PON
+  WAGE
   KLIWON
   UMANIS
 }
@@ -136,7 +137,6 @@ model Pura {
   konten       Json?
   tahunBerdiri Int
   alamat       String
-  piodalan     String
   wuku         Wuku
   pancaWara    PancaWara
   saptaWara    SaptaWara

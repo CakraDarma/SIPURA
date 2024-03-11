@@ -13,7 +13,10 @@ import { z } from 'zod';
 import { Button } from '@/components/ui/Button';
 import { uploadFiles } from '@/lib/uploadthing';
 import EditorJS from '@editorjs/editorjs';
-import { kategoriPura } from '@/config/form';
+import { kategoriPura } from '@/constants/kategoriPura';
+import { wuku } from '@/constants/wuku';
+import { SaptaWara } from '@/constants/saptaWara';
+import { pancaWara } from '@/constants/pancaWara';
 import { SingleFileDropzone } from '@/components/SingleFileDropzone';
 import { Desa } from '@prisma/client';
 
@@ -38,6 +41,9 @@ interface FormCreatePuraProps {
 export default function FormCreatePura({ data }: FormCreatePuraProps) {
 	const [file, setFile] = useState<File>();
 	const listKategori = kategoriPura;
+	const listWuku = wuku;
+	const listPancaWara = pancaWara;
+	const listSaptaWara = SaptaWara;
 
 	const [selectedDesa, setSelectedDesa] = useState<DesaOption | null>(null);
 
@@ -71,7 +77,9 @@ export default function FormCreatePura({ data }: FormCreatePuraProps) {
 			alamat,
 			kategori,
 			name,
-			piodalan,
+			wuku,
+			pancaWara,
+			saptaWara,
 			tahunBerdiri,
 			konten,
 			thumbnail,
@@ -82,7 +90,9 @@ export default function FormCreatePura({ data }: FormCreatePuraProps) {
 				alamat,
 				kategori,
 				name,
-				piodalan,
+				pancaWara,
+				saptaWara,
+				wuku,
 				tahunBerdiri,
 				konten,
 				thumbnail: res.fileUrl,
@@ -236,7 +246,9 @@ export default function FormCreatePura({ data }: FormCreatePuraProps) {
 			alamat: data.alamat,
 			kategori: data.kategori,
 			name: data.name,
-			piodalan: data.piodalan,
+			pancaWara: data.pancaWara,
+			saptaWara: data.saptaWara,
+			wuku: data.wuku,
 			tahunBerdiri: data.tahunBerdiri,
 			thumbnail: data.thumbnail,
 			desaId: data.desaId,
@@ -314,49 +326,31 @@ export default function FormCreatePura({ data }: FormCreatePuraProps) {
 					<p className='px-1 text-xs text-red-600'>{errors.alamat.message}</p>
 				)}
 			</div>
-			<div className='mb-5'>
-				<label
-					htmlFor='alamat'
-					className='mb-3 block text-base font-medium text-[#07074D]'
-				>
-					Desa<span className='text-red-500'>*</span>
-				</label>
-				<Select
-					options={desaOptions}
-					value={selectedDesa}
-					onChange={(selectedOption) => {
-						if (!selectedOption) return '';
-						setSelectedDesa(selectedOption);
-						setValue('desaId', selectedOption.value);
-					}}
-					placeholder='Pilih desa...'
-					className='z-10'
-				/>
-				{errors?.alamat && (
-					<p className='px-1 text-xs text-red-600'>{errors.alamat.message}</p>
-				)}
-			</div>
 
+			{/* desa & kategori */}
 			<div className='flex flex-wrap -mx-3'>
 				<div className='w-full px-3 sm:w-1/2'>
 					<div className='mb-5'>
 						<label
-							htmlFor='piodalan'
-							className='mb-3 block text-base font-medium texpiodalant-[#07074D]'
+							htmlFor='alamat'
+							className='mb-3 block text-base font-medium text-[#07074D]'
 						>
-							Piodalan<span className='text-red-500'>*</span>
+							Desa<span className='text-red-500'>*</span>
 						</label>
-						<input
-							{...register('piodalan')}
-							type='text'
-							name='piodalan'
-							id='piodalan'
-							placeholder='Masukkan piodalan Pura'
-							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
+						<Select
+							options={desaOptions}
+							value={selectedDesa}
+							onChange={(selectedOption) => {
+								if (!selectedOption) return '';
+								setSelectedDesa(selectedOption);
+								setValue('desaId', selectedOption.value);
+							}}
+							placeholder='Pilih desa...'
+							className='z-10'
 						/>
-						{errors?.piodalan && (
+						{errors?.alamat && (
 							<p className='px-1 text-xs text-red-600'>
-								{errors.piodalan.message}
+								{errors.alamat.message}
 							</p>
 						)}
 					</div>
@@ -392,6 +386,99 @@ export default function FormCreatePura({ data }: FormCreatePuraProps) {
 					</div>
 				</div>
 			</div>
+
+			{/* piodalan */}
+			<div className='flex flex-wrap -mx-3'>
+				<div className='w-full px-3 sm:w-1/3'>
+					<div className='mb-5'>
+						<label
+							htmlFor='wuku'
+							className='mb-3 block text-base font-medium text-[#07074D]'
+						>
+							Wuku<span className='text-red-500'>*</span>
+						</label>
+						<select
+							id='wuku'
+							// @ts-ignore
+							onChange={(e) => setValue('wuku', e.target.value)}
+							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
+						>
+							<option value='' className='text-[#6B7280]'>
+								-- Pilih Wuku Piodalan --
+							</option>
+							{listWuku.map((data) => (
+								<option key={data.id} value={data.value}>
+									{data.wuku}
+								</option>
+							))}
+						</select>
+						{errors?.wuku && (
+							<p className='px-1 text-xs text-red-600'>{errors.wuku.message}</p>
+						)}
+					</div>
+				</div>
+				<div className='w-full px-3 sm:w-1/3'>
+					<div className='mb-5'>
+						<label
+							htmlFor='kategori'
+							className='mb-3 block text-base font-medium texpiodalant-[#07074D]'
+						>
+							Panca Wara<span className='text-red-500'>*</span>
+						</label>
+						<select
+							id='pancaWara'
+							// @ts-ignore
+							onChange={(e) => setValue('pancaWara', e.target.value)}
+							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
+						>
+							<option value='' className='text-[#6B7280]'>
+								-- Pilih Panca Wara Piodalan --
+							</option>
+							{listPancaWara.map((data) => (
+								<option key={data.id} value={data.value}>
+									{data.pancaWara}
+								</option>
+							))}
+						</select>
+						{errors?.pancaWara && (
+							<p className='px-1 text-xs text-red-600'>
+								{errors.pancaWara.message}
+							</p>
+						)}
+					</div>
+				</div>
+				<div className='w-full px-3 sm:w-1/3'>
+					<div className='mb-5'>
+						<label
+							htmlFor='saptaWara'
+							className='mb-3 block text-base font-medium texpiodalant-[#07074D]'
+						>
+							Sapta Wara<span className='text-red-500'>*</span>
+						</label>
+						<select
+							id='saptaWara'
+							// @ts-ignore
+							onChange={(e) => setValue('saptaWara', e.target.value)}
+							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
+						>
+							<option value='' className='text-[#6B7280]'>
+								-- Pilih Sapta Wara Piodalan --
+							</option>
+							{listSaptaWara.map((data) => (
+								<option key={data.id} value={data.value}>
+									{data.saptaWara}
+								</option>
+							))}
+						</select>
+						{errors?.saptaWara && (
+							<p className='px-1 text-xs text-red-600'>
+								{errors.saptaWara.message}
+							</p>
+						)}
+					</div>
+				</div>
+			</div>
+
 			<div className='mb-5'>
 				{/* editor */}
 				<label
