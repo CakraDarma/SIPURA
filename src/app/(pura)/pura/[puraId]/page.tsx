@@ -1,10 +1,22 @@
 import EditorOutput from '@/components/EditorOutput';
 import { Icons } from '@/components/Icons';
 import { db } from '@/lib/db';
-import { formatDate } from '@/lib/utils';
+import {
+	capitalizeFirstLetter,
+	findNearestDateObject,
+	formatDate,
+} from '@/lib/utils';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
 import React from 'react';
+import {
+	BalineseDate,
+	Wuku,
+	Filter,
+	PancaWara,
+	BalineseDateUtil,
+	SaptaWara,
+} from 'balinese-date-js-lib';
 
 interface PuraPageProps {
 	params: {
@@ -24,6 +36,20 @@ export default async function Purapage({ params }: PuraPageProps) {
 	if (!pura) {
 		redirect('/');
 	}
+
+	const currentYear = new Date().getFullYear();
+	const start = new Date(currentYear, 0, 1);
+	const finish = new Date(currentYear, 11, 31);
+	const q = new Filter();
+
+	q.saptaWara = SaptaWara[pura.saptaWara];
+	q.pancaWara = PancaWara[pura.pancaWara];
+	q.wuku = Wuku[pura.wuku];
+
+	const arr = BalineseDateUtil.filterByDateRange(start, finish, q);
+	// @ts-ignore
+	const nextPiodalan = findNearestDateObject(arr)?.date;
+
 	return (
 		<>
 			<div className='container py-10 max-w-7xl'>
@@ -50,8 +76,16 @@ export default async function Purapage({ params }: PuraPageProps) {
 					</div>
 					<div className='text-lg capitalize xs:text-xl'>
 						<p>Alamat: {pura.alamat}</p>
-						<p>Kategori: {pura.kategori}</p>
-						<p>Piodalan: {pura.piodalan}</p>
+						<p>Kategori: {`Pura ${capitalizeFirstLetter(pura.kategori)}`}</p>
+						<p>
+							Piodalan:{' '}
+							{`${capitalizeFirstLetter(
+								pura.saptaWara
+							)} ${capitalizeFirstLetter(
+								pura.pancaWara
+							)} ${capitalizeFirstLetter(pura.wuku)}`}
+						</p>
+						<p>Piodalan Selanjutnya: {`${formatDate(nextPiodalan)}`}</p>
 						<p>Tahun berdiri: {pura.tahunBerdiri}</p>
 					</div>
 				</div>

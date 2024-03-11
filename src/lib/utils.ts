@@ -77,3 +77,30 @@ export async function urlToBlobFile(
 	// Buat objek File dari Blob
 	return new File([blob], fileKey, { type: blob.type });
 }
+
+export function capitalizeFirstLetter(string: string) {
+	return string.toLowerCase().replace(/(^|\s)\S/g, function (firstLetter) {
+		return firstLetter.toUpperCase();
+	});
+}
+
+export function findNearestDateObject(dateObjects: any[]) {
+	const currentDate = new Date();
+	let smallestDifference = Infinity;
+	let nearestDateObject = null;
+
+	dateObjects.forEach((dateObject) => {
+		const objectDate = new Date(dateObject.date);
+
+		// Memeriksa apakah tanggal objek lebih besar dari tanggal saat ini
+		if (objectDate.getTime() > currentDate.getTime()) {
+			const difference = objectDate.getTime() - currentDate.getTime();
+			if (difference < smallestDifference) {
+				smallestDifference = difference;
+				nearestDateObject = dateObject;
+			}
+		}
+	});
+
+	return nearestDateObject;
+}

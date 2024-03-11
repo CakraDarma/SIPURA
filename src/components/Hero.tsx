@@ -4,13 +4,6 @@ interface postHero {
 	text: string | null;
 }
 
-import { BalineseDate } from 'balinese-date-js-lib';
-const specificDate = new Date('2024-03-11T12:00:00');
-const now = new BalineseDate(specificDate);
-
-console.log(now); // show the saka
-console.log('now'); // show the saka
-
 const Hero = ({ imageUrl, text, heading }: postHero) => {
 	const divStyle = {
 		backgroundImage: `url(${imageUrl})`,
