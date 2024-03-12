@@ -8,6 +8,7 @@ import { Icons } from '@/components/Icons';
 import SearchBar from '@/components/SearchBar';
 import Footer from '@/components/Footer';
 import { db } from '@/lib/db';
+import Notification from '@/components/Notification';
 
 interface DashboardLayoutProps {
 	children?: React.ReactNode;
@@ -20,6 +21,9 @@ export default async function DashboardLayout({
 	const puraNotActived = await db.pura.findMany({
 		where: { actived: false },
 	});
+	const puraActived = await db.pura.findMany({
+		where: { actived: true },
+	});
 
 	return (
 		<div className='flex flex-col min-h-screen'>
@@ -31,16 +35,19 @@ export default async function DashboardLayout({
 					<SearchBar />
 
 					{session?.user ? (
-						<UserAccountNav
-							user={{
-								id: session.user.id,
-								name: session.user.name,
-								email: session.user.email,
-								role: session.user.role,
-								image: session.user.image,
-							}}
-							countPuraIsUnactived={puraNotActived.length}
-						/>
+						<div className='flex flex-row'>
+							<Notification puras={puraActived} />
+							<UserAccountNav
+								user={{
+									id: session.user.id,
+									name: session.user.name,
+									email: session.user.email,
+									role: session.user.role,
+									image: session.user.image,
+								}}
+								countPuraIsUnactived={puraNotActived.length}
+							/>
+						</div>
 					) : (
 						<Link
 							href='/sign-in'

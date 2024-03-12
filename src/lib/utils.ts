@@ -1,6 +1,6 @@
 import { ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { formatDistanceToNowStrict } from 'date-fns';
+import { differenceInDays, formatDistanceToNowStrict } from 'date-fns';
 import locale from 'date-fns/locale/en-US';
 
 export function cn(...inputs: ClassValue[]) {
@@ -102,5 +102,24 @@ export function findNearestDateObject(dateObjects: any[]) {
 		}
 	});
 
-	return nearestDateObject;
+	// @ts-ignore
+	return nearestDateObject?.date;
+}
+
+export function isWithinSevenDaysBefore(targetDate: Date): boolean {
+	const dateToCheck = new Date();
+	const differenceInMilliseconds = targetDate.getTime() - dateToCheck.getTime();
+
+	const millisecondsPerDay = 24 * 60 * 60 * 1000;
+
+	const differenceInDays = Math.floor(
+		differenceInMilliseconds / millisecondsPerDay
+	);
+
+	return differenceInDays >= 0 && differenceInDays <= 700;
+}
+
+export function getDaysDifference(targetDate: Date) {
+	const currentDate = new Date();
+	return differenceInDays(targetDate, currentDate);
 }

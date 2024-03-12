@@ -20,7 +20,7 @@ import {
 	Command,
 	PlusIcon,
 	AlignVerticalJustifyCenterIcon,
-	BellPlusIcon,
+	Bell,
 	type Icon as LucideIcon,
 	Menu,
 	UserCog,
@@ -32,7 +32,7 @@ import {
 export type Icon = LucideIcon;
 
 export const Icons = {
-	notif: BellPlusIcon,
+	notif: Bell,
 	prajuru: UserCog,
 	plus: PlusIcon,
 	pura: Building,

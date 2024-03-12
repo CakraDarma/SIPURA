@@ -5,6 +5,8 @@ import {
 	capitalizeFirstLetter,
 	findNearestDateObject,
 	formatDate,
+	getDaysDifference,
+	isWithinSevenDaysBefore,
 } from '@/lib/utils';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
@@ -48,7 +50,20 @@ export default async function Purapage({ params }: PuraPageProps) {
 
 	const arr = BalineseDateUtil.filterByDateRange(start, finish, q);
 	// @ts-ignore
-	const nextPiodalan = findNearestDateObject(arr)?.date;
+	const nextPiodalan = findNearestDateObject(arr);
+
+	const targetDate = new Date(nextPiodalan);
+	const dateToCheck = new Date();
+	console.log(dateToCheck, targetDate);
+	console.log(isWithinSevenDaysBefore(dateToCheck));
+
+	// Contoh penggunaan
+	const targetDate2 = new Date('2024-03-13');
+	const daysDifference = getDaysDifference(targetDate2);
+
+	console.log(
+		`Selisih hari antara tanggal sekarang dan ${targetDate2.toDateString()}: ${daysDifference} hari`
+	);
 
 	return (
 		<>
