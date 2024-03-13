@@ -80,7 +80,7 @@ function Notification({ puras }: NotificationProps) {
 								<ListItem
 									key={pura?.name}
 									title={pura?.name}
-									href={`pura/${pura?.id}`}
+									href={`${pura?.id}`}
 								>
 									Piodalan: {formatDate(pura?.nextPiodalan)}
 								</ListItem>

@@ -25,7 +25,7 @@ export default async function purasPage() {
 			<div className='container py-20 max-w-7xl'>
 				{pura?.length ? (
 					<div>
-						<div className='flex flex-col flex-wrap items-center justify-center gap-6 mb-10 md:flex-row'>
+						<div className='flex flex-col flex-wrap items-center justify-start gap-6 mb-10 md:flex-row'>
 							{pura.map((pura, index) => (
 								<CardPuras key={index} pura={pura} link={`pura/${pura.id}`} />
 							))}

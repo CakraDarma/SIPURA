@@ -29,7 +29,7 @@ export default async function PelinggihPuraPage({
 				Pelinggih
 			</h2>
 			{pura?.pelinggihs.length ? (
-				<div className='flex flex-col flex-wrap items-center justify-center gap-10 mb-10 md:items-start md:flex-row'>
+				<div className='flex flex-col flex-wrap items-center justify-start gap-10 mb-10 md:items-start md:flex-row'>
 					{pura.pelinggihs.map((pelinggih) => (
 						<Card
 							key={pelinggih.id}

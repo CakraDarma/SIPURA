@@ -6,6 +6,10 @@ export const dashboardConfig: DashboardConfig = {
 			title: 'Pura',
 			href: '/pura',
 		},
+		{
+			title: 'Kalender',
+			href: '/kalender',
+		},
 	],
 	sidebarNav: [
 		{

@@ -29,7 +29,7 @@ export default async function Card({
 	return (
 		<div className=' relative flex-col flex  rounded-xl bg-white  text-gray-700 shadow-md overflow-clip bg-clip-border h-[431px]'>
 			<div
-				className='relative flex max-w-[16rem] overflow-clip bg-clip-border flex-col'
+				className='relative flex max-w-[17rem] overflow-clip bg-clip-border flex-col'
 				ref={pRef}
 			>
 				<div className='relative m-0 overflow-hidden text-gray-700 bg-transparent rounded-none shadow-none bg-clip-border min-h-[224px]'>

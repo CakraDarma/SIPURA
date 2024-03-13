@@ -86,7 +86,7 @@ const PelinggihPuraPage = async ({ params }: PelinggihPuraPageProps) => {
 							Beberapa topik yang terkait dengan data tersebut
 						</p>
 					</div>
-					<div className='flex flex-col items-center justify-between gap-6 p-3 sm:flex-row'>
+					<div className='flex flex-col items-center justify-start gap-6 p-3 sm:flex-row'>
 						{pura?.pelinggihs.slice(0, 4).map((pelinggih) => (
 							<Card
 								key={pelinggih.id}

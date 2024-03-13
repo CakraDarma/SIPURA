@@ -6,13 +6,11 @@ import {
 	findNearestDateObject,
 	formatDate,
 	getDaysDifference,
-	isWithinSevenDaysBefore,
 } from '@/lib/utils';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
 import React from 'react';
 import {
-	BalineseDate,
 	Wuku,
 	Filter,
 	PancaWara,
@@ -40,8 +38,8 @@ export default async function Purapage({ params }: PuraPageProps) {
 	}
 
 	const currentYear = new Date().getFullYear();
-	const start = new Date(currentYear, 0, 1);
-	const finish = new Date(currentYear, 11, 31);
+	const start = new Date();
+	const finish = new Date(currentYear + 1, 11, 31);
 	const q = new Filter();
 
 	q.saptaWara = SaptaWara[pura.saptaWara];
@@ -52,18 +50,8 @@ export default async function Purapage({ params }: PuraPageProps) {
 	// @ts-ignore
 	const nextPiodalan = findNearestDateObject(arr);
 
-	const targetDate = new Date(nextPiodalan);
-	const dateToCheck = new Date();
-	console.log(dateToCheck, targetDate);
-	console.log(isWithinSevenDaysBefore(dateToCheck));
-
-	// Contoh penggunaan
-	const targetDate2 = new Date('2024-03-13');
+	const targetDate2 = new Date(nextPiodalan);
 	const daysDifference = getDaysDifference(targetDate2);
-
-	console.log(
-		`Selisih hari antara tanggal sekarang dan ${targetDate2.toDateString()}: ${daysDifference} hari`
-	);
 
 	return (
 		<>
@@ -100,7 +88,10 @@ export default async function Purapage({ params }: PuraPageProps) {
 								pura.pancaWara
 							)} ${capitalizeFirstLetter(pura.wuku)}`}
 						</p>
-						<p>Piodalan Selanjutnya: {`${formatDate(nextPiodalan)}`}</p>
+						<p>
+							{`Piodalan Selanjutnya: ${formatDate(nextPiodalan)}`}
+							<span className='text-gray-700 lowercase'>{` (${daysDifference} hari lagi)`}</span>
+						</p>
 						<p>Tahun berdiri: {pura.tahunBerdiri}</p>
 					</div>
 				</div>

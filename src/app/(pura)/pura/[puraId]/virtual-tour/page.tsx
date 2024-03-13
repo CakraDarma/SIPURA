@@ -30,7 +30,7 @@ export default async function VirtualTourPuraPage({
 				Virtual Tour
 			</h2>
 			{pura?.virtualTours.length ? (
-				<div className='flex flex-col flex-wrap items-center justify-center gap-10 mb-10 md:items-start md:flex-row'>
+				<div className='flex flex-col flex-wrap items-center justify-start gap-10 mb-10 md:items-start md:flex-row'>
 					{pura.virtualTours.map((virtualTour) => (
 						<Card
 							key={virtualTour.id}

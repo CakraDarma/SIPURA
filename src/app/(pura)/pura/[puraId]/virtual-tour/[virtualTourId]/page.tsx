@@ -62,7 +62,7 @@ export default async function VirtualTourPuraPage({
 							Beberapa topik yang terkait dengan data tersebut
 						</p>
 					</div>
-					<div className='flex flex-col items-center justify-between gap-6 p-3 sm:flex-row'>
+					<div className='flex flex-col items-center justify-start gap-6 p-3 sm:flex-row'>
 						{pura?.virtualTours.map((virtualTour) => (
 							<Card
 								key={virtualTour.id}
