@@ -20,9 +20,7 @@ export default async function DashboardLayout({
 	const puraNotActived = await db.pura.findMany({
 		where: { actived: false },
 	});
-	const puraActived = await db.pura.findMany({
-		where: { actived: true },
-	});
+
 	return (
 		<div className='flex flex-col min-h-screen'>
 			<header className='fixed inset-x-0 top-0 z-40 border-b bg-black-light backdrop-filter backdrop-blur-lg bg-opacity-30'>
@@ -34,7 +32,7 @@ export default async function DashboardLayout({
 
 					{session?.user ? (
 						<div className='flex flex-row'>
-							<Notification puras={puraActived} />
+							<Notification />
 							<UserAccountNav
 								user={{
 									id: session.user.id,
@@ -47,17 +45,20 @@ export default async function DashboardLayout({
 							/>
 						</div>
 					) : (
-						<Link
-							href='/sign-in'
-							className={cn(
-								'text-white text-sm ',
-								'flex items-center justify-center gap-1',
-								'hover:border-b-2 border-gray-50'
-							)}
-						>
-							Login
-							<Icons.user className='text-white' />
-						</Link>
+						<div className='flex flex-row'>
+							<Notification />
+							<Link
+								href='/sign-in'
+								className={cn(
+									'text-black text-base ',
+									'flex items-center justify-center gap-1',
+									'hover:border-b-2 border-black font-medium'
+								)}
+							>
+								Login
+								<Icons.user color='black' />
+							</Link>
+						</div>
 					)}
 				</div>
 			</header>

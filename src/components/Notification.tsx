@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	NavigationMenu,
 	NavigationMenuContent,
@@ -25,13 +25,34 @@ import {
 	getDaysDifference,
 	isWithinSevenDaysBefore,
 } from '@/lib/utils';
+import axios from 'axios';
 
-interface NotificationProps {
-	puras: Pura[];
-}
+function Notification() {
+	const [notificationData, setNotificationData] = useState<Pura[]>([]);
 
-function Notification({ puras }: NotificationProps) {
-	const piodalanPura = puras
+	useEffect(() => {
+		const fetchNotificationData = async () => {
+			try {
+				const savedPuraIdsString = localStorage.getItem('savedPuras');
+				const savedPuraIds: string[] = savedPuraIdsString
+					? JSON.parse(savedPuraIdsString)
+					: [];
+
+				if (savedPuraIds.length > 0) {
+					const response = await axios.post('/api/notification', {
+						puraIds: savedPuraIds,
+					});
+					setNotificationData(response.data);
+				}
+			} catch (error) {
+				console.error('Error fetching notification data:', error);
+			}
+		};
+
+		fetchNotificationData();
+	}, []);
+
+	const piodalanPura = notificationData
 		.map((pura) => {
 			const currentYear = new Date().getFullYear();
 			const start = new Date();
@@ -44,8 +65,6 @@ function Notification({ puras }: NotificationProps) {
 
 			// get list piodalan
 			const arr = BalineseDateUtil.filterByDateRange(start, finish, q);
-			// @ts-ignore
-			// get nearest piodalan
 			const nextPiodalan = findNearestDateObject(arr);
 			const daysDifference = getDaysDifference(nextPiodalan);
 

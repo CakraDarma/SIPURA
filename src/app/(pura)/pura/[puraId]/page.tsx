@@ -17,6 +17,7 @@ import {
 	BalineseDateUtil,
 	SaptaWara,
 } from 'balinese-date-js-lib';
+import ButtonFollow from '@/components/ButtonFollow';
 
 interface PuraPageProps {
 	params: {
@@ -88,10 +89,13 @@ export default async function Purapage({ params }: PuraPageProps) {
 								pura.pancaWara
 							)} ${capitalizeFirstLetter(pura.wuku)}`}
 						</p>
-						<p>
-							{`Piodalan Selanjutnya: ${formatDate(nextPiodalan)}`}
-							<span className='text-gray-700 lowercase'>{` (${daysDifference} hari lagi)`}</span>
-						</p>
+						<div className='flex flex-row items-center gap-2'>
+							<p>
+								{`Piodalan Selanjutnya: ${formatDate(nextPiodalan)}`}
+								<span className='text-gray-700 lowercase'>{` (${daysDifference} hari lagi)`}</span>
+							</p>
+							<ButtonFollow puraId={params.puraId} />
+						</div>
 						<p>Tahun berdiri: {pura.tahunBerdiri}</p>
 					</div>
 				</div>
