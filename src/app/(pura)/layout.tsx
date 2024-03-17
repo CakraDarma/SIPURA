@@ -46,7 +46,7 @@ export default async function DashboardLayout({
 						</div>
 					) : (
 						<div className='flex flex-row'>
-							<Notification />
+							<Notification hide={true} />
 							<Link
 								href='/sign-in'
 								className={cn(

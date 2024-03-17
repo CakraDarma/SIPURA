@@ -96,7 +96,7 @@ export const UserAccountNav = ({
 						});
 					}}
 				>
-					Sign out
+					Sign Out
 				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>

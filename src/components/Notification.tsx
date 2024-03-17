@@ -27,8 +27,13 @@ import {
 } from '@/lib/utils';
 import axios from 'axios';
 
-function Notification() {
+interface NotificationProps {
+	hide?: boolean;
+}
+
+function Notification({ hide }: NotificationProps) {
 	const [notificationData, setNotificationData] = useState<Pura[]>([]);
+	const [showFollowed, setShowFollowed] = useState(true); //
 
 	useEffect(() => {
 		const fetchNotificationData = async () => {
@@ -39,9 +44,11 @@ function Notification() {
 					: [];
 
 				if (savedPuraIds.length > 0) {
-					const response = await axios.post('/api/notification', {
-						puraIds: savedPuraIds,
-					});
+					const endpoint = showFollowed
+						? '/api/notification'
+						: '/api/notification/prajuru';
+					const requestData = showFollowed ? { puraIds: savedPuraIds } : null;
+					const response = await axios.post(endpoint, requestData);
 					setNotificationData(response.data);
 				}
 			} catch (error) {
@@ -50,7 +57,7 @@ function Notification() {
 		};
 
 		fetchNotificationData();
-	}, []);
+	}, [showFollowed]);
 
 	const piodalanPura = notificationData
 		.map((pura) => {
@@ -88,6 +95,31 @@ function Notification() {
 						<Icons.notif className='w-6 h-6' />
 					</NavigationMenuTrigger>
 					<NavigationMenuContent>
+						<div className='flex flex-row justify-between px-4 py-2 md:w-[300px]'>
+							<button
+								onClick={() => setShowFollowed(true)}
+								className={`focus:outline-none ${
+									showFollowed
+										? 'font-bold border-b-2 border-orange-light text-orange-light'
+										: ''
+								}`}
+							>
+								Pura Diikuti
+							</button>
+
+							{!hide && (
+								<button
+									onClick={() => setShowFollowed(false)}
+									className={`focus:outline-none ${
+										!showFollowed
+											? 'font-bold border-b-2 border-orange-light text-orange-light'
+											: ''
+									}`}
+								>
+									Pura Disungsung
+								</button>
+							)}
+						</div>
 						<ul className='grid w-[250px] gap-3 p-4 md:w-[300px]'>
 							<div className='pb-2 border-b-2 border-gray-500'>
 								<h1 className='px-3 text-lg w-fit'>Notifikasi Piodalan</h1>
