@@ -35,11 +35,7 @@ export default function RootLayout({
 	return (
 		<html
 			lang='en'
-			className={cn(
-				'bg-white text-black',
-				fontSans.variable,
-				fontHeading.variable
-			)}
+			className={cn('bg-white ', fontSans.variable, fontHeading.variable)}
 		>
 			<body className='min-h-screen antialiased bg-white'>
 				<Providers>

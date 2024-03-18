@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Label } from '@/components/ui/Label';
 import UserAuthForm from '@/components/UserAuthForm';
-import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { LoginValidator } from '@/lib/validators/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -136,19 +135,19 @@ function SignIn({ className, ...props }: SignInProps) {
 			<UserAuthForm />
 			<p className='px-8 text-sm leading-6 text-center text-muted-foreground'>
 				Belum memiliki akun?{' '}
-				<Link
+				<a
 					href='/sign-up'
 					className='underline underline-offset-4 hover:text-primary'
 				>
 					Daftar
-				</Link>{' '}
+				</a>{' '}
 				atau{' '}
-				<Link
+				<a
 					href='/reset-password'
 					className='underline underline-offset-4 hover:text-primary'
 				>
 					lupa password
-				</Link>
+				</a>
 				.
 			</p>
 		</div>

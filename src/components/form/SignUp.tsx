@@ -56,6 +56,7 @@ function SignIn({ className, ...props }: SignInProps) {
 			email: data.email,
 			password: data.password,
 			telepon: data.telepon,
+			confirmPassword: data.confirmPassword,
 		};
 		registerUser(payload);
 	}
@@ -118,6 +119,7 @@ function SignIn({ className, ...props }: SignInProps) {
 							Konfirmasi Password
 						</Label>
 						<Input
+							{...register('confirmPassword')}
 							id='confirm-password'
 							placeholder='Konfirmasi Password'
 							type='password'

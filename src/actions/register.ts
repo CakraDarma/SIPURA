@@ -16,7 +16,11 @@ export const register = async (values: z.infer<typeof RegisterValidator>) => {
 		return { error: 'Invalid fields!' };
 	}
 
-	const { email, password, name, alamat, telepon } = validatedFields.data;
+	const { email, password, name, alamat, telepon, confirmPassword } =
+		validatedFields.data;
+	if (password !== confirmPassword) {
+		return { error: 'Password tidak sama dengan konfirmasi password' };
+	}
 	const hashedPassword = await bcrypt.hash(password, 10);
 
 	const existingUser = await getUserByEmail(email);

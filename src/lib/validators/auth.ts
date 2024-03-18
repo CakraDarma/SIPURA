@@ -17,6 +17,14 @@ export const RegisterValidator = z.object({
 		.max(128, {
 			message: 'password tidak boleh lebih dari 128 karakter',
 		}),
+	confirmPassword: z
+		.string()
+		.min(6, {
+			message: 'password harus lebih dari 6 karakter',
+		})
+		.max(128, {
+			message: 'password tidak boleh lebih dari 128 karakter',
+		}),
 	email: z.string().email({
 		message: 'Email is required',
 	}),
