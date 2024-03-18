@@ -26,6 +26,7 @@ import {
 	isWithinSevenDaysBefore,
 } from '@/lib/utils';
 import axios from 'axios';
+import Link from 'next/link';
 
 interface NotificationProps {
 	hide?: boolean;
@@ -133,7 +134,14 @@ function Notification({ hide }: NotificationProps) {
 							<div className='pb-2 border-b-2 border-gray-500'>
 								<h1 className='px-3 text-lg w-fit'>Notifikasi Piodalan</h1>
 								<p className='px-3 text-sm text-gray-600 w-fit'>
-									{`Piodalan ${reminder}  hari mendatang`}
+									Piodalan{' '}
+									<Link
+										href={'/settings/notifications'}
+										className='text-blue-500 underline'
+									>
+										{reminder}
+									</Link>{' '}
+									hari mendatang
 								</p>
 							</div>
 							{piodalanPura && piodalanPura.length > 0 ? (
