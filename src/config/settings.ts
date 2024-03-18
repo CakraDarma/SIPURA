@@ -7,6 +7,10 @@ export const settingsConfig: DashboardConfig = {
 			href: '/',
 		},
 		{
+			title: 'Keamanan',
+			href: '/security',
+		},
+		{
 			title: 'Pemberitahuan',
 			href: '/notification',
 		},
@@ -16,6 +20,11 @@ export const settingsConfig: DashboardConfig = {
 			title: 'Profil',
 			href: '/',
 			icon: 'user',
+		},
+		{
+			title: 'Kemanan',
+			href: '/security',
+			icon: 'security',
 		},
 		{
 			title: 'Notifikasi',

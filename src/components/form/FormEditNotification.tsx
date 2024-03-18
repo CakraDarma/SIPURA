@@ -104,7 +104,7 @@ export function FormEditNotification() {
 							inputMode='numeric'
 							name='notifikasiPiodalan'
 							id='notifikasiPiodalan'
-							placeholder='Masukkan nomor notifikasiPiodalan'
+							placeholder='Masukkan hari sebelum piodalan pura'
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						/>
 						{errors?.notifikasiPiodalan && (

@@ -36,3 +36,22 @@ export const NotificationValidator = z.object({
 			message: 'Notifikasi Piodalan maksimal h-60 sebelum piodalan',
 		}),
 });
+
+export const ChangePasswordValidator = z.object({
+	password: z
+		.string()
+		.min(6, {
+			message: 'password harus lebih dari 6 karakter',
+		})
+		.max(128, {
+			message: 'password tidak boleh lebih dari 128 karakter',
+		}),
+	newPassword: z
+		.string()
+		.min(6, {
+			message: 'password harus lebih dari 6 karakter',
+		})
+		.max(128, {
+			message: 'password tidak boleh lebih dari 128 karakter',
+		}),
+});

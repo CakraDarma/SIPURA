@@ -25,6 +25,7 @@ import {
 	Menu,
 	UserCog,
 	Clock,
+	Lock,
 } from 'lucide-react';
 
 // import { FaRegUserCircle } from 'react-icons/fa';
@@ -32,6 +33,7 @@ import {
 export type Icon = LucideIcon;
 
 export const Icons = {
+	security: Lock,
 	notif: Bell,
 	prajuru: UserCog,
 	plus: PlusIcon,
