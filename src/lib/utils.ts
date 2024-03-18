@@ -106,7 +106,10 @@ export function findNearestDateObject(dateObjects: any[]) {
 	return nearestDateObject?.date;
 }
 
-export function isWithinSevenDaysBefore(targetDate: Date): boolean {
+export function isWithinSevenDaysBefore(
+	targetDate: Date,
+	duration = 7
+): boolean {
 	const dateToCheck = new Date();
 	const differenceInMilliseconds = targetDate.getTime() - dateToCheck.getTime();
 
@@ -116,7 +119,7 @@ export function isWithinSevenDaysBefore(targetDate: Date): boolean {
 		differenceInMilliseconds / millisecondsPerDay
 	);
 
-	return differenceInDays >= 0 && differenceInDays <= 700;
+	return differenceInDays >= 0 && differenceInDays <= duration;
 }
 
 export function getDaysDifference(targetDate: Date) {

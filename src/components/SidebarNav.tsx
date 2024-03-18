@@ -28,7 +28,9 @@ export function SidebarNav({ items }: SidebarNavProps) {
 						<Link
 							key={index}
 							href={
-								item.disabled ? '/' : `/dashboard/${params.puraId + item.href}`
+								params.puraId
+									? `/dashboard/${params.puraId + item.href}`
+									: `/settings/${item.href}`
 							}
 						>
 							<span

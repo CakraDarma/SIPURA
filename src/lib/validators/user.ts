@@ -27,3 +27,12 @@ export const UserValidator = z.object({
 		}),
 	thumbnail: z.any(),
 });
+
+export const NotificationValidator = z.object({
+	notifikasiPiodalan: z
+		.number()
+		.min(1, { message: 'Notifikasi Piodalan minimal h-1 sebelum piodalan' })
+		.max(60, {
+			message: 'Notifikasi Piodalan maksimal h-60 sebelum piodalan',
+		}),
+});

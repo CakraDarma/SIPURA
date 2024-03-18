@@ -31,24 +31,33 @@ interface NotificationProps {
 	hide?: boolean;
 }
 
+interface NotifikasiPiodalan {
+	ids: string[];
+	reminder: number;
+}
+
 function Notification({ hide }: NotificationProps) {
 	const [notificationData, setNotificationData] = useState<Pura[]>([]);
-	const [showFollowed, setShowFollowed] = useState(true); //
+	const [reminder, setReminder] = useState<number>();
+	const [showFollowed, setShowFollowed] = useState(true);
 
 	useEffect(() => {
 		const fetchNotificationData = async () => {
 			try {
-				const savedPuraIdsString = localStorage.getItem('savedPuras');
-				const savedPuraIds: string[] = savedPuraIdsString
-					? JSON.parse(savedPuraIdsString)
+				const piodalanNotification = localStorage.getItem(
+					'piodalanNotifications'
+				);
+				const notifikasi: NotifikasiPiodalan = piodalanNotification
+					? JSON.parse(piodalanNotification)
 					: [];
-
-				if (savedPuraIds.length > 0) {
+				const { ids } = notifikasi;
+				if (ids.length > 0) {
 					const endpoint = showFollowed
 						? '/api/notification'
 						: '/api/notification/prajuru';
-					const requestData = showFollowed ? { puraIds: savedPuraIds } : null;
+					const requestData = showFollowed ? { puraIds: ids } : null;
 					const response = await axios.post(endpoint, requestData);
+					setReminder(notifikasi.reminder);
 					setNotificationData(response.data);
 				}
 			} catch (error) {
@@ -75,7 +84,7 @@ function Notification({ hide }: NotificationProps) {
 			const nextPiodalan = findNearestDateObject(arr);
 			const daysDifference = getDaysDifference(nextPiodalan);
 
-			if (isWithinSevenDaysBefore(nextPiodalan)) {
+			if (isWithinSevenDaysBefore(nextPiodalan, reminder)) {
 				return {
 					...pura,
 					nextPiodalan: nextPiodalan,
@@ -124,19 +133,24 @@ function Notification({ hide }: NotificationProps) {
 							<div className='pb-2 border-b-2 border-gray-500'>
 								<h1 className='px-3 text-lg w-fit'>Notifikasi Piodalan</h1>
 								<p className='px-3 text-sm text-gray-600 w-fit'>
-									Piodalan 7 hari mendatang
+									{`Piodalan ${reminder}  hari mendatang`}
 								</p>
 							</div>
-							{piodalanPura.map((pura) => (
-								<ListItem
-									key={pura?.name}
-									title={pura?.name}
-									href={`${pura?.id}`}
-								>
-									Piodalan: {formatDate(pura?.nextPiodalan)}
-								</ListItem>
-								// <h1>adsfd</h1>
-							))}
+							{piodalanPura && piodalanPura.length > 0 ? (
+								piodalanPura.map((pura) => (
+									<ListItem
+										key={pura?.name}
+										title={pura?.name}
+										href={`${pura?.id}`}
+									>
+										Piodalan: {formatDate(pura?.nextPiodalan)}
+									</ListItem>
+								))
+							) : (
+								<h3 className='px-3 text-sm text-gray-700 w-fit'>
+									Tidak ada piodalan pura terdekat
+								</h3>
+							)}
 						</ul>
 					</NavigationMenuContent>
 				</NavigationMenuItem>

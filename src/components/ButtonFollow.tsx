@@ -8,29 +8,43 @@ interface ButtonFollowProps {
 
 const ButtonFollow = ({ puraId }: ButtonFollowProps) => {
 	const [isFollowed, setIsFollowed] = useState(false);
+	const defaultReminderDuration = 7;
 
 	useEffect(() => {
-		const savedPurasString: string | null = localStorage.getItem('savedPuras');
-		const savedPuras: string[] = savedPurasString
-			? JSON.parse(savedPurasString)
-			: [];
-		setIsFollowed(savedPuras.includes(puraId));
-	}, []);
+		const savedDataString: string | null = localStorage.getItem(
+			'piodalanNotifications'
+		);
+		const savedData: { ids: string[]; reminder: number } = savedDataString
+			? JSON.parse(savedDataString)
+			: { ids: [], reminder: defaultReminderDuration };
+
+		if (savedData.ids.includes(puraId)) {
+			setIsFollowed(true);
+		}
+	}, [puraId]);
 
 	const handleFollowClick = () => {
-		const savedPurasString: string | null = localStorage.getItem('savedPuras');
-		const savedPuras: string[] = savedPurasString
-			? JSON.parse(savedPurasString)
-			: [];
+		const savedDataString: string | null = localStorage.getItem(
+			'piodalanNotifications'
+		);
+		const savedData: { ids: string[]; reminder: number } = savedDataString
+			? JSON.parse(savedDataString)
+			: { ids: [], reminder: defaultReminderDuration };
 
 		if (!isFollowed) {
-			savedPuras.push(puraId);
-			localStorage.setItem('savedPuras', JSON.stringify(savedPuras));
+			savedData.ids.push(puraId);
+			localStorage.setItem('piodalanNotifications', JSON.stringify(savedData));
 			setIsFollowed(true);
 		} else {
-			const updatedPuras = savedPuras.filter((id) => id !== puraId);
-			localStorage.setItem('savedPuras', JSON.stringify(updatedPuras));
-			setIsFollowed(false);
+			const index = savedData.ids.indexOf(puraId);
+			if (index !== -1) {
+				savedData.ids.splice(index, 1);
+				localStorage.setItem(
+					'piodalanNotifications',
+					JSON.stringify(savedData)
+				);
+				setIsFollowed(false);
+			}
 		}
 	};
 
