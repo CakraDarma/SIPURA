@@ -11,6 +11,7 @@ import { toast } from '@/hooks/use-toast';
 import { ChangePasswordValidator } from '@/lib/validators/user';
 import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
+import { changePassword } from '@/actions/change-password';
 
 type FormData = z.infer<typeof ChangePasswordValidator>;
 
@@ -19,23 +20,30 @@ export function FormChangePassword() {
 	const {
 		handleSubmit,
 		register,
+		reset,
 		formState: { errors },
 	} = useForm<FormData>({
 		resolver: zodResolver(ChangePasswordValidator),
 	});
 
 	const { mutate: updateUsername, isPending } = useMutation({
-		mutationFn: async ({ password, newPassword }: FormData) => {
-			const payload: FormData = {
-				password,
-				newPassword,
-			};
-			const { data } = await axios.patch(`/api/user/`, payload);
+		mutationFn: async (payload: FormData) => {
+			const { data } = await axios.patch(`/api/user/change-password`, payload);
 			return data;
 		},
 		onError: (err) => {
+			reset();
+			if (err instanceof AxiosError) {
+				if (err.response?.status === 402) {
+					return toast({
+						title: 'Password lama salah',
+						description: 'Silakan masukkan password lama yang benar',
+						variant: 'destructive',
+					});
+				}
+			}
 			return toast({
-				title: 'Terjadi kesalahan.',
+				title: 'Terjadi kesalahan',
 				description: 'Password Anda tidak dapat dirubah. Silakan coba lagi.',
 				variant: 'destructive',
 			});
@@ -44,6 +52,7 @@ export function FormChangePassword() {
 			toast({
 				description: 'Password Anda berhasil dirubah.',
 			});
+			reset();
 			router.refresh();
 		},
 	});
@@ -64,7 +73,7 @@ export function FormChangePassword() {
 							type='password'
 							name='password'
 							id='password'
-							placeholder='Masukkan Username'
+							placeholder='Masukkan password lama'
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						/>
 						{errors?.password && (
@@ -87,7 +96,7 @@ export function FormChangePassword() {
 							type='password'
 							name='newPassword'
 							id='newPassword'
-							placeholder='Masukkan nomor newPassword'
+							placeholder='Masukkan password baru'
 							className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md'
 						/>
 						{errors?.newPassword && (

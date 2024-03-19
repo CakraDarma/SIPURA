@@ -7,7 +7,7 @@ import { db } from '@/lib/db';
 import { ChangePasswordValidator } from '@/lib/validators/user';
 import { getAuthSession } from '@/lib/auth';
 
-export const register = async (
+export const changePassword = async (
 	values: z.infer<typeof ChangePasswordValidator>
 ) => {
 	const session = await getAuthSession();
@@ -20,7 +20,7 @@ export const register = async (
 	if (!session) {
 		return { error: 'Session undefined' };
 	}
-
+	console.log(validatedFields);
 	console.log(session);
 
 	const { password, newPassword } = validatedFields.data;

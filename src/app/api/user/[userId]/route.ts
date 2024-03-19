@@ -96,7 +96,7 @@ export async function DELETE(
 		}
 
 		return new Response(
-			'Could not delete Userat this time. Please try again later.',
+			'Could not delete User at this time. Please try again later.',
 			{ status: 500 }
 		);
 	}
