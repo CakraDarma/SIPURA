@@ -156,7 +156,7 @@ function Notification({ hide }: NotificationProps) {
 								))
 							) : (
 								<h3 className='px-3 text-sm text-gray-700 w-fit'>
-									Tidak ada piodalan pura terdekat
+									Tidak ada piodalan pura saat ini
 								</h3>
 							)}
 						</ul>

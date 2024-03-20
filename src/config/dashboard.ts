@@ -18,11 +18,6 @@ export const dashboardConfig: DashboardConfig = {
 			icon: 'pura',
 		},
 		{
-			title: 'Upacara',
-			href: '/upacara',
-			icon: 'upacara',
-		},
-		{
 			title: 'Kegiatan',
 			href: '/kegiatan',
 			icon: 'kegiatan',
@@ -43,19 +38,20 @@ export const dashboardConfig: DashboardConfig = {
 			icon: 'virtualTour',
 		},
 		{
-			title: 'Akses Prajuru',
-			href: '/prajuru',
-			icon: 'prajuru',
+			title: 'Upacara',
+			href: '/upacara',
+			icon: 'upacara',
+		},
+		{
+			title: 'banten',
+			href: '/banten',
+			icon: 'banten',
 		},
 	],
 	dashboardNav: [
 		{
 			title: 'Profil',
 			href: '/profil',
-		},
-		{
-			title: 'Upacara',
-			href: '/upacara',
 		},
 		{
 			title: 'Kegiatan',
@@ -76,6 +72,14 @@ export const dashboardConfig: DashboardConfig = {
 		{
 			title: 'Akses Prajuru',
 			href: '/prajuru',
+		},
+		{
+			title: 'Upacara',
+			href: '/upacara',
+		},
+		{
+			title: 'Banten',
+			href: '/banten',
 		},
 	],
 };
