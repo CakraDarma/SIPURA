@@ -21,20 +21,15 @@ const renderers = {
 const style = {
 	paragraph: {
 		fontSize: '1.3rem',
-		fontWeight: 200,
+		// fontWeight: 200,
 		textAlign: 'justify',
+		lineHeight: '2.4rem',
+		marginBottom: '18px',
 	},
 };
 
 const EditorOutput = ({ content }: EditorOutputProps) => {
-	return (
-		<Output
-			style={style}
-			className='font-sans text-base '
-			renderers={renderers}
-			data={content}
-		/>
-	);
+	return <Output style={style} renderers={renderers} data={content} />;
 };
 
 export default EditorOutput;

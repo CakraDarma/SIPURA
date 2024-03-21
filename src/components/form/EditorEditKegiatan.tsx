@@ -100,6 +100,7 @@ export const EditorEditKegiatan = ({ kegiatan }: EditorProps) => {
 				// data: { blocks: [] },
 				tools: {
 					header: Header,
+
 					linkTool: {
 						class: LinkTool,
 						config: {
