@@ -2,22 +2,22 @@ import BackButton from '@/components/BackButton';
 import DashboardHeader from '@/components/DashboardHeader';
 import DashboardShell from '@/components/DashboardShell';
 import EmptyPlaceholder from '@/components/EmptyPlaceholder';
-import TableUpacara from '@/components/table/TableUpacara';
+import TableBanten from '@/components/table/TableBanten';
 import { buttonVariants } from '@/components/ui/Button';
 import { db } from '@/lib/db';
 import Link from 'next/link';
 
-interface UpacaraPageProps {
+interface BantenPageProps {
 	params: {
 		puraId: string;
 	};
 }
 
-const UpacaraPage = async ({ params }: UpacaraPageProps) => {
+const BantenPage = async ({ params }: BantenPageProps) => {
 	let data = await db.pura.findFirst({
 		where: { id: params.puraId },
 		include: {
-			upacaras: {
+			bantens: {
 				orderBy: {
 					createdAt: 'desc',
 				},
@@ -25,7 +25,7 @@ const UpacaraPage = async ({ params }: UpacaraPageProps) => {
 		},
 	});
 
-	const upacaraPura = data?.upacaras.map(
+	const bantenPura = data?.bantens.map(
 		({ id, thumbnail, createdAt, nama }) => ({
 			id,
 			nama,
@@ -39,30 +39,32 @@ const UpacaraPage = async ({ params }: UpacaraPageProps) => {
 				<BackButton />
 			</div>
 			<DashboardShell>
-				<DashboardHeader heading='Upacara Pura' text='Kelola upacara pura.' />
-				{upacaraPura?.length ? (
+				<DashboardHeader heading='Banten Pura' text='Kelola banten pura.' />
+				{bantenPura?.length ? (
 					<div>
 						<div className='flex flex-row justify-end'>
 							<Link
 								className={buttonVariants()}
-								href={`/dashboard/${params.puraId}/upacara/create`}
+								href={`/dashboard/${params.puraId}/banten/create`}
 							>
 								Tambah
 							</Link>
 						</div>
-						<TableUpacara data={upacaraPura} />
+						<TableBanten data={bantenPura} />
 					</div>
 				) : (
 					<EmptyPlaceholder>
 						<EmptyPlaceholder.Icon name='kegiatan' />
-						<EmptyPlaceholder.Title>Belum ada upacara</EmptyPlaceholder.Title>
+						<EmptyPlaceholder.Title>
+							Belum ada data banten
+						</EmptyPlaceholder.Title>
 						<EmptyPlaceholder.Description>
-							Anda belum memiliki upacara yang dimasukkan. Mulai tambahkan
+							Anda belum memiliki data banten yang dimasukkan. Mulai tambahkan
 							sekarang.
 						</EmptyPlaceholder.Description>
 						<Link
 							className={buttonVariants({})}
-							href={`/dashboard/${params.puraId}/upacara/create`}
+							href={`/dashboard/${params.puraId}/banten/create`}
 						>
 							Tambah
 						</Link>
@@ -73,4 +75,4 @@ const UpacaraPage = async ({ params }: UpacaraPageProps) => {
 	);
 };
 
-export default UpacaraPage;
+export default BantenPage;

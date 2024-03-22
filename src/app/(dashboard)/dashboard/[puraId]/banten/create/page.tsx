@@ -1,7 +1,7 @@
 import BackButton from '@/components/BackButton';
 import DashboardHeader from '@/components/DashboardHeader';
 import DashboardShell from '@/components/DashboardShell';
-import FormCreateUpacara from '@/components/form/FormCreateUpacara';
+import FormCreatebanten from '@/components/form/FormCreateBanten';
 
 const Page = async () => {
 	return (
@@ -15,7 +15,7 @@ const Page = async () => {
 					text='Kelola semua aspek terkait dengan pura dalam satu lokasi yang nyaman.'
 				/>
 				<hr className='h-px bg-red-500' />
-				<FormCreateUpacara />
+				<FormCreatebanten />
 			</DashboardShell>
 		</>
 	);

@@ -16,6 +16,13 @@ enum Role {
   PRAJURU
 }
 
+enum CategoryBanten {
+  PENGRESIKAN
+  AYABAN
+  PENGHARAPAN
+  LAINNYA
+}
+
 enum CategoryPura {
   KAWITAN
   SWAGINA
@@ -125,6 +132,7 @@ model User {
   pelinggihs   Pelinggih[]
   userTokens   User_refresh_token[]
   virtualTours VirtualTour[]
+  bantens      Banten[]
 }
 
 model Pura {
@@ -152,6 +160,7 @@ model Pura {
   pratimas     Pratima[]
   pelinggihs   Pelinggih[]
   virtualTours VirtualTour[]
+  bantens      Banten[]
 
   @@index([name])
 }
@@ -205,9 +214,8 @@ model Pelinggih {
   updatedAt        DateTime @updatedAt
   thumbnail        String
 
-  pura    Pura     @relation(fields: [puraId], references: [id], onDelete: Cascade)
-  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  bantens Banten[]
+  pura Pura @relation(fields: [puraId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User_refresh_token {
@@ -235,17 +243,19 @@ model VirtualTour {
 }
 
 model Banten {
-  id          String   @id @default(cuid())
-  pelinggihId String
-  upacaraId   String
-  thumbnail   String
-  nama        String
-  konten      Json?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id        String         @id @default(cuid())
+  thumbnail String?
+  nama      String
+  userId    String
+  puraId    String
+  kategori  CategoryBanten
+  deskripsi String?        @db.Text
+  komponen  String?        @db.Text
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
 
-  pelinggih Pelinggih @relation(fields: [pelinggihId], references: [id], onDelete: Cascade)
-  upacara   Upacara   @relation(fields: [upacaraId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  pura Pura @relation(fields: [puraId], references: [id], onDelete: Cascade)
 }
 
 model Upacara {
@@ -255,13 +265,11 @@ model Upacara {
   nama      String
   thumbnail String
   biaya     Int
-  konten    Json?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  pura    Pura     @relation(fields: [puraId], references: [id], onDelete: Cascade)
-  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  bantens Banten[]
+  pura Pura @relation(fields: [puraId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 // schema.prisma
