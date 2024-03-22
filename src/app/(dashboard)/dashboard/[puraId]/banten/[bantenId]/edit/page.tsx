@@ -1,28 +1,28 @@
 import BackButton from '@/components/BackButton';
 import DashboardHeader from '@/components/DashboardHeader';
 import DashboardShell from '@/components/DashboardShell';
-import FormEditUpacara from '@/components/form/FormEditUpacara';
+import FormEditBanten from '@/components/form/FormEditBanten';
 import { authOptions, getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { notFound, redirect } from 'next/navigation';
 
-interface EditUpacaraPageProps {
-	params: { upacaraId: string; puraId: string };
+interface EditBantenPageProps {
+	params: { bantenId: string; puraId: string };
 }
 
-const EditUpacaraPage = async ({ params }: EditUpacaraPageProps) => {
+const EditBantenPage = async ({ params }: EditBantenPageProps) => {
 	const session = await getAuthSession();
 
 	if (!session) {
 		redirect(authOptions?.pages?.signIn || '/sign-in');
 	}
 
-	const upacara = await db.upacara.findFirst({
+	const banten = await db.banten.findFirst({
 		where: {
-			id: params.upacaraId,
+			id: params.bantenId,
 		},
 	});
-	if (!upacara) {
+	if (!banten) {
 		notFound();
 	}
 
@@ -37,14 +37,15 @@ const EditUpacaraPage = async ({ params }: EditUpacaraPageProps) => {
 					text='Kelola semua aspek terkait dengan pura dalam satu lokasi yang nyaman.'
 				/>
 				<hr className='h-px bg-red-500' />
-				<FormEditUpacara
-					upacara={{
-						nama: upacara.nama,
-						konten: upacara.konten,
-						puraId: upacara.puraId,
-						id: upacara.id,
-						biaya: upacara.biaya,
-						thumbnail: upacara.thumbnail,
+				<FormEditBanten
+					banten={{
+						nama: banten.nama,
+						deskripsi: banten.deskripsi,
+						komponen: banten.komponen,
+						puraId: banten.puraId,
+						id: banten.id,
+						kategori: banten.kategori,
+						thumbnail: banten.thumbnail,
 					}}
 				/>
 			</DashboardShell>
@@ -52,4 +53,4 @@ const EditUpacaraPage = async ({ params }: EditUpacaraPageProps) => {
 	);
 };
 
-export default EditUpacaraPage;
+export default EditBantenPage;

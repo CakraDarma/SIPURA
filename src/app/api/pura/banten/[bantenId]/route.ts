@@ -1,11 +1,11 @@
 import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { z } from 'zod';
-import { PratimaValidator } from '@/lib/validators/inventaris';
+import { BantenValidator } from '@/lib/validators/banten';
 
 const routeContextSchema = z.object({
 	params: z.object({
-		pratimaId: z.string(),
+		bantenId: z.string(),
 	}),
 });
 
@@ -18,8 +18,8 @@ export async function PATCH(
 
 		const body = await req.json();
 
-		const { nama, puraId, tahunDitemukan, konten, thumbnail } =
-			PratimaValidator.parse(body);
+		const { nama, puraId, deskripsi, kategori, komponen, thumbnail } =
+			BantenValidator.parse(body);
 		const session = await getAuthSession();
 
 		if (!session?.user) {
@@ -37,15 +37,16 @@ export async function PATCH(
 			return new Response('Access Denied', { status: 403 });
 		}
 
-		await db.pratima.update({
+		await db.banten.update({
 			where: {
-				id: params.pratimaId,
+				id: params.bantenId,
 			},
 			data: {
 				nama,
-				konten,
+				deskripsi,
+				komponen,
+				kategori,
 				thumbnail,
-				tahunDitemukan,
 				userId: session.user.id,
 			},
 		});
@@ -57,7 +58,7 @@ export async function PATCH(
 		}
 
 		return new Response(
-			'Could not change Pratima to the Pura at this time. Please try again later.',
+			'Could not change banten at this time. Please try again later.',
 			{ status: 500 }
 		);
 	}
@@ -76,9 +77,9 @@ export async function DELETE(
 			return new Response('Unauthorized', { status: 401 });
 		}
 
-		const pura = await db.pratima.findFirst({
+		const pura = await db.banten.findFirst({
 			where: {
-				id: params.pratimaId,
+				id: params.bantenId,
 			},
 			select: {
 				puraId: true,
@@ -101,9 +102,9 @@ export async function DELETE(
 			return new Response('Access Denied', { status: 403 });
 		}
 
-		await db.pratima.delete({
+		await db.banten.delete({
 			where: {
-				id: params.pratimaId,
+				id: params.bantenId,
 			},
 		});
 
@@ -114,7 +115,7 @@ export async function DELETE(
 		}
 
 		return new Response(
-			'Could not delete Pratima to the Pura at this time. Please try again later.',
+			'Could not delete banten at this time. Please try again later.',
 			{ status: 500 }
 		);
 	}
