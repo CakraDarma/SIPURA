@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 interface CardProps {
-	thumbnail: string;
+	thumbnail: string | null;
 	deskripsi: any;
 	nama: string;
 	link: string;
