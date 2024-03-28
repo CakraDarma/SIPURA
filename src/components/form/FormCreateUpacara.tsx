@@ -1,6 +1,5 @@
 'use client';
 
-import Select from 'react-select';
 import React, { useState } from 'react';
 import { toast } from '@/hooks/use-toast';
 import { useCustomToasts } from '@/hooks/use-custom-toasts';
@@ -68,13 +67,12 @@ export default function FormCreateUpacara({
 		}: // bantenId,
 		FormData) => {
 			console.log(bantens);
-			// const [res] = await uploadFiles([thumbnail], 'imageUploader');
+			const [res] = await uploadFiles([thumbnail], 'imageUploader');
 			const payload = {
 				nama,
 				biaya,
 				deskripsi,
-				thumbnail: 'hsdfhsdaha',
-				// thumbnail: res.fileUrl,
+				thumbnail: res.fileUrl,
 				puraId,
 				bantens,
 			};
