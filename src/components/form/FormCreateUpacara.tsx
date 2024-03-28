@@ -67,7 +67,6 @@ export default function FormCreateUpacara({
 			bantens,
 		}: // bantenId,
 		FormData) => {
-			console.log(bantens);
 			const [res] = await uploadFiles([thumbnail], 'imageUploader');
 			const payload = {
 				nama,

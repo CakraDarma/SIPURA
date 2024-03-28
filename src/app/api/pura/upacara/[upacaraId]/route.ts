@@ -1,11 +1,11 @@
 import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { z } from 'zod';
-import { PratimaValidator } from '@/lib/validators/inventaris';
+import { UpacaraValidator } from '@/lib/validators/upacara';
 
 const routeContextSchema = z.object({
 	params: z.object({
-		pratimaId: z.string(),
+		upacaraId: z.string(),
 	}),
 });
 
@@ -18,8 +18,8 @@ export async function PATCH(
 
 		const body = await req.json();
 
-		const { nama, puraId, tahunDitemukan, konten, thumbnail } =
-			PratimaValidator.parse(body);
+		const { nama, puraId, biaya, deskripsi, thumbnail, bantens } =
+			UpacaraValidator.parse(body);
 		const session = await getAuthSession();
 
 		if (!session?.user) {
@@ -37,15 +37,16 @@ export async function PATCH(
 			return new Response('Access Denied', { status: 403 });
 		}
 
-		await db.pratima.update({
+		await db.upacara.update({
 			where: {
-				id: params.pratimaId,
+				id: params.upacaraId,
 			},
 			data: {
 				nama,
-				konten,
+				deskripsi,
 				thumbnail,
-				tahunDitemukan,
+				biaya,
+				bantens,
 				userId: session.user.id,
 			},
 		});
@@ -57,7 +58,7 @@ export async function PATCH(
 		}
 
 		return new Response(
-			'Could not change Pratima to the Pura at this time. Please try again later.',
+			'Could not change Upacara to the Pura at this time. Please try again later.',
 			{ status: 500 }
 		);
 	}
@@ -76,9 +77,9 @@ export async function DELETE(
 			return new Response('Unauthorized', { status: 401 });
 		}
 
-		const pura = await db.pratima.findFirst({
+		const pura = await db.upacara.findFirst({
 			where: {
-				id: params.pratimaId,
+				id: params.upacaraId,
 			},
 			select: {
 				puraId: true,
@@ -101,9 +102,9 @@ export async function DELETE(
 			return new Response('Access Denied', { status: 403 });
 		}
 
-		await db.pratima.delete({
+		await db.upacara.delete({
 			where: {
-				id: params.pratimaId,
+				id: params.upacaraId,
 			},
 		});
 
@@ -114,7 +115,7 @@ export async function DELETE(
 		}
 
 		return new Response(
-			'Could not delete Pratima to the Pura at this time. Please try again later.',
+			'Could not delete Upacara to the Pura at this time. Please try again later.',
 			{ status: 500 }
 		);
 	}

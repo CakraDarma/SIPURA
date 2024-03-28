@@ -4,6 +4,7 @@ import DashboardShell from '@/components/DashboardShell';
 import FormEditUpacara from '@/components/form/FormEditUpacara';
 import { authOptions, getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
+import { Banten, Pura } from '@prisma/client';
 import { notFound, redirect } from 'next/navigation';
 
 interface EditUpacaraPageProps {
@@ -11,6 +12,7 @@ interface EditUpacaraPageProps {
 }
 
 const EditUpacaraPage = async ({ params }: EditUpacaraPageProps) => {
+	const { puraId } = params;
 	const session = await getAuthSession();
 
 	if (!session) {
@@ -25,6 +27,19 @@ const EditUpacaraPage = async ({ params }: EditUpacaraPageProps) => {
 	if (!upacara) {
 		notFound();
 	}
+
+	let pura: (Pura & { bantens: Banten[] }) | null = null;
+	pura = await db.pura.findFirst({
+		where: { id: puraId },
+		include: {
+			bantens: {
+				orderBy: {
+					createdAt: 'desc',
+				},
+			},
+		},
+	});
+	if (!pura) return notFound();
 
 	return (
 		<>
@@ -47,6 +62,7 @@ const EditUpacaraPage = async ({ params }: EditUpacaraPageProps) => {
 						biaya: upacara.biaya,
 						thumbnail: upacara.thumbnail,
 					}}
+					dataBanten={pura.bantens}
 				/>
 			</DashboardShell>
 		</>

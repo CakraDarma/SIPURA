@@ -20,8 +20,6 @@ export const changePassword = async (
 	if (!session) {
 		return { error: 'Session undefined' };
 	}
-	console.log(validatedFields);
-	console.log(session);
 
 	const { password, newPassword } = validatedFields.data;
 
