@@ -12,5 +12,16 @@ export const UpacaraValidator = z.object({
 	puraId: z.string(),
 	thumbnail: z.any(),
 	biaya: z.number(),
-	konten: z.any(),
+	deskripsi: z.string().min(3, {
+		message: 'Deskripsi banten harus lebih dari 3 karakter',
+	}),
+	bantens: z
+		.array(
+			z.object({
+				idBanten: z.string().min(3, { message: 'Banten tidak boleh kosong' }),
+			})
+		)
+		.optional(),
+	// bantenId: z.string(),
+	// banten: z.any(),
 });

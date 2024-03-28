@@ -1,13 +1,13 @@
 import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
-import { PratimaValidator } from '@/lib/validators/inventaris';
+import { UpacaraValidator } from '@/lib/validators/upacara';
 import { z } from 'zod';
 
 export async function POST(req: Request) {
 	try {
 		const body = await req.json();
-		const { konten, nama, tahunDitemukan, thumbnail, puraId } =
-			PratimaValidator.parse(body);
+		const { deskripsi, nama, biaya, thumbnail, puraId, bantens } =
+			UpacaraValidator.parse(body);
 
 		const session = await getAuthSession();
 
@@ -36,11 +36,12 @@ export async function POST(req: Request) {
 			return new Response('Access Denied', { status: 403 });
 		}
 
-		await db.pratima.create({
+		await db.upacara.create({
 			data: {
-				konten,
+				deskripsi,
 				nama,
-				tahunDitemukan,
+				biaya,
+				bantens,
 				thumbnail,
 				userId: session.user.id,
 				puraId: pura.id,
@@ -53,7 +54,7 @@ export async function POST(req: Request) {
 			return new Response(error.message, { status: 400 });
 		}
 		return new Response(
-			'Could not submit pratima to the Pura at this time. Please try again later.',
+			'Could not submit upacara to the Pura at this time. Please try again later.',
 			{ status: 500 }
 		);
 	}
