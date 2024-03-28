@@ -8,15 +8,15 @@ import {
 	TableHeader,
 	TableRow,
 } from '@/components/ui/Table';
-import { Pratima } from '@prisma/client';
-import PratimaOperations from '@/components/operations/PratimaOperations';
+import { Upacara } from '@prisma/client';
+import UpacaraOperations from '@/components/operations/UpacaraOperations';
 import { formatDate } from '@/lib/utils';
 import Link from 'next/link';
 
 interface TableDataProps {
-	data: Pick<Pratima, 'id' | 'nama' | 'createdAt' | 'thumbnail'>[] | undefined;
+	data: Pick<Upacara, 'id' | 'nama' | 'createdAt' | 'thumbnail'>[] | undefined;
 }
-export default function TablePratima({ data }: TableDataProps) {
+export default function TableUpacara({ data }: TableDataProps) {
 	return (
 		<Table>
 			<TableHeader>
@@ -42,7 +42,7 @@ export default function TablePratima({ data }: TableDataProps) {
 						</TableCell>
 						<TableCell>{formatDate(data.createdAt)}</TableCell>
 						<TableCell className='flex justify-end '>
-							<PratimaOperations pratima={{ id: data.id }} />
+							<UpacaraOperations upacara={{ id: data.id }} />
 						</TableCell>
 					</TableRow>
 				))}

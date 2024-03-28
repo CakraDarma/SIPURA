@@ -21,6 +21,7 @@ import {
 	PlusIcon,
 	AlignVerticalJustifyCenterIcon,
 	Bell,
+	Trash2,
 	type Icon as LucideIcon,
 	Menu,
 	UserCog,
@@ -34,6 +35,7 @@ import {
 export type Icon = LucideIcon;
 
 export const Icons = {
+	hapus: Trash2,
 	banten: Book,
 	security: Lock,
 	notif: Bell,

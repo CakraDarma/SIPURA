@@ -40,7 +40,8 @@ const EditUpacaraPage = async ({ params }: EditUpacaraPageProps) => {
 				<FormEditUpacara
 					upacara={{
 						nama: upacara.nama,
-						konten: upacara.konten,
+						bantens: upacara.bantens,
+						deskripsi: upacara.deskripsi,
 						puraId: upacara.puraId,
 						id: upacara.id,
 						biaya: upacara.biaya,

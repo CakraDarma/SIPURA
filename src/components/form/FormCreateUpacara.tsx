@@ -14,6 +14,7 @@ import { Button } from '@/ui/Button';
 import { uploadFiles } from '@/lib/uploadthing';
 import { SingleFileDropzone } from '@/components/SingleFileDropzone';
 import { Banten } from '@prisma/client';
+import { Icons } from '../Icons';
 
 type FormData = z.infer<typeof UpacaraValidator>;
 interface BantenOption {
@@ -201,25 +202,22 @@ export default function FormCreateUpacara({
 
 						<button
 							onClick={() => remove(index)}
-							className='px-4 py-2 text-white bg-black'
+							className='px-2 py-1 text-white bg-gray-200'
 						>
-							delete
+							<Icons.hapus color='black' className='w-8 h-8 sm:h-6 sm:w-6' />
 						</button>
 					</div>
 				))}
-
-				<div className='flex flex-col items-center justify-center w-full gap-2 mt-4'>
+				{errors?.bantens && (
+					<p className='px-1 text-xs text-red-600'>Banten tidak boleh kosong</p>
+				)}
+				<div className='flex flex-col items-start justify-center w-full gap-2 '>
 					<button
-						className='px-4 py-2 text-white bg-black'
+						className='px-4 py-2 text-blue-400 bg-white'
 						onClick={() => append({ idBanten: '' })}
 					>
-						tambah banten
+						+ Tambahkan Banten
 					</button>
-					{errors?.bantens && (
-						<p className='px-1 text-xs text-red-600'>
-							Banten tidak boleh kosong
-						</p>
-					)}
 				</div>
 			</div>
 			<div className='mb-5'>

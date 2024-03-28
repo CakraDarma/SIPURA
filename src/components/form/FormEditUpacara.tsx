@@ -21,7 +21,7 @@ type FormData = z.infer<typeof UpacaraValidator>;
 interface FormEditUpacaraProps {
 	upacara: Pick<
 		Upacara,
-		'id' | 'konten' | 'nama' | 'puraId' | 'biaya' | 'thumbnail'
+		'id' | 'deskripsi' | 'nama' | 'puraId' | 'biaya' | 'thumbnail' | 'bantens'
 	>;
 }
 export default function FormEditUpacara({ upacara }: FormEditUpacaraProps) {
@@ -60,8 +60,8 @@ export default function FormEditUpacara({ upacara }: FormEditUpacaraProps) {
 		resolver: zodResolver(UpacaraValidator),
 		defaultValues: {
 			nama: upacara.nama,
-			biaya: upacara.biaya,
-			konten: upacara.konten,
+			biaya: upacara.biaya || undefined,
+			deskripsi: upacara.deskripsi,
 			puraId: upacara.puraId,
 		},
 	});
@@ -70,7 +70,7 @@ export default function FormEditUpacara({ upacara }: FormEditUpacaraProps) {
 		mutationFn: async ({
 			nama,
 			biaya,
-			konten,
+			deskripsi,
 			thumbnail,
 			puraId,
 		}: FormData) => {
@@ -78,7 +78,7 @@ export default function FormEditUpacara({ upacara }: FormEditUpacaraProps) {
 				const payload = {
 					nama,
 					biaya,
-					konten,
+					deskripsi,
 					puraId,
 					thumbnail: upacara.thumbnail,
 				};
@@ -92,7 +92,7 @@ export default function FormEditUpacara({ upacara }: FormEditUpacaraProps) {
 				const payload = {
 					nama,
 					biaya,
-					konten,
+					deskripsi,
 					puraId,
 					thumbnail: res.fileUrl,
 				};
@@ -136,7 +136,7 @@ export default function FormEditUpacara({ upacara }: FormEditUpacaraProps) {
 		const payload: FormData = {
 			nama: data.nama,
 			biaya: data.biaya,
-			konten: data.konten,
+			deskripsi: data.deskripsi,
 			thumbnail: data.thumbnail,
 			puraId: upacara.puraId,
 		};
@@ -195,20 +195,22 @@ export default function FormEditUpacara({ upacara }: FormEditUpacaraProps) {
 			</div>
 			<div className='mb-5'>
 				<label
-					htmlFor='konten'
+					htmlFor='deskripsi'
 					className='mb-3 block text-base font-medium text-[#07074D]'
 				>
 					Deskripsi Upacara<span className='text-red-500'>*</span>
 				</label>
 				<textarea
-					{...register('konten')}
-					id='konten'
+					{...register('deskripsi')}
+					id='deskripsi'
 					placeholder='Tambahkan deskripsi dari Upacara'
 					required
 					className='w-full rounded-md border border-gray-500 bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-gray-700 focus:shadow-md h-40'
 				></textarea>
-				{errors?.konten && typeof errors.konten.message === 'string' && (
-					<p className='px-1 text-xs text-red-600'>{errors.konten.message}</p>
+				{errors?.deskripsi && typeof errors.deskripsi.message === 'string' && (
+					<p className='px-1 text-xs text-red-600'>
+						{errors.deskripsi.message}
+					</p>
 				)}
 			</div>
 			<div className='mb-5'>
